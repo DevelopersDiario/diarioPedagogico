@@ -375,7 +375,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         startActivityForResult(signInIntent, RC_SIGN_IN);
 
     }
-    public void signOut() {
+  /*  public void signOut() {
         Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                 new ResultCallback<Status>() {
                     @Override
@@ -384,7 +384,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                     }
                 });
     }
-
+*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
