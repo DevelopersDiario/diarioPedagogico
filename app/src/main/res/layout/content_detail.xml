@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="5dp"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+            <!-- Title-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?colorControlHighlight" >
+                <TextView
+                    android:id="@+id/tvTitlePubDetail"
+                    android:textAlignment="center"
+                    android:hint="@string/tag_title"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+            </RelativeLayout>
+
+            <!-- Body-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:paddingTop="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/imProfilPubDetail"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/ic_contact_icon"
+                    android:layout_alignParentStart="true"
+                   />
+
+                <TextView
+                    android:id="@+id/tvDatePubDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tvUserRec"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="false"
+                    android:text="@string/tag_date"
+                    style="@style/TextAppearance.AppCompat"/>
+
+                <TextView
+                    android:id="@+id/tvUserPubDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/imProfileRec"
+                    android:text="@string/tag_name_user"
+                    android:paddingTop="@dimen/padding_5dp"
+                    android:layout_marginLeft="40dp"
+                    android:paddingBottom="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+            </RelativeLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvPubDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tag_lorem"
+                    style="@style/TextAppearance.AppCompat"/>
+
+            </LinearLayout>
+            </ScrollView>
+           <!-- &lt;!&ndash; Acciones &ndash;&gt;
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/action_post"
+                    android:background="@drawable/button_rectangule"
+                    android:layout_gravity="center"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:theme="@style/buttonRaised"/>
+
+
+
+            </LinearLayout>
+-->
+        </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+</RelativeLayout>

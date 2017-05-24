@@ -1,0 +1,13 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@color/md_black_1000"
+        android:state_pressed="true">
+
+    </item>
+
+    <item
+        android:drawable="@raw/heart_off"
+        android:state_pressed="false">
+    </item>
+</selector>

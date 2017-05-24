@@ -1,0 +1,367 @@
+<resources>
+    <!-- App Name-->
+    <string name="app_name">Mi Diario</string>
+
+    <!--Title Module-->
+    <string name="title_login">Iniciar sesión</string>
+    <string name="title_create_account">Crear cuenta</string>
+    <string name="title_activity_login">Registrarse</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_terms_condicions">Términos y condiciones</string>
+    <string name="title_forget_password">Recuperar</string>
+
+
+    <!-- Selected Account -->
+    <string name="action_sign_in">Iniciar sesión</string>
+    <string name="prompt_login_google">Login Google</string>
+    <string name="action_create_account">Crear cuenta</string>
+    <string name="tag_terms">He leído y acepto los términos de la aplicación</string>
+    <string name="tag_message_selected">Comparte tus investigaciones</string>
+    <string name="tag_message_selected2">Retroalimenta a otros usuarios</string>
+    <string name="tag_message_selected3">Aprende de las demás personas</string>
+
+
+    <!-- Login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="forget_password">¿Olvidó contraseña?</string>
+    <string name="error_invalid_email">Este email es inválido</string>
+    <string name="error_invalid_password">Esta contraseña es demasiado corta</string>
+    <string name="error_incorrect_password">La contraseña es incorrecta</string>
+    <string name="error_field_required">Campo requerido</string>
+    <string name="open_profile">open profile</string>
+    <string name="user_Login_entra">user Login entra</string>
+    <string name="Success">Success</string>
+    <string name="Failded">Failded!!...Verifique Email Y Password</string>
+    <string name="my_preferences2">my_preferences2</string>
+    <string name="login_complete">login_complete</string>
+
+    <!-- Create Account -->
+    <string name="prompt_name">Nombre</string>
+    <string name="prompt_lastname">Apellidos</string>
+    <string name="prompt_password_confirmar">Confirmar contraseña</string>
+    <string name="prompt_user">Usuario</string>
+    <string name="Terminos">Aceptar términos y condiciones</string>
+    <string name="no_text"> </string>
+    <string name="action_register">Registrar</string>
+
+    <!-- Terms & Conditions-->
+    <string name="title_terms">Términos de servicio en "Mi Diario"</string>
+    <string name="tag_text_primary_terms">Al utilizar Mi Diario, estás de acuerdo con los presentes términos de uso</string>
+    <string name="text_terms">
+        Es responsable del uso de los servicios por cualquier contenido que publique y
+        de las consecuencias derivadas. El contenido que envíe, publique o muestre podrá
+        ser visto por otros usuarios de los servicios a través de servicios y sitios web
+        de terceros. Sólo deberá proporcionar el contenido que quiera compartir con otras
+        personas en estos Términos.
+
+        Tip: Lo que digas en Mi Diario se verá alrededor del mundo instantáneamente.
+        ¡Eres lo que publicas!
+
+        El usuario únicamente podrá hacer uso de estos servicios si acepta un contrato vinculante
+        con Mi Diario como también a recibir dichos servicios según las leyes de México
+        u otra jurisdicción aplicable.
+
+        El usuario sólo podrá hacer uso de dichos Servicios conforme a
+        dichas Condiciones como a toda ley, normativa o reglamento aplicable
+        sea local, estatal, nacional o internacional.
+    </string>
+
+    <!-- Activity Forget Password -->
+    <string name="tag_forget_pass">¿Olvidó su contraseña?</string>
+    <string name="message_help_forget_pass">*Ingrese su email y de click al botón continuar </string>
+    <string name="action_continue">Continuar</string>
+
+    <!-- Main Activity-->
+    <string name="values">VALUES</string>
+    <string name="theme">THEME</string>
+    <string name="message_presione_otra_vez">Presione otra vez para salir!</string>
+    <string name="message_utiliza_la_app">¡Hey utiliza Mi Diario, esta genial, ahi me puedes encontar ! https://play.google.com/store/apps/details?id=com.gismart.realpianofree</string>
+    <string name="text_plain">text/plain</string>
+    <string name="Share_with">Share with</string>
+    <string name="Los_permisos_son_necesarios">Los permisos son necesarios para poder usar la aplicación</string>
+    <string name="UUUps">UUUps!!!!!</string>
+    <string name="Error">Error!!</string>
+    <string name="carita">°_°</string>
+    <string name="message_ocurrio_error">ocurio un error !</string>
+
+    <!-- Profile-->
+    <string name="Tu_Estado_ha_sido_actualizado">Tú  Estado ha sido actualizado con exito!!!</string>
+    <string name="portada">PORTADA</string>
+    <string name="profile">PROFILE</string>
+    <string name="action">Action</string>
+    <string name="editar">Editar</string>
+    <string name="personal">Personal</string>
+    <string name="academia">Academica</string>
+    <string name="social">Social</string>
+    <string name="camara">Camara</string>
+    <string name="galeria">Galeria</string>
+    <string name="imageda">image/*</string>
+    <string name="elija_opcion">Elija una opción</string>
+    <string name="selecciona_app_imagen">Selecciona app de imagen</string>
+    <string name="jpg">.jpg</string>
+    <string name="file_path">file_path</string>
+    <string name="ExternalStorage">ExternalStorage</string>
+    <string name="Scanned">Scanned </string>
+    <string name="uri">-> Uri = </string>
+    <string name="provider">.provider</string>
+    <string name="message_permisos_aceptados">Permisos aceptados</string>
+    <string name="message_permisos_denegados">Permisos denegados</string>
+    <string name="message_funciones">Para usar las funciones de la app necesitas aceptar los permisos</string>
+    <string name="packge">package</string>
+
+    <!--   Navigaton Drawer -->
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_title">didacticsonline.com</string>
+
+    <!--Menu Drawer-->
+    <string name="action_home">Inicio</string>
+    <string name="action_publication">Publicación</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_information">Información</string>
+    <string name="action_profile">Perfil</string>
+    <string name="action_coach">Asesor</string>
+    <string name="action_asesorado">Asesorado</string>
+    <string name="action_friends">Amigos</string>
+    <string name="action_share">Compartir</string>
+    <string name="action_about">Nosotros</string>
+    <string name="action_exit">Salir</string>
+
+    <!--   Messages Welcome-->
+    <string name="message_welcome">Bienvenido a tu diario</string>
+
+    <!-- Acerca de -->
+    <string name="GIDDET_link">http://www.giddet.psicol.unam.mx/</string>
+    <string name="about_GIDDET">
+        Los participantes que forman parte del Grupo de Investigación en Docencia,
+        Diseño Educativo y TIC (GIDDET) tienen diversa experiencia y formación en el campo educativo, pero el común denominador
+        que los reúne en este proyecto reside en la relevancia que otorgan al diseño tecnopedagógico de entornos educativos que
+        conduzca a una transformación innovadora de los usos y las prácticas educativas mediadas por la tecnología.
+        Con fundamento en la perspectiva socioconstructivista de los procesos de enseñanza y aprendizaje, las propuestas e
+        investigaciones de los participantes del grupo se encaminan a promover la construcción conjunta del conocimiento,
+        la literacidad crítica respecto a los usos de la tecnología, el trabajo colaborativo en torno a tareas auténticas basadas
+        tanto en la discusión y apropiación crítica de los contenidos, como en la solución de casos y problemas situados en
+        contextos reales.
+        El grupo trabaja en colaboración con el Grupo de Investigación en Interacción e Influencia Educativa (GRINTIE),
+        del Departamento de Psicología Evolutiva y de la Educación de la Universidad de Barcelona, coordinado por el Dr. César Coll
+        y Alfonso Bustos.
+        En este sitio encontrará información respecto al proyecto, sus participantes y la producción académica que han generado.
+        </string>
+
+
+    <!--<string name="Tittle">Bienvenido a su Registro</string>-->
+    <string name="btnImagenG">Agregar imagen</string>
+    <string name="txtInput_name_user">Cuenta</string>
+    <string name="txtInput_password">Cree una contraseña</string>
+    <string name="txtInput_name">Nombre</string>
+    <string name="txtInput_gender">Género</string>
+    <string name="txtInput_mail">Correo</string>
+    <string name="txtInput_movil">Teléfono</string>
+    <string name="txtInput_male">Masculino</string>
+    <string name="txtInput_female">Femenino</string>
+    <string name="btnAgree">Aceptar</string>
+    <string name="btnDisagree">Cancelar</string>
+    <string name="txtInput_school">Institución</string>
+    <string name="txtInput_staff">Cargo</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Resource Id -->
+    <string name="facebook_app_id">650316601835760</string>
+
+
+    <!--Publication-->
+    <string name="action_save">Guardar</string>
+    <string name="message_Oops">Oops!</string>
+    <string name="message_Publication_Error">Publication Error!!</string>
+    <string name="message_Conexion_a_Wifi">Tu Dispositivo tiene Conexion a Wifi.</string>
+    <string name="message_Conexion_movil">Tu Dispositivo tiene Conexion Movil.</string>
+    <string name="message_no_conexion_internet">"Tu Dispositivo no tiene Conexion a Internet.</string>
+    <string name="message_Conexion_a_Internet">Conexion a Internet</string>
+    <string name="pagina_del_dia">http://pagina-del-dia.euroresidentes.es/gadget-dia-de-hoyH.php?fondo=</string>
+    <string name="salvar">SALVAR</string>
+    <string name="download">DOWNLOAD</string>
+    <string name="doc">DOC</string>
+    <string name="mic">Mic</string>
+    <string name="mas">MAS</string>
+    <string name="ed">ed=</string>
+    <string name="message_aceptar_acuerdo">Debe aceptar el acuerdo para proceder con el registro</string>
+    <string name="formato">FORMATO</string>
+
+    <!--SelectAccount-->
+    <string name="public_profile">public_profile</string>
+    <string name="email">email</string>
+    <string name="AccessToken.getCurrentAccessToken">AccessToken.getCurrentAccessToken()</string>
+    <string name="Su_registro_realizo_con_Exito"> Su registro se realizo con Exito!!</string>
+    <string name="cero">0000000000</string>
+    <string name="id_name_email">id,name,email,gender,birthday</string>
+    <string name="fields">fields</string>
+    <string name="caritados">(*_*)----></string>
+    <string name="Login_Failed">Login Failed</string>
+
+    <!-- Strings de diálogo personalizado -->
+    <string name="info_text">Necesitas tener creada una cuenta para iniciar la aplicación</string>
+    <string name="crear_boton">CREAR CUENTA</string>
+    <string name="nombre_input">Nombre</string>
+    <string name="contrasena_input">Constraseña</string>
+    <string name="recordar_check">Recordarme</string>
+    <string name="olvidar_text">¿Olvidaste tu contraseña?</string>
+    <string name="entrar_boton">Entrar</string>
+    <string name="cliente_label">Cliente</string>
+    <string name="producto_label">Producto</string>
+    <string name="fecha_label">Fecha</string>
+    <string name="prioridad_label">Prioridad</string>
+    <string name="notas_label">Notas</string>
+    <string name="notas_hint">Notas</string>
+
+    <!-- Strings  -->
+    <string name="tag_settings_advance">Configuración avanzada</string>
+    <string name="tag_change_color">Cambiar tema</string>
+    <string name="info_change_color">Presiona para cambiar el tema del Diario</string>
+    <string name="tag_change_account">Cambiar de cuenta </string>
+    <string name="info_change_account">Seleccione para cerrar sesión</string>
+
+
+    <string name="colorRed">Rojo</string>
+    <string name="colorBlue">Azul</string>
+    <string name="coloGreen">Verde</string>
+    <string name="colorOrange">Naranja</string>
+    <string name="colorPink">Rosa</string>
+    <string name="colorIndigo">Indigo</string>
+    <string name="colorBrown">Café</string>
+    <string name="colorGrey">Gris</string>
+    <string name="colorFalcon">Falcón</string>
+    <string name="colorLightBlue">Azul Cielo</string>
+    <string name="colorCobalto">Cobalto</string>
+    <string name="colorCian">Cian</string>
+    <string name="colorOliva">Oliva</string>
+    <string name="colorVioleta">Violeta</string>
+
+    <string name="btnChoose">Cambiar</string>
+    <string name="btnCancel">Cancelar</string>
+
+    <string name="action_post">Postear</string>
+    <string name="action_search">Buscar Amigo</string>
+
+
+    <!-- Xtras-->
+
+    <string-array name="school">
+        <item>ENEPO</item>
+        <item>UPN</item>
+        <item>CRENO</item>
+        <item>IESO</item>
+        <item>UABJO</item>
+        <item>ANAHUAC</item>
+        <item>CASANDO</item>
+        <item>LA SALLE</item>
+
+    </string-array>
+
+    <string-array name="staff">
+        <item>Asesor</item>
+        <item>Alumno</item>
+        <item>Invitado</item>
+    </string-array>
+    <string name="prompt_spinner">Seleccione fuente</string>
+
+
+    <string-array name="prioridades">
+        <item>Alta</item>
+        <item>Media</item>
+        <item>Baja</item>
+    </string-array>
+
+    <string-array name="font_name">
+        <item>Seleccione fuente</item>
+        <item>Abstrakt</item>
+        <item>Abtecia Basic Sans Serif Font</item>
+        <item>Action Jackson</item>
+        <item>A Cut Above The Rest</item>
+        <item>Adore64</item>
+        <item>Adventure Subtitles Normal</item>
+        <item>A to Z</item>
+        <item>Congratulations</item>
+        <item>KG Primary Italics</item>
+        <item>Maria Lucia</item>
+        <item>PENMP</item>
+        <item>Precursive</item>
+        <item>PW School Script</item>
+        <item>PW Scolarpaper</item>
+
+    </string-array>
+    <string name="title_activity_choose_color">ChooseColor</string>
+    <string name="quila_name">quila_name</string>
+    <string name="quila_tagline">quila_tagline</string>
+    <string name="lorem">ESLOREM ES UNA COSA MUY GRANDE PORQUE EN ESTE CASO NECESITA MUCHO DE AMONTON TECTPOS QUE NO SE DONDE SACAR Y NO ME PERMITE MI MORAL, PONER TEXTO ALETARORIO SIN SENTIDO BUENO OSEA PALABRAS O LETRAS CARATCERES SIN SENTIDO, SOLO CON EL FIN DE RELLANER.. SOLO LO QUE HAGO ES ESCRIBIR MIO JUSTIFICACION DE ESTE TEXTO UTILIZANDOP EL TEXTO MISMO</string>
+    <string name="quila_name2">MERINO</string>
+
+    <string name="title_activity_tools">tools</string>
+    <string name="title_activity_ejemplo">Ejemplo</string>
+
+    <string name="title1">Acerca de </string>
+    <string name="name">MI DIARIO</string>
+    <string name="title2">Objetivos</string>
+    <string name="tag1">
+        Comprender los procesos inherentes al pensamiento reflexivo que se generan a través del
+        diario interactivo en línea, realizado por un grupo estudiantes normalistas de la Licenciatura
+        en Educación Primaria en sus escenarios reales de práctica docente.</string>
+    <string name="tag2"></string>
+    <string name="tag3"></string>
+    <string name="tag4"></string>
+    <string name="action_saved">Guardando.......</string>
+    <string name="tag_about_us">Acerca de nosotros</string>
+    <string name="prompt_phone">Teléfono</string>
+    <string name="prompt_birthday">Cumpleaños</string>
+    <string name="prompt_group">Grupo</string>
+    <string name="prompt_role">Rol</string>
+    <string name="prompt_validity">Vigencia</string>
+    <string name="prompt_friends">Amigos</string>
+    <string name="action_break">Saltar</string>
+    <string name="txtInput_add_title">Agregar título</string>
+    <string name="txtInput_add_group">Agrege Amigo</string>
+    <string name="txtInput_publication">¿Que está pasando?</string>
+    <string name="action_add">Agregar</string>
+    <string name="tag_state">Estado:</string>
+    <string name="title_state">Estado</string>
+    <string name="tag_title">Título</string>
+    <string name="tag_name_user">Nombre usuario</string>
+    <string name="tag_date">Fecha de publicación</string>
+    <string name="tag_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="action_information_personal">Información personal</string>
+    <string name="action_information_academic">Información escolar</string>
+    <string name="action_information_social">Información social</string>
+    <string name="tag_font">Fuente</string>
+    <string name="tag_create_group">Crea una colaboración</string>
+    <string name="prompt_create_group">Teclea un nombre</string>
+    <string name="prompt_date">AAAA/MMM/DD</string>
+    <string name="action_select">Seleccionado</string>
+    <string name="message_succes_information">Tú  informacion personal ha sido actualizada con exito!!!</string>
+    <string name="UTF8">UTF-8</string>
+    <string name="title_information_private">Información Personal</string>
+    <string name="message_disable">PUEDE EDITAR</string>
+    <string name="title_information_social">Información Social</string>
+    <string name="title_information_academic">Información Academica</string>
+    <string name="message_succes_group">Grupo Creado</string>
+    <string name="action_add_member">Agregar Miembro</string>
+    <string name="message_succes_publication">Tu publicacion ha sido Registrada con Exito!</string>
+    <string name="message_whis_saved">¿Guardar borrador?</string>
+    <string name="message_ok">OK</string>
+    <string name="title_conection_fail">Conexion a Internet</string>
+    <string name="message_need_conection">Tu dispositivo no tiene conexion a internet.</string>
+    <string name="action_team">Colaboración</string>
+    <string name="action_colaboration">Colaboraciones</string>
+    <string name="tag_new_colaboration">Nueva Colaboración</string>
+    <string name="action_replay">Replay</string>
+    <string name="action_play">Grabar</string>
+    <string name="action_stop">Stop</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="button_description">Emoticons Button</string>
+    <string name="chat_hint">Enter text here</string>
+    <string name="post">Post</string>
+    <string name="back">Back</string>
+</resources>

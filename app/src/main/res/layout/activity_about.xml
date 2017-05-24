@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_acerca"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".About">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbarAbout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:translationZ="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <TextView
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/tag_about_us"
+        style="@style/TextAppearance.AppCompat.Notification.Title"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textColor="?colorPrimaryDark"
+        android:typeface="sans"/>
+
+
+
+    <WebView
+        android:id="@+id/wvAbout"
+        android:layout_marginTop="100dp"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
+
+
+</RelativeLayout>

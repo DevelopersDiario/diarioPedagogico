@@ -1,0 +1,32 @@
+/* Curso CSS estilos aprenderaprogramar.com*/
+*{font-family: arial; }
+
+body {
+		width: 410px;
+		/*border-style: dotted;*/
+		font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
+	}
+div {
+	/*border-style: dashed;*/
+	margin: 20px;
+	padding: 2px;
+	text-align: justify;
+
+}
+
+h1 {
+  font-family: fantasy;
+  font-size: 20px
+}
+p {
+	text-align: justify; 
+	margin:10px;
+	font: 100% sans-serif;
+}
+footer{
+	margin: 20px;
+	padding: 5px; 
+	}
+
+
+ img {margin:10px; float:right;}

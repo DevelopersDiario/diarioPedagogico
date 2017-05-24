@@ -1,0 +1,264 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayoutSettings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true"
+    android:layout_gravity="center|top">
+
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:translationZ="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center|top">
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/textViewThemeDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tag_change_color"
+        android:layout_marginTop="58dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center">
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view1"
+            card_view:cardBackgroundColor="@color/md_red_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            app:cardElevation="@dimen/cardview_elevation_9">
+            <ImageView
+                android:id="@+id/img1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view2"
+            card_view:cardBackgroundColor="@color/md_blue_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            card_view:cardElevation="@dimen/cardview_elevation_9"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" >
+            <ImageView
+                android:id="@+id/img2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view3"
+            card_view:cardBackgroundColor="@color/md_green_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            card_view:cardElevation="10dp"
+            android:layout_marginRight="15dp">
+            <ImageView
+                android:id="@+id/img3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view4"
+            card_view:cardBackgroundColor="@color/md_orange_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            card_view:cardElevation="@dimen/cardview_elevation_9" >
+            <ImageView
+                android:id="@+id/img4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_marginLeft="15dp"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view5"
+            card_view:cardBackgroundColor="@color/md_pink_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            android:stateListAnimator="@anim/raise"
+            card_view:cardElevation="@dimen/cardview_elevation_9">
+            <ImageView
+                android:id="@+id/img5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view6"
+            card_view:cardBackgroundColor="@color/md_indigo_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            android:stateListAnimator="@anim/raise"
+            card_view:cardElevation="@dimen/cardview_elevation_9">
+            <ImageView
+                android:id="@+id/img6"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view7"
+            card_view:cardBackgroundColor="@color/md_brown_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            android:stateListAnimator="@anim/raise"
+            card_view:cardElevation="@dimen/cardview_elevation_9"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+            <ImageView
+                android:id="@+id/img7"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view8"
+            card_view:cardBackgroundColor="@color/md_blue_grey_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            card_view:cardElevation="@dimen/cardview_elevation_9"
+            >
+            <ImageView
+                android:id="@+id/img8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view9"
+            card_view:cardBackgroundColor="@color/md_falcon_400"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            android:stateListAnimator="@anim/raise"
+            card_view:cardElevation="@dimen/cardview_elevation_9"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp">
+            <ImageView
+                android:id="@+id/img9"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view10"
+            card_view:cardBackgroundColor="@color/md_light_blue_500"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            card_view:cardElevation="@dimen/cardview_elevation_9">
+            <ImageView
+                android:id="@+id/img10"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:paddingTop="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view_original"
+            card_view:cardBackgroundColor="@color/colorPrimary"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?selectableItemBackground"
+            card_view:cardElevation="@dimen/cardview_elevation_9">
+            <ImageView
+                android:id="@+id/img11"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    </LinearLayout>
+    <!--LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center|bottom"-->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/buttonAgree"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/dialog_button"
+            android:clickable="true"
+            android:text="@string/btnChoose"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="?attr/colorAccent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <!--/LinearLayout-->
+
+
+
+
+</RelativeLayout>

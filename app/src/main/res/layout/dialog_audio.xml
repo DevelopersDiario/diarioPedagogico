@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/btnExit"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_cancel_black_24dp"
+        android:tint="@color/md_white_1000"
+        android:elevation="10dp"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:id="@+id/a"
+        android:gravity="center"
+        android:background="?colorPrimary"
+        android:src="@drawable/ic_mic_black_24dp"
+        android:tint="@color/md_white_1000"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TEXTO"
+        android:id="@+id/text_dialog"
+        android:layout_below="@+id/a"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/md_black_1000"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal" />
+    <LinearLayout
+        android:layout_below="@+id/text_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center|top">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/action_stop"
+        android:id="@+id/btnStop"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_below="@+id/text_dialog"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_flat_red_selector"
+        android:drawableTop="@drawable/ic_stop_black_24dp"
+        android:drawableTint="@color/md_white_1000"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/md_white_1000" />
+        <Button
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/action_play"
+            android:id="@+id/btnStart"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_below="@+id/text_dialog"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_flat_red_selector"
+            android:layout_centerHorizontal="true"
+            android:drawableTop="@drawable/ic_play_circle_outline_black_24dp"
+            android:drawableTint="@color/md_white_1000"
+            android:textColor="@color/md_white_1000" />
+
+        <Button
+
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/action_replay"
+            android:id="@+id/btnReplay"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_below="@+id/text_dialog"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_flat_red_selector"
+            android:layout_centerHorizontal="true"
+            android:drawableTop="@drawable/ic_replay_black_24dp"
+            android:drawableTint="@color/md_white_1000"
+            android:textColor="@color/md_white_1000"/>
+    </LinearLayout>
+</RelativeLayout>

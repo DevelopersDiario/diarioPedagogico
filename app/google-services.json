@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "538625938434",
+    "project_id": "diariop-162202"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538625938434:android:7d303910c293b787",
+        "android_client_info": {
+          "package_name": "com.dese.diario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538625938434-2rdaoc4kg445880lvrp0j6t12sn3ebrk.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "538625938434-k2l0mia7g25sp110u71j2u18a0nujlh0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dese.diario",
+            "certificate_hash": "4e36818b2a3e035d490ec611b0ba05b0e951b07a"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAalYZLsolFp0M1H96HJY7wLBufTfu3gkY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

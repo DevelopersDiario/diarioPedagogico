@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlSelection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bckselection"
+    android:gravity="bottom">
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_facebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/com_facebook_loginview_log_in_button_long"
+        android:textColor="@color/md_white_1000"
+        android:textSize="18sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="10dp"
+        />
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/login_google"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_login_google"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@id/login_facebook"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        />
+
+    <Button
+        android:id="@+id/btn_login_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_google"
+        android:layout_alignParentLeft="true"
+        android:text="@string/action_sign_in"
+        android:background="@drawable/edit_text_button_transparent"
+        android:textColor="@color/md_white_1000"
+        android:textSize="15sp"
+        android:layout_toLeftOf="@+id/btn_create_account"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/btn_create_account"
+        android:textColor="@color/md_white_1000"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:text="@string/tag_terms"
+        android:layout_marginLeft="16dp"
+
+        android:layout_marginRight="16dp"/>
+
+    <Button
+        android:id="@id/btn_create_account"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_button_transparent"
+        android:textColor="@color/md_white_1000"
+        android:textSize="15sp"
+        android:text="@string/action_create_account"
+        android:layout_below="@+id/login_google"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"/>
+
+
+    <TextView
+        android:id="@+id/tvMessageWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20pt"
+        android:textColor="@color/md_white_1000"
+        android:layout_above="@+id/login_facebook"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="56dp" />
+
+
+</RelativeLayout>

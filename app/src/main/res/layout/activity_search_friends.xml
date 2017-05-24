@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Item.Search_friends">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="218dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+            <LinearLayout
+                android:layout_width="374dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvIdGF"
+                    style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+                    android:hint="###"
+                    android:visibility="gone"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvNameGF"
+                    android:hint="NAME GPO"
+                    style="@style/TextAppearance.AppCompat.Headline"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center_horizontal" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/md_white_1000"
+                    android:textColorHint="@color/md_white_1000"
+                    android:layout_gravity="center_horizontal">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/etBuscar"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_search_black_24dp"
+                        android:drawableTint="@color/md_white_1000"
+                        android:hint="@string/prompt_name"
+                        android:inputType="textPersonName"
+                        android:imeOptions="actionNext"/>
+                    <requestFocus />
+                </android.support.design.widget.TextInputLayout>
+
+                <com.doodle.android.chips.ChipsView
+                    android:id="@+id/cv_contacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cv_max_height="120dp"
+                    app:cv_vertical_spacing="2dp"
+                    app:cv_bg_color="?colorAccent"
+                    app:cv_text_color="@color/md_white_1000"
+                    app:cv_icon_placeholder="@drawable/logo"
+                    app:cv_bg_color_clicked="?colorControlHighlight"
+                    app:cv_color_clicked="?colorPrimaryDark"
+                    app:cv_color="?colorPrimary"
+                    />
+
+            </LinearLayout>
+
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_marginTop="223dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerFriends"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            tools:listitem="@layout/item_friends"
+            />
+
+    </LinearLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_post"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:showIn="@layout/activity_publication">
+
+    <ScrollView
+        android:id="@+id/svContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <WebView
+                    android:id="@+id/wvDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:text="@string/navigation_drawer_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:textColor="?colorControlHighlight"
+                    android:visibility="invisible"/>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/ettitlepost"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/txtInput_add_title"
+                        android:textAlignment="center"
+                        android:background="@drawable/edit_text_border"
+                        />
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/spGpoP"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/txtInput_add_group"
+                        android:textAlignment="center"
+                        android:background="@drawable/edit_text_border"/>
+
+                </android.support.v7.widget.CardView>
+                   </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="356dp">
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                 <com.rockerhieu.emojicon.EmojiconEditText
+                    android:id="@+id/etPublication"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_border"
+                    android:layout_centerInParent="true"
+                    android:gravity="top|start"
+                    android:hint="@string/txtInput_publication"
+                    android:lines="10"
+                    android:padding="16dp"
+                    android:textSize="10pt"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    />
+
+                </ScrollView>
+
+                <FrameLayout
+                    android:layout_gravity="bottom"
+                    android:id="@+id/emojicons"
+                    android:layout_width="match_parent"
+                    android:layout_height="222dp"
+                    android:visibility="gone"
+                    android:layout_alignParentBottom="true" />
+
+
+            </RelativeLayout>
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/svContent"
+                android:visibility="gone"
+                >
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/imViewPublication1"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            />
+                        <ImageView
+                            android:id="@+id/imViewPublication2"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            />
+                        <ImageView
+                            android:id="@+id/imViewPublication3"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            />
+                        <ImageView
+                            android:id="@+id/imViewPublication4"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            />
+                        <TextView
+                            android:id="@+id/failed_registerpost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_margin="24dp"
+                            android:textSize="16sp"
+                            />
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</RelativeLayout>
