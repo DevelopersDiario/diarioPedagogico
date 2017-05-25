@@ -45,10 +45,13 @@
             />
     <ImageView
         android:id="@+id/imType"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="152dp"
         android:layout_gravity="center"
+        android:tint="@color/md_white_1000"
+            android:visibility="gone"
+        android:src="@drawable/ic_action_toggle_star"
         />
 
         </LinearLayout>
