@@ -212,7 +212,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                                                     @Override
                                                     public void onResponse(String response) {
                                                         Toast.makeText(SelectAccount.this, R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
-                                                        finishLogin("facebook");
+                                                        finishLogin();
                                                     }
                                                 }, new Response.ErrorListener() {
                                             @Override
@@ -418,7 +418,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                         public void onResponse(String response) {
 
                             Toast.makeText(SelectAccount.this,R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
-                            finishLogin("Gmail");
+                            finishLogin();
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -538,7 +538,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
                     }
                     //openProfile();
-                  finishLogin("Manual");
+                  finishLogin();
 
                 }
                 else {
@@ -831,9 +831,9 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void finishLogin( String type) {
+    private void finishLogin( ) {
         Intent main = new Intent(this, MainActivity.class);
-        main.putExtra("Type", type);
+
         startActivity(main);
         finish();
     }
