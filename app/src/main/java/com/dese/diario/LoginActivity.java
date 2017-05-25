@@ -379,7 +379,7 @@ public class LoginActivity extends AppCompatActivity {
                 .putBoolean(getString(R.string.login_complete),true).apply();
 
         Intent main = new Intent(this, MainActivity.class);
-
+        main.putExtra("Type", "Manual");
         startActivity(main);
 
 

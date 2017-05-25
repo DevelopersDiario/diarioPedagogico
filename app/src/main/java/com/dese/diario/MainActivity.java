@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity
     String navHloginaccount =varlogin.getCuenta();
     String navHemaillogin=varlogin.getCorreo();
     CircleImageView fotouser;
+    ImageView imType;
     TextView nvloginaccount;
     TextView nvemaillogin;
     VariablesLogin varLogin;
@@ -170,12 +172,34 @@ public class MainActivity extends AppCompatActivity
         nvloginaccount=(TextView)hView.findViewById(R.id.nvloginaccount);
         nvemaillogin.setText(varlogin.getCorreo().toString());
         nvloginaccount.setText(varlogin.getCuenta().toString());
+        String  type= getIntent().getExtras().getString("Type");
+        Toast.makeText(this, type, Toast.LENGTH_LONG).show();
+        Uri uri = null;
+        switch (type){
+            case "Gmail":
+              uri=  Uri.parse("android.resource://"+this.getPackageName()+"/drawable/ic_google");
+                break;
+            case "Facebook":
+              uri=  Uri.parse("android.resource://"+this.getPackageName()+"/drawable/ic_facebook_box");
+                break;
+            case "Manual":
+                uri=  Uri.parse("android.resource://"+this.getPackageName()+"/drawable/ic_contact_mail_black_24dp");
 
+
+                break;
+        }
+        Picasso.with(this)
+                .load(uri)
+                .into( imType=(ImageView) hView.findViewById(R.id.imType));
         Picasso.with(MainActivity.this)
                 .load(Urls.fotouser+du.getFoto())
                 .resize(200, 200)
                 .centerCrop()
-                .into(  fotouser=(CircleImageView)hView.findViewById(R.id.imageView));
+                .into(  fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile)); Picasso.with(MainActivity.this)
+                .load(Urls.fotouser+du.getFoto())
+                .resize(200, 200)
+                .centerCrop()
+                .into(  fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile));
 
 
 
