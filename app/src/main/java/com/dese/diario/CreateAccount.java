@@ -175,7 +175,7 @@ public class CreateAccount extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             Toast.makeText(CreateAccount.this, account+" Su registro se realizo con Exito!!", Toast.LENGTH_LONG).show();
-                            openLogin();
+                            openLogin(email);
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -223,9 +223,10 @@ public class CreateAccount extends AppCompatActivity {
 
     }//Fin RegisterUser
 
-    private void openLogin() {
+    private void openLogin(String mail) {
         // showProgress(true);
         Intent intent= new Intent(CreateAccount.this,LoginActivity.class);
+        intent.putExtra("mail", mail);
         startActivity(intent);
         finish();
     } //Fin open login
