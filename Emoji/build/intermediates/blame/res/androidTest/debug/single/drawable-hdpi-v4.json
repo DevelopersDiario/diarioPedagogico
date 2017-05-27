@@ -116,32 +116,32 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\orca_composer_tab_dark.9.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\orca_attach_camera_pressed.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\orca_attach_camera_pressed.png"
-    },
-    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_emoji_nature_light_activated.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_emoji_nature_light_activated.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\orca_composer_tab_pressed.9.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\orca_composer_tab_pressed.9.png"
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\orca_attach_camera_pressed.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\orca_attach_camera_pressed.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\orca_emoji_more_front_normal.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\orca_emoji_more_front_normal.png"
     },
     {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\orca_composer_tab_pressed.9.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\orca_composer_tab_pressed.9.png"
+    },
+    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\orca_emoji_backspace_back_normal.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\orca_emoji_backspace_back_normal.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_emoji_people_light_activated.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_emoji_people_light_activated.png"
-    },
-    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\orca_emoji_category_objects.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\orca_emoji_category_objects.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_emoji_people_light_activated.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_emoji_people_light_activated.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\orca_emoji_category_punctuation.png",
