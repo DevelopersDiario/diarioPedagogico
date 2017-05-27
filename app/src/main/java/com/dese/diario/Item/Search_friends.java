@@ -169,6 +169,7 @@ public class Search_friends extends AppCompatActivity  {
         tvIdF.setText( getIntent().getExtras().getString("gpo"));
 
 
+
         //tvIdF.setText();
 
         etBuscar.addTextChangedListener(new TextWatcher() {

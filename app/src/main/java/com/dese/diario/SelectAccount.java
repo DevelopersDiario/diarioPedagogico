@@ -831,8 +831,9 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void finishLogin() {
+    private void finishLogin( ) {
         Intent main = new Intent(this, MainActivity.class);
+
         startActivity(main);
         finish();
     }

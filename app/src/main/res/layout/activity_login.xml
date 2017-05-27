@@ -94,6 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:paddingTop="5dp"
+                        android:visibility="gone"
                         android:text="@string/forget_password" />
 
                     <Button

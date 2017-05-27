@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -106,6 +107,7 @@ public class MainActivity extends AppCompatActivity
     String navHloginaccount =varlogin.getCuenta();
     String navHemaillogin=varlogin.getCorreo();
     CircleImageView fotouser;
+    ImageView imType;
     TextView nvloginaccount;
     TextView nvemaillogin;
     VariablesLogin varLogin;
@@ -171,11 +173,49 @@ public class MainActivity extends AppCompatActivity
         nvemaillogin.setText(varlogin.getCorreo().toString());
         nvloginaccount.setText(varlogin.getCuenta().toString());
 
+       /* String  type= getIntent().getExtras().getString("Type");
+        Toast.makeText(this, type, Toast.LENGTH_LONG).show();
+        Uri uri = null;
+        switch (type){
+            case "Gmail":
+              //uri=  Uri.parse("android.resource://"+this.getPackageName()+"/drawable/ic_google");
+              uri=  Uri.parse("anhttps://sites.google.com/a/wadsworthschools.org/beta-bear/_/rsrc/1470874216923/search/Search%20icon.png");
+                Picasso.with(this)
+                        .load(uri)
+                        .placeholder(R.drawable.image_cloud_sad)
+                        .error(R.drawable.image_sun_smile)
+                        .into( imType=(ImageView) hView.findViewById(R.id.imType));
+                break;
+            case "Facebook":
+             // uri=  Uri.parse("android.resource://"+this.getPackageName()+"/drawable/ic_facebook_box");
+              uri=  Uri.parse("https://www.seeklogo.net/wp-content/uploads/2016/09/facebook-icon-preview-1.png");
+                Picasso.with(this)
+                        .load(uri)
+                        .placeholder(R.drawable.image_cloud_sad)
+                        .error(R.drawable.image_sun_smile)
+                        .into( imType=(ImageView) hView.findViewById(R.id.imType));
+                break;
+            case "Manual":
+                //uri=  Uri.parse("android.resource://"+this.getPackageName()+"/drawable/ic_contact_mail_black_24dp");
+                uri=  Uri.parse("http://www.iconarchive.com/download/i87103/graphicloads/colorful-long-shadow/Mail-at.ico");
+                Picasso.with(this)
+                        .load(uri)
+                        .placeholder(R.drawable.image_cloud_sad)
+                        .error(R.drawable.image_sun_smile)
+                        .into( imType=(ImageView) hView.findViewById(R.id.imType));
+
+                break;
+        }*/
+
         Picasso.with(MainActivity.this)
                 .load(Urls.fotouser+du.getFoto())
                 .resize(200, 200)
                 .centerCrop()
-                .into(  fotouser=(CircleImageView)hView.findViewById(R.id.imageView));
+                .into(  fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile)); Picasso.with(MainActivity.this)
+                .load(Urls.fotouser+du.getFoto())
+                .resize(200, 200)
+                .centerCrop()
+                .into(  fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile));
 
 
 
