@@ -30,7 +30,7 @@
             android:icon="@drawable/settingblack"
             android:title="@string/action_settings"  />
 
-
+        
 
             <item
                 android:id="@+id/item_navigation_drawer_share"
@@ -38,7 +38,7 @@
                 android:title="@string/action_share"/>
             <item
                 android:id="@+id/item_navigation_drawer_about"
-                android:icon="@drawable/ic_info_outline_black_24dp"
+                android:icon="@drawable/informationblack"
                 android:title="@string/action_about"/>
             <item
             android:id="@+id/item_navigation_drawer_exit"

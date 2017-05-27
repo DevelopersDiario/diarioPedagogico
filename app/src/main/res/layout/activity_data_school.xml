@@ -147,7 +147,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:visibility="gone"
         android:background="?attr/selectableItemBackground">
 
         <ImageView
@@ -166,11 +165,21 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="64dp"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
 
-
+                <!--EditText
+                    android:id="@+id/etRolEdit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Rol"
+                    android:drawableTint="?colorAccent"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:background="@drawable/edit_text_border"
+                    android:maxLines="1"
+                    android:enabled="false"
+                    android:gravity="center"/-->
             <Spinner
                 android:id="@+id/etRolEdit"
                 android:layout_width="fill_parent"
