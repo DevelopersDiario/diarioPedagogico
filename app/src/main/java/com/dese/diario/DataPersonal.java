@@ -39,6 +39,7 @@ import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
 
 import org.json.JSONException;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -82,8 +83,8 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
 
     //KEY
     final  String KEY_IDUSUARIO="idusuario";
-    final  String KEY_NAME="nombreusuario";
-    final String  KEY_LASTNAME="apellido";
+    final  String KEY_NAME="nombre";
+    final String  KEY_LASTNAME="apellidos";
     final String  KEY_PHONE="telefono";
     final String  KEY_MATCH="genero";
     final String  KEY_DATE="fnacimiento";
@@ -151,9 +152,9 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
     private void  updatedatos()  throws JSONException{
 
         final VariablesLogin varlogin =new VariablesLogin();
-
         final StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                 new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(DataPersonal.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
@@ -164,11 +165,19 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onErrorResponse(VolleyError error) {
                 String body;
-
+                String statusCode = String.valueOf(error.networkResponse.statusCode);
+                //get response body and parse with appropriate encoding
                 if (error.networkResponse.data != null) {
 
-                    body = new String(error.networkResponse.data, R.string.UTF8);
+                    try {
+                        body = new String(error.networkResponse.data, "UTF-8");
 
+                        Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
+
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -371,17 +380,19 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
                 }
                 else if(!etName.isEnabled()&& !etLastName.isEnabled()&& !etPhone.isEnabled() && !etDateBithdayEdit.isEnabled()){
                     disableDates();
+                    Toast.makeText(this, R.string.message_disable, Toast.LENGTH_SHORT).show();
                 }
                 break;
 
             case R.id.action_saved:
 
-                getRadioButtonesDate();
                 enableDates();
                 try {
-                    updatedatos();
+                    getRadioButtonesDate();
                     Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
 
+
+                    updatedatos();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
