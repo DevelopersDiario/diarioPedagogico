@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values\\values.xml",
+        "outputFile": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 103
                 },
                 "from": {
-                    "file": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\values\\colors.xml",
+                    "file": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 2,
-                        "startOffset": 624,
+                        "startOffset": 641,
                         "endColumn": 50,
-                        "endOffset": 672
+                        "endOffset": 689
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 157
                 },
                 "from": {
-                    "file": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\values\\colors.xml",
+                    "file": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 2,
-                        "startOffset": 675,
+                        "startOffset": 693,
                         "endColumn": 51,
-                        "endOffset": 724
+                        "endOffset": 742
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 464
                 },
                 "from": {
-                    "file": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\values\\strings.xml",
+                    "file": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 1,
                         "startColumn": 4,
-                        "startOffset": 16,
+                        "startOffset": 17,
                         "endColumn": 45,
-                        "endOffset": 57
+                        "endOffset": 58
                     }
                 }
             }
