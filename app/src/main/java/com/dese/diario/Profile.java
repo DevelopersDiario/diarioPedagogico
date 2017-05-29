@@ -77,7 +77,7 @@ import com.dese.diario.Resource.ShowProgressDialog;
 
 
 public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener,
-        LoaderManager.LoaderCallbacks {
+    LoaderManager.LoaderCallbacks {
 
 
     //Animation Imagen

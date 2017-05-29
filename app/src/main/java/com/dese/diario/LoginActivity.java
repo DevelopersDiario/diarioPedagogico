@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         //    buttonLogin = (Button) findViewById(R.id.email_sign_in_button);
     Intent i=(getIntent());
         if (i == null)
-            mEmailView.setText( " ");
+            mEmailView.setText("");
      else
             mEmailView.setText( i.getExtras().getString("mail"));
 
