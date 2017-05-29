@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Friends;
+import com.dese.diario.Objects.DataFriends;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
@@ -208,7 +209,6 @@ public class Search_friends extends AppCompatActivity  {
 
     public  void searchFriends(final String name){
 
-
             RequestQueue queue = Volley.newRequestQueue(this);
 
         if(name!=null) {
@@ -334,11 +334,12 @@ public class Search_friends extends AppCompatActivity  {
 
 
     private void registerGroup(final String g, final String u, final String r) throws JSONException{
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlgpodetalle,
+        final DataFriends dataFriends= new DataFriends();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST , urlgpodetalle,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(Search_friends.this, "Succes", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Search_friends.this, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
 
                     }
                 }, new Response.ErrorListener() {
