@@ -86,11 +86,10 @@ public class LoginActivity extends AppCompatActivity {
         failedLoginMessage = (TextView)findViewById(R.id.failed_login);
         mPasswordView=(EditText)findViewById(R.id.tvPassword_Login);
         //    buttonLogin = (Button) findViewById(R.id.email_sign_in_button);
-    Intent i=(getIntent());
+    Bundle i=(getIntent().getExtras());
         if (i == null)
             mEmailView.setText("");
-     else
-            mEmailView.setText( i.getExtras().getString("mail"));
+     else mEmailView.setText( i.getString("mail"));
 
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
