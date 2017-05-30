@@ -7,11 +7,7 @@ import java.io.Serializable;
  */
 
 public class VariablesLogin implements Serializable{
-    /*
-    {
-  "Success": "[{\"correo\":\"benja@gmail.com\",\"cuenta\":\"benya\",\"idusuario\":\"12\"}]"
-}
-    */
+
     public  static String idusuario;
     public  static String cuenta;
     public  static String correo;

@@ -41,7 +41,7 @@ public class Urls {
     //URLs Grupodetalle
     public static final String listgpodetalle ="http://187.188.168.51:8080/diariopws/api/1.0/grupodetalle/list";   //Funcional en server
     public static final String addparticipante ="http://187.188.168.51:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
-
+    public static final String repuplication ="http://187.188.168.51:8080/diariopws/api/1.0/publicacion/republication";
 
 
 
