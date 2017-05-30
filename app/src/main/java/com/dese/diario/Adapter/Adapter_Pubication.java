@@ -1,24 +1,42 @@
 package com.dese.diario.Adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.dese.diario.Colaboration;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderP;
+import com.dese.diario.MainActivity;
 import com.dese.diario.Objects.DetailPublication;
 import com.dese.diario.Objects.Publication;
 import com.dese.diario.Objects.Urls;
+import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Eduardo on 04/04/2017.
@@ -29,7 +47,19 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     Context context;
     View.OnLongClickListener longClickListener;
 
+    final static String url= Urls.repuplication;
+    final  String KEY_IDUSUARIO="idusuario";
+    final  String KEY_TITULO="titulo";
+    final String KEY_OBSERVACIONES="observaciones";
+    final  String KEY_IDGROUP="idgrupo";
+
+    final  String KEY_ROL="idrol";
+    final  String KEY_IDPUBLICACION="idgrupo";
+    final  String CONTENT_TYPE="Content-Type";
+    final  String APPLICATION="application/x-www-form-urlencoded";
     public Adapter_Pubication(ArrayList<Publication> listapublicaciones, Context context) {
+
+
         this.listapublicaciones=listapublicaciones;
         this.context=context;
 
@@ -51,6 +81,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         final String u=listapublicaciones.get(position).getNombre();
         final String t=listapublicaciones.get(position).getTitulo();
         final String f=listapublicaciones.get(position).getFoto();
+        final String pa=listapublicaciones.get(position).getIdpublicacion();
 
         holder.tvFechaRec.setText(d);
         holder.tvPublicationRec.setText(p);
@@ -67,6 +98,13 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             public void onItemClick(int pos) {
                 openDetailActivity(t,u, d, p, f);
                 //Toast.makeText(c,name,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               AlertRepublication(pa);
             }
         });
 
@@ -100,5 +138,114 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         context.startActivity(i);
 
     }
+
+    private void AlertRepublication(final String pa){
+        final VariablesLogin varlogin =new VariablesLogin();
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+
+        View dialoglayout = inflater.inflate(R.layout.activity_publication, null);
+
+           final EditText TITLE = (EditText) dialoglayout.findViewById(R.id.ettitlepost);
+           final EditText PUBLIC = (EditText) dialoglayout.findViewById(R.id.etPublication);
+            final Spinner GPO = (Spinner) dialoglayout.findViewById(R.id.spGpoP);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder
+                .setCancelable(false)
+                .setPositiveButton("Republicar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogBox, int id) {
+
+                        String titulo = TITLE.getText().toString();
+                        String publica = PUBLIC.getText().toString();
+                        String idgrupe = String.valueOf(GPO.getItemIdAtPosition(0));
+                        String papa= pa;
+
+                        try {
+                            registerRePost(titulo, publica, papa, idgrupe);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                })
+
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                dialogBox.cancel();
+                            }
+                        });
+        builder.setView(dialoglayout);
+        builder.show();
+    }
+
+
+
+    private void registerRePost(final String t,final String o, final String p,final String g) throws JSONException {
+        final VariablesLogin varlogin =new VariablesLogin();
+
+             final String idusuario= varlogin.getIdusuario();
+             final String titulo= t;
+            final String  observaciones = o;
+            final String padre=p;
+            final String grupe=g;
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // failed_regpublication.setText(R.string.message_succes_publication);
+                        //openMainactivity();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String body;
+                String statusCode = String.valueOf(error.networkResponse.statusCode);
+                //get response body and parse with appropriate encoding
+                if (error.networkResponse.data != null) {
+
+                    try {
+                        body = new String(error.networkResponse.data, "UTF-8");
+
+                        //   failed_regpublication.setText(body);
+
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put(KEY_IDUSUARIO,idusuario );
+                params.put(KEY_TITULO, titulo);
+                params.put(KEY_IDGROUP, grupe);
+                params.put(KEY_OBSERVACIONES, observaciones);
+                params.put(KEY_ROL, "1");
+                params.put(KEY_IDPUBLICACION, padre);
+                params.put(CONTENT_TYPE, APPLICATION);
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+
+
+
+
+    }//Fin RegisterPost
+
+    /*private void openMainactivity() {
+        // showProgress(true);
+        Intent intent= new Intent(context,MainActivity.class);
+        startActivity(intent);
+        finish();
+    } //Fin open login*/
 
 }
