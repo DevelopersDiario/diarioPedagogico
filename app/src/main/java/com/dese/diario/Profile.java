@@ -187,7 +187,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     }
     ///performed request
     public void performRequest() {
-
         final  DatosUsr dusr=new DatosUsr();
 
         RequestQueue rqueue = Volley.newRequestQueue(this);
@@ -209,8 +208,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         );
         rqueue.add(peticion);
 
-
-    }///End download foto
+    }
 
     private void upload(){
         final  DatosUsr dusr=new DatosUsr();
@@ -222,8 +220,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         imgbitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
         byte[] imageBytes = baos.toByteArray();
-        String perfil = "perfil";
-        final String imageString = perfil+ Base64.encodeToString(imageBytes, Base64.DEFAULT);
+         final String imageString =  Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
         //sending image to server
         StringRequest request = new StringRequest(Request.Method.POST, URLSfoto, new Response.Listener<String>(){
