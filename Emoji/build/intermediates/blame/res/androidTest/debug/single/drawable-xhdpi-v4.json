@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png",
-        "source": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png"
-    },
-    {
         "merged": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\sym_keyboard_delete_holo_dark.png",
         "source": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\sym_keyboard_delete_holo_dark.png"
+    },
+    {
+        "merged": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png",
+        "source": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png"
     },
     {
         "merged": "C:\\Users\\TOSHIBA\\AndroidStudioProjects\\Diario_Interactivo\\Github\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_objects_light_normal.png",
