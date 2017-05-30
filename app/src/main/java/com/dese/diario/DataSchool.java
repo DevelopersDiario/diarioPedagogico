@@ -140,7 +140,7 @@ public class DataSchool extends AppCompatActivity implements View.OnClickListene
                 params.put(KEY_USER,varlogin.getIdusuario() );
                 params.put(KEY_SCHOOL,etInstituEdit.getText().toString() );
                 params.put(KEY_GROUP, etGrupoEdit.getText().toString());
-                params.put(KEY_ROL, roleCode );
+                params.put(KEY_ROL, "1" );
                 params.put("Content-Type", "application/x-www-form-urlencoded");
                 return params;
             }
@@ -149,11 +149,12 @@ public class DataSchool extends AppCompatActivity implements View.OnClickListene
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
 
+
     } //fin updatedatos
 
     private void openactivity(){
 
-        Intent intent =new Intent(DataSchool.this,DataSchool.class);
+        Intent intent =new Intent(DataSchool.this,Profile.class);
         startActivity(intent);
         finish();
 

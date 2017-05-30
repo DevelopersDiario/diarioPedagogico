@@ -12,6 +12,10 @@ public class DataFriends {
     public  static String idrol;
     public static String foto;
 
+    public DataFriends() {
+
+    }
+
     public static String getIdusuario() {
         return idusuario;
     }
