@@ -21,6 +21,7 @@ public class ShowProgressDialog {
         //progressDoalog.setTitle("ProgressDialog bar example");
         progressDoalog.setIndeterminate(true);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.setCanceledOnTouchOutside(false);
         progressDoalog.show();
         new Thread(new Runnable() {
             @Override

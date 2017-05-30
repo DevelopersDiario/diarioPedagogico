@@ -78,7 +78,7 @@
                    </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="356dp">
+                android:layout_height="wrap_content">
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -119,7 +119,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/svContent"
-                android:visibility="gone"
                 >
                 <HorizontalScrollView
                     android:layout_width="match_parent"

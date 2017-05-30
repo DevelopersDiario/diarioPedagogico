@@ -478,7 +478,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             final AlertDialog alert = new AlertDialog.Builder(this).create();
 
             alert.setMessage(getResources().getString(R.string.message_whis_saved));
-            alert.setButton(Dialog.BUTTON_POSITIVE,(getResources().getString(R.string.message_ok)),new DialogInterface.OnClickListener(){
+            alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
