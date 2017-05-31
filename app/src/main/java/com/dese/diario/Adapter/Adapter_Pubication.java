@@ -83,13 +83,14 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         final String f=listapublicaciones.get(position).getFoto();
         final String pa=listapublicaciones.get(position).getIdpublicacion();
 
+
         holder.tvFechaRec.setText(d);
         holder.tvPublicationRec.setText(p);
         holder.tvUserRec.setText(u);
         holder.titlePublication.setText(t);
         Picasso.with(context)
                 .load(Urls.fotouser+f)
-                .resize(100, 100)
+                .resize(250, 250)
                 .centerCrop()
                 .into(holder.imProfileRec);
 
