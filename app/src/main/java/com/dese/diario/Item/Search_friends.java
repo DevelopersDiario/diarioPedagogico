@@ -339,7 +339,15 @@ public class Search_friends extends AppCompatActivity  {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(Search_friends.this, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
+
+                        if(response.equals("succes")){
+                            //  Toast.makeText(MainActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Search_friends.this, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(Search_friends.this, "@"+dataFriends.getCuenta().toString()+"Ya forma parte de este Grupo", Toast.LENGTH_LONG).show();
+                        }
+                        // Toast.makeText(Search_friends.this, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
 
                     }
                 }, new Response.ErrorListener() {
