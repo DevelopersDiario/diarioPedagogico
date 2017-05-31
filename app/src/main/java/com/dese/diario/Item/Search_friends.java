@@ -42,6 +42,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Search_friends extends AppCompatActivity  {
@@ -315,8 +316,34 @@ public class Search_friends extends AppCompatActivity  {
                             i=3;
                     }
 
+
+                    List<ChipsView.Chip> lst= mChipsView.getChips();
+                    int size=lst.size();
+                   // Toast.makeText(this, "ChildCount " +mChipsView.getChildCount() + size, Toast.LENGTH_LONG).show();
+                if(size==0){
                     mChipsView.addChip(email, "", contact);
-                    registerGroup(g, u, String.valueOf(i));
+                }else{
+
+
+                    for(int x=0;x<lst.size();x++) {
+                        ChipsView.Chip ch = lst.get(x);
+                        Contact c= ch.getContact();
+
+
+                        if(c.getEmailAddress()==email){
+
+                            Toast.makeText(this, "Ya esta agregada " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
+                        }else{
+                          //
+                            mChipsView.addChip(email, "", contact);
+                            Toast.makeText(this, " No esta agregada " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
+                            registerGroup(g, u, String.valueOf(i));
+                        }
+
+                        System.out.println();
+                    }
+                }
+
 
 
                 } catch (JSONException e) {
@@ -339,8 +366,13 @@ public class Search_friends extends AppCompatActivity  {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(Search_friends.this, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
-
+                        if(response.equals("succes")){
+                            //  Toast.makeText(MainActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Search_friends.this, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            Toast.makeText(Search_friends.this, "@"+dataFriends.getCuenta().toString()+"Ya forma parte de este Grupo", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override

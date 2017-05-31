@@ -74,7 +74,7 @@ public class Urls {
 
     //URLs Grupo
     public static final String listgrupo ="http://192.168.20.25:8084/diariopws/api/1.0/grupo/list";            //Funcional en server
-        public static final String listgpoxid ="http://192.168.20.25:8084/diariopws/api/1.0/grupo/listgpoxid";     //Funcional en server " requiere parametro idgrupo"
+    public static final String listgpoxid ="http://192.168.20.25:8084/diariopws/api/1.0/grupo/listgpoxid";     //Funcional en server " requiere parametro idgrupo"
 
     public static final String creategpo ="http://192.168.20.25:8084/diariopws/api/1.0/grupo/create";    //ok
 
