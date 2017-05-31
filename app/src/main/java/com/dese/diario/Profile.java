@@ -146,7 +146,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     VariablesLogin Vrlog=new VariablesLogin();
 
     private final static  String urlfoto= Urls.fotouser;
-    String URLSfoto ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";
+    //String URLSfoto ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";
+    String URLSfoto ="http://192.168.20.25:8084/diariopws/api/1.0/usuario/upload/";
 
     CircleImageView circleImageView;
     Bitmap imgbitmap;

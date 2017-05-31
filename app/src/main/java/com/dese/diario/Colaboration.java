@@ -269,6 +269,8 @@ public class Colaboration extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(Colaboration.this, R.string.message_succes_group, Toast.LENGTH_LONG).show();
+                        Intent i= new Intent(Colaboration.this, Colaboration.class);
+                        startActivity(i);
 
                     }
                 }, new Response.ErrorListener() {
