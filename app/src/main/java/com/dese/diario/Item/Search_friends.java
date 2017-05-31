@@ -42,6 +42,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Search_friends extends AppCompatActivity  {
@@ -191,11 +192,11 @@ public class Search_friends extends AppCompatActivity  {
 
                 String textValue = String.valueOf(s);
 
-                if(s.length()>0){
+                if(s.length()>=0){
                     searchFriends(textValue);
                 }
 
-                else if(s.length()<=0) {
+                else if(s.length()<0) {
                     listFriends.clear();
                     adpt.notifyDataSetChanged();
                 }
@@ -314,7 +315,7 @@ public class Search_friends extends AppCompatActivity  {
                         default:
                             i=3;
                     }
-
+                  //  List lst= mChipsView.getChips();
                     mChipsView.addChip(email, "", contact);
                     registerGroup(g, u, String.valueOf(i));
 
