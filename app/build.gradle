@@ -76,4 +76,6 @@ dependencies {
     compile 'com.github.DoodleScheduling:android-material-chips:1.1.0'
     testCompile 'junit:junit:4.12'
     compile project(':Emoji')
+    compile 'com.google.firebase:firebase-messaging:10.2.4'
 }
+apply plugin: 'com.google.gms.google-services'
