@@ -17,7 +17,7 @@ public class ShowProgressDialog {
     public  void progressDilog(Context context, final Boolean status) {
         progressDoalog = new ProgressDialog(context);
         progressDoalog.setMax(100);
-        progressDoalog.setMessage("Cargando...");
+        progressDoalog.setMessage("Cargando");
         //progressDoalog.setTitle("ProgressDialog bar example");
         progressDoalog.setIndeterminate(true);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);

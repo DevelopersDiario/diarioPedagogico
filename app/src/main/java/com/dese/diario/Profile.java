@@ -146,8 +146,9 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     VariablesLogin Vrlog=new VariablesLogin();
 
     private final static  String urlfoto= Urls.fotouser;
-    //String URLSfoto ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";
-    String URLSfoto ="http://192.168.20.25:8084/diariopws/api/1.0/usuario/upload/";
+  //  private final static  String URLSfoto= Urls.upload;
+    String URLSfoto ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";
+    //String URLSfoto ="http://192.168.20.25:8084/diariopws/api/1.0/usuario/upload/";
 
     CircleImageView circleImageView;
     Bitmap imgbitmap;
@@ -197,7 +198,14 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
-                        circleImageView.setImageBitmap(bitmap);
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                        String path = MediaStore.Images.Media.insertImage(Profile.this.getContentResolver(), bitmap, "Title", null);
+                        Picasso.with(Profile.this)
+                                .load( Uri.parse(path))
+                                .resize(200, 200)
+                                .centerCrop()
+                                .into( cViewImagen);
                     }
                 }, 0, 0, null, // maxWidth, maxHeight, decodeConfig
                 new Response.ErrorListener() {
@@ -231,7 +239,10 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
             @Override
             public void onResponse(String s) {
                 //  progressDialog.dismiss();
+               // ShowProgressDialog spd = new ShowProgressDialog();
+
                 if(s.equals("true")){
+                   // spd.progressDilog(Profile.this, true);
                     Toast.makeText(Profile.this, "Foto de parfilActualizada con exito!!", Toast.LENGTH_LONG).show();
                     openactivity();
                 }
