@@ -6,7 +6,6 @@ package com.dese.diario.Objects;
 
 public class Urls {
 
-
     //URL usuario login
     public static final String login =  "http://187.188.168.51:8080/diariopws/api/1.0/user/autenticar";                        //en uso
     public static final String createaccount =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/insert";                //en uso
@@ -16,7 +15,7 @@ public class Urls {
     public static final String ufilXnombre =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/filtrousuarioXnombre"; //Funcional en server
     public static final String filtrousuarioXid =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/filtrousuarioXid";  //Funcional en server
     public static final String fotouser =  "http://187.188.168.51:8080/diariopws/api/1.0/archivos/descargar/";         //en uso  "local"
-
+    public static final String upload =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";         //en uso  "local"
     ////actualizacion de informacion de perfil
     public static final String updateestado ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/updateestado";                //en uso
     public static final String updateinfPersonal ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/updateinfPersonal";       //en uso
@@ -49,6 +48,13 @@ public class Urls {
 /**
     //URL usuario login
 public static final String login =  "http://192.168.20.25:8084/diariopws/api/1.0/user/autenticar";                        //en uso
+
+/**
+**/
+/**
+    //URL usuario login
+    public static final String login =  "http://192.168.20.25:8084/diariopws/api/1.0/user/autenticar";                        //en uso
+>>>>>>> republicacion
     public static final String createaccount =  "http://192.168.20.25:8084/diariopws/api/1.0/usuario/insert";                //en uso
 
     //URLs Seleccionar usurio
@@ -56,6 +62,9 @@ public static final String login =  "http://192.168.20.25:8084/diariopws/api/1.0
     public static final String ufilXnombre =  "http://192.168.20.25:8084/diariopws/api/1.0/usuario/filtrousuarioXnombre"; //Funcional en server
     public static final String filtrousuarioXid =  "http://192.168.20.25:8084/diariopws/api/1.0/usuario/filtrousuarioXid";  //Funcional en server
     public static final String fotouser =  "http://192.168.20.25:8084/diariopws/api/1.0/archivos/descargar/";         //en uso  "local"
+
+ public static final String upload =  "http://192.168.20.25:8084/diariopws/api/1.0/usuario/upload//";         //en uso  "local"
+
 
     ////actualizacion de informacion de perfil
     public static final String updateestado ="http://192.168.20.25:8084/diariopws/api/1.0/usuario/updateestado";                //en uso
@@ -68,6 +77,8 @@ public static final String login =  "http://192.168.20.25:8084/diariopws/api/1.0
     public static final String listpublicacion =  "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/list";                //en uso
     public static final String listxiduser =  "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listxiduser";  ///funcional server "Requiere idusuario" como header
     public static final String listxidgrupo =  "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listxidgrupo"; //ok
+
+    public static final String repuplication ="http://192.168.20.25:8084/diariopws/api/1.0/publicacion/republication";
 
     //URLs insertar  publicaciones
     public static final String insertpublicacion =  "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/createpublicacionpadre";   //En reconstruccion
@@ -82,6 +93,10 @@ public static final String login =  "http://192.168.20.25:8084/diariopws/api/1.0
     //URLs Grupodetalle
     public static final String listgpodetalle ="http://192.168.20.25:8084/diariopws/api/1.0/grupodetalle/list";   //Funcional en server
     public static final String addparticipante ="http://192.168.20.25:8084/diariopws/api/1.0/grupodetalle/addparticipante";   //ok
+
     public static final String republication ="http://192.168.20.25:8084/diariopws/api/1.0/publicacion/republication";
     **/
+
+
 }
+

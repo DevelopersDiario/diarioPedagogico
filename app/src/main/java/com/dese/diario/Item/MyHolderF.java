@@ -12,6 +12,8 @@ import com.doodle.android.chips.ChipsView;
 
 import java.util.LinkedList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by Eduardo on 15/05/2017.
  */
@@ -21,7 +23,7 @@ public class MyHolderF extends RecyclerView.ViewHolder implements View.OnLongCli
         public TextView cuen;
         public TextView name;
         public  TextView tvIdRol;
-
+          public CircleImageView imProfileRec;
 
        MyLongClickListener longClickListener;
       ItemClickListener itemClickListener;
@@ -37,7 +39,7 @@ public class MyHolderF extends RecyclerView.ViewHolder implements View.OnLongCli
             _idA = (TextView) itemView.findViewById(R.id.tvIdF);
             cuen = (TextView) itemView.findViewById(R.id.tvAccountF);
             name = (TextView) itemView.findViewById(R.id.tvNameF);
-
+            imProfileRec = (CircleImageView) itemView.findViewById(R.id.imgAmigo);
 
             this.tvIdRol = (TextView) itemView.findViewById(R.id.tvidRolF);
 

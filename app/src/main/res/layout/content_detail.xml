@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -56,8 +56,8 @@
 
                 <ImageView
                     android:id="@+id/imProfilPubDetail"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:background="@drawable/ic_contact_icon"
                     android:layout_alignParentStart="true"
                    />
@@ -80,17 +80,17 @@
                     android:layout_toEndOf="@+id/imProfileRec"
                     android:text="@string/tag_name_user"
                     android:paddingTop="@dimen/padding_5dp"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="49dp"
                     android:paddingBottom="8dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
             </RelativeLayout>
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:paddingTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/tvPubDetail"
@@ -99,8 +99,23 @@
                     android:text="@string/tag_lorem"
                     style="@style/TextAppearance.AppCompat"/>
 
-            </LinearLayout>
+               </LinearLayout>
+
             </ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerRepost"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    tools:listitem="@layout/card_layout_publication"
+                    />
+
+            </LinearLayout>
            <!-- &lt;!&ndash; Acciones &ndash;&gt;
             <LinearLayout
                 android:layout_width="match_parent"

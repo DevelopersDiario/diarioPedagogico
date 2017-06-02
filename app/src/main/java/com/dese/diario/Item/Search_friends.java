@@ -315,9 +315,38 @@ public class Search_friends extends AppCompatActivity  {
                         default:
                             i=3;
                     }
+
                   //  List lst= mChipsView.getChips();
+
+
+
+                    List<ChipsView.Chip> lst= mChipsView.getChips();
+                    int size=lst.size();
+                   // Toast.makeText(this, "ChildCount " +mChipsView.getChildCount() + size, Toast.LENGTH_LONG).show();
+                if(size==0){
                     mChipsView.addChip(email, "", contact);
-                    registerGroup(g, u, String.valueOf(i));
+                }else{
+
+
+                    for(int x=0;x<lst.size();x++) {
+                        ChipsView.Chip ch = lst.get(x);
+                        Contact c= ch.getContact();
+
+
+                        if(c.getEmailAddress()==email){
+
+                            Toast.makeText(this, "Ya esta agregada " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
+                        }else{
+                          //
+                            mChipsView.addChip(email, "", contact);
+                            Toast.makeText(this, " No esta agregada " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
+                            registerGroup(g, u, String.valueOf(i));
+                        }
+
+                        System.out.println();
+                    }
+                }
+
 
 
                 } catch (JSONException e) {
@@ -348,7 +377,6 @@ public class Search_friends extends AppCompatActivity  {
                         else{
                             Toast.makeText(Search_friends.this, "@"+dataFriends.getCuenta().toString()+"Ya forma parte de este Grupo", Toast.LENGTH_LONG).show();
                         }
-                        // Toast.makeText(Search_friends.this, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
 
                     }
                 }, new Response.ErrorListener() {

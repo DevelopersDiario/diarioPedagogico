@@ -14,8 +14,10 @@ import com.dese.diario.Item.MyHolderF;
 import com.dese.diario.Item.MyLongClickListener;
 import com.dese.diario.Item.Search_friends;
 import com.dese.diario.Objects.DataFriends;
+import com.dese.diario.Objects.Urls;
 import com.dese.diario.R;
 import com.doodle.android.chips.ChipsView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -51,8 +53,13 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
         holder.cuen.setText("@"+lista.get(position).getCuenta());
         int r= Integer.parseInt(lista.get(position).getIdrol());
         String role = " ";
-      
-        
+        final String f=lista.get(position).getFoto();
+
+        Picasso.with(context)
+                .load(Urls.fotouser+f)
+                .resize(250, 250)
+                .centerCrop()
+                .into(holder.imProfileRec);
         switch (r){
             case  1:
                 role="Asesor";

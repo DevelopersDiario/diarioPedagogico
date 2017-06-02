@@ -101,7 +101,7 @@
             <Space
                 android:layout_width="@dimen/image_final_width"
                 android:layout_height="@dimen/image_final_width"
-                tools:targetApi="ice_cream_sandwich" />
+                />
 
             <TextView
                 android:id="@+id/profile.textview.title"

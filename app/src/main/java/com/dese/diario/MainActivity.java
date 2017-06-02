@@ -439,24 +439,24 @@ public class MainActivity extends AppCompatActivity
                             case R.id.item_navigation_drawer_about:
                                 menuItem.setChecked(true);
                                 Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                //drawerLayout.closeDrawer(GravityCompat.START);
-                               /* Dialog dialog = new Dialog(MainActivity.this);
-                                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                                dialog.setContentView(R.layout.activity_about);
-                                dialog.show();
-                                */
+
                                 Intent ia= new Intent(MainActivity.this, About.class);
                                 startActivity(ia);
 
                                 return true;
                             case R.id.item_navigation_drawer_exit:
                                 menuItem.setChecked(true);
-                                finish();
-                                Intent intent = new Intent(Intent.ACTION_MAIN);
-                                intent.addCategory(Intent.CATEGORY_HOME);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
+
                                 LoginManager.getInstance().logOut();
+                              /*  Intent intent = new Intent(Intent.ACTION_MAIN);
+                                intent.addCategory(Intent.CATEGORY_HOME);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+
+                                startActivity(intent);
+                                finish();*/
+                                startActivity(new Intent(getBaseContext(), SelectAccount.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+                                finish();
                                 break;
                         }
                         return true;
@@ -549,77 +549,7 @@ public class MainActivity extends AppCompatActivity
         swipeContainer.setRefreshing(false);
     }// Fin conectionPublication
 
-  /*  public void getPersonalInformation(){
-        final VariablesLogin varlogin=new VariablesLogin();
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        StringRequest stringRequest = new StringRequest(GET, URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
-                            try{
-                                JSONArray jsonarray = new JSONArray(response);
-                                for (int i = 0; i < jsonarray.length(); i++) {
-                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                    DatosUsr Du =new DatosUsr();
-                                    Du.setIdusuario(jsonobject.getString("idusuario"));
-                                    Du.setNombre(jsonobject.getString("nombre"));
-                                    Du.setApellidos(jsonobject.getString("apellidos"));
-                                    Du.setGenero(jsonobject.getString("genero"));
-                                    Du.setCuenta(jsonobject.getString("cuenta"));
-                                    Du.setVigencia(jsonobject.getString("vigencia"));
-                                    Du.setFnacimiento(jsonobject.getString("fnacimiento"));
-                                    Du.setCorreo(jsonobject.getString("correo"));
-                                    Du.setTelefono(jsonobject.getString("telefono"));
-                                    Du.setInstitucion(jsonobject.getString("institucion"));
-                                    Du.setGrupo(jsonobject.getString("grupo"));
-                                    Du.setEstado(jsonobject.getString("estado"));
-                                    Du.setFoto(jsonobject.getString("foto"));
-
-                                 //    nvemaillogin.setText(jsonobject.getString("correo"));
-                                   // nvloginaccount.setText(jsonobject.getString("cuenta"));
-
-                                    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-                                    if (navigationView != null) {
-                                        // Añadir carácteristicas
-                                    }
-                                    nvloginaccount.setText(jsonobject.getString("cuenta"));
-                                }
-                            }
-
-                            catch (JSONException e){
-                                Log.e("UUUps!!!!!", "Error!!"+e);
-                            }
-                        }
-                    }
-
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("°_°","ocurio un error !");
-            }
-
-        }
-
-        ) {*//**
-         * Passing some request headers
-         *//*
-        @Override
-        public Map<String, String> getHeaders() throws AuthFailureError {
-            HashMap<String, String> headers = new HashMap<String, String>();
-            headers.put("Content-Type", "application/x-www-form-urlencoded");
-            headers.put("idusuario", varlogin.getIdusuario());
-            return headers;
-        }
-        };
-
-        queue.add(stringRequest);
-// Signify that we are done refreshing
-
-    }// Fin response*/
     @Override
     public void onClick(View v) {
 
