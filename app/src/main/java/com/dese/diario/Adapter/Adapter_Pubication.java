@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -56,7 +57,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
     final static String url = Urls.repuplication;
 
-    final static String urllistar = "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listrepublication";
+    final static String urllistar = "http://187.188.168.51:8080/diariopws/api/1.0/publicacion/listrepublication";
     final String KEY_IDUSUARIO = "idusuario";
     final String KEY_TITULO = "titulo";
     final String KEY_OBSERVACIONES = "observaciones";
@@ -76,6 +77,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
     ArrayList listpublicaciones;
     Adapter_Pubication adapter;
+    LinearLayoutManager linearLayoutManager;
 
     public Adapter_Pubication(ArrayList<Publication> listapublicaciones, Context context) {
 
@@ -89,6 +91,9 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     public MyHolderP onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_layout_publication, parent, false);
+
+
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerRepost);
         return new MyHolderP(view);
     }
 
@@ -117,9 +122,9 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                openDetailActivity(t, u, d, p, f);
-                listarRepublicaciones(pa);
-                //Toast.makeText(c,name,Toast.LENGTH_SHORT).show();
+                openDetailActivity(t, u, d, p, f, pa);
+
+                Toast.makeText(context,"Select+"+ pa,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -141,7 +146,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     }
 
 
-    private void openDetailActivity(String t, String u, String d, String p, String f) {
+    private void openDetailActivity(String t, String u, String d, String p, String f , final String pa ) {
         Intent i = new Intent(context, DetailPublication.class);
 
         //PACK DATA TO SEND
@@ -150,7 +155,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         i.putExtra("DATA_KEY", d);
         i.putExtra("PUBLI_KEY", p);
         i.putExtra("FOTO_KEY", f);
-
+        listarRepublicaciones(pa);
 
         //open activity
         context.startActivity(i);
@@ -200,7 +205,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
     private void registerRePost(final String t, final String o, final String p, final String g) throws JSONException {
         final VariablesLogin varlogin = new VariablesLogin();
-
+        Toast.makeText(context, "   Registarr Post",Toast.LENGTH_SHORT).show();
         final String idusuario = varlogin.getIdusuario();
         final String titulo = t;
         final String observaciones = o;
@@ -212,8 +217,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // failed_regpublication.setText(R.string.message_succes_publication);
-                        //openMainactivity();
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -257,9 +261,10 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
 
     public void listarRepublicaciones(final String pa) {
-
+        linearLayoutManager= new LinearLayoutManager(context);
+      //  recyclerView.setLayoutManager(linearLayoutManager);
         RequestQueue queue = Volley.newRequestQueue(context);
-
+        Toast.makeText(context,"Entra a listar+"+pa,Toast.LENGTH_SHORT).show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urllistar,
                 new Response.Listener<String>() {
@@ -275,8 +280,8 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                                 JSONArray jsonarray = new JSONArray(response);
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                    //  System.out.println(jsonobject);
-                                    VariablesLogin varllogin = new VariablesLogin();
+                                    Toast.makeText(context, " Post"+jsonobject.getString("titulo"),Toast.LENGTH_SHORT).show();
+                                    //VariablesLogin varllogin = new VariablesLogin();
 
                                     listpublicaciones.add(new com.dese.diario.Objects.Publication(
                                             jsonobject.getString(KEY_IDPUBLICACION),
@@ -289,6 +294,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                                             jsonobject.getString(KEY_PAPA)));
                                     adapter = new Adapter_Pubication(listpublicaciones,context);
                                     recyclerView.setAdapter(adapter);
+                                    Toast.makeText(context, "listapublicacoones=="+listapublicaciones,Toast.LENGTH_SHORT).show();
                                     /// System.out.println(listpublicaciones);
 
 
@@ -303,7 +309,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("°_°", "ocurio un error !");
+                Log.e("°_°", "ocurio un error !"+error);
             }
 
         }

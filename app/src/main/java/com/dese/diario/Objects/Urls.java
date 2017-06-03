@@ -16,6 +16,7 @@ public class Urls {
     public static final String filtrousuarioXid =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/filtrousuarioXid";  //Funcional en server
     public static final String fotouser =  "http://187.188.168.51:8080/diariopws/api/1.0/archivos/descargar/";         //en uso  "local"
     public static final String upload =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";         //en uso  "local"
+
     ////actualizacion de informacion de perfil
     public static final String updateestado ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/updateestado";                //en uso
     public static final String updateinfPersonal ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/updateinfPersonal";       //en uso
@@ -29,7 +30,7 @@ public class Urls {
 
     //URLs insertar  publicaciones
     public static final String insertpublicacion =  "http://187.188.168.51:8080/diariopws/api/1.0/publicacion/createpublicacionpadre";   //En reconstruccion
-
+    public static final String repuplication ="http://187.188.168.51:8080/diariopws/api/1.0/publicacion/republication";
 
     //URLs Grupo
     public static final String listgrupo ="http://187.188.168.51:8080/diariopws/api/1.0/grupo/list";            //Funcional en server
@@ -40,7 +41,7 @@ public class Urls {
     //URLs Grupodetalle
     public static final String listgpodetalle ="http://187.188.168.51:8080/diariopws/api/1.0/grupodetalle/list";   //Funcional en server
     public static final String addparticipante ="http://187.188.168.51:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
-    public static final String repuplication ="http://187.188.168.51:8080/diariopws/api/1.0/publicacion/republication";
+
 /**
 **/
 /**
