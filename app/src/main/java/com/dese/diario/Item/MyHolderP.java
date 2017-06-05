@@ -40,8 +40,12 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
     public CircleImageView imProfileRec;
     public Button btnRPoster;
     MyLongClickListener longClickListener;
-    ItemClickListener itemClickListener;
-
+    ItemClickListener itemClickListener
+            ;
+    public TextView tvUserRecR;
+    public TextView titlePublicationR;
+    public TextView tvPublicationRecR;
+    public CircleImageView imProfileRecR;
 
     //Multiple
     private int resource;
@@ -57,6 +61,10 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
         titlePublication = (TextView) itemView.findViewById(R.id.titlePublication);
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
         btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);
+
+        titlePublicationR = (TextView)itemView.findViewById(R.id.titlePublicationR);
+        tvUserRecR= (TextView)itemView.findViewById(R.id.tvUserRecR);
+        imProfileRecR = (CircleImageView)itemView.findViewById(R.id.imProfileRecR);
 
         itemView.setOnLongClickListener(this);
         itemView.setOnCreateContextMenuListener(this);

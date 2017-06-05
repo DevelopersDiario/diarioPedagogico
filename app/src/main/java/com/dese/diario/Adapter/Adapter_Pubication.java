@@ -19,10 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Colaboration;
@@ -55,9 +62,8 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     Context context;
     View.OnLongClickListener longClickListener;
 
-    final static String url = Urls.repuplication;
 
-    final static String urllistar = "http://187.188.168.51:8080/diariopws/api/1.0/publicacion/listrepublication";
+
     final String KEY_IDUSUARIO = "idusuario";
     final String KEY_TITULO = "titulo";
     final String KEY_OBSERVACIONES = "observaciones";
@@ -65,7 +71,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     final String KEY_ROL = "idrol";
     final String KEY_IDPUBLICACION = "idpublicacion";
 
-    final String KEY_NAMEU = "nombreusuario";
+    final String KEY_NAMEU = "nombre";
     final String KEY_PAPA = "padre";
     final String KEY_FOTO = "foto";
 
@@ -76,7 +82,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     RecyclerView recyclerView;
 
     ArrayList listpublicaciones;
-    Adapter_Pubication adapter;
+    Adapter_RePubication adapter;
     LinearLayoutManager linearLayoutManager;
 
     public Adapter_Pubication(ArrayList<Publication> listapublicaciones, Context context) {
@@ -94,6 +100,8 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerRepost);
+
+
         return new MyHolderP(view);
     }
 
@@ -124,14 +132,17 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             public void onItemClick(int pos) {
                 openDetailActivity(t, u, d, p, f, pa);
 
-                Toast.makeText(context,"Select+"+ pa,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Entra a itemClicklistener"+ pa,Toast.LENGTH_SHORT).show();
             }
         });
 
         holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertRepublication(pa);
+                ListRepublication rp= new ListRepublication();
+
+                rp.AlertRepublication(pa, context);
+               // AlertRepublication(pa);
             }
         });
 
@@ -148,6 +159,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
     private void openDetailActivity(String t, String u, String d, String p, String f , final String pa ) {
         Intent i = new Intent(context, DetailPublication.class);
+        ListRepublication rp= new ListRepublication();
 
         //PACK DATA TO SEND
         i.putExtra("TITLE_KEY", t);
@@ -155,14 +167,15 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         i.putExtra("DATA_KEY", d);
         i.putExtra("PUBLI_KEY", p);
         i.putExtra("FOTO_KEY", f);
-        listarRepublicaciones(pa);
 
         //open activity
-        context.startActivity(i);
 
+        context.startActivity(i);
+        DetailPublication dp= new DetailPublication();
+          rp.listarRe(context, pa);
     }
 
-    private void AlertRepublication(final String pa) {
+   /* private void AlertRepublication(final String pa) {
         final VariablesLogin varlogin = new VariablesLogin();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -200,12 +213,12 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                         });
         builder.setView(dialoglayout);
         builder.show();
-    }
+    }*/
 
 
-    private void registerRePost(final String t, final String o, final String p, final String g) throws JSONException {
+    /*private void registerRePost(final String t, final String o, final String p, final String g) throws JSONException {
         final VariablesLogin varlogin = new VariablesLogin();
-        Toast.makeText(context, "   Registarr Post",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "   Register Post",Toast.LENGTH_SHORT).show();
         final String idusuario = varlogin.getIdusuario();
         final String titulo = t;
         final String observaciones = o;
@@ -258,11 +271,12 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
 
     }//Fin RegisterPost
-
-
+*/
+/*
     public void listarRepublicaciones(final String pa) {
-        linearLayoutManager= new LinearLayoutManager(context);
-      //  recyclerView.setLayoutManager(linearLayoutManager);
+
+
+              // final RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(context);
         RequestQueue queue = Volley.newRequestQueue(context);
         Toast.makeText(context,"Entra a listar+"+pa,Toast.LENGTH_SHORT).show();
 
@@ -271,12 +285,14 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                     @Override
                     public void onResponse(String response) {
 
+                        Toast.makeText(context,"response"+response.length(),Toast.LENGTH_SHORT).show();
                         //JSONArray jsonArray = null;
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
                             try {
                                 listpublicaciones = new ArrayList<>();
+
                                 JSONArray jsonarray = new JSONArray(response);
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
@@ -292,16 +308,20 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                                             jsonobject.getString(KEY_TITULO),
                                             jsonobject.getString(KEY_OBSERVACIONES),
                                             jsonobject.getString(KEY_PAPA)));
-                                    adapter = new Adapter_Pubication(listpublicaciones,context);
+                                    adapter = new Adapter_RePubication(listpublicaciones,context);
+                                    recyclerView.setLayoutManager(linearLayoutManager);
+                                    // recyclerView.setLayoutManager(layoutManager2);
                                     recyclerView.setAdapter(adapter);
+
                                     Toast.makeText(context, "listapublicacoones=="+listapublicaciones,Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "listapublicacoones=="+jsonarray.toString(),Toast.LENGTH_SHORT).show();
                                     /// System.out.println(listpublicaciones);
 
 
 
                                 }
                             } catch (JSONException e) {
-                               // Log.e(getString(R.string.UUUps), getString(R.string.Error) + e);
+                               Log.e("Oops!", "Sucedio un error" + e);
                             }
                         }
                     }
@@ -309,27 +329,39 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("°_°", "ocurio un error !"+error);
+          if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+                    Toast.makeText(context,
+                            ("Tiempo error"),
+                            Toast.LENGTH_LONG).show();
+                } else if (error instanceof AuthFailureError) {
+                    //TODO
+                } else if (error instanceof ServerError) {
+                    //TODO
+                } else if (error instanceof NetworkError) {
+                    //TODO
+                } else if (error instanceof ParseError) {
+                    //TODO
+                }
             }
+
 
         }
 
         ) {
-            /**
-             * Passing some request headers
-             */
+
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put(KEY_PAPA, pa);
-                headers.put("Content-Type", "application/x-www-form-urlencoded");
-                return headers;
+            public Map<String, String> getParams() {
+                HashMap<String, String> params = new HashMap<String, String>();
+                params.put(KEY_PAPA, pa);
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
             }
+
         };
 
 
         queue.add(stringRequest);
-    }
+    }*/
 }
 
 

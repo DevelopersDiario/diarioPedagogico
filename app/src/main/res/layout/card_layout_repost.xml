@@ -43,7 +43,7 @@
                 >
 
                     <TextView
-                        android:id="@+id/titlePublication"
+                        android:id="@+id/titlePublicationR"
                         android:textAlignment="center"
                         android:hint="@string/tag_title"
                         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 >
 
                 <ImageView
-                    android:id="@+id/imProfileRec"
+                    android:id="@+id/imProfileRecR"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/ic_contact_icon"
@@ -68,7 +68,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvFechaRec"
+                    android:id="@+id/tvFechaRecR"
                     android:hint="fecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                     android:text="        " />
 
                 <TextView
-                    android:id="@+id/tvUserRec"
+                    android:id="@+id/tvUserRecR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -92,7 +92,7 @@
 
 
             <TextView
-                android:id="@+id/tvPublicationRec"
+                android:id="@+id/tvPublicationRecR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tag_lorem" />

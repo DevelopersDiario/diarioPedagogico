@@ -1,0 +1,155 @@
+package com.dese.diario.Adapter;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.dese.diario.Item.ItemClickListener;
+import com.dese.diario.Item.MyHolderP;
+import com.dese.diario.Objects.DetailPublication;
+import com.dese.diario.Objects.Publication;
+import com.dese.diario.Objects.Urls;
+import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.R;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by Eduardo on 04/04/2017.
+ */
+
+public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderP> {
+    ArrayList<Publication> listaRepublicaciones;
+    Context context;
+    View.OnLongClickListener longClickListener;
+
+    final static String url = Urls.repuplication;
+
+
+
+    RecyclerView recyclerView;
+
+    ArrayList listpublicaciones;
+    Adapter_RePubication adapter;
+    LinearLayoutManager linearLayoutManager;
+
+    public Adapter_RePubication(ArrayList<Publication> listaRepublicaciones, Context context) {
+
+
+        this.listaRepublicaciones = listaRepublicaciones;
+        this.context = context;
+
+    }
+
+    @Override
+    public MyHolderP onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.card_layout_repost, parent, false);
+
+
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerRepost);
+
+
+        return new MyHolderP(view);
+    }
+
+    @Override
+    public void onBindViewHolder(MyHolderP holder, int position) {
+
+
+        final String t = listaRepublicaciones.get(position).getTitulo();
+        final String u = listaRepublicaciones.get(position).getNombre();
+        final String f = listaRepublicaciones.get(position).getFoto();
+
+
+        holder.tvUserRec.setText(u);
+        holder.titlePublication.setText(t);
+        Picasso.with(context)
+                .load(Urls.fotouser + f)
+                .resize(250, 250)
+                .centerCrop()
+                .into(holder.imProfileRecR);
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(int pos) {
+              //  openDetailActivity(t, u, d, p, f, pa);
+
+                //Toast.makeText(context,"Select+"+ pa,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            //    AlertRepublication(pa);
+            }
+        });
+
+
+    }
+
+
+    @Override
+    public int getItemCount() {
+        return (null != listaRepublicaciones ? listaRepublicaciones.size() : 0);
+        //return listapublicaciones.size();
+    }
+
+
+   /* private void openDetailActivity(String t, String u, String d, String p, String f , final String pa ) {
+        Intent i = new Intent(context, DetailPublication.class);
+
+        //PACK DATA TO SEND
+        i.putExtra("TITLE_KEY", t);
+        i.putExtra("USER_KEY", u);
+        i.putExtra("DATA_KEY", d);
+        i.putExtra("PUBLI_KEY", p);
+        i.putExtra("FOTO_KEY", f);
+        listarRepublicaciones(pa);
+
+        //open activity
+        context.startActivity(i);
+
+    }*/
+
+
+
+
+
+
+}
+
+
+
+
