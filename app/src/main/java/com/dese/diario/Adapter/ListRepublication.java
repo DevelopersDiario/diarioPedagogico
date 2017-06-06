@@ -54,8 +54,9 @@ import java.util.Map;
  */
 
 public class ListRepublication extends AppCompatActivity {
-    final static String urllistar = "http://187.188.168.51:8080/diariopws/api/1.0/publicacion/listrepublication";
-    final static String url= Urls.listpublicacion;
+   // final static String urllistar = "http://187.188.168.51:8080/diariopws/api/1.0/publicacion/listrepublication";
+    final static String urllistar = "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listrepublication";
+    final static String url= Urls.repuplication;
     final static String urlLisGpo= Urls.listgrupo;
 
     final String idpublicacion= "idpublicacion";
@@ -93,7 +94,6 @@ public class ListRepublication extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         DetailPublication dp = new DetailPublication();
-
         recyclerView = (RecyclerView)findViewById(R.id.recyclerRepost);
         linearLayoutManager= new LinearLayoutManager(dp.getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -294,7 +294,10 @@ public class ListRepublication extends AppCompatActivity {
 
     public  void listarRe(final Context context, final String pa){
 
-        final DetailPublication dp= new DetailPublication();
+
+
+
+      //  final DetailPublication dp= new DetailPublication();
 
     Toast.makeText(context, "Entro a listar con el padre"+ pa, Toast.LENGTH_LONG).show();
 
@@ -325,9 +328,9 @@ public class ListRepublication extends AppCompatActivity {
                                                 jsonobject.getString("titulo"),
                                                 jsonobject.getString("nombre"),
                                                 jsonobject.getString("idusuario")));
-                                        adapter = new Adapter_RePubication(listRepublicaciones, context);
+                                        adapter = new Adapter_RePubication(listRepublicaciones,context);
                                         Toast.makeText(context, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
-                                      // recyclerView.setAdapter(adapter);
+                                        recyclerView.setAdapter(adapter);
                                          System.out.println(listRepublicaciones);
 
                                     }
@@ -340,7 +343,7 @@ public class ListRepublication extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.e("°_°", "ocurio un error !");
+                    Log.e("Horror", "Response--->"+error);
                 }
 
             }

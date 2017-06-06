@@ -28,8 +28,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderP;
+import com.dese.diario.Item.MyHolderR;
+import com.dese.diario.Item.MyLongClickListener;
 import com.dese.diario.Objects.DetailPublication;
 import com.dese.diario.Objects.Publication;
+import com.dese.diario.Objects.RePublication;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
@@ -48,22 +51,12 @@ import java.util.Map;
  * Created by Eduardo on 04/04/2017.
  */
 
-public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderP> {
-    ArrayList<Publication> listaRepublicaciones;
+public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
+    ArrayList<RePublication> listaRepublicaciones;
     Context context;
     View.OnLongClickListener longClickListener;
-
-    final static String url = Urls.repuplication;
-
-
-
-    RecyclerView recyclerView;
-
-    ArrayList listpublicaciones;
-    Adapter_RePubication adapter;
-    LinearLayoutManager linearLayoutManager;
-
-    public Adapter_RePubication(ArrayList<Publication> listaRepublicaciones, Context context) {
+    int selectedPos;
+    public Adapter_RePubication(ArrayList<RePublication> listaRepublicaciones, Context context) {
 
 
         this.listaRepublicaciones = listaRepublicaciones;
@@ -72,19 +65,16 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderP> {
     }
 
     @Override
-    public MyHolderP onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyHolderR onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_layout_repost, parent, false);
 
 
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerRepost);
-
-
-        return new MyHolderP(view);
+        return new MyHolderR(view);
     }
 
     @Override
-    public void onBindViewHolder(MyHolderP holder, int position) {
+    public void onBindViewHolder(MyHolderR holder, int position) {
 
 
         final String t = listaRepublicaciones.get(position).getTitulo();
@@ -92,9 +82,9 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderP> {
         final String f = listaRepublicaciones.get(position).getFoto();
 
 
-        holder.tvUserRec.setText(u);
-        holder.titlePublication.setText(t);
-        Picasso.with(context)
+        holder.titlePublicationR.setText(u);
+        holder.tvUserRecR.setText(t);
+     Picasso.with(context)
                 .load(Urls.fotouser + f)
                 .resize(250, 250)
                 .centerCrop()
@@ -109,12 +99,14 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderP> {
             }
         });
 
-        holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
+        holder.setLongClickListener(new MyLongClickListener() {
             @Override
-            public void onClick(View v) {
-            //    AlertRepublication(pa);
+            public void onLongClick(int pos) {
+                selectedPos =pos;
+
             }
         });
+
 
 
     }

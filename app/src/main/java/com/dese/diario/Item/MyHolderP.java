@@ -62,9 +62,6 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
         btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);
 
-        titlePublicationR = (TextView)itemView.findViewById(R.id.titlePublicationR);
-        tvUserRecR= (TextView)itemView.findViewById(R.id.tvUserRecR);
-        imProfileRecR = (CircleImageView)itemView.findViewById(R.id.imProfileRecR);
 
         itemView.setOnLongClickListener(this);
         itemView.setOnCreateContextMenuListener(this);

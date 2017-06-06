@@ -62,29 +62,6 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     Context context;
     View.OnLongClickListener longClickListener;
 
-
-
-    final String KEY_IDUSUARIO = "idusuario";
-    final String KEY_TITULO = "titulo";
-    final String KEY_OBSERVACIONES = "observaciones";
-    final String KEY_IDGROUP = "idgrupo";
-    final String KEY_ROL = "idrol";
-    final String KEY_IDPUBLICACION = "idpublicacion";
-
-    final String KEY_NAMEU = "nombre";
-    final String KEY_PAPA = "padre";
-    final String KEY_FOTO = "foto";
-
-    final String CONTENT_TYPE = "Content-Type";
-    final String APPLICATION = "application/x-www-form-urlencoded";
-
-
-    RecyclerView recyclerView;
-
-    ArrayList listpublicaciones;
-    Adapter_RePubication adapter;
-    LinearLayoutManager linearLayoutManager;
-
     public Adapter_Pubication(ArrayList<Publication> listapublicaciones, Context context) {
 
 
@@ -98,8 +75,6 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_layout_publication, parent, false);
 
-
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerRepost);
 
 
         return new MyHolderP(view);
@@ -132,7 +107,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             public void onItemClick(int pos) {
                 openDetailActivity(t, u, d, p, f, pa);
 
-                Toast.makeText(context,"Entra a itemClicklistener"+ pa,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Entra a itemClicklistener "+ pa,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -167,201 +142,14 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         i.putExtra("DATA_KEY", d);
         i.putExtra("PUBLI_KEY", p);
         i.putExtra("FOTO_KEY", f);
+        i.putExtra("PAPA", pa);
 
         //open activity
 
         context.startActivity(i);
-        DetailPublication dp= new DetailPublication();
-          rp.listarRe(context, pa);
+
     }
 
-   /* private void AlertRepublication(final String pa) {
-        final VariablesLogin varlogin = new VariablesLogin();
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View dialoglayout = inflater.inflate(R.layout.activity_publication, null);
-
-        final EditText TITLE = (EditText) dialoglayout.findViewById(R.id.ettitlepost);
-        final EditText PUBLIC = (EditText) dialoglayout.findViewById(R.id.etPublication);
-        final Spinner GPO = (Spinner) dialoglayout.findViewById(R.id.spGpoP);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder
-                .setCancelable(false)
-                .setPositiveButton("Republicar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialogBox, int id) {
-
-                        String titulo = TITLE.getText().toString();
-                        String publica = PUBLIC.getText().toString();
-                        String idgrupe = String.valueOf(GPO.getItemIdAtPosition(0));
-                        String papa = pa;
-
-                        try {
-                            registerRePost(titulo, publica, papa, idgrupe);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                })
-
-                .setNegativeButton("Cancelar",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialogBox, int id) {
-                                dialogBox.cancel();
-                            }
-                        });
-        builder.setView(dialoglayout);
-        builder.show();
-    }*/
-
-
-    /*private void registerRePost(final String t, final String o, final String p, final String g) throws JSONException {
-        final VariablesLogin varlogin = new VariablesLogin();
-        Toast.makeText(context, "   Register Post",Toast.LENGTH_SHORT).show();
-        final String idusuario = varlogin.getIdusuario();
-        final String titulo = t;
-        final String observaciones = o;
-        final String padre = p;
-        final String grupe = g;
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                if (error.networkResponse.data != null) {
-
-                    try {
-                        body = new String(error.networkResponse.data, "UTF-8");
-
-                        //   failed_regpublication.setText(body);
-
-
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_IDUSUARIO, idusuario);
-                params.put(KEY_TITULO, titulo);
-                params.put(KEY_IDGROUP, grupe);
-                params.put(KEY_OBSERVACIONES, observaciones);
-                params.put(KEY_ROL, "1");
-                params.put(KEY_IDPUBLICACION, padre);
-                params.put(CONTENT_TYPE, APPLICATION);
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(stringRequest);
-
-
-    }//Fin RegisterPost
-*/
-/*
-    public void listarRepublicaciones(final String pa) {
-
-
-              // final RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(context);
-        RequestQueue queue = Volley.newRequestQueue(context);
-        Toast.makeText(context,"Entra a listar+"+pa,Toast.LENGTH_SHORT).show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, urllistar,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        Toast.makeText(context,"response"+response.length(),Toast.LENGTH_SHORT).show();
-                        //JSONArray jsonArray = null;
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
-                            try {
-                                listpublicaciones = new ArrayList<>();
-
-                                JSONArray jsonarray = new JSONArray(response);
-                                for (int i = 0; i < jsonarray.length(); i++) {
-                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                    Toast.makeText(context, " Post"+jsonobject.getString("titulo"),Toast.LENGTH_SHORT).show();
-                                    //VariablesLogin varllogin = new VariablesLogin();
-
-                                    listpublicaciones.add(new com.dese.diario.Objects.Publication(
-                                            jsonobject.getString(KEY_IDPUBLICACION),
-                                            jsonobject.getString(KEY_IDUSUARIO),
-                                            jsonobject.getString(KEY_NAMEU),
-                                            jsonobject.getString(KEY_FOTO),
-                                            jsonobject.getString("fecha"),
-                                            jsonobject.getString(KEY_TITULO),
-                                            jsonobject.getString(KEY_OBSERVACIONES),
-                                            jsonobject.getString(KEY_PAPA)));
-                                    adapter = new Adapter_RePubication(listpublicaciones,context);
-                                    recyclerView.setLayoutManager(linearLayoutManager);
-                                    // recyclerView.setLayoutManager(layoutManager2);
-                                    recyclerView.setAdapter(adapter);
-
-                                    Toast.makeText(context, "listapublicacoones=="+listapublicaciones,Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(context, "listapublicacoones=="+jsonarray.toString(),Toast.LENGTH_SHORT).show();
-                                    /// System.out.println(listpublicaciones);
-
-
-
-                                }
-                            } catch (JSONException e) {
-                               Log.e("Oops!", "Sucedio un error" + e);
-                            }
-                        }
-                    }
-
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-          if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(context,
-                            ("Tiempo error"),
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof AuthFailureError) {
-                    //TODO
-                } else if (error instanceof ServerError) {
-                    //TODO
-                } else if (error instanceof NetworkError) {
-                    //TODO
-                } else if (error instanceof ParseError) {
-                    //TODO
-                }
-            }
-
-
-        }
-
-        ) {
-
-            @Override
-            public Map<String, String> getParams() {
-                HashMap<String, String> params = new HashMap<String, String>();
-                params.put(KEY_PAPA, pa);
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-
-        };
-
-
-        queue.add(stringRequest);
-    }*/
 }
 
 
