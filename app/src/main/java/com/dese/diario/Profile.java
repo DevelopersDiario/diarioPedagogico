@@ -199,14 +199,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
-                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                        String path = MediaStore.Images.Media.insertImage(Profile.this.getContentResolver(), bitmap, "Title", null);
-                        Picasso.with(Profile.this)
-                                .load( Uri.parse(path))
-                                .resize(200, 200)
-                                .centerCrop()
-                                .into( cViewImagen);
+                        circleImageView.setImageBitmap(bitmap);
                     }
                 }, 0, 0, null, // maxWidth, maxHeight, decodeConfig
                 new Response.ErrorListener() {
@@ -220,6 +213,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         rqueue.add(peticion);
 
     }
+
 
     private void upload(){
         final  DatosUsr dusr=new DatosUsr();

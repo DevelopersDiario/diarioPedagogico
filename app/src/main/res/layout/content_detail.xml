@@ -112,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    tools:listitem="@layout/card_layout_publication"
+                    tools:listitem="@layout/card_layout_repost"
                     />
 
             </LinearLayout>

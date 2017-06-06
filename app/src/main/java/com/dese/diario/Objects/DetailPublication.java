@@ -1,27 +1,58 @@
 package com.dese.diario.Objects;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.dese.diario.Adapter.Adapter_RePubication;
+import com.dese.diario.Adapter.ListRepublication;
 import com.dese.diario.DataSchool;
 import com.dese.diario.MainActivity;
+import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Profile;
 import com.dese.diario.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DetailPublication extends AppCompatActivity {
     //Theme
@@ -33,19 +64,56 @@ public class DetailPublication extends AppCompatActivity {
     Boolean homeButton = false, themeChanged;
     TextView tvTitlePubDetail, tvUserPubDetail, tvDatePubDetail, tvPubDetail;
     ImageView foto;
-    String t,u,d,p,f;
+    String t,u,d,p,f, pa;
+
+
+    Button btnPost;
+
+    //ListarGpo
+    final static String urlLisGpo= Urls.listgrupo;
+
+    ArrayList listRepublicaciones;
+    Adapter_RePubication adapter;
+    RecyclerView recyclerView;
+    LinearLayoutManager linearLayoutManager;
+    String ed;
+
+    List leadsNames, leadsIdes;
+    ArrayAdapter mLeadsAdapter;
+
+    //repub
+    final static String url= Urls.repuplication;
+
+    final String KEY_IDUSUARIO = "idusuario";
+    final String KEY_TITULO = "titulo";
+    final String KEY_OBSERVACIONES = "observaciones";
+    final String KEY_IDGROUP = "idgrupo";
+    final String KEY_ROL = "idrol";
+    final String KEY_IDPUBLICACION = "idpublicacion";
+    final String CONTENT_TYPE = "Content-Type";
+    final String APPLICATION = "application/x-www-form-urlencoded";
+
+
+    final static String urllistar = "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listrepublication";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_publication);
-
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerRepost);
+        linearLayoutManager= new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         bindData();
         inicializarToolbar();
     }
 
     private void bindData() {
+        final ListRepublication lp =new ListRepublication();
+        btnPost= (Button) findViewById(R.id.btnRep);
+
+
+
 
         tvTitlePubDetail = (TextView) findViewById(R.id.tvTitlePubDetail);
         tvUserPubDetail=(TextView) findViewById(R.id.tvUserPubDetail);
@@ -59,8 +127,16 @@ public class DetailPublication extends AppCompatActivity {
         d=i.getExtras().getString("DATA_KEY");
          p=i.getExtras().getString("PUBLI_KEY");
         f=i.getExtras().getString("FOTO_KEY");
+        pa=i.getExtras().getString("PAPA");
 
+     listarRe( pa);
+        btnPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertRepublication(pa);
 
+            }
+        });
         tvTitlePubDetail.setText(t);
         tvUserPubDetail.setText(u);
         tvDatePubDetail.setText(d);
@@ -87,6 +163,244 @@ public class DetailPublication extends AppCompatActivity {
             getWindow().setStatusBarColor(colorPrimaryDark);
 
         }
+    }
+    public void AlertRepublication(final String pa) {
+        final VariablesLogin varlogin = new VariablesLogin();
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View dialoglayout = inflater.inflate(R.layout.dialog_republication, null);
+
+        final EditText TITLE = (EditText) dialoglayout.findViewById(R.id.ettitlepost);
+        final EditText PUBLIC = (EditText) dialoglayout.findViewById(R.id.etPublication);
+        final Spinner GPO = (Spinner) dialoglayout.findViewById(R.id.spGpoP);
+        listGpo(GPO);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setCancelable(false)
+                .setPositiveButton("Republicar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogBox, int id) {
+
+                        String titulo = TITLE.getText().toString();
+                        String publica = PUBLIC.getText().toString();
+                        String idgrupe = ed;
+                        String papa = pa;
+
+                        registerRePost(titulo, publica, papa, idgrupe);
+
+                    }
+                })
+
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialogBox, int id) {
+                                dialogBox.cancel();
+                            }
+                        });
+        builder.setView(dialoglayout);
+        builder.show();
+    }
+
+    private void registerRePost(String t, String o, String papa, String g) {
+
+        final VariablesLogin varlogin = new VariablesLogin();
+      //  Toast.makeText(DetailPublication.this, "   Register Post",Toast.LENGTH_SHORT).show();
+        final String idusuario = varlogin.getIdusuario();
+        final String titulo = t;
+        final String observaciones = o;
+        final String padre = papa;
+        final String grupe = g;
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(DetailPublication.this, "CORRRECTO", Toast.LENGTH_SHORT).show();
+                        openActivity();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String body;
+                String statusCode = String.valueOf(error.networkResponse.statusCode);
+                //get response body and parse with appropriate encoding
+                if (error.networkResponse.data != null) {
+
+                    try {
+                        body = new String(error.networkResponse.data, "UTF-8");
+
+                        //   failed_regpublication.setText(body);
+
+
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put(KEY_IDUSUARIO, idusuario);
+                params.put(KEY_TITULO, titulo);
+                params.put(KEY_IDGROUP, grupe);
+                params.put(KEY_OBSERVACIONES, observaciones);
+                params.put(KEY_ROL, "1");
+                params.put(KEY_IDPUBLICACION, padre);
+                params.put(CONTENT_TYPE, APPLICATION);
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(DetailPublication.this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    private void openActivity(){
+        Intent is=new Intent(DetailPublication.this, MainActivity.class);
+        startActivity(is);
+
+    }
+
+    public  void listarRe( final String pa){
+
+
+
+
+        //  final DetailPublication dp= new DetailPublication();
+
+        //Toast.makeText(DetailPublication.this, "Entro a listar con el padre"+ pa, Toast.LENGTH_LONG).show();
+
+
+        RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urllistar,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                                listRepublicaciones = new ArrayList<>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (int i = 0; i < jsonarray.length(); i++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+
+
+                                    listRepublicaciones.add(new com.dese.diario.Objects.RePublication(
+                                            jsonobject.getString("padre"),
+                                            jsonobject.getString("idpublicacion"),
+                                            jsonobject.getString("foto"),
+                                            jsonobject.getString("ruta"),
+                                            jsonobject.getString("titulo"),
+                                            jsonobject.getString("nombre"),
+                                            jsonobject.getString("idusuario")));
+                                    adapter = new Adapter_RePubication(listRepublicaciones,DetailPublication.this);
+                                  // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
+                                    recyclerView.setAdapter(adapter);
+                                    System.out.println(listRepublicaciones);
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("UUUps!!!!!", "Error!!" + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Horror", "Response--->"+error);
+            }
+
+        }
+
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idpublicacion", pa);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
+    }
+
+
+
+
+    private void listGpo(final Spinner gpo) {
+        RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlLisGpo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                                leadsNames  = new ArrayList<String>();
+                                leadsIdes= new ArrayList<String>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (final int[] i = {0}; i[0] < jsonarray.length(); i[0]++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i[0]);
+
+                                    leadsNames.add(0, jsonobject.getString("nombregrupo"));
+                                    leadsIdes.add(0, jsonobject.getString("idgrupo"));
+
+
+                                    // GPO= (Spinner) findViewById(R.id.spGpoP);
+                                    mLeadsAdapter = new ArrayAdapter<String>(DetailPublication.this,
+                                            android.R.layout.simple_spinner_item, leadsNames);
+                                    mLeadsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                    gpo.setAdapter(mLeadsAdapter);
+                                    gpo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+                                        {
+                                            ed= (String) leadsIdes.get(pos);
+
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent)
+                                        {    }
+                                    });
+                                }
+
+
+
+                            } catch (JSONException e) {
+                                Log.e(getString(R.string.message_Oops), getString(R.string.message_Publication_Error) + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(getString(R.string.carita), getString(R.string.message_ocurrio_error));
+            }
+        });
+
+
+        queue.add(stringRequest);
+
     }
 
 
