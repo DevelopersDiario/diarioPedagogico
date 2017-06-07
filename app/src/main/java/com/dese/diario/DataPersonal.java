@@ -250,11 +250,14 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
         public void onDateSet(DatePicker view, int selectedYear,
                               int selectedMonth, int selectedDay) {
             year = selectedYear;
-            month = selectedMonth;
+            month = 1+selectedMonth;
             day = selectedDay;
-            etDateBithdayEdit.setText(new StringBuilder().append(year)
-                    .append("-").append(month).append("-").append(day)
-                    .append(" "));
+
+                etDateBithdayEdit.setText(new StringBuilder().append(year)
+                        .append("-").append(month).append("-").append(day)
+                        .append(" "));
+
+
 
         }
     };
@@ -376,6 +379,7 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
             case R.id.action_edit:
                 if(etName.isEnabled()&&etLastName.isEnabled()&&  etPhone.isEnabled()&&etDateBithdayEdit.isEnabled()) {
                     enableDates();
+
 
                 }
                 else if(!etName.isEnabled()&& !etLastName.isEnabled()&& !etPhone.isEnabled() && !etDateBithdayEdit.isEnabled()){

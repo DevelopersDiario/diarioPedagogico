@@ -337,7 +337,7 @@
     <string name="tag_font">Fuente</string>
     <string name="tag_create_group">Crea una colaboración</string>
     <string name="prompt_create_group">Teclea un nombre</string>
-    <string name="prompt_date">AAAA/MMM/DD</string>
+    <string name="prompt_date">AAAA/MM/DD</string>
     <string name="action_select">Seleccionado</string>
     <string name="message_succes_information">Tú  informacion personal ha sido actualizada con exito!!!</string>
     <string name="UTF8">UTF-8</string>

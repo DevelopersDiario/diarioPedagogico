@@ -209,8 +209,13 @@ public class DataSocial extends AppCompatActivity implements View.OnClickListene
         public void onDateSet(DatePicker view, int selectedYear,
                               int selectedMonth, int selectedDay) {
             year = selectedYear;
-            month = selectedMonth;
+            month = 1+selectedMonth;
             day = selectedDay;
+
+            etDateVigenciaEdit.setText(new StringBuilder().append(year)
+                    .append("-").append(month).append("-").append(day)
+                    .append(" "));
+
 
         }
     };
