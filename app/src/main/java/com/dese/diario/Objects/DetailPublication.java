@@ -94,7 +94,8 @@ public class DetailPublication extends AppCompatActivity {
     final String APPLICATION = "application/x-www-form-urlencoded";
 
 
-    final static String urllistar = "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listrepublication";
+    //final static String urllistar = "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listrepublication";
+    final static String urllistar = Urls.listarrepublication;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
