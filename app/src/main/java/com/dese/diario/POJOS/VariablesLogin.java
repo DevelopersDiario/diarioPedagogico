@@ -12,6 +12,7 @@ public class VariablesLogin implements Serializable{
     public  static String cuenta;
     public  static String correo;
     public  static String foto;
+    public  static String fportada;
     public  static String telefono;
 
 
@@ -31,6 +32,14 @@ public class VariablesLogin implements Serializable{
     }
     public String getFoto() {
         return VariablesLogin.foto;
+    }
+
+    public static String getFportada() {
+        return fportada;
+    }
+
+    public static void setFportada(String fportada) {
+        VariablesLogin.fportada = fportada;
     }
 
     public void setIdusuario(String idusuario) {

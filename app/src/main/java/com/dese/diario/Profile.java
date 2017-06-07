@@ -39,9 +39,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -111,6 +117,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     private final int SELECT_PICTURE = 300;
 
     private ImageView mSetImage, imagenAs;
+    private  ImageView mPortada;
     private RelativeLayout mRlView;
     private String mPath;
 
@@ -141,19 +148,21 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     final String grupo= "grupo";
     final String estado= "estado";
     final String foto= "foto";
+    final String fportada="fportada";
     final String URL= Urls.filtrousuarioXid;
     final String URLupdatestate= Urls.updateestado;
     VariablesLogin Vrlog=new VariablesLogin();
 
     private final static  String urlfoto= Urls.fotouser;
    private final static  String URLSfoto= Urls.upload;
+   private final static  String uploadHolder= Urls.uploadholder;
    // String URLSfoto ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";
 
    // String URLSfoto ="http://192.168.20.25:8084/diariopws/api/1.0/usuario/upload/";
 
 
     CircleImageView circleImageView;
-    Bitmap imgbitmap;
+    Bitmap imgbitmap,bmHolder,bmProfile;
 
 
     @Override
@@ -171,17 +180,17 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
         bindActivity();
         settingsButtons();
+        performRequest();
+        dowlandHolder();
 
 
     }//End Create
-    private void init() {
-
-    }
 
     @Override
     protected void onStart() {
         super.onStart();
         performRequest();
+        dowlandHolder();
 
 
     }
@@ -192,20 +201,73 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     ///performed request
     public void performRequest() {
         final  DatosUsr dusr=new DatosUsr();
-
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         RequestQueue rqueue = Volley.newRequestQueue(this);
 
         final ImageRequest peticion = new ImageRequest(urlfoto+dusr.getFoto(),
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
-                        circleImageView.setImageBitmap(bitmap);
+                        if(!bitmap.equals(null)){
+
+
+                        //circleImageView.setImageBitmap(bitmap);
+
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                            Toast.makeText(Profile.this, "profile perfoma", Toast.LENGTH_LONG).show();
+
+                            String pPath = MediaStore.Images.Media.insertImage(Profile.this.getContentResolver(), bitmap, "Profile", null);
+                            Picasso.with(Profile.this)
+                                    .load(pPath)
+                                    .resize(150, 150)
+                                    .centerCrop()
+                                    .into(cViewImagen);
+                    }else{
+                            circleImageView.setImageResource(R.drawable.logo);
+                        }
+
                     }
                 }, 0, 0, null, // maxWidth, maxHeight, decodeConfig
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        circleImageView.setImageResource(R.drawable.image_cloud_sad);
+                        circleImageView.setImageResource(R.drawable.logo);
+
+                    }
+                }
+        );
+        rqueue.add(peticion);
+
+    }
+    public void dowlandHolder() {
+        final  DatosUsr dusr=new DatosUsr();
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+
+        RequestQueue rqueue = Volley.newRequestQueue(this);
+
+        final ImageRequest peticion = new ImageRequest(urlfoto+dusr.getFportada(),
+                new Response.Listener<Bitmap>() {
+                    @Override
+                    public void onResponse(Bitmap bitmap) {
+                        if(!bitmap.equals(null)){
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                            Toast.makeText(Profile.this, "dowlandHolderr", Toast.LENGTH_LONG).show();
+                            String pPath = MediaStore.Images.Media.insertImage(Profile.this.getContentResolver(), bitmap, "Portada", null);
+                            Picasso.with(Profile.this)
+                                    .load(pPath)
+                                    .resize(550, 450)
+                                    .centerCrop()
+                                    .into(mPortada);
+                        }
+                     //   mPortada.setImageBitmap(bitmap);
+                        else
+                            mPortada.setImageResource(R.drawable.header);
+                    }
+                }, 0, 0, null, // maxWidth, maxHeight, decodeConfig
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mPortada.setImageResource(R.drawable.header);
 
                     }
                 }
@@ -217,9 +279,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
     private void upload(){
         final  DatosUsr dusr=new DatosUsr();
-      /* progressDialog = new ProgressDialog(MainActivity.this);
-       progressDialog.setMessage("Uploading, please wait...");
-       progressDialog.show();*/
+
 
         //converting image to base64 string
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -236,17 +296,17 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
                 if(s.equals("true")){
                    // spd.progressDilog(Profile.this, true);
-                    Toast.makeText(Profile.this, "Foto de parfilActualizada con exito!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Profile.this, "Foto de perfil actualizada!", Toast.LENGTH_LONG).show();
                     openactivity();
                 }
                 else{
-                    Toast.makeText(Profile.this, "Some error occurred!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Profile.this, "¡Ocurrio algun error!", Toast.LENGTH_LONG).show();
                 }
             }
         },new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(Profile.this, "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();;
+                Toast.makeText(Profile.this, "¡Ocurrio algun error!"+volleyError, Toast.LENGTH_LONG).show();;
             }
         }) {
             //adding parameters to send
@@ -259,6 +319,74 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                 parameters.put("idusuario",Vrlog.idusuario);
                 parameters.put("boundary",identificador+".jpg");
                 dusr.setFoto(identificador+".jpg");
+
+
+
+                return parameters;
+            }
+        };
+
+        RequestQueue rQueue = Volley.newRequestQueue(Profile.this);
+        rQueue.add(request);
+    }//End Upload
+    private void uploadHolder(){
+        final  DatosUsr dusr=new DatosUsr();
+
+
+        //converting image to base64 string
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        imgbitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+        byte[] imageBytes = baos.toByteArray();
+         final String imageString =  Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+        //sending image to server
+        StringRequest request = new StringRequest(Request.Method.POST, uploadHolder, new Response.Listener<String>(){
+            @Override
+            public void onResponse(String s) {
+
+                if(s.equals("true")){
+                   // spd.progressDilog(Profile.this, true);
+                    Toast.makeText(Profile.this, "Foto de portada actualizada!", Toast.LENGTH_LONG).show();
+                    openactivity();
+                }
+                else{
+                    Toast.makeText(Profile.this, "¡Ocurrio algun error!", Toast.LENGTH_LONG).show();
+                }
+            }
+        },new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                NetworkResponse networkResponse = volleyError.networkResponse;
+                if (networkResponse != null) {
+                    Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                }
+
+                if (volleyError instanceof TimeoutError) {
+                    Log.e("Volley", "TimeoutError");
+                }else if(volleyError instanceof NoConnectionError){
+                    Log.e("Volley", "NoConnectionError");
+                } else if (volleyError instanceof AuthFailureError) {
+                    Log.e("Volley", "AuthFailureError");
+                } else if (volleyError instanceof ServerError) {
+                    Log.e("Volley", "ServerError");
+                } else if (volleyError instanceof NetworkError) {
+                    Log.e("Volley", "NetworkError");
+                } else if (volleyError instanceof ParseError) {
+                    Log.e("Volley", "ParseError");
+                }
+            }
+        }) {
+            //adding parameters to send
+            //String identificador= Vrlog.getCuenta().toString()+"P"+String.valueOf(System.currentTimeMillis());
+            String identificador=String.valueOf(System.currentTimeMillis());
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("fportada", imageString);
+                parameters.put("idusuario",Vrlog.idusuario);
+                parameters.put("boundary",identificador+".jpg");
+                dusr.setFportada(identificador+".jpg");
 
 
 
@@ -356,10 +484,10 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
         edState = (EditText) findViewById(R.id.etestadouserProfile);
 
-        // tvaccountProfile=(TextView)findViewById(R.id.tvInformationPrivate);
-       // tvgeneroProfile=(TextView)findViewById(R.id.tvState);
         etestadouserProfile=(EditText) findViewById(R.id.etestadouserProfile);
+
         circleImageView = (CircleImageView) findViewById(R.id.imCircleView);
+        mPortada = (ImageView) findViewById(R.id.profile_imageview_placeholder);
 
     }
 
@@ -745,6 +873,9 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Bundle b=(getIntent().getExtras());
+        //int i=(getIntent().getExtras().getInt("identificador"));
+
 
 
         if(resultCode == RESULT_OK){
@@ -767,18 +898,24 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                             //getting image from gallery
                             imgbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image1);
                             //Setting image to ImageView
-                            Picasso.with(Profile.this)
-                                    .load(image1)
-                                    .resize(50, 50)
-                                    .centerCrop()
-                                    .into(imagenAs);
 
-                            // imagenAs.setImageResource(bitmap);
                             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                             imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                          //  String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imgbitmap, "Title", null);
 
+                            uploadHolder();
                             upload();
+                           /* if(b!=null) {
+                                int i=b.getInt("identificador");
+
+                                if (i == 200) {
+                                    bmHolder.equals(imgbitmap);
+                                    uploadHolder();
+                                } else if (i == 100) {
+                                    bmProfile = imgbitmap;
+                                    upload();
+                                }
+                            }*/
+
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -786,16 +923,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
 
 
-
-    /*                Bitmap bitmap2 = BitmapFactory.decodeFile(mPath);
-                    String paths = MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap2,null, null);
-                    Uri image1= Uri.parse(paths);
-                    Picasso.with(Profile.this)
-                            .load(image1)
-                            .placeholder(R.drawable.st)
-                            .error(R.drawable.d)
-                            .into(imagenAs);
-                    // upload();     */
 
                     break;
                 case SELECT_PICTURE:
@@ -807,33 +934,36 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                             //getting image from gallery
                             imgbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                             //Setting image to ImageView
-                            Picasso.with(Profile.this)
+                           /* Picasso.with(Profile.this)
                                     .load(filePath)
                                     .resize(50, 50)
                                     .centerCrop()
-                                    .into(imagenAs);
+                                    .into(imagenAs);*/
 
                             // imagenAs.setImageResource(bitmap);
                             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                             imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imgbitmap, "Title", null);
-
+                            uploadHolder();
                             upload();
+                          /*  if(b!=null) {
+                                int i=b.getInt("identificador");
 
+                                if (i == 200) {
+                                    bmHolder.equals(imgbitmap);
+                                    uploadHolder();
+                                } else if (i == 100) {
+                                    bmProfile = imgbitmap;
+                                    upload();
+                                }
+                            }*/
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
 
                     }
 
-               /*     Uri path = data.getData();
 
-                    //imagenAs.setImageURI(path);
-                    Picasso.with(Profile.this)
-                            .load(path)
-                            .placeholder(R.drawable.st)
-                            .error(R.drawable.d)
-                            .into(imagenAs);*/
 
                     break;
 

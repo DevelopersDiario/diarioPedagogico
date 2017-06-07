@@ -24,6 +24,7 @@ public class DatosUsr implements Serializable{
     public  static   String grupo;
     public  static   String estado;
     public  static   String foto;
+    public  static   String fportada;
 
     public static DatosUsr instance;
 
@@ -126,6 +127,14 @@ public class DatosUsr implements Serializable{
 
     public  void setInstance(DatosUsr instance) {
         this.instance = instance;
+    }
+
+    public static String getFportada() {
+        return fportada;
+    }
+
+    public static void setFportada(String fportada) {
+        DatosUsr.fportada = fportada;
     }
 
     public static synchronized DatosUsr getInstance(){
