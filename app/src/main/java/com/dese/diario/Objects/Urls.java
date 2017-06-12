@@ -5,7 +5,7 @@ package com.dese.diario.Objects;
  */
 
 public class Urls {
-/**
+/** */
     //URL usuario login
     public static final String login =  "http://187.188.168.51:8080/diariopws/api/1.0/user/autenticar";                        //en uso
     public static final String createaccount =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/insert";                //en uso
@@ -45,12 +45,11 @@ public class Urls {
     public static final String addparticipante ="http://187.188.168.51:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
 
 
-*/
+
 
 
 
 /**
-**/
 
     //URL usuario login
     public static final String login =  "http://192.168.20.25:8084/diariopws/api/1.0/user/autenticar";                        //en uso
@@ -96,7 +95,7 @@ public class Urls {
 
 
 
-
+**/
 
 
 }

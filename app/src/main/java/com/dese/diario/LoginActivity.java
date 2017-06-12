@@ -335,8 +335,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
                 else {
-                    //spd.progressDilog(LoginActivity.this, false);
+
                     Toast.makeText(LoginActivity.this,R.string.Failded,Toast.LENGTH_LONG).show();
+                    spd.dismiss();
                 }
 
             } catch (Exception e) {

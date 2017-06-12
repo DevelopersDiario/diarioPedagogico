@@ -77,11 +77,6 @@ import static com.android.volley.Request.Method.GET;
 
 import com.dese.diario.Resource.ShowProgressDialog;
 
-
-
-
-
-
 public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener,
     LoaderManager.LoaderCallbacks {
 
@@ -104,9 +99,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     SharedPreferences.Editor editor;
     int theme;
     int img;
-    String preferencias1;
-    String preferencias2;
-    boolean preferenciasGuardadas;
+
 
     //Image View
     private static String APP_DIRECTORY = "DiarioApp/";
@@ -163,6 +156,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
     CircleImageView circleImageView;
     Bitmap imgbitmap,bmHolder,bmProfile;
+    String ide;
 
 
     @Override
@@ -590,7 +584,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
                 Snackbar.make(v, R.string.portada, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action, null).show();
-                imagenAs= mSetImage;
+              //  imagenAs= mSetImage;
+                ide="holder";
                 showOptions();
                 break;
 
@@ -598,7 +593,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                 Snackbar.make(v, R.string.profile, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action, null).show();
 
-                imagenAs= cViewImagen;
+                //imagenAs= cViewImagen;
+                ide="profile";
                 showOptions();
                 break;
 
@@ -902,19 +898,18 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                             imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
-                            uploadHolder();
-                            upload();
-                           /* if(b!=null) {
-                                int i=b.getInt("identificador");
+                           // uploadHolder();
+                           // upload();
 
-                                if (i == 200) {
+
+                                if (ide == "holder") {
                                     bmHolder.equals(imgbitmap);
                                     uploadHolder();
-                                } else if (i == 100) {
+                                } else if (ide=="profile") {
                                     bmProfile = imgbitmap;
                                     upload();
                                 }
-                            }*/
+
 
 
                         } catch (Exception e) {
@@ -933,30 +928,22 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                         try {
                             //getting image from gallery
                             imgbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                            //Setting image to ImageView
-                           /* Picasso.with(Profile.this)
-                                    .load(filePath)
-                                    .resize(50, 50)
-                                    .centerCrop()
-                                    .into(imagenAs);*/
+
 
                             // imagenAs.setImageResource(bitmap);
                             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                             imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
                             String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imgbitmap, "Title", null);
-                            uploadHolder();
-                            upload();
-                          /*  if(b!=null) {
-                                int i=b.getInt("identificador");
+                          // uploadHolder();
+                            //upload();
 
-                                if (i == 200) {
-                                    bmHolder.equals(imgbitmap);
-                                    uploadHolder();
-                                } else if (i == 100) {
-                                    bmProfile = imgbitmap;
-                                    upload();
-                                }
-                            }*/
+                            if (ide == "holder") {
+                                bmHolder.equals(imgbitmap);
+                                uploadHolder();
+                            } else if (ide=="profile") {
+                                bmProfile = imgbitmap;
+                                upload();
+                            }
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -58,5 +58,9 @@ public class ShowProgressDialog {
         }
     };
 
+    public  void dismiss(){
+        progressDoalog.dismiss();
+    }
+
 
 }
