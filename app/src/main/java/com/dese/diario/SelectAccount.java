@@ -788,12 +788,207 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
 
+                moveEntrada4();
+
+            }
+        });
+
+    }//End
+    private void moveEntrada4() {
+
+
+        //  Toast.makeText(Shared.this, "Mover Entrada3", Toast.LENGTH_SHORT).show();
+        //tv1.setVisibility(View.INVISIBLE);
+        android.view.animation.Animation animation4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movevinput);
+        tv1.setText(R.string.tag_message_selected4);
+        tv1.startAnimation(animation4);
+
+        animation4.setAnimationListener(new android.view.animation.Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(android.view.animation.Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(android.view.animation.Animation animation) {
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+
+                        moverSalida4();
+
+                    }
+                }, MILISEGUNDOS_ESPERA);
+            }
+        });
+
+
+    }
+
+    private void moverSalida4() {
+        //  Toast.makeText(Shared.this, "Mover Salida3", Toast.LENGTH_SHORT).show();
+        //tv1.setVisibility(View.INVISIBLE);
+        android.view.animation.Animation animation4 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movevoutput);
+        tv1.setText(R.string.tag_message_selected4);
+        tv1.startAnimation(animation4);
+
+        animation4.setAnimationListener(new android.view.animation.Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(android.view.animation.Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(android.view.animation.Animation animation) {
+
+                moveEntrada5();
+
+            }
+        });
+
+    }//End
+
+    private void moveEntrada5() {
+
+
+        //  Toast.makeText(Shared.this, "Mover Entrada3", Toast.LENGTH_SHORT).show();
+        //tv1.setVisibility(View.INVISIBLE);
+        android.view.animation.Animation animation5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movevinput);
+        tv1.setText(R.string.tag_message_selected5);
+        tv1.startAnimation(animation5);
+
+        animation5.setAnimationListener(new android.view.animation.Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(android.view.animation.Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(android.view.animation.Animation animation) {
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+
+                        moverSalida5();
+
+                    }
+                }, MILISEGUNDOS_ESPERA);
+            }
+        });
+
+
+    }
+
+    private void moverSalida5() {
+        //  Toast.makeText(Shared.this, "Mover Salida3", Toast.LENGTH_SHORT).show();
+        //tv1.setVisibility(View.INVISIBLE);
+        android.view.animation.Animation animation5 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movevoutput);
+        tv1.setText(R.string.tag_message_selected5);
+        tv1.startAnimation(animation5);
+
+        animation5.setAnimationListener(new android.view.animation.Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(android.view.animation.Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(android.view.animation.Animation animation) {
+
+                moveEntrada6();
+
+            }
+        });
+
+    }//End
+
+    private void moveEntrada6() {
+
+
+        //  Toast.makeText(Shared.this, "Mover Entrada3", Toast.LENGTH_SHORT).show();
+        //tv1.setVisibility(View.INVISIBLE);
+        android.view.animation.Animation animation6 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movevinput);
+        tv1.setText(R.string.tag_message_selected6);
+        tv1.startAnimation(animation6);
+
+        animation6.setAnimationListener(new android.view.animation.Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(android.view.animation.Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(android.view.animation.Animation animation) {
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+
+                        moverSalida6();
+
+                    }
+                }, MILISEGUNDOS_ESPERA);
+            }
+        });
+
+
+    }
+
+    private void moverSalida6() {
+        //  Toast.makeText(Shared.this, "Mover Salida3", Toast.LENGTH_SHORT).show();
+        //tv1.setVisibility(View.INVISIBLE);
+        android.view.animation.Animation animation6 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movevoutput);
+        tv1.setText(R.string.tag_message_selected6);
+        tv1.startAnimation(animation6);
+
+        animation6.setAnimationListener(new android.view.animation.Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(android.view.animation.Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(android.view.animation.Animation animation) {
+
                 moveEntarda1();
 
             }
         });
 
     }//End
+
 
     private void moveEntarda1() {
 

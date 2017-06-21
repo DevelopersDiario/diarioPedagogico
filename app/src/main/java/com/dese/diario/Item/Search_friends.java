@@ -323,28 +323,25 @@ public class Search_friends extends AppCompatActivity  {
                     List<ChipsView.Chip> lst= mChipsView.getChips();
                     int size=lst.size();
                    // Toast.makeText(this, "ChildCount " +mChipsView.getChildCount() + size, Toast.LENGTH_LONG).show();
-                if(size==0){
+               if(size==0){
                     mChipsView.addChip(email, "", contact);
-                }else{
-
+               }else{
 
                     for(int x=0;x<lst.size();x++) {
                         ChipsView.Chip ch = lst.get(x);
                         Contact c= ch.getContact();
-
-
                         if(c.getEmailAddress()==email){
 
-                            Toast.makeText(this, "Ya esta agregada " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, "Ya esta agregado " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
                         }else{
-                          //
+
                             mChipsView.addChip(email, "", contact);
-                            Toast.makeText(this, " No esta agregada " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, " No esta agregado " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
                             registerGroup(g, u, String.valueOf(i));
                         }
 
                         System.out.println();
-                    }
+                    }//end for
                 }
 
 

@@ -19,10 +19,10 @@
 
     <string name="tag_message_selected">Comparte tus investigaciones</string>
     <string name="tag_message_selected2">Retroalimenta a otros usuarios</string>
-
-    <!--string name="tag_message_selected">Comparte tus investigaciones</string>
-    <string name="tag_message_selected2">Retroalimenta a otros usuarios</string-->
     <string name="tag_message_selected3">Aprende de las demás personas</string>
+    <string name="tag_message_selected4">Conserva la información valiosa</string>
+    <string name="tag_message_selected5">Consigna las ideas y momentos memorables</string>
+    <string name="tag_message_selected6">Evita perder tus momentos importantes y significantes</string>
 
 
     <!-- Login -->
