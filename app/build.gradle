@@ -26,6 +26,11 @@ repositories {
         url "https://jitpack.io"
     }
 }
+repositories{
+    maven{
+        url "http://dl.bintray.com/lukaville/maven"
+    }
+}
 configurations.all {
     resolutionStrategy.eachDependency {
         DependencyResolveDetails details ->       def requested = details.requested
@@ -74,6 +79,12 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     //Chips
     compile 'com.github.DoodleScheduling:android-material-chips:1.1.0'
+
+    //Upload Files
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.nbsp:library:1.6'
+    compile 'net.gotev:uploadservice:3.0'
+
     testCompile 'junit:junit:4.12'
     compile project(':Emoji')
     compile 'com.google.firebase:firebase-messaging:10.2.4'

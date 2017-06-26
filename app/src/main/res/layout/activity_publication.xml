@@ -45,6 +45,21 @@
             <include layout="@layout/content_post" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <FrameLayout
+                android:layout_gravity="bottom"
+                android:id="@+id/emojicons"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" />
+
+        </LinearLayout>
+
 
         <RelativeLayout
             android:id="@id/fabtoolbar_container"
@@ -86,7 +101,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_emoticon_white_36dp" />
+                android:tint="@color/md_white_1000"
+                android:src="@drawable/ic_insert_emoticon_black_24dp" />
 
             <ImageView
                 android:id="@+id/imCamera"
@@ -97,14 +113,13 @@
                 android:tint="@color/md_white_1000"
                 android:src="@drawable/ic_menu_camera" />
 
-            <!--<ImageView
+            <ImageView
                 android:id="@+id/imDoc"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
-                android:visibility="invisible"
-                android:src="@drawable/ic_insert_drive_file_white_24dp" />-->
+                android:src="@drawable/ic_insert_drive_file_white_24dp" />
             <ImageView
                 android:id="@+id/imMic"
                 android:layout_width="0dp"

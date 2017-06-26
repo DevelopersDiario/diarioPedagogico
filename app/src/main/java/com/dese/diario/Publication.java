@@ -26,6 +26,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -45,6 +46,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -70,15 +72,24 @@ import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Resource.Font;
 import com.dese.diario.Resource.Recording;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
+import com.nbsp.materialfilepicker.MaterialFilePicker;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.rockerhieu.emojicon.EmojiconEditText;
 import com.rockerhieu.emojicon.EmojiconGridFragment;
 import com.rockerhieu.emojicon.EmojiconsFragment;
 import com.rockerhieu.emojicon.emoji.Emojicon;
 
+import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.ServerResponse;
+import net.gotev.uploadservice.UploadInfo;
+import net.gotev.uploadservice.UploadNotificationConfig;
+import net.gotev.uploadservice.UploadStatusDelegate;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -87,6 +98,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.UUID;
+import java.util.regex.Pattern;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -122,8 +138,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     //Action
     FloatingActionButton fab;
 
-    //Recording
-    int peticion = 1;
+
     Uri url1;
 
 
@@ -149,8 +164,20 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     final  String KEY_VALUE="VALUES";
     final  String KEY_THEME="THEME";
 
-    //Function
+    //REQUEST FILE
     private final int SELECT_PICTURE = 300;
+    private final int PICK_DOC_REQUEST = 1;
+    private final int PICK_IMG_REQUEST = 2;
+    private final int PICK_AUD_REQUEST = 3;
+    private final int PICK_VID_REQUEST = 4;
+
+    //Dates Upload
+    final  String URL_SUBIRPICTURE="http://187.188.168.51:8080/diariopws/api/1.0/publicacion/publicarArchivo";
+    final String lineEnd = "\r\n";
+    final String twoHyphens = "--";
+    final String boundary="qwertyuiop";
+
+
     private FABToolbarLayout morph;
     ImageView imPictures1, imPictures2, imPictures3, imPictures4;
     List leadsNames, leadsIdes;
@@ -184,7 +211,14 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         bindActivity();
         startedResource();
         startedDate();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.
+                    READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+                requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE},100);
+                return;
 
+            }
+        }
 
     }
 
@@ -229,7 +263,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         uno = findViewById(R.id.imFont);
         dos = findViewById(R.id.imGIF);
         tres = findViewById(R.id.imCamera);
-        //cuatro = findViewById(R.id.imDoc);
+        cuatro = findViewById(R.id.imDoc);
         cinco = findViewById(R.id.imMic);
         seis = findViewById(R.id.imSeleced);
 
@@ -237,7 +271,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         uno.setOnClickListener(this);
         dos.setOnClickListener(this);
         tres.setOnClickListener(this);
-      //  cuatro.setOnClickListener(this);
+        cuatro.setOnClickListener(this);
         cinco.setOnClickListener(this);
         seis.setOnClickListener(this);
 
@@ -526,7 +560,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             case R.id.action_saved:
                 try {
                     RegisterPost(ed);
-                    Toast.makeText(this, R.string.ed+ed,  Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, R.string.ed+ed,  Toast.LENGTH_LONG).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -661,7 +695,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 galleryIntent.setType(getString(R.string.imageda));
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType(getString(R.string.imageda));
-                startActivityForResult(intent.createChooser(intent, getString(R.string.selecciona_app_imagen)), SELECT_PICTURE);
+                startActivityForResult(intent.createChooser(intent, getString(R.string.selecciona_app_imagen)), PICK_IMG_REQUEST);
                 //Toast.makeText(this, id, Toast.LENGTH_LONG).show();
                 break;
 
@@ -670,9 +704,12 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 Recording r= new Recording();
                 r.dialogGrabar(this,msg);
                 break;
-
-
-
+            case R.id.imDoc:
+                Intent doc = new Intent();
+                doc.setType("application/*");
+                doc.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(doc, "Seleccione Archivo"), PICK_DOC_REQUEST);
+                break;
 
             default:
                 morph.hide();
@@ -771,27 +808,142 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK && requestCode ==SELECT_PICTURE) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode){
 
-            Uri path = data.getData();
+                case PICK_DOC_REQUEST:
+                    uploadMultipartFile(data);
+                    //imPictures1.setImageResource(R.drawable.doc);
+                    break;
 
-            if(imPictures1.getDrawable()==null)
-                imPictures1.setImageURI(path);
-            else if(imPictures2.getDrawable()==null)
-                imPictures2.setImageURI(path);
-            else  if(imPictures3.getDrawable()==null)
-                imPictures3.setImageURI(path);
-            else if(imPictures4.getDrawable()==null)
-                imPictures4.setImageURI(path);
+                case PICK_IMG_REQUEST:
+                    Uri path = data.getData();
+
+                    if(imPictures1.getDrawable()==null)
+                        imPictures1.setImageURI(path);
+                    else if(imPictures2.getDrawable()==null)
+                        imPictures2.setImageURI(path);
+                    else  if(imPictures3.getDrawable()==null)
+                        imPictures3.setImageURI(path);
+                    else if(imPictures4.getDrawable()==null)
+                        imPictures4.setImageURI(path);
+
+                    break;
+
+                case PICK_AUD_REQUEST:
+
+                    break;
+
+                case PICK_VID_REQUEST:
+
+                    break;
+
+            }
+
+
         }//Fin resultCode
 
-        if(resultCode == RESULT_OK && requestCode ==peticion){
-            url1 = data.getData();
-
-        }
     }// Fin onActivityResult
+    /***Upload Files***/
+    public void uploadMultipartFile(final Intent data) {
+
+        Thread tread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(Publication.this.getApplicationContext(),"tread", Toast.LENGTH_SHORT).show();
+
+                try {
+                    final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                    String content_type =getMimeType(file.getPath());
+                    final String file_path = file.getAbsolutePath();
+                    OkHttpClient client = new OkHttpClient();
+                    MediaType mediaType = MediaType.parse("multipart/form-data; "+boundary+"");
 
 
+                    final String filenameGaleria= file.getName();
+                    final String uploadId = UUID.randomUUID().toString();
+                    new MultipartUploadRequest(Publication.this, uploadId, URL_SUBIRPICTURE)
+                            .addFileToUpload(String.valueOf(file),"archivo")
+                            .addParameter("filename", filenameGaleria)
+                            .setMaxRetries(2)
+                            .setNotificationConfig(new UploadNotificationConfig()
+                                    .setInProgressMessage("Subiendo Archivo")
+                                    .setCompletedMessage("Completado correctamente")
+                                    .setTitle("Subiendo ")
+                            )
+                            .setDelegate(new UploadStatusDelegate() {
+                                @Override
+                                public void onProgress(UploadInfo uploadInfo) {
+
+
+                                }
+
+                                @Override
+                                public void onError(UploadInfo uploadInfo, Exception e) {}
+
+                                @Override
+                                public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
+
+
+                                    String dat=data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+                                   // messageAlert("Complet",dat);
+                                    Toast.makeText(Publication.this.getApplicationContext(),"Archivo subida exitosamente.", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onCancelled(UploadInfo uploadInfo) {}
+                            })
+                            .startUpload();
+
+                } catch (Exception exc) {
+                    System.out.println(exc.getMessage()+" "+exc.getLocalizedMessage());
+                }
+
+            }
+               /* public void run() {
+                    File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                    final String boundary="qwertyuiop";
+                    MediaType mediaType = MediaType.parse("multipart/form-data;"+boundary);
+                    String content_type =getMimeType(file.getPath());
+                    String filename="\\" +file.getName();
+
+                    String file_path = file.getAbsolutePath();
+                    OkHttpClient client = new OkHttpClient();
+
+                    RequestBody file_body =RequestBody.create(MediaType.parse("multipart/form-data;"),boundary);
+
+                    RequestBody body = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("archivo", content_type)
+                            //.addFormDataPart("archivo",file_path.substring(file_path.lastIndexOf("/")+1),file_body)
+                            .addFormDataPart("archivo",filename,RequestBody.create(MediaType.parse(content_type),file))
+                            .build();
+
+                    Request request= new Request.Builder()
+                            .url("http://192.168.20.25:8084/diariopws/api/1.0/publicacion/publicarArchivo")
+                            .post(body)
+                            .build();
+
+                    try {
+                        Response response = client.newCall(request).execute();
+                        if (!response.isSuccessful()){
+                            throw new IOException("No se pudo guardar el archivo"+response);
+                        }
+                        progress.dismiss();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }*/
+        });
+        tread.start();
+    }
+
+private  String getMimeType(String path){
+    String extension = MimeTypeMap.getFileExtensionFromUrl(path);
+    return  MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+}
     ///Post publication
 
     private void RegisterPost(final String  ide) throws JSONException {
