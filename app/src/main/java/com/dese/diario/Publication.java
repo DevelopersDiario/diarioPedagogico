@@ -847,21 +847,25 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                     else if(imPictures2.getDrawable()==null){
                         imPictures2.setImageURI(path);
-                        uploadMultipartImage(data);                    }
+                        //uploadMultipartImage(data);
+                        uploadMultipartFile(data, "Image");              }
 
                     else  if(imPictures3.getDrawable()==null){
                         imPictures3.setImageURI(path);
-                        uploadMultipartImage(data);                    }
+                        //uploadMultipartImage(data);
+                        uploadMultipartFile(data, "Image");             }
 
                     else if(imPictures4.getDrawable()==null)
                     {
                         imPictures4.setImageURI(path);
-                        uploadMultipartImage(data);
+                        //uploadMultipartImage(data);
+                        uploadMultipartFile(data, "Image");
                     }
 
                     else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
                     {  uploadMultipartImage(data);
-                        imPictures1.setImageURI(path);
+                        //uploadMultipartImage(data);
+                        uploadMultipartFile(data, "Image");
                     }
                     break;
 
@@ -988,7 +992,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
      //   final String path = (String) data.getExtras().get("data");
 
         //Uploading code
-        String path = String.valueOf(data.getData());
+        String path = data.getAction();
         try {
             String uploadId = UUID.randomUUID().toString();
 
