@@ -725,7 +725,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         .withRequestCode(PICK_DOC_REQUEST)
                         .withFilter(Pattern.compile(".*\\.pdf"))// Filtering files and directories by file name using regexp
                         .withTitle("Seleccione  un archivo")
-                        .withFilterDirectories(false) // Set directories filterable (false by default)
                         .withHiddenFiles(true) // Show hidden files and folders
                         .start();
                 break;
