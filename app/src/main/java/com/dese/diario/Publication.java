@@ -694,11 +694,19 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                 break;
             case R.id.imCamera:
-                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                new MaterialFilePicker()
+                        .withActivity(Publication.this)
+                        .withRequestCode(PICK_IMG_REQUEST)
+                        .withFilter(Pattern.compile(".*\\.jpg"))// Filtering files and directories by file name using regexp
+                        .withTitle("Seleccione  un archivo")
+                        .withFilterDirectories(false) // Set directories filterable (false by default)
+                        .withHiddenFiles(true) // Show hidden files and folders
+                        .start();
+               /* Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType(getString(R.string.imageda));
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType(getString(R.string.imageda));
-                startActivityForResult(intent.createChooser(intent, getString(R.string.selecciona_app_imagen)), PICK_IMG_REQUEST);
+                startActivityForResult(intent.createChooser(intent, getString(R.string.selecciona_app_imagen)), PICK_IMG_REQUEST);*/
                 //Toast.makeText(this, id, Toast.LENGTH_LONG).show();
                 break;
 
@@ -823,23 +831,39 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             switch (requestCode){
 
                 case PICK_DOC_REQUEST:
-                    Toast.makeText(Publication.this," onActivityResult ", Toast.LENGTH_SHORT).show();
-                    uploadMultipartFile(data);
-                    //imPictures1.setImageResource(R.drawable.doc);
+
+                    uploadMultipartFile(data, "Documento");
+                    imPictures1.setImageResource(R.drawable.pdf);
+
                     break;
 
                 case PICK_IMG_REQUEST:
                     Uri path = data.getData();
 
-                    if(imPictures1.getDrawable()==null)
+                    if(imPictures1.getDrawable()==null){
                         imPictures1.setImageURI(path);
-                    else if(imPictures2.getDrawable()==null)
-                        imPictures2.setImageURI(path);
-                    else  if(imPictures3.getDrawable()==null)
-                        imPictures3.setImageURI(path);
-                    else if(imPictures4.getDrawable()==null)
-                        imPictures4.setImageURI(path);
+                        //uploadMultipartImage(data);
+                        uploadMultipartFile(data, "Image");
+                    }
 
+                    else if(imPictures2.getDrawable()==null){
+                        imPictures2.setImageURI(path);
+                        uploadMultipartImage(data);                    }
+
+                    else  if(imPictures3.getDrawable()==null){
+                        imPictures3.setImageURI(path);
+                        uploadMultipartImage(data);                    }
+
+                    else if(imPictures4.getDrawable()==null)
+                    {
+                        imPictures4.setImageURI(path);
+                        uploadMultipartImage(data);
+                    }
+
+                    else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
+                    {  uploadMultipartImage(data);
+                        imPictures1.setImageURI(path);
+                    }
                     break;
 
                 case PICK_AUD_REQUEST:
@@ -857,30 +881,34 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
     }// Fin onActivityResult
     /***Upload Files***/
-    public void uploadMultipartFile(final Intent data) {
-        Toast.makeText(Publication.this," entra uploadMultipartFile", Toast.LENGTH_SHORT).show();
-        Thread tread = new Thread(new Runnable() {
-            @Override
-            public void run() {
+    public void uploadMultipartFile(final Intent data, final String typo) {
 
-                try {
-                    final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    String content_type =getMimeType(file.getPath());
-                    final String file_path = file.getAbsolutePath();
+       /* Thread tread = new Thread(new Runnable() {
+            @Override
+            public void run() {*/
+            try{
+             final File file;
+
+
+                        file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                          final String file_path = file.getAbsolutePath();
+
+                 //   String content_type =getMimeType(file.getPath());
+
                     OkHttpClient client = new OkHttpClient();
                     MediaType mediaType = MediaType.parse("multipart/form-data; "+boundary+"");
 
 
-                    final String filenameGaleria= file.getName();
+                    final String filename= typo+file.getName();
                     final String uploadId = UUID.randomUUID().toString();
                     new MultipartUploadRequest(Publication.this, uploadId, URL_SUBIRPICTURE)
-                            .addFileToUpload(String.valueOf(file),"archivo")
-                            .addParameter("filename", filenameGaleria)
+                            .addFileToUpload(file_path,"archivo")
+                            .addParameter("filename", filename)
                             .setMaxRetries(2)
                             .setNotificationConfig(new UploadNotificationConfig()
-                                    .setInProgressMessage("Subiendo Archivo")
-                                    .setCompletedMessage("Completado correctamente")
-                                    .setTitle("Subiendo ")
+                                    .setInProgressMessage("Subiendo"+ filename)
+                                    .setCompletedMessage("Completado correctamente!")
+                                    .setTitle("Carga ")
                             )
                             .setDelegate(new UploadStatusDelegate() {
                                 @Override
@@ -910,7 +938,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     System.out.println(exc.getMessage()+" "+exc.getLocalizedMessage());
                 }
 
-            }
+         //   }
                /* public void run() {
                     File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
                     final String boundary="qwertyuiop";
@@ -947,10 +975,60 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
 
                 }*/
-        });
-        tread.start();
+       /* });
+        tread.start();*/
     }
 
+    public void uploadMultipartImage(final Intent data) {
+        //getting name for the image
+        // String name = editText.getText().toString().trim();
+//        final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+        //getting the actual path of the image
+        // final String filenameGaleria= file.getName();
+        // final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+     //   final String path = (String) data.getExtras().get("data");
+
+        //Uploading code
+        String path = String.valueOf(data.getData());
+        try {
+            String uploadId = UUID.randomUUID().toString();
+
+            //Creating a multi part request
+            new MultipartUploadRequest(this, uploadId, URL_SUBIRPICTURE)
+                    .addFileToUpload(path, "image") //Adding file
+                    .addParameter("name", "filenameGaleria") //Adding text parameter to the request
+                    .setNotificationConfig(new UploadNotificationConfig())
+                    .setMaxRetries(2)
+                    .setDelegate(new UploadStatusDelegate() {
+                        @Override
+                        public void onProgress(UploadInfo uploadInfo) {}
+
+                        @Override
+                        public void onError(UploadInfo uploadInfo, Exception e) {
+                          //  messageAlert("Error", path);
+                        }
+
+                        @Override
+                        public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
+
+
+                            String dat=data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+
+                            //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onCancelled(UploadInfo uploadInfo) {}
+                    })
+                    .startUpload(); //Starting the upload
+
+        } catch (Exception exc) {
+            Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    /*******/
 private  String getMimeType(String path){
     String extension = MimeTypeMap.getFileExtensionFromUrl(path);
     return  MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
