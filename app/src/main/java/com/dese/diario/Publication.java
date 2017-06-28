@@ -211,6 +211,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         bindActivity();
         startedResource();
         startedDate();
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.
                     READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
@@ -219,6 +221,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
             }
         }
+
 
     }
 
@@ -705,10 +708,18 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 r.dialogGrabar(this,msg);
                 break;
             case R.id.imDoc:
-                Intent doc = new Intent();
+               /* Intent doc = new Intent();
                 doc.setType("application/*");
                 doc.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(doc, "Seleccione Archivo"), PICK_DOC_REQUEST);
+                startActivityForResult(Intent.createChooser(doc, "Seleccione Archivo"), PICK_DOC_REQUEST);*/
+                new MaterialFilePicker()
+                        .withActivity(Publication.this)
+                        .withRequestCode(PICK_DOC_REQUEST)
+                        .withFilter(Pattern.compile(".*\\.pdf"))// Filtering files and directories by file name using regexp
+                        .withTitle("Seleccione  un archivo")
+                        .withFilterDirectories(false) // Set directories filterable (false by default)
+                        .withHiddenFiles(true) // Show hidden files and folders
+                        .start();
                 break;
 
             default:
@@ -812,6 +823,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             switch (requestCode){
 
                 case PICK_DOC_REQUEST:
+                    Toast.makeText(Publication.this," onActivityResult ", Toast.LENGTH_SHORT).show();
                     uploadMultipartFile(data);
                     //imPictures1.setImageResource(R.drawable.doc);
                     break;
@@ -846,11 +858,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     }// Fin onActivityResult
     /***Upload Files***/
     public void uploadMultipartFile(final Intent data) {
-
+        Toast.makeText(Publication.this," entra uploadMultipartFile", Toast.LENGTH_SHORT).show();
         Thread tread = new Thread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(Publication.this.getApplicationContext(),"tread", Toast.LENGTH_SHORT).show();
 
                 try {
                     final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
@@ -886,8 +897,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
 
                                     String dat=data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-                                   // messageAlert("Complet",dat);
-                                    Toast.makeText(Publication.this.getApplicationContext(),"Archivo subida exitosamente.", Toast.LENGTH_SHORT).show();
+                                    //messageAlert("Complet",dat);
+                                    //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
