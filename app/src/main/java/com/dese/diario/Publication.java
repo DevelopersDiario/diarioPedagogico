@@ -71,6 +71,7 @@ import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Resource.Font;
 import com.dese.diario.Resource.Recording;
+import com.dese.diario.Resource.Upload;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -139,8 +140,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     FloatingActionButton fab;
 
 
-    Uri url1;
-
 
     //Theme
     SharedPreferences sharedPreferences;
@@ -193,12 +192,13 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     Font font ;
 
 
-    //Emojic
-
 
 
     //
     FrameLayout emojicons;
+
+
+    Upload upload;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -229,6 +229,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     private void bindActivity() {
         myWebView = (WebView) this.findViewById(R.id.wvDate);
         tvDate = (TextView) findViewById(R.id.tvDate);
+        upload = new Upload();
         listGpo();
 
         font.getContext(Publication.this);
@@ -830,8 +831,9 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             switch (requestCode){
 
                 case PICK_DOC_REQUEST:
+                    upload.uploadMultipartFile(data, Publication.this);
 
-                    uploadMultipartFile(data, "Documento");
+                //    uploadMultipartFile(data, "Documento");
                     imPictures1.setImageResource(R.drawable.pdf);
 
                     break;
@@ -842,30 +844,37 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     if(imPictures1.getDrawable()==null){
                         imPictures1.setImageURI(path);
                         //uploadMultipartImage(data);
-                        uploadMultipartFile(data, "Image");
+                      //  uploadMultipartFile(data, "Image");
+                        upload.uploadMultipartFile(data, Publication.this);
                     }
 
                     else if(imPictures2.getDrawable()==null){
                         imPictures2.setImageURI(path);
                         //uploadMultipartImage(data);
-                        uploadMultipartFile(data, "Image");              }
-
+                       // uploadMultipartFile(data, "Image");
+                        upload.uploadMultipartFile(data, Publication.this);
+                    }
                     else  if(imPictures3.getDrawable()==null){
                         imPictures3.setImageURI(path);
                         //uploadMultipartImage(data);
-                        uploadMultipartFile(data, "Image");             }
+                      //  uploadMultipartFile(data, "Image");
+                        upload.uploadMultipartFile(data, Publication.this);
+                    }
 
                     else if(imPictures4.getDrawable()==null)
                     {
                         imPictures4.setImageURI(path);
                         //uploadMultipartImage(data);
-                        uploadMultipartFile(data, "Image");
+                        //uploadMultipartFile(data, "Image");
+                        upload.uploadMultipartFile(data, Publication.this);
                     }
 
                     else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
-                    {  uploadMultipartImage(data);
+                    {
+                        upload.uploadMultipartFile(data, Publication.this);
+                        //uploadMultipartFile(data, "Image");
                         //uploadMultipartImage(data);
-                        uploadMultipartFile(data, "Image");
+                      //  uploadMultipartFile(data, "Image");
                     }
                     break;
 
@@ -982,53 +991,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         tread.start();*/
     }
 
-    public void uploadMultipartImage(final Intent data) {
-        //getting name for the image
-        // String name = editText.getText().toString().trim();
-//        final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-        //getting the actual path of the image
-        // final String filenameGaleria= file.getName();
-        // final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-     //   final String path = (String) data.getExtras().get("data");
-
-        //Uploading code
-        String path = data.getAction();
-        try {
-            String uploadId = UUID.randomUUID().toString();
-
-            //Creating a multi part request
-            new MultipartUploadRequest(this, uploadId, URL_SUBIRPICTURE)
-                    .addFileToUpload(path, "image") //Adding file
-                    .addParameter("name", "filenameGaleria") //Adding text parameter to the request
-                    .setNotificationConfig(new UploadNotificationConfig())
-                    .setMaxRetries(2)
-                    .setDelegate(new UploadStatusDelegate() {
-                        @Override
-                        public void onProgress(UploadInfo uploadInfo) {}
-
-                        @Override
-                        public void onError(UploadInfo uploadInfo, Exception e) {
-                          //  messageAlert("Error", path);
-                        }
-
-                        @Override
-                        public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
-
-
-                            String dat=data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-
-                            //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCancelled(UploadInfo uploadInfo) {}
-                    })
-                    .startUpload(); //Starting the upload
-
-        } catch (Exception exc) {
-            Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
     /*******/
