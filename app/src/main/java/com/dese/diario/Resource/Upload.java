@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.webkit.MimeTypeMap;
 
+import com.dese.diario.Objects.Urls;
+import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.squareup.picasso.Picasso;
@@ -29,10 +31,11 @@ public class Upload {
     final String lineEnd = "\r\n";
     final String twoHyphens = "--";
     final String boundary="qwertyuiop";
-    final  String URL_SUBIRPICTURE="http://187.188.168.51:8080/diariopws/api/1.0/publicacion/publicarArchivo";
+    final static String urlUpload= Urls.publicararchivo;
 
+    public void uploadMultipartFile(final Intent data,final Context context, final String typo) {
+        final VariablesLogin varlogin =new VariablesLogin();
 
-    public void uploadMultipartFile(final Intent data,final Context context) {
         Thread tread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -43,19 +46,22 @@ public class Upload {
                     final String file_path = file.getAbsolutePath();
                     OkHttpClient client = new OkHttpClient();
                     MediaType mediaType = MediaType.parse("multipart/form-data; " + boundary + "");
+                    String id= varlogin.getIdusuario();
 
+                    final String filename = file.getName();
 
-                    final String filenameGaleria = file.getName();
                     final String uploadId = UUID.randomUUID().toString();
-                    new MultipartUploadRequest(context, uploadId, URL_SUBIRPICTURE)
+                    new MultipartUploadRequest(context, uploadId, urlUpload)
                             .addFileToUpload(file_path, "archivo")
-                            .addParameter("filename", filenameGaleria)
-                            .setMaxRetries(2)
-                            .setNotificationConfig(new UploadNotificationConfig()
-                                    .setInProgressMessage("Subiendo Archivo")
-                                    .setCompletedMessage("Completado correctamente")
-                                    .setTitle("Subiendo ")
-                            )
+                            .addParameter("titulo", filename)
+                             .addParameter("tipoarchivo", typo)
+                             .addParameter("idgrupo", "15")
+                             .addParameter("idusuario", id)
+                             .addParameter("Farchivo", "MP3")
+
+
+
+                            .setNotificationConfig(new UploadNotificationConfig())
                             .setDelegate(new UploadStatusDelegate() {
                                 @Override
                                 public void onProgress(UploadInfo uploadInfo) {
@@ -71,8 +77,11 @@ public class Upload {
                                 public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
 
-                                    String dat = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-                                    messageAlert("Complet", dat, context);
+                                    String dat = "Categorias" +data.getCategories()+
+                                                  "Name" +  "\n"+ file.getName() +
+                                                 "Path" + "\n"+ file.getPath()+
+                                                 "ParentFile" +  "\n"+ file.getParentFile() ;
+                                    messageAlert("Datos", dat, context);
                                    /* Picasso.with(context)
                                             .load(file_path)
                                             .resize(150, 150)
@@ -88,7 +97,7 @@ public class Upload {
                             .startUpload();
 
                 } catch (Exception exc) {
-                    System.out.println(exc.getMessage() + " " + exc.getLocalizedMessage());
+                    System.out.println("Exceptio-->"+exc.getMessage() + " " + exc.getLocalizedMessage());
                 }
 
             }

@@ -111,7 +111,7 @@
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:tint="@color/md_white_1000"
-                android:src="@drawable/ic_menu_camera" />
+                android:src="@drawable/ic_image_black_24dp" />
 
             <ImageView
                 android:id="@+id/imDoc"

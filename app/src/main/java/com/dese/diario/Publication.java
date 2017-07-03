@@ -16,6 +16,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -171,7 +172,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     private final int PICK_VID_REQUEST = 4;
 
     //Dates Upload
-    final  String URL_SUBIRPICTURE="http://187.188.168.51:8080/diariopws/api/1.0/publicacion/publicarArchivo";
+
     final String lineEnd = "\r\n";
     final String twoHyphens = "--";
     final String boundary="qwertyuiop";
@@ -179,6 +180,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
     private FABToolbarLayout morph;
     ImageView imPictures1, imPictures2, imPictures3, imPictures4;
+  //  ImageView imgSelect1, imgSelect2, imgSelect3;
     List leadsNames, leadsIdes;
     ArrayAdapter mLeadsAdapter;
     Spinner spGpoP;
@@ -319,6 +321,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         imPictures2 =(ImageView) findViewById(R.id.imViewPublication2);
         imPictures3 =(ImageView)findViewById(R.id.imViewPublication3);
         imPictures4 =(ImageView) findViewById(R.id.imViewPublication4);
+
+       /* imgSelect1= (ImageView) findViewById(R.id.imgSelect1);
+        imgSelect2= (ImageView) findViewById(R.id.imgSelect2);
+        imgSelect3= (ImageView)findViewById(R.id.imgSelect3);*/
     }
 
     public void listGpo() {
@@ -674,8 +680,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 morph.show();
                 break;
             case R.id.imFont:
-               // Typeface t1=font.getFont(Publication.this);
-             //  font.selectFont(Publication.this, edPublication);
 
                selectFont();
 
@@ -703,24 +707,22 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         .withFilterDirectories(false) // Set directories filterable (false by default)
                         .withHiddenFiles(true) // Show hidden files and folders
                         .start();
-               /* Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType(getString(R.string.imageda));
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                intent.setType(getString(R.string.imageda));
-                startActivityForResult(intent.createChooser(intent, getString(R.string.selecciona_app_imagen)), PICK_IMG_REQUEST);*/
-                //Toast.makeText(this, id, Toast.LENGTH_LONG).show();
+
                 break;
 
             case R.id.imMic:
-                String msg="Puede Iniciar la Grabacion";
-                Recording r= new Recording();
-                r.dialogGrabar(this,msg);
+                //String msg="Puede Iniciar la Grabacion";
+                //Recording r= new Recording();
+                //r.dialogGrabar(this,msg);
+                new MaterialFilePicker()
+                        .withActivity(Publication.this)
+                        .withRequestCode(PICK_AUD_REQUEST)
+                        .withFilter(Pattern.compile(".*\\.mp3"))// Filtering files and directories by file name using regexp
+                        .withTitle("Seleccione  un archivo")
+                        .withHiddenFiles(true) // Show hidden files and folders
+                        .start();
                 break;
             case R.id.imDoc:
-               /* Intent doc = new Intent();
-                doc.setType("application/*");
-                doc.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(doc, "Seleccione Archivo"), PICK_DOC_REQUEST);*/
                 new MaterialFilePicker()
                         .withActivity(Publication.this)
                         .withRequestCode(PICK_DOC_REQUEST)
@@ -831,10 +833,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             switch (requestCode){
 
                 case PICK_DOC_REQUEST:
-                    upload.uploadMultipartFile(data, Publication.this);
+                    upload.uploadMultipartFile(data, Publication.this, "Documento");
 
                 //    uploadMultipartFile(data, "Documento");
-                    imPictures1.setImageResource(R.drawable.pdf);
+                   // imgSelect1.setImageResource(R.drawable.file);
 
                     break;
 
@@ -845,20 +847,20 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         imPictures1.setImageURI(path);
                         //uploadMultipartImage(data);
                       //  uploadMultipartFile(data, "Image");
-                        upload.uploadMultipartFile(data, Publication.this);
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures2.getDrawable()==null){
                         imPictures2.setImageURI(path);
                         //uploadMultipartImage(data);
                        // uploadMultipartFile(data, "Image");
-                        upload.uploadMultipartFile(data, Publication.this);
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
                     else  if(imPictures3.getDrawable()==null){
                         imPictures3.setImageURI(path);
                         //uploadMultipartImage(data);
                       //  uploadMultipartFile(data, "Image");
-                        upload.uploadMultipartFile(data, Publication.this);
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures4.getDrawable()==null)
@@ -866,12 +868,12 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         imPictures4.setImageURI(path);
                         //uploadMultipartImage(data);
                         //uploadMultipartFile(data, "Image");
-                        upload.uploadMultipartFile(data, Publication.this);
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
                     {
-                        upload.uploadMultipartFile(data, Publication.this);
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
                         //uploadMultipartFile(data, "Image");
                         //uploadMultipartImage(data);
                       //  uploadMultipartFile(data, "Image");
@@ -879,7 +881,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     break;
 
                 case PICK_AUD_REQUEST:
-
+                    upload.uploadMultipartFile(data, Publication.this, "Audio");
+                   // imgSelect1.setImageResource(R.drawable.audio);
                     break;
 
                 case PICK_VID_REQUEST:
@@ -892,115 +895,13 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         }//Fin resultCode
 
     }// Fin onActivityResult
-    /***Upload Files***/
-    public void uploadMultipartFile(final Intent data, final String typo) {
-
-       /* Thread tread = new Thread(new Runnable() {
-            @Override
-            public void run() {*/
-            try{
-             final File file;
-
-
-                        file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                          final String file_path = file.getAbsolutePath();
-
-                 //   String content_type =getMimeType(file.getPath());
-
-                    OkHttpClient client = new OkHttpClient();
-                    MediaType mediaType = MediaType.parse("multipart/form-data; "+boundary+"");
-
-
-                    final String filename= typo+file.getName();
-                    final String uploadId = UUID.randomUUID().toString();
-                    new MultipartUploadRequest(Publication.this, uploadId, URL_SUBIRPICTURE)
-                            .addFileToUpload(file_path,"archivo")
-                            .addParameter("filename", filename)
-                            .setMaxRetries(2)
-                            .setNotificationConfig(new UploadNotificationConfig()
-                                    .setInProgressMessage("Subiendo"+ filename)
-                                    .setCompletedMessage("Completado correctamente!")
-                                    .setTitle("Carga ")
-                            )
-                            .setDelegate(new UploadStatusDelegate() {
-                                @Override
-                                public void onProgress(UploadInfo uploadInfo) {
-
-
-                                }
-
-                                @Override
-                                public void onError(UploadInfo uploadInfo, Exception e) {}
-
-                                @Override
-                                public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
-
-
-                                    String dat=data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-                                    //messageAlert("Complet",dat);
-                                    //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onCancelled(UploadInfo uploadInfo) {}
-                            })
-                            .startUpload();
-
-                } catch (Exception exc) {
-                    System.out.println(exc.getMessage()+" "+exc.getLocalizedMessage());
-                }
-
-         //   }
-               /* public void run() {
-                    File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    final String boundary="qwertyuiop";
-                    MediaType mediaType = MediaType.parse("multipart/form-data;"+boundary);
-                    String content_type =getMimeType(file.getPath());
-                    String filename="\\" +file.getName();
-
-                    String file_path = file.getAbsolutePath();
-                    OkHttpClient client = new OkHttpClient();
-
-                    RequestBody file_body =RequestBody.create(MediaType.parse("multipart/form-data;"),boundary);
-
-                    RequestBody body = new MultipartBody.Builder()
-                            .setType(MultipartBody.FORM)
-                            .addFormDataPart("archivo", content_type)
-                            //.addFormDataPart("archivo",file_path.substring(file_path.lastIndexOf("/")+1),file_body)
-                            .addFormDataPart("archivo",filename,RequestBody.create(MediaType.parse(content_type),file))
-                            .build();
-
-                    Request request= new Request.Builder()
-                            .url("http://192.168.20.25:8084/diariopws/api/1.0/publicacion/publicarArchivo")
-                            .post(body)
-                            .build();
-
-                    try {
-                        Response response = client.newCall(request).execute();
-                        if (!response.isSuccessful()){
-                            throw new IOException("No se pudo guardar el archivo"+response);
-                        }
-                        progress.dismiss();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }*/
-       /* });
-        tread.start();*/
-    }
 
 
 
-    /*******/
-private  String getMimeType(String path){
-    String extension = MimeTypeMap.getFileExtensionFromUrl(path);
-    return  MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-}
+
     ///Post publication
 
-    private void RegisterPost(final String  ide) throws JSONException {
+       private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();
 
         if (ettitlepost!=null && edPublication!=null) {
@@ -1070,7 +971,58 @@ private  String getMimeType(String path){
         finish();
     } //Fin open login
 
+    private void publicarArchvio(final String  ide) throws JSONException {
+        final VariablesLogin varlogin = new VariablesLogin();
 
+
+            idusuario = varlogin.getIdusuario();
+            titulo = ettitlepost.getText().toString().trim();
+            observaciones = edPublication.getText().toString().trim();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            failed_regpublication.setText(R.string.message_succes_publication);
+                            openMainactivity();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String body;
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if (error.networkResponse.data != null) {
+
+                        try {
+                            body = new String(error.networkResponse.data, "UTF-8");
+
+                            failed_regpublication.setText(body);
+
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(KEY_IDUSUARIO, idusuario);
+                    params.put(KEY_TITULO, titulo);
+                    params.put(KEY_IDGROUP, ide);
+                    params.put(KEY_OBSERVACIONES, observaciones);
+                    params.put(CONTENT_TYPE, APPLICATION);
+                    return params;
+                }
+
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+
+
+    }
 
 
     /**
