@@ -835,8 +835,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 case PICK_DOC_REQUEST:
                     actReq=data;
                     type="documento";
-                    final File file = new File(actReq.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    upload.uploadMultipartFile(data, Publication.this, "Documento", ed);
+                   // final File file = new File(actReq.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                    upload.uploadMultipartFile(data, Publication.this, "Documento");
 
                     break;
 

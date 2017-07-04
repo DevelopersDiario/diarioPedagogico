@@ -35,7 +35,7 @@ public class Upload {
     final String boundary="qwertyuiop";
     final static String urlUpload= Urls.publicararchivo;
 
-        public void uploadMultipartFile(final Intent data ,final Context context, final String typo, final String idgrupo) {
+        public void uploadMultipartFile(final Intent data ,final Context context, final String typo) {
             //Toast.makeText(context, "Entrp-<"+file.getName(),  Toast.LENGTH_LONG).show();
         final VariablesLogin varlogin =new VariablesLogin();
 
@@ -57,9 +57,9 @@ public class Upload {
                     new MultipartUploadRequest(context, uploadId, urlUpload)
                             .addFileToUpload(file_path, "archivo")
                             .addParameter("titulo", filename)
-                             .addParameter("tipoarchivo", typo)
+                             .addParameter("tipoarchivo","documento")
                              .addParameter("idgrupo", "15")
-                             .addParameter("idusuario", id)
+                             .addParameter("idusuario", "3")
                              .addParameter("Farchivo", ".pdf")
                             .setNotificationConfig(new UploadNotificationConfig())
                             .setDelegate(new UploadStatusDelegate() {
