@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Publication;
 import com.dese.diario.R;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.squareup.picasso.Picasso;
@@ -33,7 +35,8 @@ public class Upload {
     final String boundary="qwertyuiop";
     final static String urlUpload= Urls.publicararchivo;
 
-    public void uploadMultipartFile(final Intent data,final Context context, final String typo) {
+        public void uploadMultipartFile(final Intent data ,final Context context, final String typo, final String idgrupo) {
+            //Toast.makeText(context, "Entrp-<"+file.getName(),  Toast.LENGTH_LONG).show();
         final VariablesLogin varlogin =new VariablesLogin();
 
         Thread tread = new Thread(new Runnable() {
@@ -41,14 +44,14 @@ public class Upload {
             public void run() {
 
                 try {
-                    final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    String content_type = getMimeType(file.getPath());
+              final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
                     final String file_path = file.getAbsolutePath();
-                    OkHttpClient client = new OkHttpClient();
-                    MediaType mediaType = MediaType.parse("multipart/form-data; " + boundary + "");
+
                     String id= varlogin.getIdusuario();
 
                     final String filename = file.getName();
+                    String tmp []=filename.split(".");
+                    String farchivo=tmp[1];
 
                     final String uploadId = UUID.randomUUID().toString();
                     new MultipartUploadRequest(context, uploadId, urlUpload)
@@ -57,10 +60,7 @@ public class Upload {
                              .addParameter("tipoarchivo", typo)
                              .addParameter("idgrupo", "15")
                              .addParameter("idusuario", id)
-                             .addParameter("Farchivo", "MP3")
-
-
-
+                             .addParameter("Farchivo", ".pdf")
                             .setNotificationConfig(new UploadNotificationConfig())
                             .setDelegate(new UploadStatusDelegate() {
                                 @Override
@@ -71,17 +71,25 @@ public class Upload {
 
                                 @Override
                                 public void onError(UploadInfo uploadInfo, Exception e) {
+                                    messageAlert("Eror!", e.toString(), context);
                                 }
 
                                 @Override
                                 public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
+                                  File eliminar =new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                                    if (eliminar.exists()) {
+                                        if (eliminar.delete()) {
+                                            System.out.println("archivo eliminado:" + eliminar.getPath());
+                                        } else {
+                                            System.out.println("archivo no eliminado" + eliminar.getPath());
+                                        }
+                                    }
+                                    Toast.makeText(context,"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
 
 
-                                    String dat = "Categorias" +data.getCategories()+
-                                                  "Name" +  "\n"+ file.getName() +
-                                                 "Path" + "\n"+ file.getPath()+
-                                                 "ParentFile" +  "\n"+ file.getParentFile() ;
-                                    messageAlert("Datos", dat, context);
+
+                                  String dat = "Name" +  "\n"+ file.getName();
+                                   // messageAlert("Datos", dat, context);
                                    /* Picasso.with(context)
                                             .load(file_path)
                                             .resize(150, 150)
@@ -142,10 +150,6 @@ public class Upload {
     }
 
 
-    private  String getMimeType(String path){
-        String extension = MimeTypeMap.getFileExtensionFromUrl(path);
-        return  MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-    }
 
 
     public void messageAlert(String body, String msg, final Context context){

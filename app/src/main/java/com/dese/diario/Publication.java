@@ -201,6 +201,9 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
 
     Upload upload;
+    //
+    Intent actReq;
+    String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -559,7 +562,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             case R.id.action_post:
                 try {
                     RegisterPost(ed);
-                   //Toast.makeText(this, R.string.ed+ed,  Toast.LENGTH_LONG).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -570,7 +572,9 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             case R.id.action_saved:
                 try {
                     RegisterPost(ed);
-                    //Toast.makeText(this, R.string.ed+ed,  Toast.LENGTH_LONG).show();
+                    //upload.uploadMultipartFile(actReq, Publication.this, type, ed);
+                    //final File file = new File(actReq.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                  //  Toast.makeText(this, "Intent="+file.getName(),  Toast.LENGTH_LONG).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -578,9 +582,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
 
                 failed_regpublication.setText("");
-                break;
-            case R.id.action_settings:
-
                 break;
 
             case android.R.id.home:
@@ -672,8 +673,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        //  if (v.getId() == R.id.fab) {
-        String id =  String.valueOf(v.getId());
+
 
         switch (v.getId()) {
             case R.id.fab:
@@ -833,10 +833,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             switch (requestCode){
 
                 case PICK_DOC_REQUEST:
-                    upload.uploadMultipartFile(data, Publication.this, "Documento");
-
-                //    uploadMultipartFile(data, "Documento");
-                   // imgSelect1.setImageResource(R.drawable.file);
+                    actReq=data;
+                    type="documento";
+                    final File file = new File(actReq.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                    upload.uploadMultipartFile(data, Publication.this, "Documento", ed);
 
                     break;
 
@@ -845,44 +845,32 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                     if(imPictures1.getDrawable()==null){
                         imPictures1.setImageURI(path);
-                        //uploadMultipartImage(data);
-                      //  uploadMultipartFile(data, "Image");
-                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures2.getDrawable()==null){
                         imPictures2.setImageURI(path);
-                        //uploadMultipartImage(data);
-                       // uploadMultipartFile(data, "Image");
-                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
                     else  if(imPictures3.getDrawable()==null){
                         imPictures3.setImageURI(path);
-                        //uploadMultipartImage(data);
-                      //  uploadMultipartFile(data, "Image");
-                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures4.getDrawable()==null)
                     {
                         imPictures4.setImageURI(path);
-                        //uploadMultipartImage(data);
-                        //uploadMultipartFile(data, "Image");
-                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                        //upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
                     {
-                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                        //uploadMultipartFile(data, "Image");
-                        //uploadMultipartImage(data);
-                      //  uploadMultipartFile(data, "Image");
+                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
                     break;
 
                 case PICK_AUD_REQUEST:
-                    upload.uploadMultipartFile(data, Publication.this, "Audio");
-                   // imgSelect1.setImageResource(R.drawable.audio);
+                    //upload.uploadMultipartFile(data, Publication.this, "Audio");
                     break;
 
                 case PICK_VID_REQUEST:
@@ -914,7 +902,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+
+
                             failed_regpublication.setText(R.string.message_succes_publication);
+
                             openMainactivity();
                         }
                     }, new Response.ErrorListener() {
@@ -953,6 +944,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             requestQueue.add(stringRequest);
 
         }//Fin isChecked
+
         else{
             String Mensaje=getString(R.string.message_aceptar_acuerdo);
             failed_regpublication.setText(Mensaje);
@@ -971,58 +963,11 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         finish();
     } //Fin open login
 
-    private void publicarArchvio(final String  ide) throws JSONException {
-        final VariablesLogin varlogin = new VariablesLogin();
 
 
-            idusuario = varlogin.getIdusuario();
-            titulo = ettitlepost.getText().toString().trim();
-            observaciones = edPublication.getText().toString().trim();
-
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            failed_regpublication.setText(R.string.message_succes_publication);
-                            openMainactivity();
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    String body;
-                    String statusCode = String.valueOf(error.networkResponse.statusCode);
-                    //get response body and parse with appropriate encoding
-                    if (error.networkResponse.data != null) {
-
-                        try {
-                            body = new String(error.networkResponse.data, "UTF-8");
-
-                            failed_regpublication.setText(body);
 
 
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put(KEY_IDUSUARIO, idusuario);
-                    params.put(KEY_TITULO, titulo);
-                    params.put(KEY_IDGROUP, ide);
-                    params.put(KEY_OBSERVACIONES, observaciones);
-                    params.put(CONTENT_TYPE, APPLICATION);
-                    return params;
-                }
 
-            };
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            requestQueue.add(stringRequest);
-
-
-    }
 
 
     /**
