@@ -845,6 +845,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                     if(imPictures1.getDrawable()==null){
                         imPictures1.setImageURI(path);
+
                        // upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 

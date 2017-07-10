@@ -4,12 +4,20 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_people_light.xml"
     },
     {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_people_light.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_people_light.xml"
+    },
+    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_recent_light.xml",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_recent_light.xml"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_symbols_light.xml",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_symbols_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_recent_light.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_recent_light.xml"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_places_light.xml",
@@ -20,7 +28,23 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_nature_light.xml"
     },
     {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_objects_light.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_objects_light.xml"
+    },
+    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_objects_light.xml",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_objects_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_symbols_light.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_symbols_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_places_light.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_places_light.xml"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ic_emoji_nature_light.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable\\ic_emoji_nature_light.xml"
     }
 ]

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png"
+    },
+    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_recent_light_activated.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_recent_light_activated.png"
     },
@@ -8,24 +12,16 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\sym_keyboard_delete_holo_dark.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png"
-    },
-    {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_objects_light_activated.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_objects_light_activated.png"
-    },
-    {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_symbols_light_activated.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_symbols_light_activated.png"
-    },
-    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_places_light_activated.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_places_light_activated.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_people_light_activated.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_people_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_objects_light_normal.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_objects_light_normal.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_people_light_normal.png",
@@ -38,6 +34,18 @@
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_nature_light_normal.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_nature_light_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_objects_light_activated.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_objects_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_recent_light_activated.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_recent_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\keyboard_background_holo.9.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\keyboard_background_holo.9.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
@@ -58,5 +66,57 @@
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\keyboard_background_holo.9.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\keyboard_background_holo.9.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_nature_light_activated.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_nature_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_people_light_activated.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_people_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_places_light_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_objects_light_activated.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_objects_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_symbols_light_activated.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_symbols_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_symbols_light_activated.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_symbols_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_symbols_light_normal.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_symbols_light_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_places_light_activated.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_places_light_activated.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_nature_light_normal.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_nature_light_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_people_light_normal.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_people_light_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ic_emoji_recent_light_normal.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ic_emoji_recent_light_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\sym_keyboard_delete_holo_dark.png",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\sym_keyboard_delete_holo_dark.png"
     }
 ]
