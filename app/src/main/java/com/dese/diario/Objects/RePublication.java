@@ -10,7 +10,7 @@ public class RePublication {
     private String idpublicacion;
     private String foto;
     private String ruta;
-    //private String observaciones;
+    private String observaciones;
     private String titulo;
     private String nombre;
     private String idusuario;
@@ -18,11 +18,12 @@ public class RePublication {
     public RePublication() {
     }
 
-    public RePublication(String padre, String idpublicacion, String foto, String ruta, String titulo, String nombre, String idusuario) {
+    public RePublication(String padre, String idpublicacion, String foto, String ruta, String observaciones, String titulo, String nombre, String idusuario) {
         this.padre = padre;
         this.idusuario = idusuario;
         this.nombre = nombre;
         this.titulo = titulo;
+        this.observaciones=observaciones;
         this.ruta = ruta;
         this.idpublicacion = idpublicacion;
         this.foto = foto;
@@ -82,6 +83,14 @@ public class RePublication {
 
     public void setIdusuario(String idusuario) {
         this.idusuario = idusuario;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
     @Override

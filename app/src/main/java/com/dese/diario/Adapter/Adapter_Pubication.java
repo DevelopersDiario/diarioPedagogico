@@ -107,7 +107,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             public void onItemClick(int pos) {
                 openDetailActivity(t, u, d, p, f, pa);
 
-                Toast.makeText(context,"Entra a itemClicklistener "+ pa,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,"Entra a itemClicklistener "+ pa,Toast.LENGTH_SHORT).show();
             }
         });
 

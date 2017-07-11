@@ -325,6 +325,7 @@ public class ListRepublication extends AppCompatActivity {
                                                 jsonobject.getString("idpublicacion"),
                                                 jsonobject.getString("foto"),
                                                 jsonobject.getString("ruta"),
+                                                jsonobject.getString("observaciones"),
                                                 jsonobject.getString("titulo"),
                                                 jsonobject.getString("nombre"),
                                                 jsonobject.getString("idusuario")));

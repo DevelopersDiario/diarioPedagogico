@@ -232,7 +232,6 @@ public class DetailPublication extends AppCompatActivity {
 
                         //   failed_regpublication.setText(body);
 
-
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
@@ -266,14 +265,6 @@ public class DetailPublication extends AppCompatActivity {
 
     public  void listarRe( final String pa){
 
-
-
-
-        //  final DetailPublication dp= new DetailPublication();
-
-        //Toast.makeText(DetailPublication.this, "Entro a listar con el padre"+ pa, Toast.LENGTH_LONG).show();
-
-
         RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urllistar,
@@ -297,6 +288,7 @@ public class DetailPublication extends AppCompatActivity {
                                             jsonobject.getString("idpublicacion"),
                                             jsonobject.getString("foto"),
                                             jsonobject.getString("ruta"),
+                                            jsonobject.getString("observaciones"),
                                             jsonobject.getString("titulo"),
                                             jsonobject.getString("nombre"),
                                             jsonobject.getString("idusuario")));

@@ -80,10 +80,12 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
         final String t = listaRepublicaciones.get(position).getTitulo();
         final String u = listaRepublicaciones.get(position).getNombre();
         final String f = listaRepublicaciones.get(position).getFoto();
+        final String r=listaRepublicaciones.get(position).getRuta();
+        final String o = listaRepublicaciones.get(position).getObservaciones();
 
-
-        holder.titlePublicationR.setText(u);
-        holder.tvUserRecR.setText(t);
+        holder.titlePublicationR.setText(t);
+        holder.tvUserRecR.setText(u);
+        holder.tvPublicationRecR.setText(o);
      Picasso.with(context)
                 .load(Urls.fotouser + f)
                 .resize(250, 250)

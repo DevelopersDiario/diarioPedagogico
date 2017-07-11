@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.dese.diario.R;
 
+import org.w3c.dom.Text;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -36,6 +38,7 @@ public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongCli
         titlePublicationR = (TextView)itemView.findViewById(R.id.titlePublicationR);
         tvUserRecR= (TextView)itemView.findViewById(R.id.tvUserRecR);
         imProfileRecR = (CircleImageView) itemView.findViewById(R.id.imProfileRecR);
+        tvPublicationRecR= (TextView) itemView.findViewById(R.id.tvPublicationRecR);
 
         itemView.setOnLongClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
