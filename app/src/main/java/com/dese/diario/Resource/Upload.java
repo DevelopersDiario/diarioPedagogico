@@ -156,7 +156,7 @@ public class Upload {
         Thread tread = new Thread(new Runnable() {
             @Override
             public void run() {
-                final String id= varlogin.getIdusuario();
+                final  String id =varlogin.getIdusuario();
                 try {
                     final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
                     String content_type = getMimeType(file.getPath());
@@ -167,11 +167,10 @@ public class Upload {
 
                     final String filename= file.getName();
                     final String uploadId = UUID.randomUUID().toString();
-
                     new MultipartUploadRequest(context, uploadId, urlUpload)
                             .addFileToUpload(file_path,"archivo")
-                            .addParameter("filename", filename)
-                            .addParameter("tipoarchivo","Documento")
+                            .addParameter("titulo", filename)
+                            .addParameter("tipoarchivo","documentos")
                             .addParameter("idgrupo", gpo)
                             .addParameter("idusuario", id)
                             .addParameter("Farchivo", ".pdf")
@@ -254,6 +253,7 @@ public class Upload {
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
         return  MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
     }
+
     public void messageAlert(String body, String msg, final Context context){
         AlertDialog alertDialog = new AlertDialog.Builder(
                 context).create();
