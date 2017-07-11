@@ -4,6 +4,18 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\layout\\emojicons.xml"
     },
     {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\debug\\layout\\emojicon_grid.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\src\\main\\res\\layout\\emojicon_grid.xml"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\debug\\layout\\emojicon_item.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\src\\main\\res\\layout\\emojicon_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\build\\intermediates\\res\\merged\\debug\\layout\\emojicons.xml",
+        "source": "C:\\Users\\un_an\\OneDrive\\Documentos\\Developer\\Android\\diarioPedagogico\\Emoji\\src\\main\\res\\layout\\emojicons.xml"
+    },
+    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\debug\\layout\\emojicon_grid.xml",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\layout\\emojicon_grid.xml"
     },
