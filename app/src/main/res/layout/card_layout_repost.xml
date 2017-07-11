@@ -10,14 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="13dp"
-        card_view:cardElevation="@dimen/cardview_elevation_9"
         card_view:cardUseCompatPadding="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
@@ -27,8 +26,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="8dp"
-                android:paddingLeft="@dimen/padding_5dp"
-                android:paddingRight="@dimen/padding_5dp"
                 android:paddingTop="0dp"
                 android:weightSum="1">
 
@@ -75,6 +72,7 @@
                         android:layout_alignBaseline="@+id/tvUserRec"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="false"
+                        android:visibility="gone"
                         android:text="        " />
 
                     <TextView
@@ -84,9 +82,9 @@
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/imProfileRec"
                        android:hint="@string/tag_name_user"
-                        android:paddingTop="@dimen/padding_5dp"
+                        android:paddingTop="15dp"
                         android:layout_marginLeft="60dp"
-                        android:paddingBottom="8dp"
+                        android:paddingBottom="18dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
                 </RelativeLayout>
 
@@ -95,6 +93,7 @@
                     android:id="@+id/tvPublicationRecR"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
                     android:hint="@string/tag_lorem" />
 
              <ScrollView
