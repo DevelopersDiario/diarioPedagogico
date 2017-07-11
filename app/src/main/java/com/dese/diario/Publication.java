@@ -812,7 +812,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     //upload.uploadMultipartFile(data, Publication.this, "Audio");
                    // upload.uploadMultipart(Publication.this, data, ed);
                     break;
-                
+
 
             }
 
