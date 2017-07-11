@@ -845,12 +845,12 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                     if(imPictures1.getDrawable()==null){
                         imPictures1.setImageURI(path);
-<<<<<<< HEAD
+
                         upload.uploadMultipartFile(data, Publication.this, "Imagen");
-=======
+
 
                        // upload.uploadMultipartFile(data, Publication.this, "Imagen");
->>>>>>> 9a71f245e1d11a72e1817ad24301924b734269d9
+
                     }
 
                     else if(imPictures2.getDrawable()==null){
