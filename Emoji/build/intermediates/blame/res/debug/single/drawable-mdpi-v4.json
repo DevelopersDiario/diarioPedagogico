@@ -20,12 +20,12 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-mdpi\\orca_attach_photo_pressed.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_emoji_nature_light_activated.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-mdpi\\ic_emoji_nature_light_activated.png"
-    },
-    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\orca_emoji_more_back_normal.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-mdpi\\orca_emoji_more_back_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_emoji_nature_light_activated.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-mdpi\\ic_emoji_nature_light_activated.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\orca_attach_photo_normal.png",

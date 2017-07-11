@@ -845,32 +845,32 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                     if(imPictures1.getDrawable()==null){
                         imPictures1.setImageURI(path);
-                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures2.getDrawable()==null){
                         imPictures2.setImageURI(path);
-                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
                     else  if(imPictures3.getDrawable()==null){
                         imPictures3.setImageURI(path);
-                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                       upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures4.getDrawable()==null)
                     {
                         imPictures4.setImageURI(path);
-                        //upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
                     {
-                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                       upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
                     break;
 
                 case PICK_AUD_REQUEST:
-                    //upload.uploadMultipartFile(data, Publication.this, "Audio");
+                    upload.uploadMultipartFile(data, Publication.this, "Audio");
                     break;
 
                 case PICK_VID_REQUEST:

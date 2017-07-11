@@ -57,7 +57,7 @@ public class Upload {
                     new MultipartUploadRequest(context, uploadId, urlUpload)
                             .addFileToUpload(file_path, "archivo")
                             .addParameter("titulo", filename)
-                             .addParameter("tipoarchivo","documento")
+                             .addParameter("tipoarchivo",typo)
                              .addParameter("idgrupo", "15")
                              .addParameter("idusuario", "3")
                              .addParameter("Farchivo", ".pdf")
