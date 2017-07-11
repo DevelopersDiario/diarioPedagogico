@@ -204,6 +204,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     //
     Intent actReq;
     String type;
+    int contador = 0;
+    ImageView imFile1, imFile2, imFile3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -325,9 +327,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         imPictures3 =(ImageView)findViewById(R.id.imViewPublication3);
         imPictures4 =(ImageView) findViewById(R.id.imViewPublication4);
 
-       /* imgSelect1= (ImageView) findViewById(R.id.imgSelect1);
-        imgSelect2= (ImageView) findViewById(R.id.imgSelect2);
-        imgSelect3= (ImageView)findViewById(R.id.imgSelect3);*/
+        imFile1= (ImageView) findViewById(R.id.imFile1);
+       imFile2= (ImageView) findViewById(R.id.imFile2);
+       imFile3= (ImageView) findViewById(R.id.imFile3);
+
     }
 
     public void listGpo() {
@@ -724,14 +727,21 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         .start();
                 break;
             case R.id.imDoc:
-                String acceptFileTypes =".*\\.(?:pdf|doc|xmls)$";
-                new MaterialFilePicker()
-                        .withActivity(Publication.this)
-                        .withRequestCode(PICK_DOC_REQUEST)
-                        .withFilter(Pattern.compile(acceptFileTypes))// Filtering files and directories by file name using regexp
-                        .withTitle("Seleccione  un archivo")
-                        .withHiddenFiles(true) // Show hidden files and folders
-                        .start();
+
+                if(contador<=3){
+                    contador++;
+                    String acceptFileTypes =".*\\.(?:pdf|doc|xmls)$";
+                    new MaterialFilePicker()
+                            .withActivity(Publication.this)
+                            .withRequestCode(PICK_DOC_REQUEST)
+                            .withFilter(Pattern.compile(acceptFileTypes))// Filtering files and directories by file name using regexp
+                            .withTitle("Seleccione  un archivo")
+                            .withHiddenFiles(true) // Show hidden files and folders
+                            .start();
+                }
+
+                contador=0;
+
                 break;
 
             default:
@@ -761,55 +771,48 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                 case PICK_DOC_REQUEST:
                     actReq=data;
-                    type="documento";
                    // final File file = new File(actReq.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
                   //  upload.uploadMultipartFile(data, Publication.this, "Documento");
-                    upload.uploadMultipart(Publication.this, data, ed);
+                 //   upload.uploadMultipart(Publication.this, data, ed);
+                    imFile1.setImageResource(R.drawable.file);
 
                     break;
 
                 case PICK_IMG_REQUEST:
                     Uri path = data.getData();
-
+                    actReq=data;
                     if(imPictures1.getDrawable()==null){
                         imPictures1.setImageURI(path);
                         //upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                        upload.uploadMultipart(Publication.this, data, ed);
+                     //   upload.uploadMultipart(Publication.this, data, ed);
                        // upload.uploadMultipartFile(data, Publication.this, "Imagen");
                     }
 
                     else if(imPictures2.getDrawable()==null){
                         imPictures2.setImageURI(path);
                       //  upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                        upload.uploadMultipart(Publication.this, data, ed);
+                     //   upload.uploadMultipart(Publication.this, data, ed);
                     }
                     else  if(imPictures3.getDrawable()==null){
                         imPictures3.setImageURI(path);
                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                        upload.uploadMultipart(Publication.this, data, ed);
+                     //   upload.uploadMultipart(Publication.this, data, ed);
                     }
 
                     else if(imPictures4.getDrawable()==null) {
                         imPictures4.setImageURI(path);
                        // upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                        upload.uploadMultipart(Publication.this, data, ed);
+                     //   upload.uploadMultipart(Publication.this, data, ed);
                     }
 
-                    else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
-                    {
-                      // upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                        upload.uploadMultipart(Publication.this, data, ed);
-                    }
-                    break;
+
 
                 case PICK_AUD_REQUEST:
+                    actReq=data;
                     //upload.uploadMultipartFile(data, Publication.this, "Audio");
-                    upload.uploadMultipart(Publication.this, data, ed);
+                   // upload.uploadMultipart(Publication.this, data, ed);
                     break;
-
-                case PICK_VID_REQUEST:
-
-                    break;
+                
 
             }
 
@@ -907,7 +910,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         @Override
                         public void onResponse(String response) {
 
-
+                            upload.uploadMultipart(Publication.this, actReq, ed);
                             failed_regpublication.setText(R.string.message_succes_publication);
 
                             openMainactivity();

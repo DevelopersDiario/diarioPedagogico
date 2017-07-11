@@ -98,21 +98,37 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     />
 
-
                 </ScrollView>
 
-
-
             </RelativeLayout>
-
-
-
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/svContent"
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/imFile1"/>
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/imFile2"/>
+                          <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/imFile3"/>
+
+                    </LinearLayout>
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -151,6 +167,7 @@
                             />
                     </LinearLayout>
                 </HorizontalScrollView>
+                </LinearLayout>
             </RelativeLayout>
 
         </LinearLayout>

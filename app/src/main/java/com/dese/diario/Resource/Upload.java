@@ -159,11 +159,8 @@ public class Upload {
                 final  String id =varlogin.getIdusuario();
                 try {
                     final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    String content_type = getMimeType(file.getPath());
                     final String file_path = file.getAbsolutePath();
                     OkHttpClient client = new OkHttpClient();
-                    MediaType mediaType = MediaType.parse("multipart/form-data; " + boundary + "");
-                    // String id= varlogin.getIdusuario();
 
                     final String filename= file.getName();
                     final String uploadId = UUID.randomUUID().toString();
