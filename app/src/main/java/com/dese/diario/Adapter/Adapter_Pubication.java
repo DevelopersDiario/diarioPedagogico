@@ -115,9 +115,9 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             @Override
             public void onClick(View v) {
                 ListRepublication rp= new ListRepublication();
-
+             //   DetailPublication dr= new DetailPublication();
                 rp.AlertRepublication(pa, context);
-               // AlertRepublication(pa);
+               // dr.listarRe(pa);
             }
         });
 

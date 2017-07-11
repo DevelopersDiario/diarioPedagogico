@@ -580,7 +580,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     e.printStackTrace();
                 }
 
-
                 failed_regpublication.setText("");
                 break;
 
@@ -888,7 +887,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         }//Fin resultCode
 
     }// Fin onActivityResult
-
 
 
 
