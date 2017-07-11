@@ -752,7 +752,66 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (resultCode == RESULT_OK) {
+            switch (requestCode){
+
+                case PICK_DOC_REQUEST:
+                    actReq=data;
+                    type="documento";
+                   // final File file = new File(actReq.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                  //  upload.uploadMultipartFile(data, Publication.this, "Documento");
+                    upload.uploadMultipart(Publication.this, data, ed);
+
+                    break;
+
+                case PICK_IMG_REQUEST:
+                    Uri path = data.getData();
+
+                    if(imPictures1.getDrawable()==null){
+                        imPictures1.setImageURI(path);
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                    }
+
+                    else if(imPictures2.getDrawable()==null){
+                        imPictures2.setImageURI(path);
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                    }
+                    else  if(imPictures3.getDrawable()==null){
+                        imPictures3.setImageURI(path);
+                       upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                    }
+
+                    else if(imPictures4.getDrawable()==null) {
+                        imPictures4.setImageURI(path);
+                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                    }
+
+                    else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
+                    {
+                       upload.uploadMultipartFile(data, Publication.this, "Imagen");
+                    }
+                    break;
+
+                case PICK_AUD_REQUEST:
+                    //upload.uploadMultipartFile(data, Publication.this, "Audio");
+                    upload.uploadMultipart(Publication.this, data, ed);
+                    break;
+
+                case PICK_VID_REQUEST:
+
+                    break;
+
+            }
+
+
+        }//Fin resultCode
+
+    }// Fin onActivityResult
 
     private void selectFont(){
 
@@ -824,72 +883,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
         b.show();
     }//End Alert Font
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            switch (requestCode){
-
-                case PICK_DOC_REQUEST:
-                    actReq=data;
-                    type="documento";
-                   // final File file = new File(actReq.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    upload.uploadMultipartFile(data, Publication.this, "Documento");
-
-                    break;
-
-                case PICK_IMG_REQUEST:
-                    Uri path = data.getData();
-
-                    if(imPictures1.getDrawable()==null){
-                        imPictures1.setImageURI(path);
-
-                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
-
-
-                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
-
-                    }
-
-                    else if(imPictures2.getDrawable()==null){
-                        imPictures2.setImageURI(path);
-                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                    }
-                    else  if(imPictures3.getDrawable()==null){
-                        imPictures3.setImageURI(path);
-                       upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                    }
-
-                    else if(imPictures4.getDrawable()==null)
-                    {
-                        imPictures4.setImageURI(path);
-                        upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                    }
-
-                    else if(imPictures1.getDrawable()==null&&imPictures2.getDrawable()==null&&imPictures3.getDrawable()==null&&imPictures4.getDrawable()==null)
-                    {
-                       upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                    }
-                    break;
-
-                case PICK_AUD_REQUEST:
-                    upload.uploadMultipartFile(data, Publication.this, "Audio");
-                    break;
-
-                case PICK_VID_REQUEST:
-
-                    break;
-
-            }
-
-
-        }//Fin resultCode
-
-    }// Fin onActivityResult
 
 
 
