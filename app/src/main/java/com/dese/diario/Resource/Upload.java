@@ -47,7 +47,7 @@ public class Upload {
               final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
                     final String file_path = file.getAbsolutePath();
 
-                    String id= varlogin.getIdusuario();
+                   final String id= varlogin.getIdusuario();
 
                     final String filename = file.getName();
                     String tmp []=filename.split(".");
@@ -59,7 +59,7 @@ public class Upload {
                             .addParameter("titulo", filename)
                              .addParameter("tipoarchivo",typo)
                              .addParameter("idgrupo", "15")
-                             .addParameter("idusuario", "3")
+                             .addParameter("idusuario", id)
                              .addParameter("Farchivo", ".pdf")
                             .setNotificationConfig(new UploadNotificationConfig())
                             .setDelegate(new UploadStatusDelegate() {

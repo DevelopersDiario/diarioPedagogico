@@ -479,6 +479,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             tvDate.setVisibility(View.INVISIBLE);
             myWebView.loadUrl(getString(R.string.pagina_del_dia)+colorfonde+".png&texto=FFFFFF");
             myWebView.getSettings().setJavaScriptEnabled(true);
+            myWebView.isEnabled();
 
         }else {
             if(!estaConectado())
@@ -701,9 +702,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 new MaterialFilePicker()
                         .withActivity(Publication.this)
                         .withRequestCode(PICK_IMG_REQUEST)
-                        .withFilter(Pattern.compile(".*\\.jpg"))// Filtering files and directories by file name using regexp
+                       // .withFilter(Pattern.compile(".*\\.jpg"))// Filtering files and directories by file name using regexp
+                            .withFilter(Pattern.compile(".*\\.(?:jpg|gif|png|bmp)$"))
                         .withTitle("Seleccione  un archivo")
-                        .withFilterDirectories(false) // Set directories filterable (false by default)
+                        .withFilterDirectories(false)// Set directories filterable (false by default)
                         .withHiddenFiles(true) // Show hidden files and folders
                         .start();
 
@@ -716,16 +718,17 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 new MaterialFilePicker()
                         .withActivity(Publication.this)
                         .withRequestCode(PICK_AUD_REQUEST)
-                        .withFilter(Pattern.compile(".*\\.mp3"))// Filtering files and directories by file name using regexp
+                        .withFilter(Pattern.compile(".*\\.(?:wav|mp3|ogg|3gp)$"))// Filtering files and directories by file name using regexp
                         .withTitle("Seleccione  un archivo")
                         .withHiddenFiles(true) // Show hidden files and folders
                         .start();
                 break;
             case R.id.imDoc:
+                String acceptFileTypes =".*\\.(?:pdf|doc|xmls)$";
                 new MaterialFilePicker()
                         .withActivity(Publication.this)
                         .withRequestCode(PICK_DOC_REQUEST)
-                        .withFilter(Pattern.compile(".*\\.pdf"))// Filtering files and directories by file name using regexp
+                        .withFilter(Pattern.compile(acceptFileTypes))// Filtering files and directories by file name using regexp
                         .withTitle("Seleccione  un archivo")
                         .withHiddenFiles(true) // Show hidden files and folders
                         .start();
