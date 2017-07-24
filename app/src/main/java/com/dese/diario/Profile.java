@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -62,6 +63,9 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -174,6 +178,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
         bindActivity();
         settingsButtons();
+
         performRequest();
         dowlandHolder();
 
@@ -183,7 +188,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     @Override
     protected void onStart() {
         super.onStart();
-        performRequest();
+       performRequest();
         dowlandHolder();
 
 
@@ -193,6 +198,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         startActivity(intent);
     }
     ///performed request
+
     public void performRequest() {
         final  DatosUsr dusr=new DatosUsr();
         final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -208,7 +214,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                         //circleImageView.setImageBitmap(bitmap);
 
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                            Toast.makeText(Profile.this, "profile perfoma", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(Profile.this, "profile perfoma", Toast.LENGTH_LONG).show();
 
                             String pPath = MediaStore.Images.Media.insertImage(Profile.this.getContentResolver(), bitmap, "Profile", null);
                             Picasso.with(Profile.this)
@@ -245,7 +251,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                     public void onResponse(Bitmap bitmap) {
                         if(!bitmap.equals(null)){
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                            Toast.makeText(Profile.this, "dowlandHolderr", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(Profile.this, "dowlandHolderr", Toast.LENGTH_LONG).show();
                             String pPath = MediaStore.Images.Media.insertImage(Profile.this.getContentResolver(), bitmap, "Portada", null);
                             Picasso.with(Profile.this)
                                     .load(pPath)
@@ -938,7 +944,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                             //upload();
 
                             if (ide == "holder") {
-                                bmHolder.equals(imgbitmap);
+                               bmHolder=(imgbitmap);
                                 uploadHolder();
                             } else if (ide=="profile") {
                                 bmProfile = imgbitmap;
@@ -958,7 +964,39 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
             }
         }
     }
+    private void shadespreferenceProfile(Intent data) {
 
+        InputStream stream;
+        String filePath = null;
+        try {
+            stream = getContentResolver().openInputStream(data.getData());
+
+            Bitmap realImage = BitmapFactory.decodeStream(stream);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            realImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+
+            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
+            //textEncode.setText(encodedImage);
+
+            SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor edit = shre.edit();
+            edit.putString("image_data2", encodedImage);
+
+            edit.commit();
+            restartActivity();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    private  void restartActivity(){
+            Intent restart_avtivity= new Intent(Profile.this, Profile.class);
+            startActivity(restart_avtivity);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

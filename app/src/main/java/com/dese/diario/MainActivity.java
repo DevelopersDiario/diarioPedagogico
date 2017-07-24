@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity
     //Resource
     TextView textView;
     DrawerLayout drawerLayout;
-    RelativeLayout conten;
+    RelativeLayout content;
 
 
     //Theme
@@ -168,20 +169,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView =  navigationView.getHeaderView(0);
+
         nvemaillogin=(TextView)hView.findViewById(R.id.nvemaillogin);
         nvloginaccount=(TextView)hView.findViewById(R.id.nvloginaccount);
         nvemaillogin.setText(varlogin.getCorreo().toString());
         nvloginaccount.setText(varlogin.getCuenta().toString());
 
+      // navigationView.setItemBackground(Drawable.createFromPath(Urls.fotouser+du.getFportada()));
+
         Picasso.with(MainActivity.this)
                 .load(Urls.fotouser+du.getFoto())
                 .resize(200, 200)
                 .centerCrop()
-                .into(  fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile)); Picasso.with(MainActivity.this)
-                .load(Urls.fotouser+du.getFoto())
-                .resize(200, 200)
-                .centerCrop()
                 .into(  fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile));
+
+            Picasso.with(MainActivity.this)
+                .load(Urls.fotouser+du.getFportada())
+                .resize(2000, 1200)
+                .centerCrop()
+                .into(  imType=(ImageView) hView.findViewById(R.id.imType));
 
 
 
