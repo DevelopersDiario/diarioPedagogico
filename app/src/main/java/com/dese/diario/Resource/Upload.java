@@ -1,7 +1,11 @@
 package com.dese.diario.Resource;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
@@ -20,6 +24,7 @@ import net.gotev.uploadservice.UploadNotificationConfig;
 import net.gotev.uploadservice.UploadStatusDelegate;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import okhttp3.MediaType;
@@ -36,138 +41,39 @@ public class Upload {
     final static String urlUpload= Urls.publicararchivo;
     final VariablesLogin varlogin =new VariablesLogin();
 
-
-    public void uploadMultipartFile(final Intent data ,final Context context, final String typo) {
-            //Toast.makeText(context, "Entrp-<"+file.getName(),  Toast.LENGTH_LONG).show();
-       // final VariablesLogin varlogin =new VariablesLogin();
-
-        Thread tread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-              final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    final String file_path = file.getAbsolutePath();
-
-                   final String id= varlogin.getIdusuario();
-
-                    final String filename = file.getName();
-                    String tmp []=filename.split(".");
-                    String farchivo=tmp[1];
-
-                    final String uploadId = UUID.randomUUID().toString();
-                    new MultipartUploadRequest(context, uploadId, urlUpload)
-                            .addFileToUpload(file_path, "archivo")
-                            .addParameter("titulo", filename)
-                             .addParameter("tipoarchivo",typo)
-                             .addParameter("idgrupo", "15")
-                             .addParameter("idusuario", id)
-                             .addParameter("Farchivo", ".pdf")
-                            .setNotificationConfig(new UploadNotificationConfig())
-                            .setDelegate(new UploadStatusDelegate() {
-                                @Override
-                                public void onProgress(UploadInfo uploadInfo) {
+    //ArrayList<String> paths = new ArrayList<>();
 
 
-                                }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 
-                                @Override
-                                public void onError(UploadInfo uploadInfo, Exception e) {
-                                    messageAlert("Eror!", e.toString(), context);
-                                }
-
-                                @Override
-                                public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
-                                  File eliminar =new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                                    if (eliminar.exists()) {
-                                        if (eliminar.delete()) {
-                                            System.out.println("archivo eliminado:" + eliminar.getPath());
-                                        } else {
-                                            System.out.println("archivo no eliminado" + eliminar.getPath());
-                                        }
-                                    }
-                                    Toast.makeText(context,"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
+    public void recorrerListPaths(  ArrayList<String> paths, Context context, Intent data, String grupo) {
+//        ClipData clipData = data.getClipData();
+        for (int i = 0; i < paths.size(); i++) {
 
 
+            Uri path = Uri.parse(paths.get(i)); //clipData.getItemAt(i).getUri();
+            final String file_path = paths.get(i);
 
-                                  String dat = "Name" +  "\n"+ file.getName();
-                                   // messageAlert("Datos", dat, context);
-                                   /* Picasso.with(context)
-                                            .load(file_path)
-                                            .resize(150, 150)
-                                            .centerCrop()
-                                            .into(imgPost);*/
-                                    //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
-                                }
-
-                                @Override
-                                public void onCancelled(UploadInfo uploadInfo) {
-                                }
-                            })
-                            .startUpload();
-
-                } catch (Exception exc) {
-                    System.out.println("Exceptio-->"+exc.getMessage() + " " + exc.getLocalizedMessage());
-                }
-
-            }
-               /* public void run() {
-                    File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    final String boundary="qwertyuiop";
-                    MediaType mediaType = MediaType.parse("multipart/form-data;"+boundary);
-                    String content_type =getMimeType(file.getPath());
-                    String filename="\\" +file.getName();
-
-                    String file_path = file.getAbsolutePath();
-                    OkHttpClient client = new OkHttpClient();
-
-                    RequestBody file_body =RequestBody.create(MediaType.parse("multipart/form-data;"),boundary);
-
-                    RequestBody body = new MultipartBody.Builder()
-                            .setType(MultipartBody.FORM)
-                            .addFormDataPart("archivo", content_type)
-                            //.addFormDataPart("archivo",file_path.substring(file_path.lastIndexOf("/")+1),file_body)
-                            .addFormDataPart("archivo",filename,RequestBody.create(MediaType.parse(content_type),file))
-                            .build();
-
-                    Request request= new Request.Builder()
-                            .url("http://192.168.20.25:8084/diariopws/api/1.0/publicacion/publicarArchivo")
-                            .post(body)
-                            .build();
-
-                    try {
-                        Response response = client.newCall(request).execute();
-                        if (!response.isSuccessful()){
-                            throw new IOException("No se pudo guardar el archivo"+response);
-                        }
-                        progress.dismiss();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }*/
-        });
-        tread.start();
+               upload(context, file_path, grupo, "Archivo"+i);
+        }
     }
 
-
-    public void uploadMultipart(final Context context, final Intent data, final String gpo) {
+    public void upload(final Context context, final String path, final String gpo, final String fname) {
         Thread tread = new Thread(new Runnable() {
             @Override
             public void run() {
-                final  String id =varlogin.getIdusuario();
+                final String id = varlogin.getIdusuario();
                 try {
-                    final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    final String file_path = file.getAbsolutePath();
-                    OkHttpClient client = new OkHttpClient();
+                  //  final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                    //final String file_path = file.getAbsolutePath();
+                    //OkHttpClient client = new OkHttpClient();
 
-                    final String filename= file.getName();
+                    final String filename=fname;// = file.getName();
                     final String uploadId = UUID.randomUUID().toString();
                     new MultipartUploadRequest(context, uploadId, urlUpload)
-                            .addFileToUpload(file_path,"archivo")
+                            .addFileToUpload(path, "archivo")
                             .addParameter("titulo", filename)
-                            .addParameter("tipoarchivo","documentos")
+                            .addParameter("tipoarchivo", "documentos")
                             .addParameter("idgrupo", gpo)
                             .addParameter("idusuario", id)
                             .addParameter("Farchivo", ".pdf")
@@ -185,28 +91,89 @@ public class Upload {
                                 }
 
                                 @Override
-                                public void onError(UploadInfo uploadInfo, Exception e) {}
+                                public void onError(UploadInfo uploadInfo, Exception e) {
+                                }
 
                                 @Override
                                 public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
 
-                                    String dat=data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-                                    messageAlert("Complet",dat, context);
+                                   // String dat = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+                                    messageAlert("Complet", filename, context);
 
                                     //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override
-                                public void onCancelled(UploadInfo uploadInfo) {}
+                                public void onCancelled(UploadInfo uploadInfo) {
+                                }
                             })
                             .startUpload();
 
                 } catch (Exception exc) {
-                    System.out.println(exc.getMessage()+" "+exc.getLocalizedMessage());
+                    System.out.println(exc.getMessage() + " " + exc.getLocalizedMessage());
                 }
 
-            }
+                    } });
+        tread.start();
+             }
+            public void uploadMultipart(final Context context, final Intent data, final String gpo) {
+                Thread tread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final String id = varlogin.getIdusuario();
+                        try {
+                            final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                            final String file_path = file.getAbsolutePath();
+                            OkHttpClient client = new OkHttpClient();
+
+                            final String filename = file.getName();
+                            final String uploadId = UUID.randomUUID().toString();
+                            new MultipartUploadRequest(context, uploadId, urlUpload)
+                                    .addFileToUpload(file_path, "archivo")
+                                    .addParameter("titulo", filename)
+                                    .addParameter("tipoarchivo", "documentos")
+                                    .addParameter("idgrupo", gpo)
+                                    .addParameter("idusuario", id)
+                                    .addParameter("Farchivo", ".pdf")
+                                    .setMaxRetries(2)
+                                    .setNotificationConfig(new UploadNotificationConfig()
+                                            .setInProgressMessage("Subiendo Archivo")
+                                            .setCompletedMessage("Completado correctamente")
+                                            .setTitle("Subiendo ")
+                                    )
+                                    .setDelegate(new UploadStatusDelegate() {
+                                        @Override
+                                        public void onProgress(UploadInfo uploadInfo) {
+
+
+                                        }
+
+                                        @Override
+                                        public void onError(UploadInfo uploadInfo, Exception e) {
+                                        }
+
+                                        @Override
+                                        public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
+
+
+                                            String dat = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+                                            messageAlert("Complet", dat, context);
+
+                                            //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(UploadInfo uploadInfo) {
+                                        }
+                                    })
+                                    .startUpload();
+
+                        } catch (Exception exc) {
+                            System.out.println(exc.getMessage() + " " + exc.getLocalizedMessage());
+                        }
+
+                    }
                /* public void run() {
                     File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
                     final String boundary="qwertyuiop";
@@ -243,9 +210,10 @@ public class Upload {
 
 
                 }*/
-        });
-        tread.start();
-    }
+                });
+                tread.start();
+            }
+
     private  String getMimeType(String path){
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
         return  MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
@@ -267,4 +235,5 @@ public class Upload {
         alertDialog.show();
 
     }
-}
+
+    }

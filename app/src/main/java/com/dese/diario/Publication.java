@@ -33,6 +33,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
@@ -68,6 +70,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dese.diario.Adapter.ItemAdapter;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Resource.Font;
@@ -80,6 +83,7 @@ import com.rockerhieu.emojicon.EmojiconEditText;
 import com.rockerhieu.emojicon.EmojiconGridFragment;
 import com.rockerhieu.emojicon.EmojiconsFragment;
 import com.rockerhieu.emojicon.emoji.Emojicon;
+import com.veer.multiselect.MultiSelectActivity;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.ServerResponse;
@@ -172,10 +176,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     private final int PICK_VID_REQUEST = 4;
 
     //Dates Upload
-
-    final String lineEnd = "\r\n";
-    final String twoHyphens = "--";
-    final String boundary="qwertyuiop";
+    ArrayList<String> paths = new ArrayList<>();
+    private RecyclerView rcItems;
 
 
     private FABToolbarLayout morph;
@@ -238,6 +240,9 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         tvDate = (TextView) findViewById(R.id.tvDate);
         upload = new Upload();
         listGpo();
+        rcItems = (RecyclerView) findViewById(R.id.rvItems);
+        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(3, 1);
+        rcItems.setLayoutManager(staggeredGridLayout);
 
         font.getContext(Publication.this);
         emojicons= (FrameLayout) findViewById(R.id.emojicons);
@@ -702,7 +707,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                 break;
             case R.id.imCamera:
-                new MaterialFilePicker()
+                /*new MaterialFilePicker()
                         .withActivity(Publication.this)
                         .withRequestCode(PICK_IMG_REQUEST)
                        // .withFilter(Pattern.compile(".*\\.jpg"))// Filtering files and directories by file name using regexp
@@ -710,7 +715,15 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         .withTitle("Seleccione  un archivo")
                         .withFilterDirectories(false)// Set directories filterable (false by default)
                         .withHiddenFiles(true) // Show hidden files and folders
-                        .start();
+                        .start();*/
+                Intent intent = new Intent(Publication.this, MultiSelectActivity.class);
+                int limit =4;
+
+                intent.putExtra(com.veer.multiselect.Util.Constants.LIMIT, limit);
+                intent.putExtra(com.veer.multiselect.Util.Constants.SELECT_TYPE,
+                        com.veer.multiselect.Util.Constants.PATH_IMAGE);
+                startActivityForResult(intent,
+                        com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT);
 
                 break;
 
@@ -743,6 +756,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 contador=0;
 
                 break;
+
 
             default:
                 morph.hide();
@@ -813,7 +827,14 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                    // upload.uploadMultipart(Publication.this, data, ed);
                     break;
 
+                case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
+                    ItemAdapter ia;
+                    paths = data.getStringArrayListExtra(com.veer.multiselect.Util.Constants.GET_PATHS);
 
+                    ia = new ItemAdapter(paths, Publication.this);
+                    rcItems.setAdapter(ia);
+
+                    break;
             }
 
 
@@ -910,7 +931,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         @Override
                         public void onResponse(String response) {
 
-                            upload.uploadMultipart(Publication.this, actReq, ed);
+                            upload.recorrerListPaths(paths, Publication.this, actReq, ed);
+                           // upload.uploadMultipart(Publication.this, actReq, ed);
                             failed_regpublication.setText(R.string.message_succes_publication);
 
                             openMainactivity();

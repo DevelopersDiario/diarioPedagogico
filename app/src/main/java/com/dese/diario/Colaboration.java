@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Grupo;
+import com.dese.diario.Item.Search_friends;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 
@@ -365,13 +366,14 @@ public class Colaboration extends AppCompatActivity {
         switch (item.getTitle().toString()){
             case "Agregar Miembro":
 
-               /* String gpo= tv1.getText().toString();
+
+                String gpo= tv1.getText().toString();
                 String namegpo= tv2.getText().toString();
 
                 Intent sf= new Intent(Colaboration.this, Search_friends.class);
                 sf.putExtra("namegpo", namegpo);
                 sf.putExtra("gpo", gpo);
-                startActivity(sf);*/
+                startActivity(sf);
                 break;
             default:
                 item.getItemId();

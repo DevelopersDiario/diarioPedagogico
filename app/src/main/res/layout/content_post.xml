@@ -167,6 +167,11 @@
                             />
                     </LinearLayout>
                 </HorizontalScrollView>
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rvItems"
+                        android:layout_centerVertical="true"/>
                 </LinearLayout>
             </RelativeLayout>
 
