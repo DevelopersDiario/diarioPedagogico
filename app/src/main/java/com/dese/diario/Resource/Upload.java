@@ -79,7 +79,7 @@ public class Upload {
                             .addParameter("Farchivo", ".pdf")
                             .setMaxRetries(2)
                             .setNotificationConfig(new UploadNotificationConfig()
-                                    .setInProgressMessage("Subiendo Archivo")
+                                    .setInProgressMessage("Subiendo "+filename)
                                     .setCompletedMessage("Completado correctamente")
                                     .setTitle("Subiendo ")
                             )
