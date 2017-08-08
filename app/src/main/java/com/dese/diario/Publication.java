@@ -217,6 +217,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     ItemAdapter ia;
     int contador = 0;
     ImageView imFile1, imFile2, imFile3;
+    int color1, color2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -739,15 +740,15 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         .setMaxCount(4)
                         .setMinCount(1)
                         .setPickerSpanCount(5)
-                        .setActionBarColor(R.color.colorPrimaryFish)
+                        .setActionBarColor(R.style.AppTheme, R.style.AppTheme2)
                         .setActionBarTitleColor(Color.parseColor("#ffffff"))
                         .setAlbumSpanCount(2, 3)
                         .setButtonInAlbumActivity(true)
                         .setCamera(true)
                         .exceptGif(true)
                         .setReachLimitAutomaticClose(true)
-                        .setHomeAsUpIndicatorDrawable(ContextCompat.getDrawable(Publication.this, R.drawable.ic_action_home))
-                        .setOkButtonDrawable(ContextCompat.getDrawable(Publication.this, R.drawable.ic_action_content_send))
+                        .setHomeAsUpIndicatorDrawable(ContextCompat.getDrawable(Publication.this, R.drawable.ic_arrow_back_white_24dp))
+                        .setOkButtonDrawable(ContextCompat.getDrawable(Publication.this, R.drawable.ic_add_a_photo_white_24dp))
                         .setAllViewTitle("Todos")
                         .setActionBarTitle("Seleccione ")
                         .textOnNothingSelected("Seleccione como maximo cuatro")
