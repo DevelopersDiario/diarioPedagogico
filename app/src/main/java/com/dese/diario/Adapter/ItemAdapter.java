@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dese.diario.Item.MyViewHolder;
 import com.dese.diario.R;
 import com.veer.multiselect.Util.LoadBitmap;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -39,7 +41,40 @@ public class ItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
 
     @Override public void onBindViewHolder(MyViewHolder holder, int position) {
-        LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
+        File f= new File(paths.get(position));
+        String fname=f.getName().toString();
+        String type = fname.substring(fname.lastIndexOf(".") + 1);
+
+
+        //String[] separated = fname.split(".");
+        //String tmp = separated[separated.length-1];
+
+
+        holder.tvItem.setText(fname);
+
+        switch (type){
+            case  "jpg":
+                LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
+                break;
+            case "png":
+                LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
+
+                break;
+            case "gif":
+                LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
+
+                break;
+            case "doc":
+                LoadBitmap.loadBitmap(String.valueOf(R.drawable.filedoc ), holder.ivItem);
+                break;
+            case "pdf":
+                holder.ivItem.setImageResource(R.drawable.filepdf);
+            //    LoadBitmap.loadBitmap(String.valueOf(R.drawable.filepdf ), holder.ivItem);
+                Toast.makeText(context, type, Toast.LENGTH_SHORT).show();
+
+                break;
+        }
+
     }
 
     @Override public int getItemCount() {

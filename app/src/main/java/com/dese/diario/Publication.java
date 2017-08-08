@@ -3,12 +3,14 @@ package com.dese.diario;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -102,6 +104,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -732,9 +735,9 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 FishBun.with(Publication.this)
                         .MultiPageMode()
                         .setMaxCount(4)
-                        .setMinCount(2)
+                        .setMinCount(1)
                         .setPickerSpanCount(5)
-                        .setActionBarColor(R.color.colorPrimary)
+                        .setActionBarColor(R.color.colorPrimaryFish)
                         .setActionBarTitleColor(Color.parseColor("#ffffff"))
                         .setAlbumSpanCount(2, 3)
                         .setButtonInAlbumActivity(true)
@@ -764,19 +767,22 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 break;
             case R.id.imDoc:
 
-                if(contador<=3){
-                    contador++;
-                    String acceptFileTypes =".*\\.(?:pdf|doc|xmls)$";
+
+                  /*  String acceptFileTypes =".*\\.(?:pdf|doc|xmls)$";
                     new MaterialFilePicker()
                             .withActivity(Publication.this)
                             .withRequestCode(PICK_DOC_REQUEST)
                             .withFilter(Pattern.compile(acceptFileTypes))// Filtering files and directories by file name using regexp
                             .withTitle("Seleccione  un archivo")
                             .withHiddenFiles(true) // Show hidden files and folders
-                            .start();
-                }
-
-                contador=0;
+                            .start();*/
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                String [] mimeTypes = {"application/msword", "application/pdf", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"};
+                intent.setType("*/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+                startActivityForResult(intent, PICK_DOC_REQUEST);
 
                 break;
 
@@ -808,41 +814,58 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                 case PICK_DOC_REQUEST:
                     actReq=data;
+                    String imageEncoded;
+                    Uri mImageUri;
+                    if (data.getData() != null) {
+                        mImageUri = Uri.parse(data.getDataString());
+                        // Get the cursor
+                        try {
+                            imageEncoded= upload.getFilePath(Publication.this, mImageUri);
+                            paths.add(imageEncoded);
 
-                    imFile1.setImageResource(R.drawable.file);
-                    upload.uploadMultipart(Publication.this, actReq,ed );
+                            ia = new ItemAdapter(paths, Publication.this);
+                            rcItems.setAdapter(ia);
+
+                            Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
+
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    } else{
+                            if (data.getClipData() != null) {
+                                ClipData mClipData = data.getClipData();
+                                ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                                for (int i = 0; i < mClipData.getItemCount(); i++) {
+                                    try {
+                                    ClipData.Item item = mClipData.getItemAt(i);
+                                    Uri uri = item.getUri();
+
+                                        String realpath = upload.getFilePath(Publication.this, uri);
+
+                                    mArrayUri.add(uri);
+
+
+                                    paths.add(realpath);
+                                    ia = new ItemAdapter(paths, Publication.this);
+                                    rcItems.setAdapter(ia);
+                                    Toast.makeText(Publication.this, "Clipdata"+realpath, Toast.LENGTH_SHORT).show();
+                                    } catch (URISyntaxException e) {
+                                    e.printStackTrace();
+                                }
+                                }
+
+                            }
+                        }
+
+                    //imFile1.setImageResource(R.drawable.file);
+                   // upload.uploadMultipart(Publication.this, actReq,ed );
                     break;
-
-                case PICK_IMG_REQUEST:
-                    Uri path = data.getData();
-                    actReq=data;
-                    if(imPictures1.getDrawable()==null){
-                        imPictures1.setImageURI(path);
-
-                    }
-
-                    else if(imPictures2.getDrawable()==null){
-                        imPictures2.setImageURI(path);
-
-                    }
-                    else  if(imPictures3.getDrawable()==null){
-                        imPictures3.setImageURI(path);
-                      // upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                     //   upload.uploadMultipart(Publication.this, data, ed);
-                    }
-
-                    else if(imPictures4.getDrawable()==null) {
-                        imPictures4.setImageURI(path);
-                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                     //   upload.uploadMultipart(Publication.this, data, ed);
-                    }
-
 
 
                 case PICK_AUD_REQUEST:
                     actReq=data;
-                    //upload.uploadMultipartFile(data, Publication.this, "Audio");
-                   // upload.uploadMultipart(Publication.this, data, ed);
                     break;
 
                 case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
