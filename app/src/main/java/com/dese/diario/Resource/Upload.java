@@ -120,12 +120,17 @@ public class Upload {
                                 @Override
                                 public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
-
-                                   // String dat = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-                                    messageAlert("Complet", filename, context);
-
-                                    //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
-                                }
+                                    //ELiminar imagen
+                                    File eliminar = new File(path);
+                                    if (eliminar.exists()) {
+                                        if (eliminar.delete()) {
+                                            System.out.println("Archivo eliminado:" + eliminar.getPath());
+                                        } else {
+                                            System.out.println("Archivo no eliminado" + eliminar.getPath());
+                                        }
+                                    }
+                                    Toast.makeText(context.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
+                                  }
 
                                 @Override
                                 public void onCancelled(UploadInfo uploadInfo) {
