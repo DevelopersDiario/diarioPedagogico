@@ -55,6 +55,8 @@ allprojects {
         jcenter()
     }
 }
+
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -95,6 +97,11 @@ dependencies {
 
     //Multiselec
     compile 'com.github.karanvs:multiselect:v1.2'
+
+    //GFishbudd
+compile('com.sangcomz:FishBun:0.7.1@aar') {
+    transitive = true
+}
 
     testCompile 'junit:junit:4.12'
     compile project(':Emoji')

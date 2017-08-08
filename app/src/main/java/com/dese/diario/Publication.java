@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,6 +30,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -83,6 +85,8 @@ import com.rockerhieu.emojicon.EmojiconEditText;
 import com.rockerhieu.emojicon.EmojiconGridFragment;
 import com.rockerhieu.emojicon.EmojiconsFragment;
 import com.rockerhieu.emojicon.emoji.Emojicon;
+import com.sangcomz.fishbun.FishBun;
+import com.sangcomz.fishbun.define.Define;
 import com.veer.multiselect.MultiSelectActivity;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
@@ -716,14 +720,33 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         .withFilterDirectories(false)// Set directories filterable (false by default)
                         .withHiddenFiles(true) // Show hidden files and folders
                         .start();*/
-                Intent intent = new Intent(Publication.this, MultiSelectActivity.class);
+              /*  Intent intent = new Intent(Publication.this, MultiSelectActivity.class);
                 int limit =4;
 
                 intent.putExtra(com.veer.multiselect.Util.Constants.LIMIT, limit);
                 intent.putExtra(com.veer.multiselect.Util.Constants.SELECT_TYPE,
                         com.veer.multiselect.Util.Constants.PATH_IMAGE);
                 startActivityForResult(intent,
-                        com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT);
+                        com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT);*/
+
+                FishBun.with(Publication.this)
+                        .MultiPageMode()
+                        .setMaxCount(4)
+                        .setMinCount(2)
+                        .setPickerSpanCount(5)
+                        .setActionBarColor(R.color.colorPrimary)
+                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                        .setAlbumSpanCount(2, 3)
+                        .setButtonInAlbumActivity(true)
+                        .setCamera(true)
+                        .exceptGif(true)
+                        .setReachLimitAutomaticClose(true)
+                        .setHomeAsUpIndicatorDrawable(ContextCompat.getDrawable(Publication.this, R.drawable.ic_action_home))
+                        .setOkButtonDrawable(ContextCompat.getDrawable(Publication.this, R.drawable.ic_action_content_send))
+                        .setAllViewTitle("Todos")
+                        .setActionBarTitle("Seleccione ")
+                        .textOnNothingSelected("Seleccione como maximo cuatro")
+                        .startAlbum();
 
                 break;
 
@@ -779,17 +802,15 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        ItemAdapter ia;
         if (resultCode == RESULT_OK) {
             switch (requestCode){
 
                 case PICK_DOC_REQUEST:
                     actReq=data;
-                   // final File file = new File(actReq.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                  //  upload.uploadMultipartFile(data, Publication.this, "Documento");
-                 //   upload.uploadMultipart(Publication.this, data, ed);
-                    imFile1.setImageResource(R.drawable.file);
 
+                    imFile1.setImageResource(R.drawable.file);
+                    upload.uploadMultipart(Publication.this, actReq,ed );
                     break;
 
                 case PICK_IMG_REQUEST:
@@ -797,15 +818,12 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     actReq=data;
                     if(imPictures1.getDrawable()==null){
                         imPictures1.setImageURI(path);
-                        //upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                     //   upload.uploadMultipart(Publication.this, data, ed);
-                       // upload.uploadMultipartFile(data, Publication.this, "Imagen");
+
                     }
 
                     else if(imPictures2.getDrawable()==null){
                         imPictures2.setImageURI(path);
-                      //  upload.uploadMultipartFile(data, Publication.this, "Imagen");
-                     //   upload.uploadMultipart(Publication.this, data, ed);
+
                     }
                     else  if(imPictures3.getDrawable()==null){
                         imPictures3.setImageURI(path);
@@ -828,13 +846,30 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     break;
 
                 case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
-                    ItemAdapter ia;
+                    //ItemAdapter ia;
                     paths = data.getStringArrayListExtra(com.veer.multiselect.Util.Constants.GET_PATHS);
 
                     ia = new ItemAdapter(paths, Publication.this);
                     rcItems.setAdapter(ia);
 
                     break;
+                case Define.ALBUM_REQUEST_CODE:
+
+
+                    ArrayList<Uri> pathUri;
+                    pathUri = data.getParcelableArrayListExtra(Define.INTENT_PATH);
+                    for (int i = 0; i < pathUri.size(); i++) {
+                        String realpath= upload.getRealPathFromURI(Publication.this, pathUri.get(i));
+
+                        paths.add(realpath);
+
+                    }
+                    ia = new ItemAdapter(paths, Publication.this);
+                    rcItems.setAdapter(ia);
+
+                    //You can get image path(ArrayList<Uri>) Version 0.6.2 or later
+                    break;
+
             }
 
 

@@ -3,8 +3,10 @@ package com.dese.diario.Resource;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.webkit.MimeTypeMap;
@@ -48,14 +50,26 @@ public class Upload {
 
     public void recorrerListPaths(  ArrayList<String> paths, Context context, Intent data, String grupo) {
 //        ClipData clipData = data.getClipData();
-        for (int i = 0; i < paths.size(); i++) {
+        File file;
+        if(paths != null){
+            for (int i = 0; i < paths.size(); i++) {
 
 
-            Uri path = Uri.parse(paths.get(i)); //clipData.getItemAt(i).getUri();
-            final String file_path = paths.get(i);
+                Uri path = Uri.parse(paths.get(i)); //clipData.getItemAt(i).getUri();
 
-               upload(context, file_path, grupo, "Archivo"+i);
+                final String file_path = paths.get(i);
+                file= new File(file_path);
+                final String fname= file.getName();
+                upload(context, file_path, grupo, fname);
+            }
+        }else {
+           file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+            final String file_path = file.getAbsolutePath();
+            final String fname= file.getName();
+            upload(context, file_path, grupo,fname);
+
         }
+
     }
 
     public void upload(final Context context, final String path, final String gpo, final String fname) {
@@ -235,5 +249,18 @@ public class Upload {
         alertDialog.show();
 
     }
-
+    public String getRealPathFromURI(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = { MediaStore.Images.Media.DATA };
+            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+    }
     }
