@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dese.diario.Item.MyViewHolder;
+import com.dese.diario.Profile;
 import com.dese.diario.R;
+import com.squareup.picasso.Picasso;
 import com.veer.multiselect.Util.LoadBitmap;
 
 import java.io.File;
@@ -62,17 +64,58 @@ public class ItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 break;
             case "gif":
                 LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
-
                 break;
             case "doc":
-                LoadBitmap.loadBitmap(String.valueOf(R.drawable.filedoc ), holder.ivItem);
+                //LoadBitmap.loadBitmap(String.valueOf(R.drawable.filedoc ), holder.ivItem);
+                Picasso.with(context)
+                        .load(R.drawable.filedoc)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
                 break;
             case "pdf":
-                holder.ivItem.setImageResource(R.drawable.filepdf);
-            //    LoadBitmap.loadBitmap(String.valueOf(R.drawable.filepdf ), holder.ivItem);
-                Toast.makeText(context, type, Toast.LENGTH_SHORT).show();
-
+                Picasso.with(context)
+                        .load(R.drawable.filepdf)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
                 break;
+            case "xls":
+                Picasso.with(context)
+                        .load(R.drawable.filexls)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
+            case "ppt":
+                Picasso.with(context)
+                        .load(R.drawable.fileppt)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
+            case "mp3":
+                Picasso.with(context)
+                        .load(R.drawable.filemp3)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
+            case "avi":
+                Picasso.with(context)
+                        .load(R.drawable.fileavi)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
+            case "wav":
+                Picasso.with(context)
+                        .load(R.drawable.filewav)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
+
         }
 
     }

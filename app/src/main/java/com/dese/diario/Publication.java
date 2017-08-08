@@ -124,6 +124,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     final static String urlLisGpo= Urls.listgrupo;
 
     Intent intent;
+
     //Permissions
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 110;
     private final int MY_PERMISSIONS = 100;
@@ -213,6 +214,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     //
     Intent actReq;
     String type;
+    ItemAdapter ia;
     int contador = 0;
     ImageView imFile1, imFile2, imFile3;
     @Override
@@ -548,7 +550,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                  //   Toast.makeText(Publication.this, R.string.salvar, Toast.LENGTH_SHORT).show();
                 }
             });
-            alert.setButton(Dialog.BUTTON_NEGATIVE, getResources().getString(R.string.action_save), new DialogInterface.OnClickListener() {
+            alert.setButton(Dialog.BUTTON_NEGATIVE, ("Descartar"), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     finish();
@@ -757,13 +759,21 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 //String msg="Puede Iniciar la Grabacion";
                 //Recording r= new Recording();
                 //r.dialogGrabar(this,msg);
-                new MaterialFilePicker()
+               /* new MaterialFilePicker()
                         .withActivity(Publication.this)
                         .withRequestCode(PICK_AUD_REQUEST)
                         .withFilter(Pattern.compile(".*\\.(?:wav|mp3|ogg|3gp)$"))// Filtering files and directories by file name using regexp
                         .withTitle("Seleccione  un archivo")
                         .withHiddenFiles(true) // Show hidden files and folders
-                        .start();
+                        .start();*/
+                Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intentA.addCategory(Intent.CATEGORY_OPENABLE);
+             //   String [] mimeTypes = {"application/msword", "application/pdf", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"};
+                intentA.setType("audio/*");
+                intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+               // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+                startActivityForResult(intentA, PICK_AUD_REQUEST);
+
                 break;
             case R.id.imDoc:
 
@@ -808,56 +818,13 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ItemAdapter ia;
+       // ItemAdapter ia;
         if (resultCode == RESULT_OK) {
             switch (requestCode){
 
                 case PICK_DOC_REQUEST:
                     actReq=data;
-                    String imageEncoded;
-                    Uri mImageUri;
-                    if (data.getData() != null) {
-                        mImageUri = Uri.parse(data.getDataString());
-                        // Get the cursor
-                        try {
-                            imageEncoded= upload.getFilePath(Publication.this, mImageUri);
-                            paths.add(imageEncoded);
-
-                            ia = new ItemAdapter(paths, Publication.this);
-                            rcItems.setAdapter(ia);
-
-                            Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
-
-                        } catch (URISyntaxException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    } else{
-                            if (data.getClipData() != null) {
-                                ClipData mClipData = data.getClipData();
-                                ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
-                                for (int i = 0; i < mClipData.getItemCount(); i++) {
-                                    try {
-                                    ClipData.Item item = mClipData.getItemAt(i);
-                                    Uri uri = item.getUri();
-
-                                        String realpath = upload.getFilePath(Publication.this, uri);
-
-                                    mArrayUri.add(uri);
-
-
-                                    paths.add(realpath);
-                                    ia = new ItemAdapter(paths, Publication.this);
-                                    rcItems.setAdapter(ia);
-                                    Toast.makeText(Publication.this, "Clipdata"+realpath, Toast.LENGTH_SHORT).show();
-                                    } catch (URISyntaxException e) {
-                                    e.printStackTrace();
-                                }
-                                }
-
-                            }
-                        }
+                  clipdataSelect(data);
 
                     //imFile1.setImageResource(R.drawable.file);
                    // upload.uploadMultipart(Publication.this, actReq,ed );
@@ -866,6 +833,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                 case PICK_AUD_REQUEST:
                     actReq=data;
+
+                    clipdataSelect(data);
                     break;
 
                 case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
@@ -899,6 +868,54 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         }//Fin resultCode
 
     }// Fin onActivityResult
+
+    private void clipdataSelect(Intent data) {
+
+        String imageEncoded;
+        Uri mImageUri;
+        if (data.getData() != null) {
+            mImageUri = Uri.parse(data.getDataString());
+            // Get the cursor
+            try {
+                imageEncoded= upload.getFilePath(Publication.this, mImageUri);
+                paths.add(imageEncoded);
+
+                ia = new ItemAdapter(paths, Publication.this);
+                rcItems.setAdapter(ia);
+
+                Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
+
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
+
+        } else{
+            if (data.getClipData() != null) {
+                ClipData mClipData = data.getClipData();
+                ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                for (int i = 0; i < mClipData.getItemCount(); i++) {
+                    try {
+                        ClipData.Item item = mClipData.getItemAt(i);
+                        Uri uri = item.getUri();
+
+                        String realpath = upload.getFilePath(Publication.this, uri);
+
+                        mArrayUri.add(uri);
+
+
+                        paths.add(realpath);
+                        ia = new ItemAdapter(paths, Publication.this);
+                        rcItems.setAdapter(ia);
+                        Toast.makeText(Publication.this, "Clipdata"+realpath, Toast.LENGTH_SHORT).show();
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }
+    }
 
     private void selectFont(){
 
