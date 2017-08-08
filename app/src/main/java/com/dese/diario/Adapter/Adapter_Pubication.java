@@ -1,57 +1,21 @@
 package com.dese.diario.Adapter;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.dese.diario.Colaboration;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderP;
-import com.dese.diario.Item.Search_friends;
-import com.dese.diario.MainActivity;
 import com.dese.diario.Objects.DetailPublication;
 import com.dese.diario.Objects.Publication;
 import com.dese.diario.Objects.Urls;
-import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Eduardo on 04/04/2017.
@@ -73,7 +37,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     @Override
     public MyHolderP onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_layout_publication, parent, false);
+                .inflate(R.layout.item_publication, parent, false);
 
 
 

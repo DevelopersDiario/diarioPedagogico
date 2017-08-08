@@ -23,8 +23,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-
             <!-- Title-->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -44,6 +42,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
             </RelativeLayout>
+
             <!-- Body-->
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
@@ -54,7 +53,6 @@
                 android:paddingLeft="@dimen/padding_5dp"
                 android:paddingRight="@dimen/padding_5dp"
                 android:paddingTop="24dp">
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -91,12 +89,17 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
                 </RelativeLayout>
 
-
                 <TextView
                     android:id="@+id/tvPublicationRec"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/tag_lorem" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/rvItemPublication"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
