@@ -23,6 +23,7 @@ import com.dese.diario.Publication;
 import com.dese.diario.R;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.squareup.picasso.Picasso;
+import com.veer.multiselect.Util.LoadBitmap;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.ServerResponse;
@@ -86,10 +87,9 @@ public class Upload {
             public void run() {
                 final String id = varlogin.getIdusuario();
                 try {
-                  //  final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    //final String file_path = file.getAbsolutePath();
-                    //OkHttpClient client = new OkHttpClient();
-
+                    File f= new File(path);
+                    String fname=f.getName().toString();
+                    String type = "."+fname.substring(fname.lastIndexOf(".") + 1);
                     final String filename=fname;// = file.getName();
                     final String uploadId = UUID.randomUUID().toString();
                     new MultipartUploadRequest(context, uploadId, urlUpload)
@@ -98,7 +98,7 @@ public class Upload {
                             .addParameter("tipoarchivo", "documentos")
                             .addParameter("idgrupo", gpo)
                             .addParameter("idusuario", id)
-                            .addParameter("Farchivo", ".pdf")
+                            .addParameter("Farchivo", type)
                             .setMaxRetries(2)
                             .setNotificationConfig(new UploadNotificationConfig()
                                     .setInProgressMessage(filename)
@@ -241,6 +241,38 @@ public class Upload {
                 });
                 tread.start();
             }
+//
+    private String getFileType(String extension){
+        String value =  "";
+        switch (extension){
+            case  ".jpg":
+                value="Imagen";
+               return value;
+            case ".png":
+                return "Imagen";
+            case ".gif":
+                return "Imagen";
+            case ".jpeg":
+                return "Imagen";
+            case ".doc":
+                return "Documento";
+            case "pdf":
+                return "Documento";
+            case "xls":
+                return "Documento";
+            case "ppt":
+                return "Documento";
+            case "mp3":
+                return "Audio";
+            case "avi":
+                return "Audio";
+            case "wav":
+                return "Audio";
+
+        }
+        return value;
+
+    }
 
     private  String getMimeType(String path){
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);

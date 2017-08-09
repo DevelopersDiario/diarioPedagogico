@@ -48,9 +48,6 @@ public class ItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
         String type = fname.substring(fname.lastIndexOf(".") + 1);
 
 
-        //String[] separated = fname.split(".");
-        //String tmp = separated[separated.length-1];
-
 
         holder.tvItem.setText(fname);
 
