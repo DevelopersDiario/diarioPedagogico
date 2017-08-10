@@ -717,23 +717,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                 break;
             case R.id.imCamera:
-                /*new MaterialFilePicker()
-                        .withActivity(Publication.this)
-                        .withRequestCode(PICK_IMG_REQUEST)
-                       // .withFilter(Pattern.compile(".*\\.jpg"))// Filtering files and directories by file name using regexp
-                            .withFilter(Pattern.compile(".*\\.(?:jpg|gif|png|bmp)$"))
-                        .withTitle("Seleccione  un archivo")
-                        .withFilterDirectories(false)// Set directories filterable (false by default)
-                        .withHiddenFiles(true) // Show hidden files and folders
-                        .start();*/
-              /*  Intent intent = new Intent(Publication.this, MultiSelectActivity.class);
-                int limit =4;
-
-                intent.putExtra(com.veer.multiselect.Util.Constants.LIMIT, limit);
-                intent.putExtra(com.veer.multiselect.Util.Constants.SELECT_TYPE,
-                        com.veer.multiselect.Util.Constants.PATH_IMAGE);
-                startActivityForResult(intent,
-                        com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT);*/
 
                 FishBun.with(Publication.this)
                         .MultiPageMode()
@@ -769,24 +752,14 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         .start();*/
                 Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intentA.addCategory(Intent.CATEGORY_OPENABLE);
-             //   String [] mimeTypes = {"application/msword", "application/pdf", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"};
                 intentA.setType("audio/*");
                 intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-               // intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
                 startActivityForResult(intentA, PICK_AUD_REQUEST);
 
                 break;
             case R.id.imDoc:
 
 
-                  /*  String acceptFileTypes =".*\\.(?:pdf|doc|xmls)$";
-                    new MaterialFilePicker()
-                            .withActivity(Publication.this)
-                            .withRequestCode(PICK_DOC_REQUEST)
-                            .withFilter(Pattern.compile(acceptFileTypes))// Filtering files and directories by file name using regexp
-                            .withTitle("Seleccione  un archivo")
-                            .withHiddenFiles(true) // Show hidden files and folders
-                            .start();*/
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 String [] mimeTypes = {"application/msword", "application/pdf", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"};
@@ -827,8 +800,6 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     actReq=data;
                   clipdataSelect(data);
 
-                    //imFile1.setImageResource(R.drawable.file);
-                   // upload.uploadMultipart(Publication.this, actReq,ed );
                     break;
 
 
@@ -839,7 +810,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     break;
 
                 case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
-                    //ItemAdapter ia;
+
                     paths = data.getStringArrayListExtra(com.veer.multiselect.Util.Constants.GET_PATHS);
 
                     ia = new ItemAdapter(paths, Publication.this);
@@ -852,7 +823,13 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                     ArrayList<Uri> pathUri;
                     pathUri = data.getParcelableArrayListExtra(Define.INTENT_PATH);
                     for (int i = 0; i < pathUri.size(); i++) {
-                        String realpath= upload.getRealPathFromURI(Publication.this, pathUri.get(i));
+                        String realpath= " ";
+                        try {
+
+                            realpath = upload.getFilePath(Publication.this, pathUri.get(i));
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
 
                         paths.add(realpath);
 

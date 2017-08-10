@@ -90,8 +90,10 @@ public class Upload {
                     File f= new File(path);
                     String fname=f.getName().toString();
                     String type = "."+fname.substring(fname.lastIndexOf(".") + 1);
+                    String filetype= getNameFile(type);
                     final String filename=fname;// = file.getName();
                     final String uploadId = UUID.randomUUID().toString();
+
                     new MultipartUploadRequest(context, uploadId, urlUpload)
                             .addFileToUpload(path, "archivo")
                             .addParameter("titulo", filename)
@@ -202,77 +204,41 @@ public class Upload {
                         }
 
                     }
-               /* public void run() {
-                    File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
-                    final String boundary="qwertyuiop";
-                    MediaType mediaType = MediaType.parse("multipart/form-data;"+boundary);
-                    String content_type =getMimeType(file.getPath());
-                    String filename="\\" +file.getName();
 
-                    String file_path = file.getAbsolutePath();
-                    OkHttpClient client = new OkHttpClient();
-
-                    RequestBody file_body =RequestBody.create(MediaType.parse("multipart/form-data;"),boundary);
-
-                    RequestBody body = new MultipartBody.Builder()
-                            .setType(MultipartBody.FORM)
-                            .addFormDataPart("archivo", content_type)
-                            //.addFormDataPart("archivo",file_path.substring(file_path.lastIndexOf("/")+1),file_body)
-                            .addFormDataPart("archivo",filename,RequestBody.create(MediaType.parse(content_type),file))
-                            .build();
-
-                    Request request= new Request.Builder()
-                            .url("http://192.168.20.25:8084/diariopws/api/1.0/publicacion/publicarArchivo")
-                            .post(body)
-                            .build();
-
-                    try {
-                        Response response = client.newCall(request).execute();
-                        if (!response.isSuccessful()){
-                            throw new IOException("No se pudo guardar el archivo"+response);
-                        }
-                        progress.dismiss();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-                }*/
                 });
                 tread.start();
+                        }
+             private String getNameFile(String type) {
+                    switch (type){
+                    case ".jpg":
+                        return "Imagen";
+                    case ".png":
+                        return "Imagen";
+                    case ".gif":
+                        return "Imagen";
+                    case ".jpeg":
+                        return "Imagen";
+                    case ".pdf":
+                        return "Documento";
+                    case ".docx":
+                        return "Documento";
+                    case ".xls":
+                        return "Documento";
+                    case ".ppt":
+                        return "Documento";
+                    case ".mov":
+                        return "Audio";
+                    case ".mp3":
+                        return "Audio";
+                    case ".ogg":
+                        return "Audio";
+                    case ".3gp":
+                        return "Audio";
+                }
+
+                    return  type;
+
             }
-//
-    private String getFileType(String extension){
-        String value =  "";
-        switch (extension){
-            case  ".jpg":
-                value="Imagen";
-               return value;
-            case ".png":
-                return "Imagen";
-            case ".gif":
-                return "Imagen";
-            case ".jpeg":
-                return "Imagen";
-            case ".doc":
-                return "Documento";
-            case "pdf":
-                return "Documento";
-            case "xls":
-                return "Documento";
-            case "ppt":
-                return "Documento";
-            case "mp3":
-                return "Audio";
-            case "avi":
-                return "Audio";
-            case "wav":
-                return "Audio";
-
-        }
-        return value;
-
-    }
 
     private  String getMimeType(String path){
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
@@ -310,40 +276,6 @@ public class Upload {
         }
     }
 
-
-    public static String getPath(final Context context, final Uri uri) {
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.BASE;
-        Log.i("URI",uri+"");
-        String result = uri+"";
-        // DocumentProvider
-        //  if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
-        if (isKitKat && (result.contains("media.documents"))) {
-            String[] ary = result.split("/");
-            int length = ary.length;
-            String imgary = ary[length-1];
-            final String[] dat = imgary.split("%3A");
-            final String docId = dat[1];
-            final String type = dat[0];
-            Uri contentUri = null;
-            if ("image".equals(type)) {
-                contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-            } else if ("video".equals(type)) {
-            } else if ("audio".equals(type)) {
-            }
-            final String selection = "_id=?";
-            final String[] selectionArgs = new String[] {
-                    dat[1]
-            };
-            return getDataColumn(context, contentUri, selection, selectionArgs);
-        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            return getDataColumn(context, uri, null, null);
-        }
-        // File
-        else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
-        }
-        return null;
-    }
 
     public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
         Cursor cursor = null;
