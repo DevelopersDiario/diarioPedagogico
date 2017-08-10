@@ -1,11 +1,7 @@
 package com.dese.diario.Resource;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -14,6 +10,7 @@ import android.widget.Toast;
 
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.R;
+import com.dese.diario.Resource.CheckForSDCard;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,14 +27,13 @@ public class DownloadTask {
     private Context context;
     private Button buttonText;
     private String downloadUrl = "", downloadFileName = "";
-    private ProgressDialog progress;
 
-    public DownloadTask(Context context, ProgressDialog pDialog, String downloadUrl) {
+    public DownloadTask(Context context, Button buttonText, String downloadUrl) {
         this.context = context;
-        this.progress = pDialog;
+        this.buttonText = buttonText;
         this.downloadUrl = downloadUrl;
 
-        downloadFileName = downloadUrl.replace(Urls.download, "");//Create file name by picking download file name from URL
+        downloadFileName =downloadUrl.replace(Urls.download, "");//Create file name by picking download file name from URL
         Log.e(TAG, downloadFileName);
 
         //Start Downloading Task
@@ -52,50 +48,47 @@ public class DownloadTask {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           // Toast.makeText(context, "Download Started", Toast.LENGTH_SHORT).show();
-            alertDialogo("Download Started", true);
+            //buttonText.setEnabled(false);
+           // buttonText.setText(R.string.downloadStarted);//Set Button Text when download started
+            Toast.makeText(context, "Se esta descargando", Toast.LENGTH_SHORT).show();
+
         }
 
         @Override
         protected void onPostExecute(Void result) {
-            try {
-                if (outputFile != null) {
-
-                   // Toast.makeText(context, "Download Complete", Toast.LENGTH_SHORT).show();
-                    alertDialogo("Download Complete", true);
-                } else {
-                    //Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show();
-                    alertDialogo("Download Failed",true);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            alertDialogo("Download Again", false);
-                          //  Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
-                        }
-                    }, 3000);
-
-                    Log.e(TAG, "Download Failed + why +"+result.toString());
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-
-                //Change button text if exception occurs
-                //buttonText.setText(R.string.downloadFailed);
-                alertDialogo("Download Failed",true);
+            //try {
+            if (outputFile != null) {
+              //  buttonText.setEnabled(true);
+               // buttonText.setText(R.string.downloadCompleted);//If Download completed then change button text
+                Toast.makeText(context, "Se descargo correctamente", Toast.LENGTH_SHORT).show();
+            } else {
+                //buttonText.setText(R.string.downloadFailed);//If download failed change button text
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                       // buttonText.setEnabled(true);
-                       // buttonText.setText(R.string.downloadAgain);
-                      //  Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
-                        alertDialogo("Download Again", false);
+                    //    buttonText.setEnabled(true);
+                        //buttonText.setText(R.string.downloadAgain);//Change button text again after 3sec
                     }
                 }, 3000);
-                Log.e(TAG, "Download Failed with Exception - " + e.getLocalizedMessage());
+
+                //  Log.e(TAG, "Download Failed + why +"+result.toString());
 
             }
+            // } catch (Exception e) {
+            //   e.printStackTrace();
+
+            //Change button text if exception occurs
+            //buttonText.setText(R.string.downloadFailed);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                   // buttonText.setEnabled(true);
+                  //  buttonText.setText(R.string.downloadAgain);
+                }
+            }, 3000);
+            //  Log.e(TAG, "Download Failed with Exception - " + e.getLocalizedMessage());
+
+//            }
 
 
             super.onPostExecute(result);
@@ -164,34 +157,5 @@ public class DownloadTask {
 
             return null;
         }
-    }
-
-    private void alertDialogo(String s, final Boolean status) {
-        progress=new ProgressDialog(context);
-        progress.setMessage(s);
-        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        // progress.setIndeterminate(true);
-        progress.setProgress(0);
-        progress.show();
-        final int totalProgressTime = 100;
-        final Thread t = new Thread() {
-            @Override
-            public void run() {
-
-                int jumpTime = 0;
-                while(jumpTime < totalProgressTime) {
-                    try {
-                        jumpTime += 5;
-                        progress.setProgress(jumpTime);
-                        progress.setCancelable(status);
-                        sleep(200);
-                    }
-                    catch (InterruptedException e) {
-                        Log.e(TAG, e.getMessage());
-                    }
-                }
-            }
-        };
-        t.start();
     }
 }
