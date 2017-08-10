@@ -46,6 +46,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
     @Override
     public void onBindViewHolder(MyHolderP holder, int position) {
+        final String _ide= listapublicaciones.get(position).getIdpublicacion();
 
 
         final String d = listapublicaciones.get(position).getFecha();
@@ -69,7 +70,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                openDetailActivity(t, u, d, p, f, pa);
+                openDetailActivity(_ide,t, u, d, p, f, pa);
 
                 //Toast.makeText(context,"Entra a itemClicklistener "+ pa,Toast.LENGTH_SHORT).show();
             }
@@ -96,11 +97,12 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     }
 
 
-    private void openDetailActivity(String t, String u, String d, String p, String f , final String pa ) {
+    private void openDetailActivity(String _ide, String t, String u, String d, String p, String f , final String pa ) {
         Intent i = new Intent(context, DetailPublication.class);
         ListRepublication rp= new ListRepublication();
 
         //PACK DATA TO SEND
+        i.putExtra("_IDE_KEY", _ide);
         i.putExtra("TITLE_KEY", t);
         i.putExtra("USER_KEY", u);
         i.putExtra("DATA_KEY", d);

@@ -5,13 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
@@ -35,13 +35,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dese.diario.*;
+import com.dese.diario.Adapter.Adapter_File;
+import com.dese.diario.Adapter.Adapter_Item;
 import com.dese.diario.Adapter.Adapter_RePubication;
 import com.dese.diario.Adapter.ListRepublication;
-import com.dese.diario.DataSchool;
-import com.dese.diario.MainActivity;
 import com.dese.diario.POJOS.VariablesLogin;
-import com.dese.diario.Profile;
-import com.dese.diario.R;
+import com.dese.diario.Publication;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -64,8 +64,7 @@ public class DetailPublication extends AppCompatActivity {
     Boolean homeButton = false, themeChanged;
     TextView tvTitlePubDetail, tvUserPubDetail, tvDatePubDetail, tvPubDetail;
     ImageView foto;
-    String t,u,d,p,f, pa;
-
+    String t,u,d,p,f, pa, idepublicacion;
 
     Button btnPost;
 
@@ -96,6 +95,13 @@ public class DetailPublication extends AppCompatActivity {
 
     //final static String urllistar = "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listrepublication";
     final static String urllistar = Urls.listarrepublication;
+
+    //
+    final static String getFilesList= Urls.obtenerdetallepublicacion;
+    ArrayList<String> filename = new ArrayList<>();
+    ArrayList<String> paths = new ArrayList<>();
+    private RecyclerView rcItems;
+    Adapter_File ia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -114,6 +120,9 @@ public class DetailPublication extends AppCompatActivity {
         btnPost= (Button) findViewById(R.id.btnRep);
 
 
+        rcItems = (RecyclerView) findViewById(R.id.rvItemDetailPublicacion);
+        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(3, 1);
+        rcItems.setLayoutManager(staggeredGridLayout);
 
 
         tvTitlePubDetail = (TextView) findViewById(R.id.tvTitlePubDetail);
@@ -123,6 +132,7 @@ public class DetailPublication extends AppCompatActivity {
         foto=(ImageView) findViewById(R.id.imProfilPubDetail);
 
         Intent  i=this.getIntent();
+        idepublicacion=i.getExtras().getString("_IDE_KEY");
         t=i.getExtras().getString("TITLE_KEY");
         u=i.getExtras().getString("USER_KEY");
         d=i.getExtras().getString("DATA_KEY");
@@ -130,7 +140,10 @@ public class DetailPublication extends AppCompatActivity {
         f=i.getExtras().getString("FOTO_KEY");
         pa=i.getExtras().getString("PAPA");
 
-     listarRe( pa);
+        listarRe( pa);
+        listarFile(idepublicacion);
+
+
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -295,6 +308,7 @@ public class DetailPublication extends AppCompatActivity {
                                     adapter = new Adapter_RePubication(listRepublicaciones,DetailPublication.this);
                                   // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
                                     recyclerView.setAdapter(adapter);
+
                                     System.out.println(listRepublicaciones);
 
                                 }
@@ -394,6 +408,64 @@ public class DetailPublication extends AppCompatActivity {
 
         queue.add(stringRequest);
 
+    }
+
+    public  void listarFile( final String ide){
+
+        RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,getFilesList ,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                               // paths = new ArrayList<>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (int i = 0; i < jsonarray.length(); i++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    String file=jsonobject.getString("descripcion");
+                                    filename.add(file);
+                                    if(file!=" "){
+                                        ia = new Adapter_File(filename, DetailPublication.this);
+                                        rcItems.setAdapter(ia);
+                                        System.out.println(paths);
+                                    }
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("UUUps!!!!!", "Error!!" + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Horror", "Response--->"+error);
+            }
+
+        }
+
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idpublicacion", ide);
+                //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
     }
 
 

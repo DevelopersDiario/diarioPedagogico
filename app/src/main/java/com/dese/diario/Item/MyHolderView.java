@@ -11,10 +11,10 @@ import com.dese.diario.R;
  * Created by Eduardo on 14/07/2017.
  */
 
-public class MyViewHolder extends RecyclerView.ViewHolder {
+public class MyHolderView extends RecyclerView.ViewHolder {
     public ImageView ivItem;
     public TextView tvItem;
-    public MyViewHolder(View itemView) {
+    public MyHolderView(View itemView) {
         super(itemView);
 
         ivItem  = (ImageView) itemView.findViewById(R.id.ivItem);

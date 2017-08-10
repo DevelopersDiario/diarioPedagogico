@@ -5,10 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.dese.diario.Item.MyViewHolder;
-import com.dese.diario.Profile;
+import com.dese.diario.Item.MyHolderView;
 import com.dese.diario.R;
 import com.squareup.picasso.Picasso;
 import com.veer.multiselect.Util.LoadBitmap;
@@ -20,13 +18,13 @@ import java.util.ArrayList;
  * Created by Eduardo on 14/07/2017.
  */
 
-public class ItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
 
-    ArrayList<String> paths;
-    Context context;
+        ArrayList<String> paths;
+        Context context;
 
 
-    public ItemAdapter(ArrayList<String> paths, Context context) {
+    public Adapter_Item(ArrayList<String> paths, Context context) {
 
 
         this.paths = paths;
@@ -34,15 +32,15 @@ public class ItemAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     }
 
-    @Override public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override public MyHolderView onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView =
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
 
-        return new MyViewHolder(itemView);
+        return new MyHolderView(itemView);
     }
 
 
-    @Override public void onBindViewHolder(MyViewHolder holder, int position) {
+    @Override public void onBindViewHolder(MyHolderView holder, int position) {
         File f= new File(paths.get(position));
         String fname=f.getName().toString();
         String type = fname.substring(fname.lastIndexOf(".") + 1);

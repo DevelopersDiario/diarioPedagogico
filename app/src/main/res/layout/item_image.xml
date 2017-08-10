@@ -6,7 +6,6 @@
     >
 
   <ImageView
-      android:src="@drawable/image_sun_smile"
       android:layout_width="fill_parent"
       android:layout_height="120dp"
       android:id="@+id/ivItem"

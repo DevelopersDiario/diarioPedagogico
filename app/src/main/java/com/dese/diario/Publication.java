@@ -9,51 +9,33 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.*;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.webkit.MimeTypeMap;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -61,8 +43,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -74,35 +54,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.dese.diario.Adapter.ItemAdapter;
+import com.dese.diario.Adapter.Adapter_Item;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Resource.Font;
-import com.dese.diario.Resource.Recording;
 import com.dese.diario.Resource.Upload;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
-import com.nbsp.materialfilepicker.MaterialFilePicker;
-import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.rockerhieu.emojicon.EmojiconEditText;
 import com.rockerhieu.emojicon.EmojiconGridFragment;
 import com.rockerhieu.emojicon.EmojiconsFragment;
 import com.rockerhieu.emojicon.emoji.Emojicon;
 import com.sangcomz.fishbun.FishBun;
 import com.sangcomz.fishbun.define.Define;
-import com.veer.multiselect.MultiSelectActivity;
-
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.ServerResponse;
-import net.gotev.uploadservice.UploadInfo;
-import net.gotev.uploadservice.UploadNotificationConfig;
-import net.gotev.uploadservice.UploadStatusDelegate;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -110,12 +78,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.UUID;
-import java.util.regex.Pattern;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
@@ -214,7 +176,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     //
     Intent actReq;
     String type;
-    ItemAdapter ia;
+    Adapter_Item ia;
     int contador = 0;
     ImageView imFile1, imFile2, imFile3;
     int color1, color2;
@@ -792,7 +754,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-       // ItemAdapter ia;
+       // Adapter_Item ia;
         if (resultCode == RESULT_OK) {
             switch (requestCode){
 
@@ -813,7 +775,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                     paths = data.getStringArrayListExtra(com.veer.multiselect.Util.Constants.GET_PATHS);
 
-                    ia = new ItemAdapter(paths, Publication.this);
+                    ia = new Adapter_Item(paths, Publication.this);
                     rcItems.setAdapter(ia);
 
                     break;
@@ -834,7 +796,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                         paths.add(realpath);
 
                     }
-                    ia = new ItemAdapter(paths, Publication.this);
+                    ia = new Adapter_Item(paths, Publication.this);
                     rcItems.setAdapter(ia);
 
                     //You can get image path(ArrayList<Uri>) Version 0.6.2 or later
@@ -858,7 +820,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 imageEncoded= upload.getFilePath(Publication.this, mImageUri);
                 paths.add(imageEncoded);
 
-                ia = new ItemAdapter(paths, Publication.this);
+                ia = new Adapter_Item(paths, Publication.this);
                 rcItems.setAdapter(ia);
 
                 Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
@@ -883,7 +845,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
 
                         paths.add(realpath);
-                        ia = new ItemAdapter(paths, Publication.this);
+                        ia = new Adapter_Item(paths, Publication.this);
                         rcItems.setAdapter(ia);
                         Toast.makeText(Publication.this, "Clipdata"+realpath, Toast.LENGTH_SHORT).show();
                     } catch (URISyntaxException e) {
