@@ -1,6 +1,7 @@
 package com.dese.diario.Resource;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,11 +31,13 @@ public class DownloadTask {
     private Context context;
     private Button buttonText;
     private String downloadUrl = "", downloadFileName = "";
-    private ProgressDialog progress;
+    private ProgressDialog pDialog;
+    public static final int progress_bar_type = 0;
+
 
     public DownloadTask(Context context, ProgressDialog pDialog, String downloadUrl) {
         this.context = context;
-        this.progress = pDialog;
+        this.pDialog = pDialog;
         this.downloadUrl = downloadUrl;
 
         downloadFileName = downloadUrl.replace(Urls.download, "");//Create file name by picking download file name from URL
@@ -52,30 +55,31 @@ public class DownloadTask {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-           // Toast.makeText(context, "Download Started", Toast.LENGTH_SHORT).show();
-            alertDialogo("Download Started", true);
+            Toast.makeText(context, "Download Started", Toast.LENGTH_SHORT).show();
+            //alertDialogo("Download Started", false);
         }
 
         @Override
         protected void onPostExecute(Void result) {
+
             try {
                 if (outputFile != null) {
 
-                   // Toast.makeText(context, "Download Complete", Toast.LENGTH_SHORT).show();
-                    alertDialogo("Download Complete", true);
+                    Toast.makeText(context, "Download Complete", Toast.LENGTH_SHORT).show();
+                    //alertDialogo("Download Complete", true);
                 } else {
-                    //Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show();
-                    alertDialogo("Download Failed",true);
+                    Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show();
+                    // alertDialogo("Download Failed",true);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-
-                            alertDialogo("Download Again", false);
-                          //  Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
+                            //  alertDialogo("Download Again", true);
+                            //  Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
                         }
                     }, 3000);
 
-                    Log.e(TAG, "Download Failed + why +"+result.toString());
+                    Log.e(TAG, "Download Failed + why +" + result.toString());
 
                 }
             } catch (Exception e) {
@@ -83,26 +87,26 @@ public class DownloadTask {
 
                 //Change button text if exception occurs
                 //buttonText.setText(R.string.downloadFailed);
-                alertDialogo("Download Failed",true);
+                Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                       // buttonText.setEnabled(true);
-                       // buttonText.setText(R.string.downloadAgain);
-                      //  Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
-                        alertDialogo("Download Again", false);
+                        // buttonText.setEnabled(true);
+                        // buttonText.setText(R.string.downloadAgain);
+                        //  Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
                     }
                 }, 3000);
                 Log.e(TAG, "Download Failed with Exception - " + e.getLocalizedMessage());
 
             }
 
-
             super.onPostExecute(result);
         }
 
         @Override
         protected Void doInBackground(Void... arg0) {
+
             try {
                 URL url = new URL(downloadUrl);//Create Download URl
                 HttpURLConnection c = (HttpURLConnection) url.openConnection();//Open Url Connection
@@ -146,6 +150,7 @@ public class DownloadTask {
 
                 byte[] buffer = new byte[1024];//Set buffer type
                 int len1 = 0;//init length
+
                 while ((len1 = is.read(buffer)) != -1) {
                     fos.write(buffer, 0, len1);//Write new file
                 }
@@ -166,32 +171,5 @@ public class DownloadTask {
         }
     }
 
-    private void alertDialogo(String s, final Boolean status) {
-        progress=new ProgressDialog(context);
-        progress.setMessage(s);
-        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        // progress.setIndeterminate(true);
-        progress.setProgress(0);
-        progress.show();
-        final int totalProgressTime = 100;
-        final Thread t = new Thread() {
-            @Override
-            public void run() {
 
-                int jumpTime = 0;
-                while(jumpTime < totalProgressTime) {
-                    try {
-                        jumpTime += 5;
-                        progress.setProgress(jumpTime);
-                        progress.setCancelable(status);
-                        sleep(200);
-                    }
-                    catch (InterruptedException e) {
-                        Log.e(TAG, e.getMessage());
-                    }
-                }
-            }
-        };
-        t.start();
-    }
 }

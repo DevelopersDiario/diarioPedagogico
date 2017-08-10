@@ -69,8 +69,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                     public void onItemClick(int pos) {
                         String nombrearchivo= download+nombrefile.get(pos);
                         new DownloadTask(context, null, nombrearchivo);
-                        //downloadFile(nombrearchivo);
-                       // Toast.makeText(context, "Elemento->"+ nombrearchivo, Toast.LENGTH_LONG).show();
+
                     }
                 });
 
@@ -82,7 +81,6 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
 
         return nombrefile.size();
     }
-
 
 
 
