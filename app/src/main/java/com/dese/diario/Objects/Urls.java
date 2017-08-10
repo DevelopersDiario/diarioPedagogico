@@ -14,7 +14,7 @@ public class Urls {
     public static final String userslist =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/list";           //Funcional en server
     public static final String ufilXnombre =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/filtrousuarioXnombre"; //Funcional en server
     public static final String filtrousuarioXid =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/filtrousuarioXid";  //Funcional en server
-    public static final String fotouser =  "http://187.188.168.51:8080/diariopws/api/1.0/archivos/descargar/";         //en uso  "local"
+    public static final String download =  "http://187.188.168.51:8080/diariopws/api/1.0/archivos/descargar/";         //en uso  "local"
     public static final String upload =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";
     public static final String uploadholder =  "http://187.188.168.51:8080/diariopws/api/1.0/usuario/uploadfPortada";         //en uso  "local"
 

@@ -150,7 +150,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     final String URLupdatestate= Urls.updateestado;
     VariablesLogin Vrlog=new VariablesLogin();
 
-    private final static  String urlfoto= Urls.fotouser;
+    private final static  String urlfoto= Urls.download;
    private final static  String URLSfoto= Urls.upload;
    private final static  String uploadHolder= Urls.uploadholder;
    // String URLSfoto ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";

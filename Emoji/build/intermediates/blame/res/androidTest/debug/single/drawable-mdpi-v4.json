@@ -28,12 +28,12 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_emoji_objects_light_normal.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\orca_emoji_category_cars.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\orca_emoji_category_cars.png"
-    },
-    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\orca_emoji_more_front_normal.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\orca_emoji_more_front_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\orca_emoji_category_cars.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\orca_emoji_category_cars.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_emoji_people_light_normal.png",
@@ -96,12 +96,12 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\orca_attach_camera_pressed.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\orca_emoji_more_back_normal.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\orca_emoji_more_back_normal.png"
-    },
-    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\orca_emoji_backspace_front_normal.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\orca_emoji_backspace_front_normal.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\orca_emoji_more_back_normal.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\orca_emoji_more_back_normal.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_emoji_nature_light_activated.png",

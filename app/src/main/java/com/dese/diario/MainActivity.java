@@ -178,13 +178,13 @@ public class MainActivity extends AppCompatActivity
       // navigationView.setItemBackground(Drawable.createFromPath(Urls.fotouser+du.getFportada()));
 
         Picasso.with(MainActivity.this)
-                .load(Urls.fotouser+du.getFoto())
+                .load(Urls.download+du.getFoto())
                 .resize(200, 200)
                 .centerCrop()
                 .into(  fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile));
 
             Picasso.with(MainActivity.this)
-                .load(Urls.fotouser+du.getFportada())
+                .load(Urls.download+du.getFportada())
                 .resize(2000, 1200)
                 .centerCrop()
                 .into(  imType=(ImageView) hView.findViewById(R.id.imType));

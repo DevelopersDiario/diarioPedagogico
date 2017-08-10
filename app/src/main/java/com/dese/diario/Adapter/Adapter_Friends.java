@@ -56,7 +56,7 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
         final String f=lista.get(position).getFoto();
 
         Picasso.with(context)
-                .load(Urls.fotouser+f)
+                .load(Urls.download+f)
                 .resize(250, 250)
                 .centerCrop()
                 .into(holder.imProfileRec);

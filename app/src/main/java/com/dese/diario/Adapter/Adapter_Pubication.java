@@ -62,7 +62,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.tvUserRec.setText(u);
         holder.titlePublication.setText(t);
         Picasso.with(context)
-                .load(Urls.fotouser + f)
+                .load(Urls.download + f)
                 .resize(250, 250)
                 .centerCrop()
                 .into(holder.imProfileRec);

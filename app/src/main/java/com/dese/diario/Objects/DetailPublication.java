@@ -156,7 +156,7 @@ public class DetailPublication extends AppCompatActivity {
         tvDatePubDetail.setText(d);
         tvPubDetail.setText(p);
         Picasso.with(DetailPublication.this)
-                .load(Urls.fotouser+f)
+                .load(Urls.download+f)
                 .resize(50, 50)
                 .centerCrop()
                 .into(foto);
