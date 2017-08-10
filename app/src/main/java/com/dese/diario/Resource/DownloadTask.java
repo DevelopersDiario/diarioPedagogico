@@ -1,6 +1,7 @@
 package com.dese.diario.Resource;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -29,10 +30,11 @@ public class DownloadTask {
     private Context context;
     private Button buttonText;
     private String downloadUrl = "", downloadFileName = "";
-    
-    public DownloadTask(Context context, Button buttonText, String downloadUrl) {
+    private ProgressDialog progress;
+
+    public DownloadTask(Context context, ProgressDialog pDialog, String downloadUrl) {
         this.context = context;
-        this.buttonText = buttonText;
+        this.progress = pDialog;
         this.downloadUrl = downloadUrl;
 
         downloadFileName = downloadUrl.replace(Urls.download, "");//Create file name by picking download file name from URL
@@ -50,30 +52,25 @@ public class DownloadTask {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //buttonText.setEnabled(false);
-            //buttonText.setText(R.string.downloadStarted);//Set Button Text when download started
            // Toast.makeText(context, "Download Started", Toast.LENGTH_SHORT).show();
-            alertDialogo("Download Started");
+            alertDialogo("Download Started", true);
         }
 
         @Override
         protected void onPostExecute(Void result) {
             try {
                 if (outputFile != null) {
-                   // buttonText.setEnabled(true);
-                    //buttonText.setText(R.string.downloadCompleted);//If Download completed then change button text
+
                    // Toast.makeText(context, "Download Complete", Toast.LENGTH_SHORT).show();
-                    alertDialogo("Download Complete");
+                    alertDialogo("Download Complete", true);
                 } else {
-                   // buttonText.setText(R.string.downloadFailed);//If download failed change button text
                     //Toast.makeText(context, "Download Failed", Toast.LENGTH_SHORT).show();
-                    alertDialogo("Download Failed");
+                    alertDialogo("Download Failed",true);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            //buttonText.setEnabled(true);
-                            //buttonText.setText(R.string.downloadAgain);//Change button text again after 3sec
-                            alertDialogo("Download Again");
+
+                            alertDialogo("Download Again", false);
                           //  Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
                         }
                     }, 3000);
@@ -86,14 +83,14 @@ public class DownloadTask {
 
                 //Change button text if exception occurs
                 //buttonText.setText(R.string.downloadFailed);
-                alertDialogo("Download Failed");
+                alertDialogo("Download Failed",true);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                        // buttonText.setEnabled(true);
                        // buttonText.setText(R.string.downloadAgain);
                       //  Toast.makeText(context, "Download Again", Toast.LENGTH_SHORT).show();
-                        alertDialogo("Download Again");
+                        alertDialogo("Download Again", false);
                     }
                 }, 3000);
                 Log.e(TAG, "Download Failed with Exception - " + e.getLocalizedMessage());
@@ -125,7 +122,7 @@ public class DownloadTask {
 
                     apkStorage = new File(
                             Environment.getExternalStorageDirectory() + "/"
-                                    + "Androhub Downloads");
+                                    + "Mi Diario");
                 } else
                     Toast.makeText(context, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
 
@@ -169,26 +166,32 @@ public class DownloadTask {
         }
     }
 
-    private void alertDialogo(String s) {
-        AlertDialog.Builder builder;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            builder = new AlertDialog.Builder(context, android.R.style.Theme_Material_Dialog_Alert);
-        } else {
-            builder = new AlertDialog.Builder(context);
-        }
-        builder.setTitle("Descarga")
-                .setMessage(s)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
+    private void alertDialogo(String s, final Boolean status) {
+        progress=new ProgressDialog(context);
+        progress.setMessage(s);
+        progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        // progress.setIndeterminate(true);
+        progress.setProgress(0);
+        progress.show();
+        final int totalProgressTime = 100;
+        final Thread t = new Thread() {
+            @Override
+            public void run() {
+
+                int jumpTime = 0;
+                while(jumpTime < totalProgressTime) {
+                    try {
+                        jumpTime += 5;
+                        progress.setProgress(jumpTime);
+                        progress.setCancelable(status);
+                        sleep(200);
                     }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
+                    catch (InterruptedException e) {
+                        Log.e(TAG, e.getMessage());
                     }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+                }
+            }
+        };
+        t.start();
     }
 }

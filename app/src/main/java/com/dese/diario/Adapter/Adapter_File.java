@@ -1,5 +1,7 @@
 package com.dese.diario.Adapter;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +37,9 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             ArrayList<String> nombrefile;
             Context context;
 
+            private ProgressDialog pDialog;
+            public static final int progress_bar_type = 0;
+
             public Adapter_File(ArrayList<String> nombrefile, Context context) {
 
 
@@ -62,7 +67,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        String nombrearchivo=nombrefile.get(pos);
+                        String nombrearchivo= download+nombrefile.get(pos);
                         new DownloadTask(context, null, nombrearchivo);
                         //downloadFile(nombrearchivo);
                        // Toast.makeText(context, "Elemento->"+ nombrearchivo, Toast.LENGTH_LONG).show();
