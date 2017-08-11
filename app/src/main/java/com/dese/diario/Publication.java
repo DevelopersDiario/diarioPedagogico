@@ -823,7 +823,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 ia = new Adapter_Item(paths, Publication.this);
                 rcItems.setAdapter(ia);
 
-                Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
 
             } catch (URISyntaxException e) {
                 e.printStackTrace();
