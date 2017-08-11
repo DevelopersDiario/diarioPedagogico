@@ -10,7 +10,7 @@ android {
         }
     }
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '25.0.3'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.dese.diario"
@@ -25,6 +25,7 @@ android {
             shrinkResources true // This must be first
             minifyEnabled true   // This must be after shrinkResources
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     lintOptions {
