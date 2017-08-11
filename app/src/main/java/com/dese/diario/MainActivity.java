@@ -175,7 +175,6 @@ public class MainActivity extends AppCompatActivity
         nvemaillogin.setText(varlogin.getCorreo().toString());
         nvloginaccount.setText(varlogin.getCuenta().toString());
 
-      // navigationView.setItemBackground(Drawable.createFromPath(Urls.fotouser+du.getFportada()));
 
         Picasso.with(MainActivity.this)
                 .load(Urls.download+du.getFoto())

@@ -39,7 +39,7 @@ public class Upload {
 
     final static String urlUpload       = Urls.publicararchivo;
     final static String uploadProfile   = Urls.upload;
-    final static String upladHolder     = Urls.uploadholder;
+    final static String uploadHolder     = Urls.uploadholder;
     final VariablesLogin varlogin =new VariablesLogin();
     final DatosUsr dusr=new DatosUsr();
 
@@ -145,14 +145,15 @@ public class Upload {
                         final String id = varlogin.getIdusuario();
                         try {
 
-                            final File file = new File(path);
-                            final String file_path = file.getAbsolutePath();
-                            final String filename = file.getName();
+                            File f= new File(path);
+                            String fname=f.getName().toString();
+                            String type = "."+fname.substring(fname.lastIndexOf(".") + 1);
+                            String filetype= getNameFile(type);
+                            final String filename=fname;// = file.getName();
                             final String uploadId = UUID.randomUUID().toString();
+                            dusr.setFoto(filename);
 
-                            dusr.setFportada(filename);
-                            Toast.makeText(context, path, Toast.LENGTH_LONG).show();
-                            /*new MultipartUploadRequest(context, uploadId, uploadProfile)
+                            new MultipartUploadRequest(context, uploadId, uploadProfile)
                                     .addFileToUpload(path, "image")
                                     .addParameter("idusuario", id)
                                     .setMaxRetries(2)
@@ -170,31 +171,97 @@ public class Upload {
 
                                         @Override
                                         public void onError(UploadInfo uploadInfo, Exception e) {
+                                            Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
                                         }
 
                                         @Override
                                         public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
-
-                                            messageAlert("Completado", path, context);
-                                          }
+                                            //ELiminar imagen
+                                            File eliminar = new File(path);
+                                            if (eliminar.exists()) {
+                                                if (eliminar.delete()) {
+                                                    System.out.println("Archivo eliminado:" + eliminar.getPath());
+                                                } else {
+                                                    System.out.println("Archivo no eliminado" + eliminar.getPath());
+                                                }
+                                            }
+                                            Toast.makeText(context.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
+                                        }
 
                                         @Override
                                         public void onCancelled(UploadInfo uploadInfo) {
                                         }
                                     })
-                                    .startUpload();*/
+                                    .startUpload();
 
                         } catch (Exception exc) {
                             System.out.println(exc.getMessage() + " " + exc.getLocalizedMessage());
                         }
+
 
                     }
 
                 });
                 tread.start();
             }
+    public void uploadPictureHolder(final Context context, final String path) {
+        Thread tread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final String id = varlogin.getIdusuario();
+                try {
 
+                    final File file = new File(path);
+                    final String file_path = file.getAbsolutePath();
+                    final String filename = file.getName();
+                    final String uploadId = UUID.randomUUID().toString();
+
+                    dusr.setFportada(filename);
+
+                    new MultipartUploadRequest(context, uploadId, uploadHolder)
+                            .addFileToUpload(path, "image")
+                            .addParameter("idusuario", id)
+                            .setMaxRetries(2)
+                            .setNotificationConfig(new UploadNotificationConfig()
+                                    .setInProgressMessage(filename)
+                                    .setCompletedMessage("Completado!")
+                                    .setTitle("Gestor de Archivos ")
+                            )
+                            .setDelegate(new UploadStatusDelegate() {
+                                @Override
+                                public void onProgress(UploadInfo uploadInfo) {
+
+
+                                }
+
+                                @Override
+                                public void onError(UploadInfo uploadInfo, Exception e) {
+                                    Toast.makeText(context, "Error"+e.getMessage().toString(), Toast.LENGTH_LONG).show();
+                                }
+
+                                @Override
+                                public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
+
+
+                                    messageAlert("Completado", path+id, context);
+                                }
+
+                                @Override
+                                public void onCancelled(UploadInfo uploadInfo) {
+                                }
+                            })
+                            .startUpload();
+
+                } catch (Exception exc) {
+                    System.out.println(exc.getMessage() + " " + exc.getLocalizedMessage());
+                }
+
+            }
+
+        });
+        tread.start();
+    }
 
              private String getNameFile(String type) {
                     switch (type){

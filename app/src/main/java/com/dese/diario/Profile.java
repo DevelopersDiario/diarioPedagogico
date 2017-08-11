@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +56,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Utils.DownloadTask;
 import com.dese.diario.Utils.Upload;
+import com.sangcomz.fishbun.FishBun;
+import com.sangcomz.fishbun.define.Define;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -67,6 +72,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,7 +107,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     SharedPreferences.Editor editor;
     int theme;
     int img;
-    Upload up;
+
 
 
     //Image View
@@ -173,6 +179,9 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
         settingsButtons();
 
+
+
+     //   downloadF();
         //performRequest();
 
         //dowlandHolder();
@@ -195,127 +204,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
 
 
-   /**AQUI PAGE**/
-
-    private void upload(){
-        final  DatosUsr dusr=new DatosUsr();
-
-        //converting image to base64 string
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imgbitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
-        byte[] imageBytes = baos.toByteArray();
-         final String imageString =  Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
-        //sending image to server
-        StringRequest request = new StringRequest(Request.Method.POST, URLSfoto, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String s) {
-                //  progressDialog.dismiss();
-               // ShowProgressDialog spd = new ShowProgressDialog();
-
-                if(s.equals("true")){
-                   // spd.progressDilog(Profile.this, true);
-                    Toast.makeText(Profile.this, "Foto de perfil actualizada!", Toast.LENGTH_LONG).show();
-                    openactivity();
-                }
-                else{
-                    Toast.makeText(Profile.this, "¡Ocurrio algun error!", Toast.LENGTH_LONG).show();
-                }
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(Profile.this, "¡Ocurrio algun error!"+volleyError, Toast.LENGTH_LONG).show();;
-            }
-        }) {
-            //adding parameters to send
-            String identificador= String.valueOf(System.currentTimeMillis());
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("image", imageString);
-                parameters.put("idusuario",Vrlog.idusuario);
-                parameters.put("boundary",identificador+".jpg");
-                dusr.setFoto(identificador+".jpg");
-
-
-
-                return parameters;
-            }
-        };
-
-        RequestQueue rQueue = Volley.newRequestQueue(Profile.this);
-        rQueue.add(request);
-    }//End Upload
-    private void uploadHolder(){
-        final  DatosUsr dusr=new DatosUsr();
-
-
-        //converting image to base64 string
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imgbitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
-        byte[] imageBytes = baos.toByteArray();
-         final String imageString =  Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
-        //sending image to server
-        StringRequest request = new StringRequest(Request.Method.POST, uploadHolder, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String s) {
-
-                if(s.equals("true")){
-                   // spd.progressDilog(Profile.this, true);
-                    Toast.makeText(Profile.this, "Foto de portada actualizada!", Toast.LENGTH_LONG).show();
-                    openactivity();
-                }
-                else{
-                    Toast.makeText(Profile.this, "¡Ocurrio algun error!", Toast.LENGTH_LONG).show();
-                }
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                NetworkResponse networkResponse = volleyError.networkResponse;
-                if (networkResponse != null) {
-                    Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
-                }
-
-                if (volleyError instanceof TimeoutError) {
-                    Log.e("Volley", "TimeoutError");
-                }else if(volleyError instanceof NoConnectionError){
-                    Log.e("Volley", "NoConnectionError");
-                } else if (volleyError instanceof AuthFailureError) {
-                    Log.e("Volley", "AuthFailureError");
-                } else if (volleyError instanceof ServerError) {
-                    Log.e("Volley", "ServerError");
-                } else if (volleyError instanceof NetworkError) {
-                    Log.e("Volley", "NetworkError");
-                } else if (volleyError instanceof ParseError) {
-                    Log.e("Volley", "ParseError");
-                }
-            }
-        }) {
-            //adding parameters to send
-            //String identificador= Vrlog.getCuenta().toString()+"P"+String.valueOf(System.currentTimeMillis());
-            String identificador=String.valueOf(System.currentTimeMillis());
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("fportada", imageString);
-                parameters.put("idusuario",Vrlog.idusuario);
-                parameters.put("boundary",identificador+".jpg");
-                dusr.setFportada(identificador+".jpg");
-
-
-
-                return parameters;
-            }
-        };
-
-        RequestQueue rQueue = Volley.newRequestQueue(Profile.this);
-        rQueue.add(request);
-    }//End Upload
 
 
     private void  updateestado()  throws JSONException{
@@ -402,6 +290,22 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
         circleImageView = (CircleImageView) findViewById(R.id.imCircleView);
         mPortada = (ImageView) findViewById(R.id.profile_imageview_placeholder);
+        DatosUsr du= new DatosUsr();
+
+        Picasso.with(Profile.this)
+                .load(Urls.download+du.getFoto())
+                .error(R.drawable.image_cloud_sad)
+                .resize(200, 200)
+                .centerCrop()
+                .into(  cViewImagen=(CircleImageView) findViewById(R.id.imCircleView));
+
+        VariablesLogin vl =new VariablesLogin();
+        Picasso.with(Profile.this)
+                .load(Urls.download+du.getFportada())
+                .error(R.drawable.image_cloud_sad)
+                .resize(2000, 1200)
+                .centerCrop()
+                .into( mPortada);
 
     }
 
@@ -436,6 +340,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                                     Du.setGrupo(jsonobject.getString(grupo));
                                     Du.setEstado(jsonobject.getString(estado));
                                     Du.setFoto(jsonobject.getString(foto));
+                                    Du.setFportada(jsonobject.getString("fportada"));
                                    // tvInformationPrivate.setText(jsonobject.getString("cuenta"));
                                     etestadouserProfile.setText(jsonobject.getString(ESTADO));
                                   //  tvgeneroProfile.setText(jsonobject.getString("genero"));
@@ -725,14 +630,14 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                     openCamera();
 
                 }else if(option[which] == getString(R.string.galeria)){
-                    //Gallery
+                      //Gallery
                     Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
                     galleryIntent.setType(getString(R.string.imageda));
-                    // startActivityForResult(galleryIntent, ACTIVITY_SELECT_IMAGE);
+                    startActivityForResult(galleryIntent, SELECT_PICTURE);
 
-                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType(getString(R.string.imageda));
-                    startActivityForResult(intent.createChooser(intent, getString(R.string.selecciona_app_imagen)), SELECT_PICTURE);
+                  //  Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    //intent.setType(getString(R.string.imageda));
+                    //startActivityForResult(intent.createChooser(intent, getString(R.string.selecciona_app_imagen)), SELECT_PICTURE);
 
                 }else {
                     dialog.dismiss();
@@ -743,7 +648,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         builder.show();
     }
 
-   private void openCamera() {
+
+    private void openCamera() {
        /* File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
         boolean isDirectoryCreated = file.exists();
 
@@ -767,21 +673,16 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
        Intent cameraIntent = new Intent(
                android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
        //Creamos una carpeta en la memeria del terminal
-       File imagesFolder = new File(
-               Environment.getExternalStorageDirectory(), "Mi diario/Perfil/");
+       File imagesFolder = new File(Environment.getExternalStorageDirectory(), "Mi diario/Perfil/");
        imagesFolder.mkdirs();
        File image = null;
        //añadimos el nombre de la imagen
-
        if (ide == "profile") 
             image= new File(imagesFolder, "Profile"+Vrlog.getIdusuario().toString()+".jpg");
        else if(ide=="holder")
            image= new File(imagesFolder, "Holder"+Vrlog.getIdusuario().toString()+".jpg");
-           
-     //  Uri uriSavedImage = Uri.fromFile(image);
-       //Le decimos al Intent que queremos grabar la imagen
+
        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider", image));
-       //Lanzamos la aplicacion de la camara con retorno (forResult)
        startActivityForResult(cameraIntent, PHOTO_CODE);
     }
 
@@ -809,7 +710,11 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         super.onActivityResult(requestCode, resultCode, data);
         Bundle b=(getIntent().getExtras());
 
-        if(resultCode == RESULT_OK){
+        Upload up = new Upload();
+
+        if(resultCode == RESULT_OK && data != null){
+
+
             switch (requestCode){
                 case PHOTO_CODE:
 
@@ -832,7 +737,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                                 "/Mi Diario/Perfil/"+"Holder"+Vrlog.getIdusuario().toString()+".jpg";
                         bMap = BitmapFactory.decodeFile(path);
 
-                        //up.uploadPictureProfile(Profile.this, path);
+                        up.uploadPictureHolder(Profile.this, path);
 
                         mPortada.setImageBitmap(bMap);
                         Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
@@ -846,11 +751,30 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
                     break;
                 case SELECT_PICTURE:
-                    //  if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-                    if (data != null && data.getData() != null) {
-                        Uri filePath = data.getData();
 
-                        try {
+                        Uri filePath = data.getData();
+                    String pathito;
+                    try {
+                         pathito=up.getFilePath(Profile.this, filePath);
+                        Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
+
+                        if (ide == "holder") {
+                            Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
+                            mPortada.setImageURI(filePath);
+
+                            up.uploadPictureHolder(this, pathito);
+                        } else if (ide=="profile") {
+                            Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
+                            cViewImagen.setImageURI(filePath);
+                            up.uploadPictureProfile(this, pathito);
+                        }
+
+
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+
+                       /* try {
                             //getting image from gallery
                             imgbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
 
@@ -871,9 +795,9 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
-                        }
+                        }*/
 
-                    }
+
 
 
 
@@ -881,41 +805,26 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
 
             }
+
+        }else{
+            Toast.makeText(this, "NUllos", Toast.LENGTH_LONG).show();
         }
     }
-    private void shadespreferenceProfile(Intent data) {
-
-        InputStream stream;
-        String filePath = null;
-        try {
-            stream = getContentResolver().openInputStream(data.getData());
-
-            Bitmap realImage = BitmapFactory.decodeStream(stream);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            realImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] b = baos.toByteArray();
-
-            String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-            //textEncode.setText(encodedImage);
-
-            SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor edit = shre.edit();
-            edit.putString("image_data2", encodedImage);
-
-            edit.commit();
-            restartActivity();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+    private void downloadF(){
+        final DatosUsr dusr=new DatosUsr();
+        if(!dusr.equals(null)){
+            if(!dusr.getFoto().isEmpty()){
+                String download=Urls.download;
+                String nombrearchivo= download+dusr.getFoto();
+                new DownloadTask(Profile.this, null, nombrearchivo);
+            }else{
+                Toast.makeText(this, "Vacio", Toast.LENGTH_LONG).show();
+            }
         }
+
+
     }
-    private  void restartActivity(){
-            Intent restart_avtivity= new Intent(Profile.this, Profile.class);
-            startActivity(restart_avtivity);
-    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
