@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'AMDI'
+            keyAlias 'AMNDI'
             keyPassword 'safa2017'
             storeFile file('C:/Users/Eduardo/Documents/Developer/KeyDiario/KeyDiario.jks')
             storePassword 'safa2017'
