@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.dese.diario.Objects.Urls;
-import com.dese.diario.R;
-import com.dese.diario.Resource.CheckForSDCard;
 
 import java.io.File;
 import java.io.FileOutputStream;
