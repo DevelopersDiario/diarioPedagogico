@@ -988,11 +988,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             requestQueue.add(stringRequest);
 
         }//Fin isChecked
-
         else{
-            String Mensaje=getString(R.string.message_aceptar_acuerdo);
+            String Mensaje=("Debe rellnar todos los campos");
             failed_regpublication.setText(Mensaje);
-            // Toast.makeText(CreateAccount.this,Mensaje , Toast.LENGTH_LONG).show();
+            Toast.makeText(Publication.this,Mensaje , Toast.LENGTH_LONG).show();
 
         }//fin else cheked
 
