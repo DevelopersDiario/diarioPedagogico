@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.dese.diario.Objects.Urls;
+import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -40,6 +41,8 @@ public class Upload {
     final static String uploadProfile   = Urls.upload;
     final static String upladHolder     = Urls.uploadholder;
     final VariablesLogin varlogin =new VariablesLogin();
+    final DatosUsr dusr=new DatosUsr();
+
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 
@@ -54,19 +57,19 @@ public class Upload {
                 final String file_path = paths.get(i);
                 file= new File(file_path);
                 final String fname= file.getName();
-                upload(context, file_path, grupo, fname);
+                upload(context, file_path, grupo);
             }
         }else {
            file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
             final String file_path = file.getAbsolutePath();
             final String fname= file.getName();
-            upload(context, file_path, grupo,fname);
+            upload(context, file_path, grupo);
 
         }
 
     }
 
-    public void upload(final Context context, final String path, final String gpo, final String fname) {
+    public void upload(final Context context, final String path, final String gpo) {
         Thread tread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -133,28 +136,30 @@ public class Upload {
                     } });
         tread.start();
              }
-            public void uploadPictureProfile(final Context context, final Intent data) {
+
+
+            public void uploadPictureProfile(final Context context, final String path) {
                 Thread tread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         final String id = varlogin.getIdusuario();
                         try {
-                            Uri uri         =  Uri.parse(data.getDataString());
-                            String realPath =  getFilePath(context, uri);
-                            final File file = new File(realPath);
+
+                            final File file = new File(path);
                             final String file_path = file.getAbsolutePath();
                             final String filename = file.getName();
                             final String uploadId = UUID.randomUUID().toString();
 
-
-                            new MultipartUploadRequest(context, uploadId, uploadProfile)
-                                    .addFileToUpload(realPath, "image")
-                                    .addParameter("idusuario", varlogin.getIdusuario())
+                            dusr.setFportada(filename);
+                            Toast.makeText(context, path, Toast.LENGTH_LONG).show();
+                            /*new MultipartUploadRequest(context, uploadId, uploadProfile)
+                                    .addFileToUpload(path, "image")
+                                    .addParameter("idusuario", id)
                                     .setMaxRetries(2)
                                     .setNotificationConfig(new UploadNotificationConfig()
-                                            .setInProgressMessage("Subiendo Archivo")
-                                            .setCompletedMessage("Completado correctamente")
-                                            .setTitle("Subiendo ")
+                                            .setInProgressMessage(filename)
+                                            .setCompletedMessage("Completado!")
+                                            .setTitle("Gestor de Archivos ")
                                     )
                                     .setDelegate(new UploadStatusDelegate() {
                                         @Override
@@ -171,15 +176,14 @@ public class Upload {
                                         public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
 
-                                            String dat = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-                                            messageAlert("Complet", dat, context);
+                                            messageAlert("Completado", path, context);
                                           }
 
                                         @Override
                                         public void onCancelled(UploadInfo uploadInfo) {
                                         }
                                     })
-                                    .startUpload();
+                                    .startUpload();*/
 
                         } catch (Exception exc) {
                             System.out.println(exc.getMessage() + " " + exc.getLocalizedMessage());

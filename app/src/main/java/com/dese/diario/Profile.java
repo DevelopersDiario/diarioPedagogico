@@ -54,6 +54,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Utils.Upload;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -100,6 +101,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     SharedPreferences.Editor editor;
     int theme;
     int img;
+    Upload up;
 
 
     //Image View
@@ -770,10 +772,11 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
        imagesFolder.mkdirs();
        File image = null;
        //añadimos el nombre de la imagen
+
        if (ide == "profile") 
-            image= new File(imagesFolder, "Profile.jpg");
+            image= new File(imagesFolder, "Profile"+Vrlog.getIdusuario().toString()+".jpg");
        else if(ide=="holder")
-           image= new File(imagesFolder, "Holder.jpg");
+           image= new File(imagesFolder, "Holder"+Vrlog.getIdusuario().toString()+".jpg");
            
      //  Uri uriSavedImage = Uri.fromFile(image);
        //Le decimos al Intent que queremos grabar la imagen
@@ -810,24 +813,31 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
             switch (requestCode){
                 case PHOTO_CODE:
 
+
+                    String path;
                     Bitmap bMap ;
                     if (ide == "profile") {
+                        path=  Environment.getExternalStorageDirectory()+
+                                "/Mi Diario/Perfil/"+"Profile"+Vrlog.getIdusuario().toString()+".jpg";
 
-                        bMap = BitmapFactory.decodeFile(
-                                Environment.getExternalStorageDirectory()+
-                                        "/Mi Diario/Perfil/"+"Profile.jpg");
+
+                        bMap = BitmapFactory.decodeFile(path);
 
                         cViewImagen.setImageBitmap(bMap);
-                        Toast.makeText(this, "Data"+data.getData().getPath(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Data->"+path, Toast.LENGTH_LONG).show();
+                        up.uploadPictureProfile(Profile.this, path);
 
-                       // uploadHolder();
                     } else if (ide=="holder") {
-                        bMap = BitmapFactory.decodeFile(
-                                Environment.getExternalStorageDirectory()+
-                                        "/Mi Diario/Perfil/"+"Holder.jpg");
+                        path= Environment.getExternalStorageDirectory()+
+                                "/Mi Diario/Perfil/"+"Holder"+Vrlog.getIdusuario().toString()+".jpg";
+                        bMap = BitmapFactory.decodeFile(path);
 
-                       mPortada.setImageBitmap(bMap);
-                       // upload();
+                        //up.uploadPictureProfile(Profile.this, path);
+
+                        mPortada.setImageBitmap(bMap);
+                        Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
+
+                        // upload();
                     }
 
 
@@ -848,7 +858,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                             // imagenAs.setImageResource(bitmap);
                             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                             imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                            String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imgbitmap, "Title", null);
+                          //  String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), imgbitmap, "Title", null);
                           // uploadHolder();
                             //upload();
 
