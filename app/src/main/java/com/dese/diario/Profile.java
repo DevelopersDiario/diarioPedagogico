@@ -151,12 +151,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     VariablesLogin Vrlog=new VariablesLogin();
 
     private final static  String urlfoto= Urls.download;
-   private final static  String URLSfoto= Urls.upload;
-   private final static  String uploadHolder= Urls.uploadholder;
-   // String URLSfoto ="http://187.188.168.51:8080/diariopws/api/1.0/usuario/upload/";
-
-   // String URLSfoto ="http://192.168.20.25:8084/diariopws/api/1.0/usuario/upload/";
-
+    private final static  String URLSfoto= Urls.upload;
+    private final static  String uploadHolder= Urls.uploadholder;
 
     CircleImageView circleImageView;
     Bitmap imgbitmap,bmHolder,bmProfile;
@@ -171,15 +167,15 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
         setContentView(R.layout.activity_profile);
 
-
-
         //Hide softKeyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         bindActivity();
+
         settingsButtons();
 
         performRequest();
+
         dowlandHolder();
 
 
@@ -197,7 +193,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         Intent intent =new Intent(Profile.this, Profile.class);
         startActivity(intent);
     }
-    ///performed request
+
+
 
     public void performRequest() {
         final  DatosUsr dusr=new DatosUsr();
@@ -279,7 +276,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
     private void upload(){
         final  DatosUsr dusr=new DatosUsr();
-
 
         //converting image to base64 string
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

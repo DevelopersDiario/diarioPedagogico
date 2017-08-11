@@ -46,19 +46,15 @@ import okhttp3.OkHttpClient;
  */
 
 public class Upload {
-    final String lineEnd = "\r\n";
-    final String twoHyphens = "--";
-    final String boundary="qwertyuiop";
-    final static String urlUpload= Urls.publicararchivo;
+
+    final static String urlUpload       = Urls.publicararchivo;
+    final static String uploadProfile   = Urls.upload;
+    final static String upladHolder     = Urls.uploadholder;
     final VariablesLogin varlogin =new VariablesLogin();
-
-    //ArrayList<String> paths = new ArrayList<>();
-
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 
     public void recorrerListPaths(  ArrayList<String> paths, Context context, Intent data, String grupo) {
-//        ClipData clipData = data.getClipData();
         File file;
         if(paths != null){
             for (int i = 0; i < paths.size(); i++) {
@@ -148,25 +144,23 @@ public class Upload {
                     } });
         tread.start();
              }
-            public void uploadMultipart(final Context context, final Intent data, final String gpo) {
+            public void uploadPictureProfile(final Context context, final Intent data) {
                 Thread tread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         final String id = varlogin.getIdusuario();
                         try {
-                            final File file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
+                            Uri uri         =  Uri.parse(data.getDataString());
+                            String realPath =  getFilePath(context, uri);
+                            final File file = new File(realPath);
                             final String file_path = file.getAbsolutePath();
-                            OkHttpClient client = new OkHttpClient();
-
                             final String filename = file.getName();
                             final String uploadId = UUID.randomUUID().toString();
-                            new MultipartUploadRequest(context, uploadId, urlUpload)
-                                    .addFileToUpload(file_path, "archivo")
-                                    .addParameter("titulo", filename)
-                                    .addParameter("tipoarchivo", "documentos")
-                                    .addParameter("idgrupo", gpo)
-                                    .addParameter("idusuario", id)
-                                    .addParameter("Farchivo", ".pdf")
+
+
+                            new MultipartUploadRequest(context, uploadId, uploadProfile)
+                                    .addFileToUpload(filename, "image")
+                                    .addParameter("idusuario", varlogin.getIdusuario())
                                     .setMaxRetries(2)
                                     .setNotificationConfig(new UploadNotificationConfig()
                                             .setInProgressMessage("Subiendo Archivo")
@@ -190,9 +184,7 @@ public class Upload {
 
                                             String dat = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
                                             messageAlert("Complet", dat, context);
-
-                                            //Toast.makeText(MainActivity.this.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
-                                        }
+                                          }
 
                                         @Override
                                         public void onCancelled(UploadInfo uploadInfo) {
@@ -208,7 +200,9 @@ public class Upload {
 
                 });
                 tread.start();
-                        }
+            }
+
+
              private String getNameFile(String type) {
                     switch (type){
                     case ".jpg":
@@ -241,10 +235,10 @@ public class Upload {
 
             }
 
-    private  String getMimeType(String path){
+   /* private  String getMimeType(String path){
         String extension = MimeTypeMap.getFileExtensionFromUrl(path);
         return  MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-    }
+    }*/
 
     public void messageAlert(String body, String msg, final Context context){
         AlertDialog alertDialog = new AlertDialog.Builder(
@@ -262,40 +256,7 @@ public class Upload {
         alertDialog.show();
 
     }
-    public String getRealPathFromURI(Context context, Uri contentUri) {
-        Cursor cursor = null;
-        try {
-            String[] proj = { MediaStore.Images.Media.DATA };
-            cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
 
-
-    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
-        Cursor cursor = null;
-        final String column = "_data";
-        final String[] projection = {
-                column
-        };
-        try {
-            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
-            if (cursor != null && cursor.moveToFirst()) {
-                final int column_index = cursor.getColumnIndexOrThrow(column);
-                return cursor.getString(column_index);
-            }
-        } finally {
-            if (cursor != null)
-                cursor.close();
-        }
-        return null;
-    }
 
     //Get Real path to Uri in All version android.
     @SuppressLint("NewApi")
