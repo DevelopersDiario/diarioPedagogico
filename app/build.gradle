@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
-        config {
-            keyAlias 'AMNDI'
+        relase {
+            keyAlias 'AMDI'
             keyPassword 'safa2017'
             storeFile file('C:/Users/Eduardo/Documents/Developer/KeyDiario/KeyDiario.jks')
             storePassword 'safa2017'
@@ -20,15 +20,17 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.relase
         }
     }
+
     lintOptions {
 
         checkReleaseBuilds false
