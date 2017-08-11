@@ -72,6 +72,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.internal.Util;
+
 import com.dese.diario.POJOS.*;
 
 import static android.Manifest.permission.CAMERA;
@@ -586,7 +588,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
                 Snackbar.make(v, R.string.portada, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action, null).show();
-              //  imagenAs= mSetImage;
                 ide="holder";
                 showOptions();
                 break;
@@ -595,17 +596,17 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                 Snackbar.make(v, R.string.profile, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action, null).show();
 
-                //imagenAs= cViewImagen;
                 ide="profile";
                 showOptions();
                 break;
 
             case R.id.tvState:
-                //  Snackbar.make(v, "Edit", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
+
                 if (edState.isEnabled()){
                     try {
-                        Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
+                          Snackbar.make(v,  R.string.action_saved, Snackbar.LENGTH_LONG)
+                                 .setAction("Action", null).show();
                         updateestado();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -827,7 +828,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     }
 
    private void openCamera() {
-        File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
+       /* File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
         boolean isDirectoryCreated = file.exists();
 
         if(!isDirectoryCreated)
@@ -846,7 +847,20 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
             intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider", newFile));
             startActivityForResult(intent, PHOTO_CODE);
 
-        }
+        }*/
+       Intent cameraIntent = new Intent(
+               android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+       //Creamos una carpeta en la memeria del terminal
+       File imagesFolder = new File(
+               Environment.getExternalStorageDirectory(), "Mi diario/Perfil");
+       imagesFolder.mkdirs();
+       //añadimos el nombre de la imagen
+       File image = new File(imagesFolder, "Profile.jpg");
+       Uri uriSavedImage = Uri.fromFile(image);
+       //Le decimos al Intent que queremos grabar la imagen
+       cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+       //Lanzamos la aplicacion de la camara con retorno (forResult)
+       startActivityForResult(cameraIntent, PHOTO_CODE);
     }
 
 
@@ -879,7 +893,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         if(resultCode == RESULT_OK){
             switch (requestCode){
                 case PHOTO_CODE:
-                    MediaScannerConnection.scanFile(this,
+                   /* MediaScannerConnection.scanFile(this,
                             new String[]{mPath}, null,
                             new MediaScannerConnection.OnScanCompletedListener() {
                                 @Override
@@ -900,9 +914,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                             imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
 
-                           // uploadHolder();
-                           // upload();
-
 
                                 if (ide == "holder") {
                                     bmHolder.equals(imgbitmap);
@@ -916,8 +927,13 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
                         } catch (Exception e) {
                             e.printStackTrace();
-                        }
-
+                        }*/
+                    Bitmap bMap = BitmapFactory.decodeFile(
+                            Environment.getExternalStorageDirectory()+
+                                    "/AndroidFacil/"+"foto.jpg");
+                    //Añadimos el bitmap al imageView para
+                    //mostrarlo por pantalla
+                    cViewImagen.setImageBitmap(bMap);
 
 
 
