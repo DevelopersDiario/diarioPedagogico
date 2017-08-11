@@ -935,7 +935,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
        private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();
 
-        if (ettitlepost!=null && edPublication!=null) {
+        if (ettitlepost.getText().toString()==" " && edPublication.getText().toString()==" ") {
             idusuario= varlogin.getIdusuario();
             titulo = ettitlepost.getText().toString().trim();
             observaciones = edPublication.getText().toString().trim();
