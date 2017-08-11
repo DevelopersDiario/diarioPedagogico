@@ -1,4 +1,4 @@
-package com.dese.diario.Resource.OnBoarding;
+package com.dese.diario.Utils.OnBoarding;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

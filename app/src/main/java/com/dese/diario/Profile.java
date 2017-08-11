@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.FileProvider;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -72,16 +70,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.internal.Util;
 
 import com.dese.diario.POJOS.*;
 
 import static android.Manifest.permission.CAMERA;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
-import static android.R.attr.bitmap;
 import static com.android.volley.Request.Method.GET;
-
-import com.dese.diario.Resource.ShowProgressDialog;
 
 public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener, View.OnClickListener,
     LoaderManager.LoaderCallbacks {
@@ -852,7 +846,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
        //Creamos una carpeta en la memeria del terminal
        File imagesFolder = new File(
-               Environment.getExternalStorageDirectory(), "Mi diario/Perfil");
+               Environment.getExternalStorageDirectory(), "Mi diario/Perfil/");
        imagesFolder.mkdirs();
        //añadimos el nombre de la imagen
        File image = new File(imagesFolder, "Profile.jpg");
@@ -930,7 +924,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                         }*/
                     Bitmap bMap = BitmapFactory.decodeFile(
                             Environment.getExternalStorageDirectory()+
-                                    "/AndroidFacil/"+"foto.jpg");
+                                    "/Mi Diario/Perfil/"+"Profile.jpg");
                     //Añadimos el bitmap al imageView para
                     //mostrarlo por pantalla
                     cViewImagen.setImageBitmap(bMap);

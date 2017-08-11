@@ -1,4 +1,4 @@
-package com.dese.diario.Resource.OnBoarding;
+package com.dese.diario.Utils.OnBoarding;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.dese.diario.MainActivity;
 import com.dese.diario.R;
 import com.dese.diario.SelectAccount;
 import com.gc.materialdesign.views.ButtonFlat;
@@ -38,7 +37,7 @@ public class OnboardingActivity extends FragmentActivity {
             public Fragment getItem(int position) {
                 switch (position) {
                     case 0 : return new OnboardingFragment1();
-                    case 1 : return new OnboardingFragment2();
+                    case 1 : return new com.dese.diario.Utils.OnBoarding.OnboardingFragment2();
                     case 2 : return new OnboardingFragment3();
                     default: return null;
                 }

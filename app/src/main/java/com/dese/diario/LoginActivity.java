@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
-import com.dese.diario.Resource.ShowProgressDialog;
+import com.dese.diario.Utils.ShowProgressDialog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

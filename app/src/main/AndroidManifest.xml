@@ -41,7 +41,7 @@
         </provider>
 
         <activity
-            android:name=".Resource.OnBoarding.OnboardingActivity"
+            android:name=".Utils.OnBoarding.OnboardingActivity"
             android:screenOrientation="locked" />
         <activity
             android:name=".SelectAccount"

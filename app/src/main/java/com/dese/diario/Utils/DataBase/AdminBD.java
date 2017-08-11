@@ -1,9 +1,8 @@
-package com.dese.diario.Resource.DataBase;
+package com.dese.diario.Utils.DataBase;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 

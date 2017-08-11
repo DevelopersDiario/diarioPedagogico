@@ -1,11 +1,9 @@
-package com.dese.diario.Resource;
+package com.dese.diario.Utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-
-import com.dese.diario.SelectAccount;
 
 /**
  * Created by Eduardo on 19/05/2017.

@@ -1,4 +1,4 @@
-package com.dese.diario.Resource;
+package com.dese.diario.Utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;

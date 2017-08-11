@@ -439,7 +439,7 @@ public class MainActivity extends AppCompatActivity
     private void shareCode() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,"¡Hey utiliza Mi Diario, esta genial, ahi me puedes encontar ! https://play.google.com/store/apps/details?id=com.gismart.realpianofree");
+        intent.putExtra(Intent.EXTRA_TEXT,"¡Hey utiliza Mi Diario, esta genial, ahi me puedes encontar! https://play.google.com/store/apps/details?id=com.dese.diario&hl=es");
         startActivity(Intent.createChooser(intent, "Shared with"));
     }
 

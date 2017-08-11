@@ -17,7 +17,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logo"
-                app:layout_behavior="com.dese.diario.Resource.AvatarImageBehavior"
+                app:layout_behavior="com.dese.diario.Utils.AvatarImageBehavior"
                 />
     <!--<ImageView
         android:layout_width="50dp"

@@ -1,4 +1,4 @@
-package com.dese.diario.Resource;
+package com.dese.diario.Utils;
 
 import android.content.Context;
 import android.content.DialogInterface;

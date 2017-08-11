@@ -1,13 +1,10 @@
 package com.dese.diario.Item;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 
 import com.dese.diario.R;
-import com.dese.diario.Resource.DataBase.AdminBD;
 
 public class DialogGrup extends AppCompatActivity {
 

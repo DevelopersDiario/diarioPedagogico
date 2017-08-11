@@ -1,31 +1,19 @@
 package com.dese.diario.Adapter;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderItem;
-import com.dese.diario.Item.MyHolderView;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.R;
-import com.dese.diario.Resource.DownloadTask;
+import com.dese.diario.Utils.DownloadTask;
 import com.squareup.picasso.Picasso;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 /**

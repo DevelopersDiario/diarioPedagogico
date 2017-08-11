@@ -1,16 +1,12 @@
-package com.dese.diario.Resource;
+package com.dese.diario.Utils;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Build;
-import android.os.Build.VERSION;
 import android.os.Environment;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;

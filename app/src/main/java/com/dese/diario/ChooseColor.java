@@ -1,6 +1,5 @@
 package com.dese.diario;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,12 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageView;
-
-import com.dese.diario.Resource.Dialogs.ColorChooserDialog;
-
-import java.util.Set;
 
 import xyz.hanks.library.SmallBang;
 import xyz.hanks.library.SmallBangListener;

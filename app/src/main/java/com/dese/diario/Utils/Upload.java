@@ -1,7 +1,6 @@
-package com.dese.diario.Resource;
+package com.dese.diario.Utils;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -13,17 +12,12 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
-import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
-import com.dese.diario.Publication;
 import com.dese.diario.R;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
-import com.squareup.picasso.Picasso;
-import com.veer.multiselect.Util.LoadBitmap;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.ServerResponse;
@@ -35,11 +29,6 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 
 /**
  * Created by Eduardo on 30/06/2017.
@@ -159,7 +148,7 @@ public class Upload {
 
 
                             new MultipartUploadRequest(context, uploadId, uploadProfile)
-                                    .addFileToUpload(filename, "image")
+                                    .addFileToUpload(realPath, "image")
                                     .addParameter("idusuario", varlogin.getIdusuario())
                                     .setMaxRetries(2)
                                     .setNotificationConfig(new UploadNotificationConfig()
