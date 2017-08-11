@@ -19,6 +19,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -170,9 +171,9 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
         settingsButtons();
 
-        performRequest();
+        //performRequest();
 
-        dowlandHolder();
+        //dowlandHolder();
 
 
     }//End Create
@@ -180,8 +181,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     @Override
     protected void onStart() {
         super.onStart();
-       performRequest();
-        dowlandHolder();
+      // performRequest();
+       // dowlandHolder();
 
 
     }
@@ -192,83 +193,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
 
 
-    public void performRequest() {
-        final  DatosUsr dusr=new DatosUsr();
-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        RequestQueue rqueue = Volley.newRequestQueue(this);
-
-        final ImageRequest peticion = new ImageRequest(urlfoto+dusr.getFoto(),
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap bitmap) {
-                        if(!bitmap.equals(null)){
-
-
-                        //circleImageView.setImageBitmap(bitmap);
-
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                           // Toast.makeText(Profile.this, "profile perfoma", Toast.LENGTH_LONG).show();
-
-                            String pPath = MediaStore.Images.Media.insertImage(Profile.this.getContentResolver(), bitmap, "Profile", null);
-                            Picasso.with(Profile.this)
-                                    .load(pPath)
-                                    .resize(150, 150)
-                                    .centerCrop()
-                                    .into(cViewImagen);
-                    }else{
-                            circleImageView.setImageResource(R.drawable.logo);
-                        }
-
-                    }
-                }, 0, 0, null, // maxWidth, maxHeight, decodeConfig
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        circleImageView.setImageResource(R.drawable.logo);
-
-                    }
-                }
-        );
-        rqueue.add(peticion);
-
-    }
-    public void dowlandHolder() {
-        final  DatosUsr dusr=new DatosUsr();
-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-
-        RequestQueue rqueue = Volley.newRequestQueue(this);
-
-        final ImageRequest peticion = new ImageRequest(urlfoto+dusr.getFportada(),
-                new Response.Listener<Bitmap>() {
-                    @Override
-                    public void onResponse(Bitmap bitmap) {
-                        if(!bitmap.equals(null)){
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                           // Toast.makeText(Profile.this, "dowlandHolderr", Toast.LENGTH_LONG).show();
-                            String pPath = MediaStore.Images.Media.insertImage(Profile.this.getContentResolver(), bitmap, "Portada", null);
-                            Picasso.with(Profile.this)
-                                    .load(pPath)
-                                    .resize(550, 450)
-                                    .centerCrop()
-                                    .into(mPortada);
-                        }
-                     //   mPortada.setImageBitmap(bitmap);
-                        else
-                            mPortada.setImageResource(R.drawable.header);
-                    }
-                }, 0, 0, null, // maxWidth, maxHeight, decodeConfig
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        mPortada.setImageResource(R.drawable.header);
-
-                    }
-                }
-        );
-        rqueue.add(peticion);
-
-    }
-
+   /**AQUI PAGE**/
 
     private void upload(){
         final  DatosUsr dusr=new DatosUsr();
@@ -389,12 +314,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         RequestQueue rQueue = Volley.newRequestQueue(Profile.this);
         rQueue.add(request);
     }//End Upload
-    @Override
-    protected void onStop() {
-       // App.cancelAllRequests(sIMAGE_URL);
-        super.onStop();
-    }
-    /// Fin performed request
+
 
     private void  updateestado()  throws JSONException{
 
@@ -852,7 +772,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
        File image = new File(imagesFolder, "Profile.jpg");
        Uri uriSavedImage = Uri.fromFile(image);
        //Le decimos al Intent que queremos grabar la imagen
-       cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage);
+       cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider", image));
        //Lanzamos la aplicacion de la camara con retorno (forResult)
        startActivityForResult(cameraIntent, PHOTO_CODE);
     }

@@ -127,7 +127,7 @@
         app:border_width="2dp"
         app:finalHeight="@dimen/image_final_width"
         app:finalYPosition="2dp"
-        app:layout_behavior="com.dese.diario.Resource.AvatarImageBehavior"
+        app:layout_behavior="com.dese.diario.Utils.AvatarImageBehavior"
         app:startHeight="2dp"
         app:startToolbarPosition="2dp"
         app:startXPosition="2dp"
