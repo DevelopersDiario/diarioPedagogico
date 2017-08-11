@@ -2,7 +2,9 @@ apply plugin: 'com.android.application'
 
 android {
     signingConfigs {
+
         config {
+
             keyAlias 'AMDI'
             keyPassword 'safa2017'
             storeFile file('C:/Users/Eduardo/Documents/Developer/KeyDiario/KeyDiario.jks')
@@ -20,19 +22,24 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
+
             shrinkResources true // This must be first
             minifyEnabled true   // This must be after shrinkResources
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
+
     }
+
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
 }
+
 
 repositories {
     mavenCentral()
