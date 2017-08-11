@@ -768,9 +768,14 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
        File imagesFolder = new File(
                Environment.getExternalStorageDirectory(), "Mi diario/Perfil/");
        imagesFolder.mkdirs();
+       File image = null;
        //añadimos el nombre de la imagen
-       File image = new File(imagesFolder, "Profile.jpg");
-       Uri uriSavedImage = Uri.fromFile(image);
+       if (ide == "profile") 
+            image= new File(imagesFolder, "Profile.jpg");
+       else if(ide=="holder")
+           image= new File(imagesFolder, "Holder.jpg");
+           
+     //  Uri uriSavedImage = Uri.fromFile(image);
        //Le decimos al Intent que queremos grabar la imagen
        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider", image));
        //Lanzamos la aplicacion de la camara con retorno (forResult)
@@ -800,54 +805,32 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bundle b=(getIntent().getExtras());
-        //int i=(getIntent().getExtras().getInt("identificador"));
-
-
 
         if(resultCode == RESULT_OK){
             switch (requestCode){
                 case PHOTO_CODE:
-                   /* MediaScannerConnection.scanFile(this,
-                            new String[]{mPath}, null,
-                            new MediaScannerConnection.OnScanCompletedListener() {
-                                @Override
-                                public void onScanCompleted(String path, Uri uri) {
-                                    Log.i(getString(R.string.ExternalStorage), getString(R.string.Scanned) + path + ":");
-                                    Log.i(getString(R.string.ExternalStorage), getString(R.string.uri) + uri);
-                                }
-                            });
-                    Bitmap bitmap2 = BitmapFactory.decodeFile(mPath);
-                    String paths = MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap2,null, null);
-                    Uri image1= Uri.parse(paths);
 
-                        try {
-                            //getting image from gallery
-                            imgbitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), image1);
-                            //Setting image to ImageView
+                    Bitmap bMap ;
+                    if (ide == "profile") {
 
-                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                            imgbitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                        bMap = BitmapFactory.decodeFile(
+                                Environment.getExternalStorageDirectory()+
+                                        "/Mi Diario/Perfil/"+"Profile.jpg");
 
+                        cViewImagen.setImageBitmap(bMap);
+                        Toast.makeText(this, "Data"+data.getData().getPath(), Toast.LENGTH_LONG).show();
 
-                                if (ide == "holder") {
-                                    bmHolder.equals(imgbitmap);
-                                    uploadHolder();
-                                } else if (ide=="profile") {
-                                    bmProfile = imgbitmap;
-                                    upload();
-                                }
+                       // uploadHolder();
+                    } else if (ide=="holder") {
+                        bMap = BitmapFactory.decodeFile(
+                                Environment.getExternalStorageDirectory()+
+                                        "/Mi Diario/Perfil/"+"Holder.jpg");
+
+                       mPortada.setImageBitmap(bMap);
+                       // upload();
+                    }
 
 
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }*/
-                    Bitmap bMap = BitmapFactory.decodeFile(
-                            Environment.getExternalStorageDirectory()+
-                                    "/Mi Diario/Perfil/"+"Profile.jpg");
-                    //Añadimos el bitmap al imageView para
-                    //mostrarlo por pantalla
-                    cViewImagen.setImageBitmap(bMap);
 
 
 
