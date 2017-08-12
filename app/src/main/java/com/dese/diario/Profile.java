@@ -161,7 +161,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         theme();
         super.onCreate(savedInstanceState);
         if(isFirstTime()){
-            
+           // Toast.makeText(this, "FIrsRun", Toast.LENGTH_SHORT).show();
+            openactivity();
         }
         getPersonalInformation();
 
@@ -182,12 +183,17 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         Intent intent =new Intent(Profile.this, Profile.class);
         startActivity(intent);
     }
-    private void isFirstTime()
+    private boolean isFirstTime()
     {
-        String nombreprofile= Urls.download+du.getFoto();
-        String nombreholder=Urls.download+du.getFportada();
-        new DownloadTask(Profile.this, Constants.mDirectoryProfile, nombreprofile);
-        new DownloadTask(Profile.this, Constants.mDirectoryHolder, nombreholder);
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if (!ranBefore) {
+            // first time
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+        }
+        return !ranBefore;
     }
 
     private void  updateestado()  throws JSONException{
