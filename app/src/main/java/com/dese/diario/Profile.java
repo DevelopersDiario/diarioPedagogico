@@ -117,10 +117,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     private final int PHOTO_CODE = 200;
     private final int SELECT_PICTURE = 300;
 
-    private ImageView mSetImage, imagenAs;
     private  ImageView mPortada;
     private RelativeLayout mRlView;
-    private String mPath;
 
     private CircleImageView cViewImagen;
 
@@ -151,6 +149,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     final String URL= Urls.filtrousuarioXid;
     final String URLupdatestate= Urls.updateestado;
     VariablesLogin Vrlog=new VariablesLogin();
+    DatosUsr du= new DatosUsr();
 
 
     CircleImageView circleImageView;
@@ -161,9 +160,12 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     protected void onCreate(Bundle savedInstanceState)  {
         theme();
         super.onCreate(savedInstanceState);
+
         if (isFirstTime()) {
             // What you do when the Application is Opened First time Goes here
             Toast.makeText(this, "FirstRun", Toast.LENGTH_SHORT).show();
+            String nombrearchivo= Urls.download+du.getFoto();
+            new DownloadTask(Profile.this, null, nombrearchivo);
         }
         getPersonalInformation();
 
@@ -378,11 +380,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         mToolbar.inflateMenu(R.menu.main);
         startAlphaAnimation(mTitle, 0, View.INVISIBLE);
 
-        mSetImage = (ImageView) findViewById(R.id.profile_imageview_placeholder);
-        mSetImage.setOnClickListener(this);
-
-        cViewImagen = (CircleImageView) findViewById(R.id.imCircleView);
-        cViewImagen.setOnClickListener(this);
 
     }
     @Override
@@ -672,22 +669,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     }
 
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(getString(R.string.file_path), mPath);
-
-
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        mPath = savedInstanceState.getString(getString(R.string.file_path));
-        //Toast.makeText(this, "ON RESTORE IMSTAM", Toast.LENGTH_SHORT).show();
-
-    }
 
 
     @Override
@@ -713,12 +694,12 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                         bMap = BitmapFactory.decodeFile(path);
 
                         cViewImagen.setImageBitmap(bMap);
-                        Toast.makeText(this, "Data->"+path, Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(this, "Data->"+path, Toast.LENGTH_LONG).show();
                         up.uploadPictureProfile(Profile.this, path);
 
                     } else if (ide=="holder") {
                         path= Environment.getExternalStorageDirectory()+
-                                "/Mi Diario/Perfil/"+"Holder"+Vrlog.getIdusuario().toString()+".jpg";
+                                Constants.mDirectoryHolder;
                         bMap = BitmapFactory.decodeFile(path);
 
                         up.uploadPictureHolder(Profile.this, path);
