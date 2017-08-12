@@ -160,12 +160,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     protected void onCreate(Bundle savedInstanceState)  {
         theme();
         super.onCreate(savedInstanceState);
-
-        if (isFirstTime()) {
-            // What you do when the Application is Opened First time Goes here
-            Toast.makeText(this, "FirstRun", Toast.LENGTH_SHORT).show();
-            String nombrearchivo= Urls.download+du.getFoto();
-            new DownloadTask(Profile.this, null, nombrearchivo);
+        if(isFirstTime()){
+            
         }
         getPersonalInformation();
 
@@ -186,17 +182,12 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         Intent intent =new Intent(Profile.this, Profile.class);
         startActivity(intent);
     }
-    private boolean isFirstTime()
+    private void isFirstTime()
     {
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        boolean ranBefore = preferences.getBoolean("RanBefore", false);
-        if (!ranBefore) {
-            // first time
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("RanBefore", true);
-            editor.commit();
-        }
-        return !ranBefore;
+        String nombreprofile= Urls.download+du.getFoto();
+        String nombreholder=Urls.download+du.getFportada();
+        new DownloadTask(Profile.this, Constants.mDirectoryProfile, nombreprofile);
+        new DownloadTask(Profile.this, Constants.mDirectoryHolder, nombreholder);
     }
 
     private void  updateestado()  throws JSONException{

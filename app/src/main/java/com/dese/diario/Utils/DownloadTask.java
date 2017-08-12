@@ -24,11 +24,12 @@ public class DownloadTask {
     private static final String TAG = "Download Task";
     private Context context;
     private Button buttonText;
+    private String ruta;
     private String downloadUrl = "", downloadFileName = "";
 
-    public DownloadTask(Context context, Button buttonText, String downloadUrl) {
+    public DownloadTask(Context context, String ruta, String downloadUrl) {
         this.context = context;
-        this.buttonText = buttonText;
+        this.ruta = ruta;
         this.downloadUrl = downloadUrl;
 
         downloadFileName =downloadUrl.replace(Urls.download, "");//Create file name by picking download file name from URL
@@ -112,8 +113,7 @@ public class DownloadTask {
                 if (new CheckForSDCard().isSDCardPresent()) {
 
                     apkStorage = new File(
-                            Environment.getExternalStorageDirectory() + "/"
-                                    + "Mi Diario");
+                            Environment.getExternalStorageDirectory() + ruta);
                 } else
                     Toast.makeText(context, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
 

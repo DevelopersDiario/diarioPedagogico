@@ -13,6 +13,7 @@ import com.dese.diario.Objects.Urls;
 import com.dese.diario.R;
 import com.dese.diario.Utils.DownloadTask;
 import com.squareup.picasso.Picasso;
+import com.veer.multiselect.Util.Constants;
 
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                     @Override
                     public void onItemClick(int pos) {
                         String nombrearchivo= download+nombrefile.get(pos);
-                        new DownloadTask(context, null, nombrearchivo);
+                        new DownloadTask(context, com.dese.diario.Utils.Constants.mMainDirectory, nombrearchivo);
 
                     }
                 });
