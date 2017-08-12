@@ -57,7 +57,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                     @Override
                     public void onItemClick(int pos) {
                         String nombrearchivo= download+nombrefile.get(pos);
-                        new DownloadTask(context, com.dese.diario.Utils.Constants.mMainDirectory, nombrearchivo);
+                        new DownloadTask(context, null, nombrearchivo);
 
                     }
                 });

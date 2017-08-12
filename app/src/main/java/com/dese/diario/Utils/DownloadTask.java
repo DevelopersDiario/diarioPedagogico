@@ -55,7 +55,7 @@ public class DownloadTask {
 
         @Override
         protected void onPostExecute(Void result) {
-            //try {
+            try {
             if (outputFile != null) {
                 //  buttonText.setEnabled(true);
                 // buttonText.setText(R.string.downloadCompleted);//If Download completed then change button text
@@ -73,8 +73,8 @@ public class DownloadTask {
                 //  Log.e(TAG, "Download Failed + why +"+result.toString());
 
             }
-            // } catch (Exception e) {
-            //   e.printStackTrace();
+            } catch (Exception e) {
+              e.printStackTrace();
 
             //Change button text if exception occurs
             //buttonText.setText(R.string.downloadFailed);
@@ -85,9 +85,9 @@ public class DownloadTask {
                     //  buttonText.setText(R.string.downloadAgain);
                 }
             }, 3000);
-            //  Log.e(TAG, "Download Failed with Exception - " + e.getLocalizedMessage());
+              Log.e(TAG, "Download Failed with Exception - " + e.getLocalizedMessage());
 
-//            }
+            }
 
 
             super.onPostExecute(result);
@@ -113,7 +113,7 @@ public class DownloadTask {
                 if (new CheckForSDCard().isSDCardPresent()) {
 
                     apkStorage = new File(
-                            Environment.getExternalStorageDirectory() + ruta);
+                            Environment.getExternalStorageDirectory() + Constants.mMainDirectory);
                 } else
                     Toast.makeText(context, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
 
