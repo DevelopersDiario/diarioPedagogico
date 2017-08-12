@@ -238,13 +238,15 @@ public class Upload {
                                 @Override
                                 public void onError(UploadInfo uploadInfo, Exception e) {
                                     Toast.makeText(context, "Error"+e.getMessage().toString(), Toast.LENGTH_LONG).show();
+
                                 }
 
                                 @Override
                                 public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
+                                    Toast.makeText(context, "Se ha subido", Toast.LENGTH_LONG).show();
 
-                                    messageAlert("Completado", path+id, context);
+                                    //  messageAlert("Completado", path+id, context);
                                 }
 
                                 @Override
