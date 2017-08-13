@@ -706,7 +706,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                         up.uploadPictureHolder(Profile.this, path);
 
                         mPortada.setImageBitmap(bMap);
-                        Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
+                       // Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
 
                     }
 
@@ -724,12 +724,12 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                         Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
 
                         if (ide == "holder") {
-                            Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
+                          //  Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
                             mPortada.setImageURI(filePath);
 
                             up.uploadPictureHolder(this, pathito);
                         } else if (ide=="profile") {
-                            Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
+                           // Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
                             cViewImagen.setImageURI(filePath);
                             up.uploadPictureProfile(this, pathito);
                         }
