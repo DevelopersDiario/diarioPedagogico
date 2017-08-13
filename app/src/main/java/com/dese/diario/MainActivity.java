@@ -57,6 +57,7 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.MANAGE_DOCUMENTS;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         VariablesLogin.getInstance();
         // Select theme saved by user
         theme();
@@ -137,12 +139,23 @@ public class MainActivity extends AppCompatActivity
 
         bindActivity();
 
-
-
         reciclerViewinit();
 
        // getSelect();
     }//Fin onCreate
+
+    private boolean isFirstTime()
+    {
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if (!ranBefore) {
+            // first time
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+        }
+        return !ranBefore;
+    }
     @Override
     protected void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
@@ -160,7 +173,6 @@ public class MainActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void bindActivity() {
            // getSelect();
-
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         linearLayoutManager= new LinearLayoutManager(this);

@@ -274,6 +274,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         circleImageView = (CircleImageView) findViewById(R.id.imCircleView);
         mPortada = (ImageView) findViewById(R.id.profile_imageview_placeholder);
 
+
         circleImageView.setOnClickListener(this);
         mPortada.setOnClickListener(this);
 
@@ -377,7 +378,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     private void settingsButtons() {
         mAppBarLayout.addOnOffsetChangedListener(this);
 
-        mToolbar.inflateMenu(R.menu.main);
+        //mToolbar.inflateMenu(R.menu.main);
         startAlphaAnimation(mTitle, 0, View.INVISIBLE);
 
 
@@ -484,7 +485,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_profile, menu);
+       // getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 
