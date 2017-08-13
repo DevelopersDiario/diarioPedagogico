@@ -935,7 +935,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
        private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();
 
-        if (ettitlepost.getText().toString()==" " && edPublication.getText().toString()==" ") {
+        if (ettitlepost.getText().toString()!=" " && edPublication.getText().toString()!=" ") {
             idusuario= varlogin.getIdusuario();
             titulo = ettitlepost.getText().toString().trim();
             observaciones = edPublication.getText().toString().trim();
@@ -989,7 +989,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
         }//Fin isChecked
         else{
-            String Mensaje=("Debe rellnar todos los campos");
+            String Mensaje=("Debe rellenar todos los campos");
             failed_regpublication.setText(Mensaje);
             Toast.makeText(Publication.this,Mensaje , Toast.LENGTH_LONG).show();
 

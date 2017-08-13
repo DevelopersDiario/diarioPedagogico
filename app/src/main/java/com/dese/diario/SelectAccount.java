@@ -543,7 +543,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 }
                 else {
 
-                    Toast.makeText(SelectAccount.this,"Failded!!...Verifique Email Y Password",Toast.LENGTH_LONG).show();
+                    Toast.makeText(SelectAccount.this,"Hubo un problema. Porfavor Verifique su Correo y Contraseña",Toast.LENGTH_LONG).show();
                 }
 
             } catch (Exception e) {
