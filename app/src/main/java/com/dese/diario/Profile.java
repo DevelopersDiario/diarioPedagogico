@@ -742,7 +742,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
             }
 
         }else{
-            Toast.makeText(this, "NUllos", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No selecciono ninguna imagen", Toast.LENGTH_LONG).show();
         }
     }
 

@@ -1,5 +1,6 @@
 package com.dese.diario;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -158,6 +159,12 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
+                        new MaterialDialog.Builder(SelectAccount.this)
+                                .title("Sucess Facebook")
+                                .content(loginResult.toString() )
+                                .canceledOnTouchOutside(false)
+                                .show();
+
                     }
 
                     @Override
@@ -168,6 +175,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
+
                     }
                 });
 
@@ -392,7 +400,12 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             //Calling a new function to handle signin
-            Toast.makeText(this, "Result"+result.getStatus().toString(), Toast.LENGTH_SHORT).show();
+            new MaterialDialog.Builder(SelectAccount.this)
+                    .title("Sucess Gmail")
+                    .content(result.getStatus().toString())
+                    .canceledOnTouchOutside(false)
+                    .show();
+          //  Toast.makeText(this, "Result"+result.getStatus().toString(), Toast.LENGTH_SHORT).show();
 
             handleSignInResult(result);
 
