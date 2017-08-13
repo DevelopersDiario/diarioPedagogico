@@ -270,11 +270,14 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         tvInformationSocial.setOnClickListener(this);
 
         edState = (EditText) findViewById(R.id.etestadouserProfile);
-
         etestadouserProfile=(EditText) findViewById(R.id.etestadouserProfile);
-
         circleImageView = (CircleImageView) findViewById(R.id.imCircleView);
         mPortada = (ImageView) findViewById(R.id.profile_imageview_placeholder);
+
+        circleImageView.setOnClickListener(this);
+        mPortada.setOnClickListener(this);
+
+
         DatosUsr du= new DatosUsr();
 
         Picasso.with(Profile.this)

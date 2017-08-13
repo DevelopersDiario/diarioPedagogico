@@ -419,12 +419,7 @@ public class MainActivity extends AppCompatActivity
                                 menuItem.setChecked(true);
 
                                 LoginManager.getInstance().logOut();
-                              /*  Intent intent = new Intent(Intent.ACTION_MAIN);
-                                intent.addCategory(Intent.CATEGORY_HOME);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
 
-                                startActivity(intent);
-                                finish();*/
                                 startActivity(new Intent(getBaseContext(), SelectAccount.class)
                                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
                                 finish();
