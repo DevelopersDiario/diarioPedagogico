@@ -392,6 +392,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             //Calling a new function to handle signin
+            Toast.makeText(this, "Result"+result.getStatus().toString(), Toast.LENGTH_SHORT).show();
 
             handleSignInResult(result);
 

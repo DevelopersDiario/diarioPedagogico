@@ -600,9 +600,9 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     /*------------------Imagen Profile-------------------*/
 
     private void showOptions() {
-        final CharSequence[] option = {getString(R.string.camara), getString(R.string.galeria)};
+        final CharSequence[] option = { getString(R.string.galeria)/*,getString(R.string.camara)*/};
         final AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
-        builder.setTitle(R.string.elija_opcion);
+       // builder.setTitle(R.string.elija_opcion);
         builder.setInverseBackgroundForced(true);
         builder.setItems(option, new DialogInterface.OnClickListener() {
             @Override

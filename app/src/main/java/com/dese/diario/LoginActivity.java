@@ -86,21 +86,21 @@ public class LoginActivity extends AppCompatActivity {
         failedLoginMessage = (TextView)findViewById(R.id.failed_login);
         mPasswordView=(EditText)findViewById(R.id.tvPassword_Login);
         //    buttonLogin = (Button) findViewById(R.id.email_sign_in_button);
-    Bundle i=(getIntent().getExtras());
-        if (i == null)
-            mEmailView.setText("");
-     else mEmailView.setText( i.getString("mail"));
+        Bundle i=(getIntent().getExtras());
+            if (i == null)
+                mEmailView.setText("");
+         else mEmailView.setText( i.getString("mail"));
 
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                   // attemptLogin();
-                    return true;
+            mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                    if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                       // attemptLogin();
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
 
 
 
