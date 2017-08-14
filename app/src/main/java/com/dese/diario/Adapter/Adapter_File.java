@@ -49,15 +49,15 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 String fname=nombrefile.get(position);
                 String type = fname.substring(fname.lastIndexOf(".") + 1);
                 holder.tvItem.setText(fname);
-                getExtensionFile(type, holder);
+                getExtensionFile(type, holder, fname);
 
 
 
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(int pos) {
-                        String nombrearchivo= download+nombrefile.get(pos);
-                        new DownloadTask(context, null, nombrearchivo);
+                        String urlDescarga= download+nombrefile.get(pos);
+                        new DownloadTask(context, null, urlDescarga);
 
                     }
                 });
@@ -73,25 +73,25 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
 
 
 
-    private void getExtensionFile(String type, MyHolderItem holder) {
+    private void getExtensionFile(String type, MyHolderItem holder, String name) {
         switch (type){
             case  "jpg":
                 Picasso.with(context)
-                        .load(R.drawable.filejpg)
-                        .resize(1120, 1120)
+                        .load(download+name)
+                        .resize(200, 200)
                         .centerCrop()
                         .into(holder.ivItem);
                 break;
             case "png":
                 Picasso.with(context)
-                        .load(R.drawable.filepng)
-                        .resize(1120, 1120)
+                        .load(download+name)
+                        .resize(1200, 1200)
                         .centerCrop()
                         .into(holder.ivItem);
                 break;
             case "gif":
                 Picasso.with(context)
-                        .load(R.drawable.unknowfile)
+                        .load(download+name)
                         .resize(1120, 1120)
                         .centerCrop()
                         .into(holder.ivItem);

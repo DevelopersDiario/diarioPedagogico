@@ -421,7 +421,7 @@ public class MainActivity extends AppCompatActivity
 
                             case R.id.item_navigation_drawer_about:
                                 menuItem.setChecked(true);
-                                Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
 
                                 Intent ia= new Intent(MainActivity.this, About.class);
                                 startActivity(ia);

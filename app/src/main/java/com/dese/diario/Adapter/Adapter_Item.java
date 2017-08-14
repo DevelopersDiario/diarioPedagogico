@@ -64,7 +64,7 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
                 //LoadBitmap.loadBitmap(String.valueOf(R.drawable.filedoc ), holder.ivItem);
                 Picasso.with(context)
                         .load(R.drawable.filedoc)
-                        .resize(1120, 1120)
+                        .resize(200, 200)
                         .centerCrop()
                         .into(holder.ivItem);
                 break;
