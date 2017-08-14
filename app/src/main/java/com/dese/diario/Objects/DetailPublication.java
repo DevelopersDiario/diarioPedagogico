@@ -158,7 +158,8 @@ public class DetailPublication extends AppCompatActivity {
         tvPubDetail.setText(p);
         Picasso.with(DetailPublication.this)
                 .load(Urls.download+f)
-                .resize(50, 50)
+                .resize(1200, 1200)
+                .noPlaceholder()
                 .centerCrop()
                 .into(foto);
 
