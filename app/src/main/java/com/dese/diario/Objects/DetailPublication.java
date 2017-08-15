@@ -95,7 +95,7 @@ public class DetailPublication extends AppCompatActivity {
 
 
     //final static String urllistar = "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listrepublication";
-    final static String urllistar = Urls.listarrepublication;
+    final static String urlListRepublication = Urls.listarrepublication;
 
     //
     final static String getFilesList= Urls.obtenerdetallepublicacion;
@@ -218,59 +218,68 @@ public class DetailPublication extends AppCompatActivity {
 
     private void registerRePost(String t, String o, String papa, String g) {
 
-        final VariablesLogin varlogin = new VariablesLogin();
-      //  Toast.makeText(DetailPublication.this, "   Register Post",Toast.LENGTH_SHORT).show();
-        final String idusuario = varlogin.getIdusuario();
-        final String titulo = t;
-        final String observaciones = o;
-        final String padre = papa;
-        final String grupe = g;
+        if (!t.isEmpty() && !o.isEmpty()) {
+            final VariablesLogin varlogin = new VariablesLogin();
+            //  Toast.makeText(DetailPublication.this, "   Register Post",Toast.LENGTH_SHORT).show();
+            final String idusuario = varlogin.getIdusuario();
+            final String titulo = t;
+            final String observaciones = o;
+            final String padre = papa;
+            final String grupe = g;
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(DetailPublication.this, "CORRRECTO", Toast.LENGTH_SHORT).show();
-                        openActivity();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                if (error.networkResponse.data != null) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(DetailPublication.this, "CORRRECTO", Toast.LENGTH_SHORT).show();
+                            openActivity();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String body;
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if (error.networkResponse.data != null) {
 
-                    try {
-                        body = new String(error.networkResponse.data, "UTF-8");
+                        try {
+                            body = new String(error.networkResponse.data, "UTF-8");
 
-                        //   failed_regpublication.setText(body);
+                            //   failed_regpublication.setText(body);
 
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_IDUSUARIO, idusuario);
-                params.put(KEY_TITULO, titulo);
-                params.put(KEY_IDGROUP, grupe);
-                params.put(KEY_OBSERVACIONES, observaciones);
-                params.put(KEY_ROL, "1");
-                params.put(KEY_IDPUBLICACION, padre);
-                params.put(CONTENT_TYPE, APPLICATION);
-                return params;
-            }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(KEY_IDUSUARIO, idusuario);
+                    params.put(KEY_TITULO, titulo);
+                    params.put(KEY_IDGROUP, grupe);
+                    params.put(KEY_OBSERVACIONES, observaciones);
+                    params.put(KEY_ROL, "1");
+                    params.put(KEY_IDPUBLICACION, padre);
+                    params.put(CONTENT_TYPE, APPLICATION);
+                    return params;
+                }
 
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(DetailPublication.this);
-        requestQueue.add(stringRequest);
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(DetailPublication.this);
+            requestQueue.add(stringRequest);
+        }
+        else{
+                String Mensaje=("Debe rellenar todos los campos");
+              //  failed_regpublication.setText(Mensaje);
+                Toast.makeText(DetailPublication.this, Mensaje , Toast.LENGTH_LONG).show();
 
-    }
+            }//fin else cheked
+
+
+        }
 
     private void openActivity(){
         Intent is=new Intent(DetailPublication.this, MainActivity.class);
@@ -282,7 +291,7 @@ public class DetailPublication extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, urllistar,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlListRepublication,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -315,7 +324,7 @@ public class DetailPublication extends AppCompatActivity {
 
                                 }
                             } catch (JSONException e) {
-                                Log.e("UUUps!!!!!", "Error!!" + e);
+                                Log.e("DetailPublication", "Error +->" + e);
                             }
                         }
                     }
@@ -327,7 +336,6 @@ public class DetailPublication extends AppCompatActivity {
             }
 
         }
-
         ) {
             /**
              * Passing some request headers
