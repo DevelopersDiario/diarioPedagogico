@@ -80,7 +80,7 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
         final String t = listaRepublicaciones.get(position).getTitulo();
         final String u = listaRepublicaciones.get(position).getNombre();
         final String f = listaRepublicaciones.get(position).getFoto();
-        final String r=listaRepublicaciones.get(position).getRuta();
+       // final String r=listaRepublicaciones.get(position).getRuta();
         final String o = listaRepublicaciones.get(position).getObservaciones();
 
         holder.titlePublicationR.setText(t);

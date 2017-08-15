@@ -18,13 +18,13 @@ public class RePublication {
     public RePublication() {
     }
 
-    public RePublication(String padre, String idpublicacion, String foto, String ruta, String observaciones, String titulo, String nombre, String idusuario) {
+    public RePublication(String padre, String idpublicacion, String foto, String observaciones, String titulo, String nombre, String idusuario) {
         this.padre = padre;
         this.idusuario = idusuario;
         this.nombre = nombre;
         this.titulo = titulo;
         this.observaciones=observaciones;
-        this.ruta = ruta;
+      //  this.ruta = ruta;
         this.idpublicacion = idpublicacion;
         this.foto = foto;
     }
@@ -53,13 +53,13 @@ public class RePublication {
         this.foto = foto;
     }
 
-    public String getRuta() {
+    /*public String getRuta() {
         return ruta;
     }
 
     public void setRuta(String ruta) {
         this.ruta = ruta;
-    }
+    }*/
 
     public String getTitulo() {
         return titulo;
@@ -101,7 +101,6 @@ public class RePublication {
                 ", foto='" + foto + '\'' +
                 ", idusuario='" + idusuario + '\'' +
                 ", titulo='" + titulo + '\'' +
-                ", ruta='" + ruta + '\'' +
                 ", padre='" + padre + '\'' +
                 '}';
     }

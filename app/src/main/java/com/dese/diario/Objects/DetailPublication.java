@@ -311,7 +311,6 @@ public class DetailPublication extends AppCompatActivity {
                                             jsonobject.getString("padre"),
                                             jsonobject.getString("idpublicacion"),
                                             jsonobject.getString("foto"),
-                                            jsonobject.getString("ruta"),
                                             jsonobject.getString("observaciones"),
                                             jsonobject.getString("titulo"),
                                             jsonobject.getString("nombre"),
