@@ -9,7 +9,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="218dp"
+        android:layout_height="268dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -94,7 +94,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:layout_marginTop="223dp"
+        android:layout_marginTop="273dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

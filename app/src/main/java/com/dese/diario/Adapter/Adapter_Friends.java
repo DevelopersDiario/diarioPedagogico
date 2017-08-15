@@ -17,6 +17,7 @@ import com.dese.diario.Objects.DataFriends;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.R;
 import com.doodle.android.chips.ChipsView;
+import com.doodle.android.chips.model.Contact;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -47,11 +48,14 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
     }
 
     @Override
-    public void onBindViewHolder(MyHolderF  holder, int position) {
+    public void onBindViewHolder(final MyHolderF  holder, int position) {
         holder._idA.setText(lista.get(position).getIdusuario());
         holder.name.setText(lista.get(position).getNombre()+" "+lista.get(position).getApellidos());
+
         holder.cuen.setText("@"+lista.get(position).getCuenta());
         int r= Integer.parseInt(lista.get(position).getIdrol());
+        //Contact contact = new Contact(null, null, null, email, null);
+
         String role = " ";
         final String f=lista.get(position).getFoto();
 
@@ -87,9 +91,11 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
+                //mChipsView = (ChipsView) holder.findViewById(R.id.cv_contacts);
+                String email =lista.get(pos).getCuenta();
+                Contact contact = new Contact(null, null, null, email, null);
 
-
-                //Toast.makeText(context,pos,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Click"+pos+lista.get(pos).getCuenta() ,Toast.LENGTH_SHORT).show();
             }
         });
     }

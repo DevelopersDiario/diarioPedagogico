@@ -310,7 +310,7 @@ public class Colaboration extends AppCompatActivity {
     }//Fin RegisterUser
 
     public void listGpo() {
-
+        final VariablesLogin variablesLogin= new VariablesLogin();
         RequestQueue queue = Volley.newRequestQueue(this);
       //  grupo = new Intent(this, ListGroup.class);
 
@@ -349,10 +349,18 @@ public class Colaboration extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("°_°", "Ocurio un error !");
+                Log.e("Colbarotaion", "Ocurio un error !");
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put(KEY_IDU, variablesLogin.getIdusuario().toString());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
 
+        };
 
         queue.add(stringRequest);
     }

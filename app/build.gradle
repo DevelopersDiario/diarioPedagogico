@@ -122,9 +122,12 @@ dependencies {
     }
     //Material Librery
     compile 'com.afollestad.material-dialogs:core:0.9.4.5'
-            //Progres imagen vir
 
+    //Progres imagen vir
     compile 'com.github.safetysystemtechnology:progress-image-view-android:v1.0'
+
+    //Glide glie
+    compile 'com.github.bumptech.glide:glide:3.6.1'
 
     testCompile 'junit:junit:4.12'
     compile project(':Emoji')

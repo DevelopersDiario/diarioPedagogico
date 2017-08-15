@@ -97,7 +97,7 @@ public class Search_friends extends AppCompatActivity  {
 
         bindData();
 
-      chipData();
+         chipData();
 
 
     }
@@ -289,7 +289,6 @@ public class Search_friends extends AppCompatActivity  {
         TextView tv3= (TextView) findViewById(R.id.tvIdF);
         TextView tv4= (TextView) findViewById(R.id.tvAccountF);
 
-
         String email= tv4.getText().toString();
         int pos = -1;
         Contact contact = new Contact(null, null, null, email, null);
@@ -301,20 +300,7 @@ public class Search_friends extends AppCompatActivity  {
                     String g= tv1.getText().toString();
                     String  u = tv3.getText().toString();
                     String r= tv2.getText().toString();
-                    int i;
-                    switch (r){
-                        case "Alumno":
-                            i=2;
-                            break;
-                        case  "Asesor":
-                            i=1;
-                            break;
-                        case "Invitado":
-                            i=3;
-                            break;
-                        default:
-                            i=3;
-                    }
+
 
                   //  List lst= mChipsView.getChips();
 
@@ -322,7 +308,7 @@ public class Search_friends extends AppCompatActivity  {
 
                     List<ChipsView.Chip> lst= mChipsView.getChips();
                     int size=lst.size();
-                   // Toast.makeText(this, "ChildCount " +mChipsView.getChildCount() + size, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "ChildCount " +mChipsView.getChildCount() + size, Toast.LENGTH_LONG).show();
                if(size==0){
                     mChipsView.addChip(email, "", contact);
                }else{
@@ -332,12 +318,12 @@ public class Search_friends extends AppCompatActivity  {
                         Contact c= ch.getContact();
                         if(c.getEmailAddress()==email){
 
-                            Toast.makeText(this, "Ya esta agregado " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(this, "Ya esta agregado " +c.getEmailAddress() , Toast.LENGTH_LONG).show();
                         }else{
 
                             mChipsView.addChip(email, "", contact);
                             Toast.makeText(this, " No esta agregado " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
-                            registerGroup(g, u, String.valueOf(i));
+                            registerGroup(g, u, "1");
                         }
 
                         System.out.println();
