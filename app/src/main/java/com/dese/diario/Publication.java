@@ -48,6 +48,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -311,7 +312,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
     }
 
     public void listGpo() {
-
+        final VariablesLogin variablesLogin= new VariablesLogin();
+        final String id=variablesLogin.getIdusuario().toString();
         RequestQueue queue = Volley.newRequestQueue(this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlLisGpo,
@@ -345,7 +347,11 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                                         @Override
                                         public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
                                         {
-                                            ed= (String) leadsIdes.get(pos);
+
+                                            if(view.callOnClick()){
+                                                ed= (String) leadsIdes.get(pos);
+                                                spGpoP.isEnabled();
+                                            }
 
                                         }
 
@@ -368,8 +374,16 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
             public void onErrorResponse(VolleyError error) {
                 Log.e(getString(R.string.carita), getString(R.string.message_ocurrio_error));
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idusuario", id);
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
 
+        };
 
         queue.add(stringRequest);
 

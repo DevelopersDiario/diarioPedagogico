@@ -9,17 +9,20 @@ public class Group {
     private  String idgrupo;
     private  String nombreusuario;
     private  String idrol;
+    private String idusuario;
+    private  String usuarioalumno;
 
     public Group(){
 
     }
 
-    public Group(String nombregrupo, String nombreusuario, String idgrupo, String idrol){
+    public Group(String nombregrupo, String nombreusuario, String idgrupo, String idrol,String idusuario, String usuarioalumno){
         this.nombregrupo=nombregrupo;
         this.nombreusuario=nombreusuario;
         this.idgrupo=idgrupo;
         this.idrol=idrol;
-
+        this.idusuario=idusuario;
+        this.usuarioalumno=usuarioalumno;
     }
 
     public String getNombreusuario() {
@@ -48,6 +51,22 @@ public class Group {
 
     public String getIdrol() {
         return idrol;
+    }
+
+    public String getIdusuario() {
+        return idusuario;
+    }
+
+    public String getUsuarioalumno() {
+        return usuarioalumno;
+    }
+
+    public void setUsuarioalumno(String usuarioalumno) {
+        this.usuarioalumno = usuarioalumno;
+    }
+
+    public void setIdusuario(String idusuario) {
+        this.idusuario = idusuario;
     }
 
     public void setIdrol(String idrol) {

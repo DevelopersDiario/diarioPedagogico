@@ -1,8 +1,11 @@
 package com.dese.diario.Item;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -20,6 +24,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,10 +34,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Friends;
+import com.dese.diario.Adapter.Adapter_Grupo;
+import com.dese.diario.Colaboration;
 import com.dese.diario.Objects.DataFriends;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
+import com.dese.diario.SelectAccount;
 import com.doodle.android.chips.ChipsView;
 import com.doodle.android.chips.model.Contact;
 
@@ -42,8 +51,11 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.OkHttpClient;
 
 public class Search_friends extends AppCompatActivity  {
     //Usuario
@@ -53,7 +65,7 @@ public class Search_friends extends AppCompatActivity  {
 
     private ChipsView mChipsView;
 
-    ArrayList list;
+
     public static final String KEY_NAME = "nombre";
     public static final String KEY_USUARIOGRUPO= "idusuario";
 
@@ -64,13 +76,8 @@ public class Search_friends extends AppCompatActivity  {
     LinearLayoutManager linearLayoutManager;
     ArrayList listFriends;
 
-    //DETALLE_GRUPO//
-    TextView tvRolF;
-    TextView tvIdF;
-    TextView tvCuenta;
-    EditText etBuscar;
-    Button btnAceptar;
-    CheckBox cbSelect;
+
+
     public static final String IDUSUARIO= "idusuario";
 
     public static final int DETALLEGRUPO = 100;
@@ -79,8 +86,14 @@ public class Search_friends extends AppCompatActivity  {
     private static final String KEY_IDG = "idgrupo";
     private static final String KEY_IDU= "idusuario";
     private static final String KEY_IDR = "idrol";
-        TextView tvNameGF, tvIdGF;
+    TextView tvNameGF;
 
+    //DETALLE_GRUPO//
+    TextView tvidRolF;
+    TextView tvIdF;
+    TextView tvAccountF;
+    TextView tvIdGF;
+    EditText etBuscar;
 
     //Theme
     SharedPreferences sharedPreferences;
@@ -88,6 +101,9 @@ public class Search_friends extends AppCompatActivity  {
     int theme;
 
     CollapsingToolbarLayout collapsing;
+
+    Contact contact;
+    ArrayList listMembers;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -97,7 +113,7 @@ public class Search_friends extends AppCompatActivity  {
 
         bindData();
 
-         chipData();
+        chipData();
 
 
     }
@@ -143,7 +159,6 @@ public class Search_friends extends AppCompatActivity  {
                 else if(text.length()<0) {
                     listFriends.clear();
                     adpt.notifyDataSetChanged();
-                    adpt.notifyDataSetChanged();
                 }
             }
         });
@@ -166,13 +181,22 @@ public class Search_friends extends AppCompatActivity  {
 
         //Member
         tvNameGF=(TextView) findViewById(R.id.tvNameGF);
-        tvIdF=(TextView) findViewById(R.id.tvIdGF);
+        tvIdGF=(TextView) findViewById(R.id.tvIdGF);
+        tvidRolF = (TextView)findViewById(R.id.tvidRolF);
+        tvAccountF= (TextView) findViewById(R.id.tvAccountF);
+
         tvNameGF.setText( getIntent().getExtras().getString("namegpo"));
-        tvIdF.setText( getIntent().getExtras().getString("gpo"));
+        tvIdGF.setText( getIntent().getExtras().getString("gpo"));
+
+        String g= tvIdGF.getText().toString();
 
 
+    if(!g.isEmpty()){
+        listarMember(g);
+    }else{
+        Toast.makeText(this, "Vacio", Toast.LENGTH_SHORT).show();
+    }
 
-        //tvIdF.setText();
 
         etBuscar.addTextChangedListener(new TextWatcher() {
             @Override
@@ -289,60 +313,121 @@ public class Search_friends extends AppCompatActivity  {
         TextView tv3= (TextView) findViewById(R.id.tvIdF);
         TextView tv4= (TextView) findViewById(R.id.tvAccountF);
 
-        String email= tv4.getText().toString();
-        int pos = -1;
-        Contact contact = new Contact(null, null, null, email, null);
+
+
+        String g= tv1.getText().toString();
+        String r= tv2.getText().toString();
+        String  u = tv3.getText().toString();
+
+
+        //Contact contact;
+        final String email= tv4.getText().toString();
+
+       contact  = new Contact(null, null, null, email, null);
         switch (item.getTitle().toString()){
 
             case  "Agregar a Grupo":
-                pos++;
-                try {
-                    String g= tv1.getText().toString();
-                    String  u = tv3.getText().toString();
-                    String r= tv2.getText().toString();
 
+                //Agrega Chip
 
-                  //  List lst= mChipsView.getChips();
+                mChipsView.addChip(email, "", contact);
 
-
-
-                    List<ChipsView.Chip> lst= mChipsView.getChips();
-                    int size=lst.size();
-                    Toast.makeText(this, "ChildCount " +mChipsView.getChildCount() + size, Toast.LENGTH_LONG).show();
-               if(size==0){
-                    mChipsView.addChip(email, "", contact);
-               }else{
-
-                    for(int x=0;x<lst.size();x++) {
-                        ChipsView.Chip ch = lst.get(x);
-                        Contact c= ch.getContact();
-                        if(c.getEmailAddress()==email){
-
-                            Toast.makeText(this, "Ya esta agregado " +c.getEmailAddress() , Toast.LENGTH_LONG).show();
-                        }else{
-
-                            mChipsView.addChip(email, "", contact);
-                            Toast.makeText(this, " No esta agregado " +c.getEmailAddress(), Toast.LENGTH_LONG).show();
-                            registerGroup(g, u, "1");
-                        }
-
-                        System.out.println();
-                    }//end for
-                }
+                //Lista
+                List<ChipsView.Chip> lstChips= mChipsView.getChips();
+                int tamaño =lstChips.size();
 
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                /*
+
+                        for(int x=0; x < tamaño; x++) {
+                                 ChipsView.Chip ch = lstChips.get(x);
+                                 Contact c= ch.getContact();
+                            if(c.getEmailAddress()==email){
+                                mChipsView.removeChipBy(contact);
+                                mChipsView.addChip(email, "", contact);
+                            }else if(c.getEmailAddress()!=email){
+
+                                mChipsView.removeChipBy(contact);
+
+                            }
+
+
+                             }//end for*//*
+
+
+
+*/
+
                 break;
-            default:
-                break;
+
         }
         etBuscar.requestFocus();
         etBuscar.setFocusable(true);
 
         return super.onContextItemSelected(item);
+    }
+
+    private void listarMember(final String idgrupo) {
+
+        VariablesLogin variablesLogin = new VariablesLogin();
+        final String id= variablesLogin.getIdusuario().toString();
+        final TextView tv4= (TextView) findViewById(R.id.tvAccountF);
+
+        RequestQueue queue = Volley.newRequestQueue(Search_friends.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listuserxgpo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                                listMembers = new ArrayList<>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (int i = 0; i < jsonarray.length(); i++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    final String email= jsonobject.getString("cuenta");
+
+                                    contact  = new Contact(null, null, null, email, null);
+                                    mChipsView.addChip(email, "", contact);
+
+                                    listMembers.add(jsonobject.getString("cuenta"));
+                                    Toast.makeText(Search_friends.this, listMembers.get(i).toString(), Toast.LENGTH_SHORT).show();
+
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Search Friends", "Error +->" + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Search Friends", "Response--->"+error);
+            }
+
+        }
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idgrupo", idgrupo);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
     }
 
 

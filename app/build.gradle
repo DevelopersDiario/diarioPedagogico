@@ -129,6 +129,9 @@ dependencies {
     //Glide glie
     compile 'com.github.bumptech.glide:glide:3.6.1'
 
+    //OK
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+
     testCompile 'junit:junit:4.12'
     compile project(':Emoji')
     compile 'com.google.firebase:firebase-messaging:10.2.4'

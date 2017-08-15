@@ -31,7 +31,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Grupo;
+import com.dese.diario.Adapter.Adapter_RePubication;
 import com.dese.diario.Item.Search_friends;
+import com.dese.diario.Objects.DetailPublication;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 
@@ -70,6 +72,9 @@ public class Colaboration extends AppCompatActivity {
     public static final String KEY_IDG= "idgrupo";
     public static final String KEY_IDROL= "idrol"  ;
 
+    final  String CONTENT_TYPE="Content-Type";
+    final  String APPLICATION="application/x-www-form-urlencoded";
+
     final String KEY_VALUE = "VALUES";
     final String KEY_THEME="THEME";
 
@@ -89,8 +94,8 @@ public class Colaboration extends AppCompatActivity {
         inicializarToolbar();
         bindActivity();
 
-       listGpo();
-
+            listGpo();
+       // listarRe();
 
     }
     private void bindActivity() {
@@ -310,9 +315,10 @@ public class Colaboration extends AppCompatActivity {
     }//Fin RegisterUser
 
     public void listGpo() {
-        final VariablesLogin variablesLogin= new VariablesLogin();
-        RequestQueue queue = Volley.newRequestQueue(this);
-      //  grupo = new Intent(this, ListGroup.class);
+        VariablesLogin variablesLogin = new VariablesLogin();
+        final String id= variablesLogin.getIdusuario().toString();
+
+        RequestQueue queue = Volley.newRequestQueue(Colaboration.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlLisGpo,
                 new Response.Listener<String>() {
@@ -328,20 +334,24 @@ public class Colaboration extends AppCompatActivity {
                                 JSONArray jsonarray = new JSONArray(response);
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                    //  System.out.println(jsonobject);
+
 
                                     listGpo.add(new com.dese.diario.Objects.Group(
                                             jsonobject.getString(KEY_NAMEG),
                                             jsonobject.getString(KEY_NAMEU),
                                             jsonobject.getString(KEY_IDG),
-                                            jsonobject.getString(KEY_IDROL)));
-                                    adaptergpo = new Adapter_Grupo(listGpo, Colaboration.this);
-
+                                            jsonobject.getString(KEY_IDROL),
+                                            jsonobject.getString(KEY_IDU),
+                                            jsonobject.getString("usuarioalumno")));
+                                    adaptergpo = new Adapter_Grupo(listGpo,Colaboration.this);
+                                    // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
                                     recyclerView.setAdapter(adaptergpo);
+
+                                    System.out.println(listGpo);
 
                                 }
                             } catch (JSONException e) {
-                                Log.e("Oops!", "Fatal Errro!" + e);
+                                Log.e("Colaboration", "Error +->" + e);
                             }
                         }
                     }
@@ -349,20 +359,26 @@ public class Colaboration extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Colbarotaion", "Ocurio un error !");
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_IDU, variablesLogin.getIdusuario().toString());
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
+                Log.e("Colaboration", "Response--->"+error);
             }
 
+        }
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idusuario", id);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
         };
 
+
         queue.add(stringRequest);
+
     }
 
 
