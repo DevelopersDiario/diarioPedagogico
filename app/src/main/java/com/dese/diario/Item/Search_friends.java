@@ -343,10 +343,15 @@ public class Search_friends extends AppCompatActivity  {
 
                                 mChipsView.addChip(email, "", contact);
 
-                                    //registerGroup(g, u, "1");
+                                try {
+                                    registerGroup(g, u, "1");
                                     listFriends.clear();
                                     etBuscar.requestFocus();
                                     etBuscar.setFocusable(true);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
 
                                 //mChipsView.removeChipBy(contact);
