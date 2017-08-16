@@ -193,6 +193,8 @@ public class Search_friends extends AppCompatActivity  {
 
     if(!g.isEmpty()){
         listarMember(g);
+        //etBuscar.requestFocus();
+        //etBuscar.setFocusable(true);
     }else{
         Toast.makeText(this, "Vacio", Toast.LENGTH_SHORT).show();
     }
@@ -263,6 +265,7 @@ public class Search_friends extends AppCompatActivity  {
                                                 jsonobject.getString("foto")));
                                         adpt = new Adapter_Friends(listFriends, Search_friends.this);
                                         recyclerFriends.setAdapter(adpt);
+
                                         /// System.out.println(listpublicaciones);
 
                                     }
@@ -331,13 +334,21 @@ public class Search_friends extends AppCompatActivity  {
                 //Lista
                 List<ChipsView.Chip> lstChips= mChipsView.getChips();
                 int tamaño =lstChips.size();
-
+                        ChipsView.Chip ch;
+                Contact c;
                         for(int x=0; x < tamaño; x++) {
-                                 ChipsView.Chip ch = lstChips.get(x);
-                                 Contact c= ch.getContact();
+                                  ch = lstChips.get(x);
+                                  c= ch.getContact();
                             if(c.getEmailAddress()!=email){
 
                                 mChipsView.addChip(email, "", contact);
+
+                                    //registerGroup(g, u, "1");
+                                    listFriends.clear();
+                                    etBuscar.requestFocus();
+                                    etBuscar.setFocusable(true);
+
+
                                 //mChipsView.removeChipBy(contact);
                             }else if(c.getEmailAddress()==email){
                                 Toast.makeText(Search_friends.this  ,"Ya esta agregado", Toast.LENGTH_SHORT).show();
