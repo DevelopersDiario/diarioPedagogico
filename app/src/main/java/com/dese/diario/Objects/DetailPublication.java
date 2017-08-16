@@ -368,7 +368,6 @@ public class DetailPublication extends AppCompatActivity {
                         //JSONArray jsonArray = null;
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
                             try {
                                 //leadsNames  = new ArrayList<String>();
                                 ///leadsIdes= new ArrayList<String>();
@@ -378,9 +377,8 @@ public class DetailPublication extends AppCompatActivity {
                                     gpo.setText(getGruop);
                                     gpo.setEnabled(false);
 
-                                    Toast.makeText(DetailPublication.this, "Lista"+ getGruop, Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(DetailPublication.this, "Lista"+ getGruop, Toast.LENGTH_LONG).show();
                                     //recyclerView.setAdapter(adaptergpo);
-
 
                                 }
                             } catch (JSONException e) {
@@ -394,7 +392,6 @@ public class DetailPublication extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e("DetallePub", "Response--->"+error);
             }
-
         }
         ) {
             /**

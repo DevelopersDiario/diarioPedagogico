@@ -212,7 +212,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
         myWebView = (WebView) this.findViewById(R.id.wvDate);
         tvDate = (TextView) findViewById(R.id.tvDate);
         upload = new Upload();
-        listGpo();
+        listGpos();
         rcItems = (RecyclerView) findViewById(R.id.rvItems);
         StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(3, 1);
         rcItems.setLayoutManager(staggeredGridLayout);
@@ -332,6 +332,81 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                                 for (final int[] i = {0}; i[0] < jsonarray.length(); i[0]++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i[0]);
 
+                                    // leadsNames.add(0, jsonobject.getString(KEY_NAMEG));
+                                    //leadsIdes.add(0, jsonobject.getString(KEY_IDGROUP));
+
+
+                                    spGpoP = (Spinner) findViewById(R.id.spGpoP);
+                                    mLeadsAdapter = new ArrayAdapter<String>(Publication.this, android.R.layout.simple_spinner_item, leadsNames);
+                                    mLeadsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                    spGpoP.setAdapter(mLeadsAdapter);
+                                   /* spGpoP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+                                        {
+
+                                            if(view.callOnClick()){
+                                                ed= (String) leadsIdes.get(pos);
+                                                spGpoP.isEnabled();
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent)
+                                        {    }
+                                    });
+                                }
+*/
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e(getString(R.string.message_Oops), getString(R.string.message_Publication_Error) + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Publication", getString(R.string.message_ocurrio_error)+error);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idusuario", id);
+             //   params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+
+        };
+
+        queue.add(stringRequest);
+
+    }
+    private void listGpos() {
+        VariablesLogin variablesLogin = new VariablesLogin();
+        final String id= variablesLogin.getIdusuario().toString();
+
+        RequestQueue queue = Volley.newRequestQueue(Publication.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listgrupo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            try {
+                                leadsNames  = new ArrayList<String>();
+                                leadsIdes= new ArrayList<String>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (final int[] i = {0}; i[0] < jsonarray.length(); i[0]++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i[0]);
+
                                     leadsNames.add(0, jsonobject.getString(KEY_NAMEG));
                                     leadsIdes.add(0, jsonobject.getString(KEY_IDGROUP));
 
@@ -350,7 +425,7 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
 
                                             if(view.callOnClick()){
                                                 ed= (String) leadsIdes.get(pos);
-                                                spGpoP.isEnabled();
+                                                spGpoP.setEnabled(true);
                                             }
 
                                         }
@@ -360,11 +435,8 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                                         {    }
                                     });
                                 }
-
-
-
                             } catch (JSONException e) {
-                                Log.e(getString(R.string.message_Oops), getString(R.string.message_Publication_Error) + e);
+                                Log.e("Detalle", "Error +->" + e);
                             }
                         }
                     }
@@ -372,18 +444,22 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(getString(R.string.carita), getString(R.string.message_ocurrio_error));
+                Log.e("DetallePub", "Response--->"+error);
             }
-        }){
+        }
+        ) {
+            /**
+             * Passing some request headers
+             */
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("idusuario", id);
-             //   params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idusuario", id);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
             }
-
         };
+
 
         queue.add(stringRequest);
 
