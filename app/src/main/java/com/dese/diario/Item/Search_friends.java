@@ -328,36 +328,26 @@ public class Search_friends extends AppCompatActivity  {
 
             case  "Agregar a Grupo":
 
-                //Agrega Chip
-
-                mChipsView.addChip(email, "", contact);
-
                 //Lista
                 List<ChipsView.Chip> lstChips= mChipsView.getChips();
                 int tamaño =lstChips.size();
 
-
-
-                /*
-
                         for(int x=0; x < tamaño; x++) {
                                  ChipsView.Chip ch = lstChips.get(x);
                                  Contact c= ch.getContact();
-                            if(c.getEmailAddress()==email){
-                                mChipsView.removeChipBy(contact);
-                                mChipsView.addChip(email, "", contact);
-                            }else if(c.getEmailAddress()!=email){
+                            if(c.getEmailAddress()!=email){
 
+                                mChipsView.addChip(email, "", contact);
+                                //mChipsView.removeChipBy(contact);
+                            }else if(c.getEmailAddress()==email){
+                                Toast.makeText(Search_friends.this  ,"Ya esta agregado", Toast.LENGTH_SHORT).show();
+                                //mChipsView.addChip(email, "", contact);
                                 mChipsView.removeChipBy(contact);
 
                             }
 
 
                              }//end for*//*
-
-
-
-*/
 
                 break;
 
@@ -396,7 +386,7 @@ public class Search_friends extends AppCompatActivity  {
                                     mChipsView.addChip(email, "", contact);
 
                                     listMembers.add(jsonobject.getString("cuenta"));
-                                    Toast.makeText(Search_friends.this, listMembers.get(i).toString(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(Search_friends.this, listMembers.get(i).toString(), Toast.LENGTH_SHORT).show();
 
 
                                 }
