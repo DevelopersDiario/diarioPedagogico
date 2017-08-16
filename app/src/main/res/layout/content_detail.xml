@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content">
 
             <LinearLayout
-                android:paddingTop="10dp"
+                android:paddingTop="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -98,15 +98,14 @@
                     android:id="@+id/tvPubDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="20dp"
+                    android:paddingBottom="10dp"
                     android:hint="@string/tag_lorem"
                     style="@style/TextAppearance.AppCompat"/>
 
              <android.support.v7.widget.RecyclerView
                  android:id="@+id/rvItemDetailPublicacion"
                  android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_centerInParent="true"/>
+                 android:layout_height="150dp"/>
 
                </LinearLayout>
 

@@ -41,6 +41,7 @@ public class Urls {
     public static final String listgpoxid ="http://187.188.168.51:8080/diariopws/api/1.0/grupo/listgpoxid";     //Funcional en server " requiere parametro idgrupo"
     public static final String listuserxgpo="http://187.188.168.51:8080/diariopws/api/1.0/grupodetalle/listusersgpo";
     public static final String creategpo ="http://187.188.168.51:8080/diariopws/api/1.0/grupo/create";    //correcion
+    public static final String listargpoxpublicacion="http://187.188.168.51:8080/diariopws/api/1.0/grupo/listgpoXppadre";
 
     //URLs Grupodetalle
     public static final String listgpodetalle ="http://187.188.168.51:8080/diariopws/api/1.0/grupodetalle/list";   //Funcional en server

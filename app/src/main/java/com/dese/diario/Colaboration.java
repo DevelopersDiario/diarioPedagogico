@@ -31,9 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Grupo;
-import com.dese.diario.Adapter.Adapter_RePubication;
 import com.dese.diario.Item.Search_friends;
-import com.dese.diario.Objects.DetailPublication;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 
@@ -326,6 +324,7 @@ public class Colaboration extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         //JSONArray jsonArray = null;
+
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 

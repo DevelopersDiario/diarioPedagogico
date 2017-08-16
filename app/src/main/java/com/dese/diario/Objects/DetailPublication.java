@@ -141,7 +141,7 @@ public class DetailPublication extends AppCompatActivity {
         f=i.getExtras().getString("FOTO_KEY");
         pa=i.getExtras().getString("PAPA");
 
-        listarRe( pa);
+        listarRe( idepublicacion);
         listarFile(idepublicacion);
 
 
@@ -188,8 +188,8 @@ public class DetailPublication extends AppCompatActivity {
 
         final EditText TITLE = (EditText) dialoglayout.findViewById(R.id.ettitlepost);
         final EditText PUBLIC = (EditText) dialoglayout.findViewById(R.id.etPublication);
-        final Spinner GPO = (Spinner) dialoglayout.findViewById(R.id.spGpoP);
-        listGpo(GPO);
+        final EditText GPO = (EditText) dialoglayout.findViewById(R.id.edGrupoRep);
+        listGpo(GPO, pa);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder
                 .setCancelable(false)
@@ -319,8 +319,8 @@ public class DetailPublication extends AppCompatActivity {
                                   // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
                                     recyclerView.setAdapter(adapter);
 
-                                    System.out.println(listRepublicaciones);
 
+                                  //&  System.out.println(listRepublicaciones);
                                 }
                             } catch (JSONException e) {
                                 Log.e("DetailPublication", "Error +->" + e);
@@ -355,54 +355,36 @@ public class DetailPublication extends AppCompatActivity {
 
 
 
-    private void listGpo(final Spinner gpo) {
+    private void listGpo(final EditText gpo, final String pa) {
+        VariablesLogin variablesLogin = new VariablesLogin();
+        final String id= variablesLogin.getIdusuario().toString();
+
         RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlLisGpo,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listargpoxpublicacion,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         //JSONArray jsonArray = null;
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
                             try {
-                                leadsNames  = new ArrayList<String>();
-                                leadsIdes= new ArrayList<String>();
-                                JSONArray jsonarray = new JSONArray(response);
-                                for (final int[] i = {0}; i[0] < jsonarray.length(); i[0]++) {
-                                    JSONObject jsonobject = jsonarray.getJSONObject(i[0]);
+                                //leadsNames  = new ArrayList<String>();
+                                ///leadsIdes= new ArrayList<String>();
+                                JSONObject jsonObject = new JSONObject(response);
+                                for (int i = 0; i < jsonObject.length(); i++) {
+                                    String getGruop=jsonObject.getString("nombregrupo").toString();
+                                    gpo.setText(getGruop);
+                                    gpo.setEnabled(false);
 
-                                    leadsNames.add(0, jsonobject.getString("nombregrupo"));
-                                    leadsIdes.add(0, jsonobject.getString("idgrupo"));
+                                    Toast.makeText(DetailPublication.this, "Lista"+ getGruop, Toast.LENGTH_LONG).show();
+                                    //recyclerView.setAdapter(adaptergpo);
 
 
-                                    // GPO= (Spinner) findViewById(R.id.spGpoP);
-                                    mLeadsAdapter = new ArrayAdapter<String>(DetailPublication.this,
-                                            android.R.layout.simple_spinner_item, leadsNames);
-                                    mLeadsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-                                    gpo.setAdapter(mLeadsAdapter);
-                                    gpo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                                        @Override
-                                        public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
-                                        {
-                                            ed= (String) leadsIdes.get(pos);
-
-                                        }
-
-                                        @Override
-                                        public void onNothingSelected(AdapterView<?> parent)
-                                        {    }
-                                    });
                                 }
-
-
-
                             } catch (JSONException e) {
-                                Log.e(getString(R.string.message_Oops), getString(R.string.message_Publication_Error) + e);
+                                Log.e("Detalle", "Error +->" + e);
                             }
                         }
                     }
@@ -410,9 +392,22 @@ public class DetailPublication extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(getString(R.string.carita), getString(R.string.message_ocurrio_error));
+                Log.e("DetallePub", "Response--->"+error);
             }
-        });
+
+        }
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idpublicacion", pa);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
 
 
         queue.add(stringRequest);
