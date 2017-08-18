@@ -368,4 +368,5 @@
     <string name="chat_hint">Enter text here</string>
     <string name="post">Post</string>
     <string name="back">Back</string>
+    <string name="title_activity_register">Register</string>
 </resources>
