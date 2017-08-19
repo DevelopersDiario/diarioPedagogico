@@ -309,9 +309,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                Intent intentPubli = new Intent(MainActivity.this, Publication.class);
-                startActivity(intentPubli);
+                //Intent intentPubli = new Intent(MainActivity.this, Publication.class);
+                //startActivity(intentPubli);
 
+                Intent ir= new Intent(MainActivity.this, Register.class);
+                startActivity(ir);
 
 
             }
