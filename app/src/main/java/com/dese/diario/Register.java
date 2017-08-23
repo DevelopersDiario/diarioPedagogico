@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -46,6 +47,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
     //EditText
     EditText  etTitle, etGrupo, etDescripcion, etSenimientos, etEvaluacion, etAnalisis, etConclusion, etPlan;
+
+    Button btnDescMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,17 +103,67 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         etConclusion= (EditText) this.findViewById(R.id.etConclusión);
         etPlan=(EditText) this.findViewById(R.id.etPlan);
 
+        btnDescMore = (Button) findViewById(R.id.btnDescMore);
+
        // etTitle.setOnClickListener(this);
        // etGrupo.setOnClickListener(this);
         etDescripcion.setOnClickListener(this);
-        etSenimientos.setOnClickListener(this);
-        etEvaluacion.setOnClickListener(this);
-        etAnalisis.setOnClickListener(this);
-        etConclusion.setOnClickListener(this);
-        etPlan.setOnClickListener(this);
+      //  etSenimientos.setOnClickListener(this);
+       // etEvaluacion.setOnClickListener(this);
+        //etAnalisis.setOnClickListener(this);
+       // etConclusion.setOnClickListener(this);
+       // etPlan.setOnClickListener(this);
 
+        btnDescMore.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnDescMore:
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+                Toast.makeText(this, "Descripcion", Toast.LENGTH_LONG).show();
+                Intent desc1= new Intent(Register.this, Publication.class);
+                startActivity(desc1);
+                break;
+
+            case R.id.etDescripcion:
+
+                //Hide softKeyboard
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                Toast.makeText(this, "Descripcion", Toast.LENGTH_LONG).show();
+                Intent desc= new Intent(Register.this, Publication.class);
+                startActivity(desc);
+
+                break;
+
+            case R.id.etSentimientos:
+
+                Toast.makeText(this, "Setnimientos", Toast.LENGTH_LONG).show();
+
+                break;
+            case R.id.etEvaluacion:
+                Toast.makeText(this, "Evaluación", Toast.LENGTH_LONG).show();
+
+                break;
+            case R.id.etAnalisis:
+                Toast.makeText(this, "Analisis", Toast.LENGTH_LONG).show();
+
+
+                break;
+
+            case R.id.etConclusión:
+                Toast.makeText(this, "Conclusión", Toast.LENGTH_LONG).show();
+
+                break;
+
+            case R.id.etPlan:
+                Toast.makeText(this, "Plan de acción", Toast.LENGTH_LONG).show();
+
+                break;
+        }
+    }
     @Override
     public void onDateSelected(DateTime dateSelected) {
         Log.i("HorizontalPicker","Fecha seleccionada="+dateSelected.toString());
@@ -241,42 +294,4 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     }
 
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-
-            case R.id.etDescripcion:
-
-                //Hide softKeyboard
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                Toast.makeText(this, "Descripcion", Toast.LENGTH_LONG).show();
-                Intent desc= new Intent(Register.this, Publication.class);
-                startActivity(desc);
-                break;
-
-            case R.id.etSentimientos:
-                Toast.makeText(this, "Setnimientos", Toast.LENGTH_LONG).show();
-
-                break;
-            case R.id.etEvaluacion:
-                Toast.makeText(this, "Evaluación", Toast.LENGTH_LONG).show();
-
-                break;
-            case R.id.etAnalisis:
-                Toast.makeText(this, "Analisis", Toast.LENGTH_LONG).show();
-
-
-                break;
-
-            case R.id.etConclusión:
-                Toast.makeText(this, "Conclusión", Toast.LENGTH_LONG).show();
-
-                break;
-
-            case R.id.etPlan:
-                Toast.makeText(this, "Plan de acción", Toast.LENGTH_LONG).show();
-
-                break;
-        }
-    }
 }

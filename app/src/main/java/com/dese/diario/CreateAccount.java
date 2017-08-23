@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -167,32 +169,47 @@ public class CreateAccount extends AppCompatActivity {
             String delimiter= "@";
             String temp []= email.split(delimiter, 2);
             account= temp[0];
-            // final String cuenta=account.toString();
+            // final String cue ta=account.toString();
             password=etPassword_CreateAcc.getText().toString().trim();
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            Toast.makeText(CreateAccount.this, account+" Su registro se realizo con Exito!!", Toast.LENGTH_LONG).show();
-                            openLogin(email);
+                            if (response != null && response.length() > 0) {
+                                Toast.makeText(CreateAccount.this, account + " Su registro se realizo con Exito!!", Toast.LENGTH_LONG).show();
+                                openLogin(email);
+                            } else {
+                                new MaterialDialog.Builder(CreateAccount.this)
+                                        .title("¡Error de conexión!")
+                                        .content("Lo lamentamos pero hubo un error en el servidor")
+                                        .show();
+                            }
+
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    String body;
+
+                   String body;
                     if (error.networkResponse.data != null) {
 
-                        try {
-                            body = new String(error.networkResponse.data, "UTF-8");
+                            try {
 
-                            Toast.makeText(CreateAccount.this, body, Toast.LENGTH_LONG).show();
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
+                                body = new String(error.networkResponse.data, "UTF-8");
+
+                                Toast.makeText(CreateAccount.this, body, Toast.LENGTH_LONG).show();
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+
+                    }else if(error.networkResponse.data==(null)){
+                        new MaterialDialog.Builder(CreateAccount.this)
+                                .title("¡Error de conexión!")
+                                .content("Lo lamentamos pero hubo un error en el servidor"+" ("+error.getMessage()+")")
+                                .show();
                     }
                 }
-
             }) {
                 @Override
                 protected Map<String, String> getParams() {
@@ -218,6 +235,7 @@ public class CreateAccount extends AppCompatActivity {
             Toast.makeText(CreateAccount.this,Mensaje , Toast.LENGTH_LONG).show();
 
         }//fin else cheked
+
 
 
 

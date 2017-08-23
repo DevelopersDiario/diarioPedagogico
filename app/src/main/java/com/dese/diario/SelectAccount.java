@@ -1,6 +1,7 @@
 package com.dese.diario;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -438,20 +439,17 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     String body;
-
                     if(error.networkResponse.data!=null) {
-
                         try {
                             body = new String(error.networkResponse.data,"UTF-8");
                             userLogin( mail, token);
-
-
 
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
                     }
                 }//Fin onErrorResponse
+
 
             }) {
                 @Override

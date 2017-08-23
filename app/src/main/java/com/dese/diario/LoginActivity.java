@@ -40,6 +40,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import cn.zhaiyifan.rememberedittext.RememberEditText;
+
 public class LoginActivity extends AppCompatActivity {
     final String correo= "correo";
     final String password1= "password";
@@ -55,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     // private EditText mEmailView;
     public EditText mPasswordView;
 
-   public  AutoCompleteTextView mEmailView;
+   public EditText mEmailView;
     private View mProgressView;
     private View mLoginFormView;
     private TextView failedLoginMessage, mForgetPassword;
@@ -81,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     }//Fin oNCreate
 
     private void inicializarButton() {
-        mEmailView= (AutoCompleteTextView) findViewById(R.id.tvEmail_Login);
+        mEmailView= (EditText) findViewById(R.id.tvEmail_Login);
         //       populateAutoComplete();
         failedLoginMessage = (TextView)findViewById(R.id.failed_login);
         mPasswordView=(EditText)findViewById(R.id.tvPassword_Login);

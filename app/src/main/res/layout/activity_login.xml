@@ -55,7 +55,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <AutoCompleteTextView
+                        <cn.zhaiyifan.rememberedittext.RememberEditText
                             android:id="@+id/tvEmail_Login"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
@@ -64,6 +64,8 @@
                             android:hint="@string/prompt_email"
                             android:inputType="textEmailAddress"
                             android:imeOptions="actionNext"
+                            app:rememberCount="3"
+                            app:rememberId="username"
                             android:maxLines="1"/>
                     </android.support.design.widget.TextInputLayout>
 
