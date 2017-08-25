@@ -80,7 +80,7 @@
                     android:layout_width="290dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Describe tus sentimientos y pensamientos"
+                    android:hint="Describa sus sentimientos y pensamientos"
                     android:textAlignment="center"
                     android:background="@drawable/edit_text_design"/>
                 <Button
@@ -101,7 +101,7 @@
                     android:layout_width="290dp"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Evaluacion del procedimeitno de reflexión"
+                    android:hint="Evaluación del procedimiento de reflexión"
                     android:textAlignment="center"
                     android:background="@drawable/edit_text_design"/>
                 <Button

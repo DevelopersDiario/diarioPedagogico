@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.dese.diario.Feelings"
-    tools:showIn="@layout/activity_feelings">
+    tools:context="com.dese.diario.Testing"
+    tools:showIn="@layout/activity_testing">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,9 +18,9 @@
 
 
             <EditText
-                android:id="@+id/etFeelingsM"
+                android:id="@+id/etTestingM"
                 android:layout_gravity="center"
-                android:hint="Describa sus sentimientos y pensamientos"
+                android:hint="Evaluación de la experiencia"
                 android:inputType="textMultiLine"
                 android:lines="20"
                 android:minLines="20"

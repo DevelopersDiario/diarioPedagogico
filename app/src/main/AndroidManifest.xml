@@ -207,7 +207,33 @@
         <activity
             android:name=".Feelings"
             android:label="@string/title_activity_feelings"
-            android:theme="@style/AppTheme"></activity>
+            android:parentActivityName=".Register">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Register" />
+        </activity>
+        <activity
+            android:name=".Testing"
+            android:label="@string/title_activity_testing"
+            android:parentActivityName=".Register">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Register" />
+        </activity>
+        <activity
+            android:name=".Analyze"
+            android:label="@string/title_activity_analyze"
+            android:parentActivityName=".Register">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Register" />
+        </activity>
     </application>
 
 </manifest>

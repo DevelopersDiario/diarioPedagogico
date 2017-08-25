@@ -371,4 +371,6 @@
     <string name="title_activity_register">Register</string>
     <string name="title_activity_descripting">Descripting</string>
     <string name="title_activity_feelings">Feelings</string>
+    <string name="title_activity_testing">Testing</string>
+    <string name="title_activity_analyze">Analyze</string>
 </resources>

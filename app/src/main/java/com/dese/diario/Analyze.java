@@ -12,8 +12,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 
-public class Feelings extends AppCompatActivity {
-
+public class Analyze extends AppCompatActivity {
     //Theme
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -24,13 +23,13 @@ public class Feelings extends AppCompatActivity {
     final  String KEY_THEME="THEME";
 
     //Bind
-    EditText etFeelingsM;
-
+    EditText etAnalyzeM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feelings);
+        setContentView(R.layout.activity_analyze);
+
 
         initView();
 
@@ -38,36 +37,41 @@ public class Feelings extends AppCompatActivity {
 
 
 
+
     }
+
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TypedValue typedValueColorPrimaryDark = new TypedValue();
-        Feelings.this.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValueColorPrimaryDark, true);
+        Analyze.this.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValueColorPrimaryDark, true);
         final int colorPrimaryDark = typedValueColorPrimaryDark.data;
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(colorPrimaryDark);
 
         }
 
-        etFeelingsM= (EditText) findViewById(R.id.etFeelingsM);
+        etAnalyzeM= (EditText) findViewById(R.id.etAnalyzeM);
 
 
     }
+
     private void initListener() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
 
+
     }
+
+
 
     /*------------Theme choose by user--------------------*/
     private void theme() {
@@ -115,8 +119,5 @@ public class Feelings extends AppCompatActivity {
                 break;
         }
     }
-
-
-
 
 }

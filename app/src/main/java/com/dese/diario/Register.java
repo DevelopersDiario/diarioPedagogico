@@ -195,7 +195,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
             case R.id.btnMoreConclusion:
                 Intent Conc= new Intent(Register.this, Conclusion.class);
                 startActivity(Conc);
-
                 break;
 
             case R.id.btnMorePlan:
