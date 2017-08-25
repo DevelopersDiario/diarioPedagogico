@@ -18,16 +18,34 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.Spinner;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.dese.diario.Objects.Urls;
+import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Utils.Upload;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
 
 import org.joda.time.DateTime;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Register extends AppCompatActivity implements DatePickerListener,  View.OnClickListener{
     //Theme
@@ -38,6 +56,11 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     //KEYS
     final  String KEY_VALUE="VALUES";
     final  String KEY_THEME="THEME";
+    public static final String KEY_NAMEG = "nombregrupo";
+    final  String KEY_IDUSUARIO="idusuario";
+    final  String KEY_TITULO="titulo";
+    final String KEY_OBSERVACIONES="observaciones";
+    final  String KEY_IDGROUP="idgrupo";
 
     //Toolbar
     private static final int TIME_DELAY = 2000;
@@ -45,11 +68,16 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     Intent intent;
     Boolean homeButton = false, themeChanged;
 
-    //EditText
+    //Bind
     EditText  etTitle, etGrupo, etDescripcion, etSenimientos, etEvaluacion, etAnalisis, etConclusion, etPlan;
+    Button btnMoreFeels, btnMoreDesc, btnMoreTest, btnMoreAnalisis, btnMoreConclusion, btnMorePlan;
+    Spinner spGpoP;
+    Upload upload;
 
-    Button btnDescMore;
-
+    //Spinner
+    List leadsNames, leadsIdes;
+    ArrayAdapter mLeadsAdapter;
+    String ed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -95,40 +123,50 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
             getWindow().setStatusBarColor(colorPrimaryDark);
 
         }
-
+        upload = new Upload();
+        listGpos();
         etTitle=(EditText) this.findViewById(R.id.etTitle);
-        etGrupo= (EditText) this.findViewById(R.id.etGrupo);
+      //  etGrupo= (EditText) this.findViewById(R.id.etGrupo);
         etDescripcion = (EditText) this.findViewById(R.id.etDescripcion);
         etEvaluacion= (EditText) this.findViewById(R.id.etEvaluacion);
-        etConclusion= (EditText) this.findViewById(R.id.etConclusión);
+        etConclusion= (EditText) this.findViewById(R.id.etConclusion);
         etPlan=(EditText) this.findViewById(R.id.etPlan);
 
-        btnDescMore = (Button) findViewById(R.id.btnDescMore);
 
        // etTitle.setOnClickListener(this);
        // etGrupo.setOnClickListener(this);
-        etDescripcion.setOnClickListener(this);
+      //  etDescripcion.setOnClickListener(this);
       //  etSenimientos.setOnClickListener(this);
        // etEvaluacion.setOnClickListener(this);
         //etAnalisis.setOnClickListener(this);
        // etConclusion.setOnClickListener(this);
        // etPlan.setOnClickListener(this);
 
-        btnDescMore.setOnClickListener(this);
+        btnMoreFeels= (Button) findViewById(R.id.btnMoreFeels);
+        btnMoreDesc= (Button) findViewById(R.id.btnMoreDesc);
+        btnMoreTest= (Button) findViewById(R.id.btnMoreTest);
+        btnMoreAnalisis= (Button) findViewById(R.id.btnMoreAnalisi);
+        btnMoreConclusion= (Button) findViewById(R.id.btnMoreConclusion);
+        btnMorePlan=(Button) findViewById(R.id.btnMorePlan);
+
+        btnMoreFeels.setOnClickListener(this);
+        btnMoreTest.setOnClickListener(this);
+        btnMoreDesc.setOnClickListener(this);
+
+        btnMoreAnalisis.setOnClickListener(this);
+        btnMoreConclusion.setOnClickListener(this);
+        btnMorePlan.setOnClickListener(this);
+
+
+        getDescripting();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnDescMore:
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-                Toast.makeText(this, "Descripcion", Toast.LENGTH_LONG).show();
-                Intent desc1= new Intent(Register.this, Publication.class);
-                startActivity(desc1);
-                break;
 
-            case R.id.etDescripcion:
+         /*   case R.id.etDescripcion:
 
                 //Hide softKeyboard
                 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -136,36 +174,39 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 Intent desc= new Intent(Register.this, Publication.class);
                 startActivity(desc);
 
+                break;*/
+            case R.id.btnMoreDesc:
+                Intent desc= new Intent(Register.this, Descripting.class);
+                startActivity(desc);
+                break;
+           case R.id.btnMoreFeels:
+                Intent feelss= new Intent(Register.this, Feelings.class);
+                startActivity(feelss);
                 break;
 
-            case R.id.etSentimientos:
-
-                Toast.makeText(this, "Setnimientos", Toast.LENGTH_LONG).show();
-
+            case R.id.btnMoreTest:
+                Intent testing= new Intent(Register.this, Testing.class);
+                startActivity(testing);
                 break;
-            case R.id.etEvaluacion:
-                Toast.makeText(this, "Evaluación", Toast.LENGTH_LONG).show();
-
+            case R.id.btnMoreAnalisi:
+                Intent Analisis= new Intent(Register.this, Analyze.class);
+                startActivity(Analisis);
                 break;
-            case R.id.etAnalisis:
-                Toast.makeText(this, "Analisis", Toast.LENGTH_LONG).show();
-
-
-                break;
-
-            case R.id.etConclusión:
-                Toast.makeText(this, "Conclusión", Toast.LENGTH_LONG).show();
+            case R.id.btnMoreConclusion:
+                Intent Conc= new Intent(Register.this, Conclusion.class);
+                startActivity(Conc);
 
                 break;
 
-            case R.id.etPlan:
-                Toast.makeText(this, "Plan de acción", Toast.LENGTH_LONG).show();
-
+            case R.id.btnMorePlan:
+                Intent plan= new Intent(Register.this, Plan.class);
+                startActivity(plan);
                 break;
         }
     }
     @Override
     public void onDateSelected(DateTime dateSelected) {
+
         Log.i("HorizontalPicker","Fecha seleccionada="+dateSelected.toString());
     }
 
@@ -293,5 +334,90 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         }
     }
 
+    private void listGpos() {
+        VariablesLogin variablesLogin = new VariablesLogin();
+        final String id= variablesLogin.getIdusuario().toString();
 
+        RequestQueue queue = Volley.newRequestQueue(Register.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listgrupo,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            try {
+                                leadsNames  = new ArrayList<String>();
+                                leadsIdes= new ArrayList<String>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (final int[] i = {0}; i[0] < jsonarray.length(); i[0]++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i[0]);
+
+                                    leadsNames.add(0, jsonobject.getString(KEY_NAMEG));
+                                    leadsIdes.add(0, jsonobject.getString(KEY_IDGROUP));
+
+
+                                    spGpoP= (Spinner) findViewById(R.id.spGpoP);
+                                    mLeadsAdapter = new ArrayAdapter<String>(Register.this,
+                                            android.R.layout.simple_spinner_item, leadsNames);
+                                    mLeadsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+                                    spGpoP.setAdapter(mLeadsAdapter);
+                                    spGpoP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                        @Override
+                                        public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+                                        {
+
+                                            if(view.callOnClick()){
+                                                ed= (String) leadsIdes.get(pos);
+                                                spGpoP.setEnabled(true);
+                                            }
+
+                                        }
+
+                                        @Override
+                                        public void onNothingSelected(AdapterView<?> parent)
+                                        {    }
+                                    });
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Detalle", "Error +->" + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("DetallePub", "Response--->"+error);
+            }
+        }
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idusuario", id);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
+
+    }
+
+    public void getDescripting() {
+        Bundle getD = getIntent().getExtras();
+        if (getD != null) {
+            etDescripcion.setText(getD.getString("Descripcion"));
+        }
+
+      //  etDescripcion.setText( getIntent().getExtras().getString("Descripcion"));
+    }
 }

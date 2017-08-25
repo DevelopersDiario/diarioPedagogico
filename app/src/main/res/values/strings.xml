@@ -369,4 +369,6 @@
     <string name="post">Post</string>
     <string name="back">Back</string>
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_descripting">Descripting</string>
+    <string name="title_activity_feelings">Feelings</string>
 </resources>

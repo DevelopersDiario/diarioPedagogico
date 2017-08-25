@@ -36,6 +36,7 @@
         <item name="colorControlHighlight">?colorControlHighlight</item>
         <item name="colorButtonNormal">?actionModeBackground</item>
     </style>
+
     <declare-styleable name="RememberEditText">
         <!-- auto fill in cache, by default true -->
         <attr name="autoFill" format="boolean" />

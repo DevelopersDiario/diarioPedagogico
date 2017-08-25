@@ -1,161 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.dese.diario.Register"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    tools:showIn="@layout/activity_register">
+    tools:context=".Register"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    >
+
+
+
     <ScrollView
-        android:layout_width="328dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
             <com.github.jhonnyx2012.horizontalpicker.HorizontalPicker
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-
-
-                <EditText
-                    android:id="@+id/etTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/txtInput_add_title"
-                    android:textAlignment="center"
-                    android:background="@drawable/edit_text_design"
-                    />
-
-
-
-            <android.support.v7.widget.CardView
+            <EditText
+                android:id="@+id/etTitle"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:elevation="10dp"
-                >
-                <EditText
-                    android:id="@+id/etGrupo"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="Grupo"
-                    android:textAlignment="center"
-                    android:background="@drawable/edit_text_border"
-                    />
-            </android.support.v7.widget.CardView>
+                android:layout_marginTop="10dp"
+                android:hint="Titulo"
+                android:textAlignment="center"
+                android:background="@drawable/edit_text_design"
+                />
+            <Spinner
+                android:id="@+id/spGpoP"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:hint="Grupo"
+                android:textAlignment="center"
+                android:background="@drawable/edit_text_design"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-            <android.support.v7.widget.CardView
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:elevation="10dp"
-                >
-                <com.rockerhieu.emojicon.EmojiconEditText
-                    android:id="@+id/etDescripcion"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="Descripcion de la reflexión"
-                    android:textAlignment="center"
-                    android:background="@drawable/edit_text_border"
-                    />
-
-            </android.support.v7.widget.CardView>
-                <Button
-                    android:id="@+id/btnDescMore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ic_menu_right"/>
-        </LinearLayout>
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="10dp">
-
                 <EditText
-                    android:id="@+id/etSentimientos"
-                    android:layout_width="match_parent"
+                    android:id="@+id/etDescripcion"
+                    android:layout_width="290dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/edit_text_border"
-                    android:hint="Sentimientos y Pensamientos"
-                    android:textAlignment="center" />
-            </android.support.v7.widget.CardView>
+                    android:background="@drawable/edit_text_design"
+                    android:gravity="center"
+                    android:hint="¿Que esta pasando?"
+                    android:textSize="10pt"
+                    android:textAlignment="center"
 
-            <android.support.v7.widget.CardView
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                <Button
+                    android:id="@+id/btnMoreDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_menu_right"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="10dp"
-                >
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/etSenimientos"
+                    android:layout_width="290dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Describe tus sentimientos y pensamientos"
+                    android:textAlignment="center"
+                    android:background="@drawable/edit_text_design"/>
+                <Button
+                    android:id="@+id/btnMoreFeels"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_menu_right"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <EditText
                     android:id="@+id/etEvaluacion"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_width="290dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Evaluación"
+                    android:hint="Evaluacion del procedimeitno de reflexión"
                     android:textAlignment="center"
-                    android:background="@drawable/edit_text_border"
-                    />
-            </android.support.v7.widget.CardView> <android.support.v7.widget.CardView
+                    android:background="@drawable/edit_text_design"/>
+                <Button
+                    android:id="@+id/btnMoreTest"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_menu_right"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="10dp"
-                >
+                android:orientation="horizontal">
                 <EditText
                     android:id="@+id/etAnalisis"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_width="290dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Anlisi"
+                    android:hint="Analisis del proceso de reflexión"
                     android:textAlignment="center"
-                    android:background="@drawable/edit_text_border"
-                    />
-            </android.support.v7.widget.CardView>
-             <android.support.v7.widget.CardView
+                    android:background="@drawable/edit_text_design"/>
+                <Button
+                    android:id="@+id/btnMoreAnalisi"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_menu_right"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="10dp"
-                >
+                android:orientation="horizontal">
                 <EditText
-                    android:id="@+id/etConclusión"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:id="@+id/etConclusion"
+                    android:layout_width="290dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Conclusion"
+                    android:hint="Conclusion del proceso de reflexion"
                     android:textAlignment="center"
-                    android:background="@drawable/edit_text_border"
-                    />
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+                    android:background="@drawable/edit_text_design"/>
+                <Button
+                    android:id="@+id/btnMoreConclusion"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_menu_right"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="10dp"
-                >
+                android:orientation="horizontal">
                 <EditText
                     android:id="@+id/etPlan"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_width="290dp"
+                    android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Plan de Acción"
+                    android:hint="Plan de acción"
                     android:textAlignment="center"
-                    android:background="@drawable/edit_text_border"
-                    />
-            </android.support.v7.widget.CardView>
+                    android:background="@drawable/edit_text_design"/>
+                <Button
+                    android:id="@+id/btnMorePlan"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_menu_right"
+                    android:layout_height="wrap_content" />
 
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

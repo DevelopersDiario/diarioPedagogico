@@ -194,6 +194,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity
+            android:name=".Descripting"
+            android:label="@string/title_activity_descripting"
+            android:parentActivityName=".Register">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Register" />
+        </activity>
+        <activity
+            android:name=".Feelings"
+            android:label="@string/title_activity_feelings"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
