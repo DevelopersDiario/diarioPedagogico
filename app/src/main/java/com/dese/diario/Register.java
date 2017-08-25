@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -32,6 +33,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Objects.Urls;
+import com.dese.diario.POJOS.Reflexion;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Upload;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
@@ -42,6 +44,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,11 +59,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     //KEYS
     final  String KEY_VALUE="VALUES";
     final  String KEY_THEME="THEME";
-    public static final String KEY_NAMEG = "nombregrupo";
+    final String KEY_NAMEG = "nombregrupo";
     final  String KEY_IDUSUARIO="idusuario";
     final  String KEY_TITULO="titulo";
     final String KEY_OBSERVACIONES="observaciones";
     final  String KEY_IDGROUP="idgrupo";
+    final  String CONTENT_TYPE="Content-Type";
+    final  String APPLICATION="application/x-www-form-urlencoded";
 
     //Toolbar
     private static final int TIME_DELAY = 2000;
@@ -72,12 +77,23 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     EditText  etTitle, etGrupo, etDescripcion, etSenimientos, etEvaluacion, etAnalisis, etConclusion, etPlan;
     Button btnMoreFeels, btnMoreDesc, btnMoreTest, btnMoreAnalisis, btnMoreConclusion, btnMorePlan;
     Spinner spGpoP;
-    Upload upload;
 
     //Spinner
     List leadsNames, leadsIdes;
     ArrayAdapter mLeadsAdapter;
     String ed;
+
+    ArrayList<String> paths = new ArrayList<>();
+
+    //Upload
+    Upload upload;
+    String idusuario;
+    String titulo;
+    String observaciones;
+    String padre;
+    Intent actReq;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -158,7 +174,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         btnMorePlan.setOnClickListener(this);
 
 
-        getDescripting();
+        getDatas();
     }
 
     @Override
@@ -203,6 +219,75 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 break;
         }
     }
+
+
+    private void RegisterPost(final String  ide) throws JSONException {
+        final VariablesLogin  varlogin =new VariablesLogin();
+
+        if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty()) {
+            idusuario= varlogin.getIdusuario();
+            titulo = etTitle.getText().toString().trim();
+            observaciones = etDescripcion.getText().toString().trim();
+            padre="0";
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.insertpublicacion,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                            upload.recorrerListPaths(paths, Register.this, actReq, ed);
+                            // upload.uploadMultipart(Publication.this, actReq, ed);
+                          //  failed_regpublication.setText(R.string.message_succes_publication);
+
+                            openMainactivity();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String body;
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if (error.networkResponse.data != null) {
+
+                        try {
+                            body = new String(error.networkResponse.data, "UTF-8");
+
+                           // failed_regpublication.setText(body);
+
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(KEY_IDUSUARIO,idusuario );
+                    params.put(KEY_TITULO, titulo);
+                    params.put(KEY_IDGROUP, ide);
+                    params.put(KEY_OBSERVACIONES, observaciones);
+                    params.put(CONTENT_TYPE, APPLICATION);
+                    return params;
+                }
+
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+
+        }//Fin isChecked
+        else{
+            String Mensaje=("Debe rellenar todos los campos");
+            //failed_regpublication.setText(Mensaje);
+            Toast.makeText(Register.this,Mensaje , Toast.LENGTH_LONG).show();
+
+        }//fin else cheked
+
+
+
+    }//Fin RegisterPost
+
     @Override
     public void onDateSelected(DateTime dateSelected) {
 
@@ -253,11 +338,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
             case R.id.action_post:
 
-                break;
-            case R.id.action_saved:
-
-
-               // failed_regpublication.setText("");
                 break;
 
             case android.R.id.home:
@@ -410,13 +490,31 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         queue.add(stringRequest);
 
     }
+            private void openMainactivity() {
+                // showProgress(true);
+                Intent intent= new Intent(Register.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            } //Fin open login
 
-    public void getDescripting() {
-        Bundle getD = getIntent().getExtras();
-        if (getD != null) {
-            etDescripcion.setText(getD.getString("Descripcion"));
-        }
+            public void getDatas() {
+                Reflexion r= new Reflexion();
 
-      //  etDescripcion.setText( getIntent().getExtras().getString("Descripcion"));
-    }
+                    if(r.getObservaciones().equals(null)){
+
+                    }
+                        else{
+                        etDescripcion.setText(r.getObservaciones());
+                }
+
+                    if(r.getSentimiento().equals(null))
+                    etSenimientos.setText("Hola");
+                else
+                        etSenimientos.setText(r.getSentimiento());
+                /*Bundle getD = getIntent().getExtras();
+
+                if (getD != null)
+                    etDescripcion.setText(getD.getString("Descripcion"));
+*/
+            }
 }

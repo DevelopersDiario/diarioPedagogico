@@ -1,6 +1,7 @@
 package com.dese.diario;
 
 import android.app.Dialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.Adapter.Adapter_Item;
 import com.dese.diario.Item.Search_friends;
+import com.dese.diario.POJOS.Reflexion;
 import com.dese.diario.Utils.Upload;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 import com.sangcomz.fishbun.FishBun;
@@ -227,7 +229,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
                 case PICK_DOC_REQUEST:
                     actReq=data;
-//                    clipdataSelect(data);
+                   clipdataSelect(data);
 
                     break;
 
@@ -235,7 +237,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                 case PICK_AUD_REQUEST:
                     actReq=data;
 
- //                   clipdataSelect(data);
+                   clipdataSelect(data);
                     break;
 
                 case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
@@ -343,14 +345,17 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
             case R.id.action_post:
                 Intent d= new Intent(Descripting.this, Register.class);
-                if(!etDescriptingM.getText().equals(" ")){
+                if(!etDescriptingM.getText().equals(null)){
+                    Reflexion r= new Reflexion();
 
                     textMore=etDescriptingM.getText().toString();
                     d.putExtra("Descripcion", textMore);
+                    r.setObservaciones(textMore);
                     startActivity(d);
+                    finish();
 
 
-                    Toast.makeText(this, "Texto"+textMore, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "Texto"+textMore, Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(this, "No guardo", Toast.LENGTH_SHORT).show();
                 }
@@ -366,6 +371,53 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private void clipdataSelect(Intent data) {
+
+        String imageEncoded;
+        Uri mImageUri;
+        if (data.getData() != null) {
+            mImageUri = Uri.parse(data.getDataString());
+            // Get the cursor
+            try {
+                imageEncoded= upload.getFilePath(Descripting.this, mImageUri);
+                paths.add(imageEncoded);
+
+                ia = new Adapter_Item(paths, Descripting.this);
+                rcItems.setAdapter(ia);
+
+//                Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
+
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
+
+        } else{
+            if (data.getClipData() != null) {
+                ClipData mClipData = data.getClipData();
+                ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                for (int i = 0; i < mClipData.getItemCount(); i++) {
+                    try {
+                        ClipData.Item item = mClipData.getItemAt(i);
+                        Uri uri = item.getUri();
+
+                        String realpath = upload.getFilePath(Descripting.this, uri);
+
+                        mArrayUri.add(uri);
+
+
+                        paths.add(realpath);
+                        ia = new Adapter_Item(paths, Descripting.this);
+                        rcItems.setAdapter(ia);
+                        Toast.makeText(Descripting.this, "Clipdata"+realpath, Toast.LENGTH_SHORT).show();
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }
     }
 
 }

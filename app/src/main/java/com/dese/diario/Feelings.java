@@ -1,6 +1,7 @@
 package com.dese.diario;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.dese.diario.POJOS.Reflexion;
 
 public class Feelings extends AppCompatActivity {
 
@@ -61,6 +65,22 @@ public class Feelings extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String textMore;
+                Reflexion r= new Reflexion();
+
+                Intent d= new Intent(Feelings.this, Register.class);
+                if(!etFeelingsM.getText().equals(null)){
+
+                    textMore=etFeelingsM.getText().toString();
+                    d.putExtra("Sentimientos", textMore);
+                    r.setSentimiento(textMore);
+                    startActivity(d);
+                    finish();
+
+
+                    // Toast.makeText(this, "Texto"+textMore, Toast.LENGTH_SHORT).show();
+                }
+
 
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
