@@ -234,6 +234,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Register" />
         </activity>
+        <activity
+            android:name=".Conclusion"
+            android:label="@string/title_activity_conclusion"
+            android:parentActivityName=".Register">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Register" />
+        </activity>
+        <activity
+            android:name=".Plan"
+            android:label="@string/title_activity_plan"
+            android:parentActivityName=".Register">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Register" />
+        </activity>
     </application>
 
 </manifest>

@@ -9,8 +9,9 @@
     android:layout_marginTop="7dp"
     android:layout_marginBottom="17dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.dese.diario.Analyze"
-    tools:showIn="@layout/activity_analyze">
+    tools:context="com.dese.diario.Conclusion"
+    tools:showIn="@layout/activity_conclusion">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,9 +22,9 @@
 
 
             <EditText
-                android:id="@+id/etAnalyzeM"
+                android:id="@+id/etConclusionM"
                 android:layout_gravity="center"
-                android:hint="Analisis de la experiencia"
+                android:hint="Conclusiones"
                 android:inputType="textMultiLine"
                 android:lines="20"
                 android:minLines="20"

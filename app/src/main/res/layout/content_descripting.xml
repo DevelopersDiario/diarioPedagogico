@@ -24,7 +24,7 @@
                         <EditText
                             android:id="@+id/etDescriptingM"
                             android:layout_gravity="center"
-                            android:hint="Descripcion"
+                            android:hint="Descripción"
                             android:inputType="textMultiLine"
                             android:lines="20"
                             android:minLines="20"

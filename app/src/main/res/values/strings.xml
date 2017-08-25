@@ -373,4 +373,6 @@
     <string name="title_activity_feelings">Feelings</string>
     <string name="title_activity_testing">Testing</string>
     <string name="title_activity_analyze">Analyze</string>
+    <string name="title_activity_conclusion">Conclusion</string>
+    <string name="title_activity_plan">Plan</string>
 </resources>
