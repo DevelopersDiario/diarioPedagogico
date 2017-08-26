@@ -382,6 +382,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         switch (id) {
 
             case R.id.action_post:
+                try {
+                    RegisterPost(ed);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 break;
 
