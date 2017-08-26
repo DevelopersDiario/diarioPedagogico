@@ -1,6 +1,7 @@
 package com.dese.diario;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class Analyze extends AppCompatActivity {
 
     //Bind
     EditText etAnalyzeM;
+
+    //Intents State
+    String D, S, E;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -55,6 +59,12 @@ public class Analyze extends AppCompatActivity {
 
         etAnalyzeM= (EditText) findViewById(R.id.etAnalyzeM);
 
+        Bundle getD = getIntent().getExtras();
+
+        if (getD != null)
+            D=(getD.getString("Descripcion"));
+            S=(getD.getString("Sentimientos"));
+            E=(getD.getString("Evaluacion"));
 
     }
 
@@ -63,8 +73,17 @@ public class Analyze extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String textMore;
+                Intent t = new Intent(Analyze.this, Register.class);
+
+
+                textMore = etAnalyzeM.getText().toString();
+                t.putExtra("Analisis", textMore);
+                t.putExtra("Descripcion", D);
+                t.putExtra("Sentimientos", S);
+                t.putExtra("Evaluacion", E);
+                startActivity(t);
+                finish();
             }
         });
 

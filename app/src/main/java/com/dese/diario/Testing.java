@@ -1,6 +1,7 @@
 package com.dese.diario;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class Testing extends AppCompatActivity {
 
     //Bind
     EditText etTestingM;
+
+    //Intents State
+    String D, S;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,12 @@ public class Testing extends AppCompatActivity {
 
         etTestingM= (EditText)findViewById(R.id.etTestingM);
 
+        Bundle getD = getIntent().getExtras();
+
+        if (getD != null)
+            D=(getD.getString("Descripcion"));
+            S=(getD.getString("Sentimientos"));
+
 
     }
 
@@ -63,8 +73,16 @@ public class Testing extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String textMore;
+                Intent t = new Intent(Testing.this, Register.class);
+
+
+                textMore = etTestingM.getText().toString();
+                t.putExtra("Evaluacion", textMore);
+                t.putExtra("Descripcion", D);
+                t.putExtra("Sentimientos", S);
+                startActivity(t);
+                finish();
             }
         });
 

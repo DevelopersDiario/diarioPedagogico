@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,6 +39,7 @@ import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Upload;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
+import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 
 import org.joda.time.DateTime;
 import org.json.JSONArray;
@@ -141,16 +143,17 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         }
         upload = new Upload();
         listGpos();
+
         etTitle=(EditText) this.findViewById(R.id.etTitle);
-      //  etGrupo= (EditText) this.findViewById(R.id.etGrupo);
         etDescripcion = (EditText) this.findViewById(R.id.etDescripcion);
+        etSenimientos= (EditText) findViewById(R.id.etSenimientos);
         etEvaluacion= (EditText) this.findViewById(R.id.etEvaluacion);
+        etAnalisis= (EditText)this.findViewById(R.id.etAnalisis);
         etConclusion= (EditText) this.findViewById(R.id.etConclusion);
         etPlan=(EditText) this.findViewById(R.id.etPlan);
 
 
        // etTitle.setOnClickListener(this);
-       // etGrupo.setOnClickListener(this);
       //  etDescripcion.setOnClickListener(this);
       //  etSenimientos.setOnClickListener(this);
        // etEvaluacion.setOnClickListener(this);
@@ -174,7 +177,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         btnMorePlan.setOnClickListener(this);
 
 
-        getDatas();
+        getData();
     }
 
     @Override
@@ -197,25 +200,67 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 break;
            case R.id.btnMoreFeels:
                 Intent feelss= new Intent(Register.this, Feelings.class);
-                startActivity(feelss);
+               if(etDescripcion.getText().toString().isEmpty()){
+                   new MaterialDialog.Builder(this)
+                           .title("Alerta!")
+                           .content("Necesita agregar primero una descrición")
+                           .show();
+
+               }else {
+                   feelss.putExtra("Descripcion", etDescripcion.getText().toString());
+                   startActivity(feelss);
+               }
+
                 break;
 
             case R.id.btnMoreTest:
                 Intent testing= new Intent(Register.this, Testing.class);
-                startActivity(testing);
+                if(etSenimientos.getText().toString().isEmpty()){
+
+
+                }else {
+                    testing.putExtra("Descripcion", etDescripcion.getText().toString());
+                    testing.putExtra("Sentimientos", etSenimientos.getText().toString());
+                    startActivity(testing);
+                }
+
                 break;
             case R.id.btnMoreAnalisi:
                 Intent Analisis= new Intent(Register.this, Analyze.class);
-                startActivity(Analisis);
+                if(etEvaluacion.getText().toString().isEmpty()){
+
+                }else {
+                    Analisis.putExtra("Descripcion", etDescripcion.getText().toString());
+                    Analisis.putExtra("Sentimientos", etSenimientos.getText().toString());
+                    Analisis.putExtra("Evaluacion", etEvaluacion.getText().toString());
+                    startActivity(Analisis);
+                }
                 break;
             case R.id.btnMoreConclusion:
                 Intent Conc= new Intent(Register.this, Conclusion.class);
-                startActivity(Conc);
+                if(etAnalisis.getText().toString().isEmpty()){
+
+                }else {
+                    Conc.putExtra("Descripcion", etDescripcion.getText().toString());
+                    Conc.putExtra("Sentimientos", etSenimientos.getText().toString());
+                    Conc.putExtra("Evaluacion", etEvaluacion.getText().toString());
+                    Conc.putExtra("Conclusion", etConclusion.getText().toString());
+                    startActivity(Conc);
+                }
                 break;
 
             case R.id.btnMorePlan:
                 Intent plan= new Intent(Register.this, Plan.class);
-                startActivity(plan);
+                if(etAnalisis.getText().toString().isEmpty()){
+
+                }else {
+                    plan.putExtra("Descripcion", etDescripcion.getText().toString());
+                    plan.putExtra("Sentimientos", etSenimientos.getText().toString());
+                    plan.putExtra("Evaluacion", etEvaluacion.getText().toString());
+                    plan.putExtra("Conclusion", etConclusion.getText().toString());
+                    plan.putExtra("Analisis", etAnalisis.getText().toString());
+                    startActivity(plan);
+                }
                 break;
         }
     }
@@ -497,24 +542,21 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 finish();
             } //Fin open login
 
-            public void getDatas() {
-                Reflexion r= new Reflexion();
+    
+                public void getData(){
+                    Bundle getD = getIntent().getExtras();
+                    if (getD != null) {
 
-                    if(r.getObservaciones().equals(null)){
+                        etDescripcion.setText(getD.getString("Descripcion"));
+                        etSenimientos.setText(getD.getString("Sentimientos"));
+                        etEvaluacion.setText(getD.getString("Evaluacion"));
+                        etAnalisis.setText(getD.getString("Analisis"));
+                        etConclusion.setText(getD.getString("Conclusion"));
+                        etPlan.setText(getD.getString("Plan"));
 
                     }
-                        else{
-                        etDescripcion.setText(r.getObservaciones());
+
                 }
 
-                    if(r.getSentimiento().equals(null))
-                    etSenimientos.setText("Hola");
-                else
-                        etSenimientos.setText(r.getSentimiento());
-                /*Bundle getD = getIntent().getExtras();
 
-                if (getD != null)
-                    etDescripcion.setText(getD.getString("Descripcion"));
-*/
-            }
 }

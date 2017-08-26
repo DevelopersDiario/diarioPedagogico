@@ -30,6 +30,9 @@ public class Feelings extends AppCompatActivity {
     //Bind
     EditText etFeelingsM;
 
+    //Intents State
+    String D;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -59,6 +62,12 @@ public class Feelings extends AppCompatActivity {
         etFeelingsM= (EditText) findViewById(R.id.etFeelingsM);
 
 
+        Bundle getD = getIntent().getExtras();
+
+        if (getD != null)
+            D=(getD.getString("Descripcion"));
+
+
     }
     private void initListener() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -66,24 +75,18 @@ public class Feelings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String textMore;
-                Reflexion r= new Reflexion();
+                Intent f= new Intent(Feelings.this, Register.class);
 
-                Intent d= new Intent(Feelings.this, Register.class);
-                if(!etFeelingsM.getText().equals(null)){
 
                     textMore=etFeelingsM.getText().toString();
-                    d.putExtra("Sentimientos", textMore);
-                    r.setSentimiento(textMore);
-                    startActivity(d);
+                     f.putExtra("Sentimientos", textMore);
+                     f.putExtra("Descripcion", D);
+                   // r.setSentimiento(textMore);
+                    startActivity(f);
                     finish();
 
 
-                    // Toast.makeText(this, "Texto"+textMore, Toast.LENGTH_SHORT).show();
-                }
 
-
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 

@@ -1,6 +1,7 @@
 package com.dese.diario;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,9 @@ public class Conclusion extends AppCompatActivity {
 
     //Bind
     EditText etConclusionM;
+
+    //Intents State
+    String D, S, E, A;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -54,6 +58,13 @@ public class Conclusion extends AppCompatActivity {
         }
 
         etConclusionM= (EditText) findViewById(R.id.etConclusionM);
+        Bundle getD = getIntent().getExtras();
+
+        if (getD != null)
+            D=(getD.getString("Descripcion"));
+            S=(getD.getString("Sentimientos"));
+            E=(getD.getString("Evaluacion"));
+            A= (getD.getString("Analisis"));
 
     }
 
@@ -62,8 +73,18 @@ public class Conclusion extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String textMore;
+                Intent c = new Intent(Conclusion.this, Register.class);
+
+
+                textMore = etConclusionM.getText().toString();
+                c.putExtra("Conclusion", textMore);
+                c.putExtra("Analisis", A);
+                c.putExtra("Descripcion", D);
+                c.putExtra("Sentimientos", S);
+                c.putExtra("Evaluacion", E);
+                startActivity(c);
+                finish();
             }
         });
 

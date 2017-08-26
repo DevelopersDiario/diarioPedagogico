@@ -1,6 +1,7 @@
 package com.dese.diario;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ public class Plan extends AppCompatActivity {
 
     //Bind
     EditText etPlanM;
+
+    //Intents State
+    String D, S, E, A, C;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -53,6 +57,15 @@ public class Plan extends AppCompatActivity {
         }
 
         etPlanM= (EditText) findViewById(R.id.etPlanM);
+        Bundle getD = getIntent().getExtras();
+
+        if (getD != null)
+            D=(getD.getString("Descripcion"));
+            S=(getD.getString("Sentimientos"));
+            E=(getD.getString("Evaluacion"));
+            A= (getD.getString("Analisis"));
+            C= (getD.getString("Conclusion"));
+
 
     }
 
@@ -61,8 +74,19 @@ public class Plan extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String textMore;
+                Intent p = new Intent(Plan.this, Register.class);
+
+
+                textMore = etPlanM.getText().toString();
+                p.putExtra("Plan", textMore);
+                p.putExtra("Analisis", A);
+                p.putExtra("Descripcion", D);
+                p.putExtra("Sentimientos", S);
+                p.putExtra("Evaluacion", E);
+                p.putExtra("Conclusion", C);
+                startActivity(p);
+                finish();
             }
         });
 
