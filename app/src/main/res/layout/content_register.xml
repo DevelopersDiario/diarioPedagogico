@@ -26,42 +26,51 @@
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-            <EditText
-                android:id="@+id/etTitle"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:hint="Titulo"
-                android:textAlignment="center"
-                android:background="@drawable/edit_text_design"
-                />
-            <Spinner
-                android:id="@+id/spGpoP"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:hint="Grupo"
-                android:textAlignment="center"
-                android:background="@drawable/edit_text_design"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Titulo"
+                    android:textAlignment="center"
+                    android:background="@drawable/edit_text_design"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spGpoP"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:hint="Grupo"
+                    android:textAlignment="center"
+                    android:background="@drawable/edit_text_design"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp">
+
+                <EditText
                     android:id="@+id/etDescripcion"
                     android:layout_width="290dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/edit_text_design"
-                    android:gravity="center"
-                    android:hint="¿Que esta pasando?"
-                    android:textSize="10pt"
-                    android:textAlignment="center"
+                    android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                    android:hint="¿Que esta pasando?"
+                    android:textAlignment="center"
+                    android:background="@drawable/edit_text_design" />
                 <Button
                     android:id="@+id/btnMoreDesc"
                     android:layout_width="wrap_content"

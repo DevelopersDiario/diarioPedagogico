@@ -226,7 +226,7 @@
         </activity>
         <activity
             android:name=".Analyze"
-            android:label="@string/title_activity_analyze"
+            android:label="Analisis de le experiencia"
             android:parentActivityName=".Register">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->

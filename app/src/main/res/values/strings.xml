@@ -370,9 +370,9 @@
     <string name="back">Back</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_descripting">Descripting</string>
-    <string name="title_activity_feelings">Feelings</string>
-    <string name="title_activity_testing">Testing</string>
-    <string name="title_activity_analyze">Analyze</string>
-    <string name="title_activity_conclusion">Conclusion</string>
-    <string name="title_activity_plan">Plan</string>
+    <string name="title_activity_feelings">Sentimientos y Pensamientos</string>
+    <string name="title_activity_testing">Evaluación</string>
+    <string name="title_activity_analyze">Analisis</string>
+    <string name="title_activity_conclusion">Conclusión</string>
+    <string name="title_activity_plan">Plan de Acción</string>
 </resources>
