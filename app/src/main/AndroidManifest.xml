@@ -186,7 +186,7 @@
         </activity>
         <activity
             android:name=".Register"
-            android:label="@string/title_activity_register"
+            android:label="Registre su experiencia"
             android:parentActivityName=".MainActivity">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
@@ -196,7 +196,7 @@
         </activity>
         <activity
             android:name=".Descripting"
-            android:label="@string/title_activity_descripting"
+            android:label="Registre su experiencia"
             android:parentActivityName=".Register">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
@@ -206,7 +206,7 @@
         </activity>
         <activity
             android:name=".Feelings"
-            android:label="@string/title_activity_feelings"
+            android:label="Pensamientos y Sentimientos"
             android:parentActivityName=".Register">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
@@ -216,7 +216,7 @@
         </activity>
         <activity
             android:name=".Testing"
-            android:label="@string/title_activity_testing"
+            android:label="Evaluación"
             android:parentActivityName=".Register">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
