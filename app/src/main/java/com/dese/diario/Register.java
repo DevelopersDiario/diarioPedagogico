@@ -244,7 +244,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     Conc.putExtra("Descripcion", etDescripcion.getText().toString());
                     Conc.putExtra("Sentimientos", etSenimientos.getText().toString());
                     Conc.putExtra("Evaluacion", etEvaluacion.getText().toString());
-                    Conc.putExtra("Conclusion", etConclusion.getText().toString());
+                    Conc.putExtra("Analisis", etAnalisis.getText().toString());
                     startActivity(Conc);
                 }
                 break;
@@ -542,7 +542,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 finish();
             } //Fin open login
 
-    
+
                 public void getData(){
                     Bundle getD = getIntent().getExtras();
                     if (getD != null) {
