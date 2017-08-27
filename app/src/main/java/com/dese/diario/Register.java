@@ -52,6 +52,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.ganfra.materialspinner.MaterialSpinner;
+
 public class Register extends AppCompatActivity implements DatePickerListener,  View.OnClickListener{
     //Theme
     SharedPreferences sharedPreferences;
@@ -78,7 +80,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     //Bind
     EditText  etTitle, etGrupo, etDescripcion, etSenimientos, etEvaluacion, etAnalisis, etConclusion, etPlan;
     Button btnMoreFeels, btnMoreDesc, btnMoreTest, btnMoreAnalisis, btnMoreConclusion, btnMorePlan;
-    Spinner spGpoP;
+    MaterialSpinner spGpoP;
 
     //Spinner
     List leadsNames, leadsIdes;
@@ -115,8 +117,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
             }
         });
 
@@ -489,7 +490,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                                     leadsIdes.add(0, jsonobject.getString(KEY_IDGROUP));
 
 
-                                    spGpoP= (Spinner) findViewById(R.id.spGpoP);
+                                    spGpoP= (MaterialSpinner) findViewById(R.id.spGpoP);
                                     mLeadsAdapter = new ArrayAdapter<String>(Register.this,
                                             android.R.layout.simple_spinner_item, leadsNames);
                                     mLeadsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
