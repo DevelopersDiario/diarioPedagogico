@@ -93,7 +93,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     Upload upload;
     String idusuario;
     String titulo;
-    String observaciones;
+    String observaciones, sentimientos, evaluacion, analisis, conclusion, plan ;
     String padre;
     Intent actReq;
 
@@ -117,7 +117,24 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                titulo = etTitle.getText().toString();
+                observaciones = etDescripcion.getText().toString();
+                sentimientos=etSenimientos.getText().toString();
+                evaluacion =etEvaluacion.getText().toString();
+                analisis=etAnalisis.getText().toString();
+                conclusion=etConclusion.getText().toString();
+                plan=etPlan.getText().toString();
 
+                Snackbar snackbar = Snackbar
+                        .make(view, "Datos obtenidos:"+ titulo
+                                    +observaciones
+                                    +sentimientos
+                                    +evaluacion
+                                    + analisis
+                                    +conclusion
+                                +plan, Snackbar.LENGTH_LONG);
+
+                snackbar.show();
             }
         });
 
@@ -186,15 +203,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         switch (v.getId()){
 
 
-         /*   case R.id.etDescripcion:
-
-                //Hide softKeyboard
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                Toast.makeText(this, "Descripcion", Toast.LENGTH_LONG).show();
-                Intent desc= new Intent(Register.this, Publication.class);
-                startActivity(desc);
-
-                break;*/
             case R.id.btnMoreDesc:
                 Intent desc= new Intent(Register.this, Descripting.class);
                 startActivity(desc);
@@ -269,19 +277,26 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
     private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();
+        idusuario= varlogin.getIdusuario();
+        titulo = etTitle.getText().toString();
+        observaciones = etDescripcion.getText().toString();
+        sentimientos=etSenimientos.getText().toString();
+        evaluacion =etEvaluacion.getText().toString();
+        analisis=etAnalisis.getText().toString();
+        conclusion=etConclusion.getText().toString();
+        plan=etPlan.getText().toString();
+        padre="0";
 
         if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty()) {
-            idusuario= varlogin.getIdusuario();
-            titulo = etTitle.getText().toString().trim();
-            observaciones = etDescripcion.getText().toString().trim();
-            padre="0";
+
+
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.insertpublicacion,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
-                            upload.recorrerListPaths(paths, Register.this, actReq, ed);
+                            //upload.recorrerListPaths(paths, Register.this, actReq, ed);
                             // upload.uploadMultipart(Publication.this, actReq, ed);
                           //  failed_regpublication.setText(R.string.message_succes_publication);
 
@@ -296,6 +311,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     if (error.networkResponse.data != null) {
 
                         try {
+                            if(error!=null && error.getMessage() !=null){
+                                Toast.makeText(getApplicationContext(),"error VOLLEY "+error.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
+
+                            }
                             body = new String(error.networkResponse.data, "UTF-8");
 
                            // failed_regpublication.setText(body);
@@ -314,6 +336,11 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     params.put(KEY_TITULO, titulo);
                     params.put(KEY_IDGROUP, ide);
                     params.put(KEY_OBSERVACIONES, observaciones);
+                    params.put("sentimiento", sentimientos);
+                    params.put("evaluacion", evaluacion);
+                    params.put("analisis", analisis);
+                    params.put("conclusion", conclusion);
+                    params.put("planaccion", plan);
                     params.put(CONTENT_TYPE, APPLICATION);
                     return params;
                 }
