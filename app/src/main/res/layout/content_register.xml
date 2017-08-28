@@ -11,8 +11,6 @@
     android:layout_marginRight="16dp">
 
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,12 +18,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <com.github.jhonnyx2012.horizontalpicker.HorizontalPicker
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,11 +35,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Titulo"
-                    android:textAlignment="center"
                     android:background="@drawable/edit_text_design"
-                    />
+                    android:hint="Titulo"
+                    android:textAlignment="center" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,17 +59,17 @@
                     android:id="@+id/spGpoP"
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
-                    app:ms_multiline="false"
-                    app:ms_hint="Tema"
-                    app:ms_enableFloatingLabel="false"
-                    app:ms_enableErrorLabel="false"
-                    app:ms_floatingLabelText="floating label"
-                    app:ms_baseColor="?colorPrimary"
-                    app:ms_thickness="2dp"
-                    app:ms_arrowSize="16dp"
-                    app:ms_alignLabels="false"
                     android:background="@drawable/edit_text_design"
-                    app:ms_floatingLabelColor="?colorPrimary"/>
+                    app:ms_alignLabels="false"
+                    app:ms_arrowSize="16dp"
+                    app:ms_baseColor="?colorPrimary"
+                    app:ms_enableErrorLabel="false"
+                    app:ms_enableFloatingLabel="false"
+                    app:ms_floatingLabelColor="?colorPrimary"
+                    app:ms_floatingLabelText="floating label"
+                    app:ms_hint="Tema"
+                    app:ms_multiline="false"
+                    app:ms_thickness="2dp" />
 
             </LinearLayout>
 
@@ -85,31 +84,34 @@
                     android:layout_width="290dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="10dp"
-                    android:hint="¿Que esta pasando?"
-                    android:textAlignment="center"
                     android:layout_weight="1"
+                    android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:hint="¿Que esta pasando?"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/edit_text_design" />
+                    android:textAlignment="center" />
+
                 <Button
                     android:id="@+id/btnMoreDesc"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/ic_menu_right"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvItems"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rvItems"
-                    android:layoutMode="clipBounds"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:layoutMode="clipBounds" />
             </LinearLayout>
 
 
@@ -117,23 +119,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <EditText
                     android:id="@+id/etSenimientos"
                     android:layout_width="290dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Describa sus sentimientos y pensamientos"
-                    android:textAlignment="center"
                     android:layout_weight="1"
+                    android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:hint="Describa sus sentimientos y pensamientos"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/edit_text_design"/>
+                    android:textAlignment="center" />
+
                 <Button
                     android:id="@+id/btnMoreFeels"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right"
-                    android:layout_height="wrap_content" />
+                    android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
 
@@ -141,23 +145,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <EditText
                     android:id="@+id/etEvaluacion"
                     android:layout_width="290dp"
                     android:layout_height="90dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Evaluación del procedimiento de reflexión"
-                    android:textAlignment="center"
                     android:layout_weight="1"
+                    android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:hint="Evaluación del procedimiento de reflexión"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/edit_text_design"/>
+                    android:textAlignment="center" />
+
                 <Button
                     android:id="@+id/btnMoreTest"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right"
-                    android:layout_height="wrap_content" />
+                    android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
 
@@ -165,23 +171,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <EditText
                     android:id="@+id/etAnalisis"
                     android:layout_width="290dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Analisis del proceso de reflexión"
-                    android:textAlignment="center"
                     android:layout_weight="1"
+                    android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:hint="Analisis del proceso de reflexión"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/edit_text_design"/>
+                    android:textAlignment="center" />
+
                 <Button
                     android:id="@+id/btnMoreAnalisi"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right"
-                    android:layout_height="wrap_content" />
+                    android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
 
@@ -189,23 +197,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <EditText
                     android:id="@+id/etConclusion"
                     android:layout_width="290dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Conclusión del proceso de reflexion"
-                    android:textAlignment="center"
                     android:layout_weight="1"
+                    android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:hint="Conclusión del proceso de reflexion"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/edit_text_design"/>
+                    android:textAlignment="center" />
+
                 <Button
                     android:id="@+id/btnMoreConclusion"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right"
-                    android:layout_height="wrap_content" />
+                    android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
 
@@ -213,30 +223,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <EditText
                     android:id="@+id/etPlan"
                     android:layout_width="290dp"
                     android:layout_height="90dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Plan de acción"
-                    android:textAlignment="center"
                     android:layout_weight="1"
+                    android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:hint="Plan de acción"
                     android:inputType="textMultiLine"
-                    android:background="@drawable/edit_text_design"/>
+                    android:textAlignment="center" />
+
                 <Button
                     android:id="@+id/btnMorePlan"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right"
-                    android:layout_height="wrap_content" />
+                    android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-             <!--   <android.support.v7.widget.RecyclerView
+                <!--   <android.support.v7.widget.RecyclerView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/rvItems"

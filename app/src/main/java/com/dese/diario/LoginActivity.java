@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             if(isNetworkConnected()){
-            spd.progressDilog(LoginActivity.this, true);
+            spd.MaterialDialog (LoginActivity.this, true);
             userLogin();
             }else{
                 showAlertDialog(getResources().getString(R.string.title_conection_fail),

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+
 /**
  * Created by Eduardo on 19/05/2017.
  */
@@ -58,6 +60,13 @@ public class ShowProgressDialog {
 
     public  void dismiss(){
         progressDoalog.dismiss();
+    }
+
+    public void MaterialDialog(Context context, Boolean status){
+        new MaterialDialog.Builder(context)
+                .content("Cargando..")
+                .progress(status, 0)
+                .show();
     }
 
 
