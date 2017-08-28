@@ -500,6 +500,11 @@ public class MainActivity extends AppCompatActivity
                                             jsonobject.getString(fecha),
                                             jsonobject.getString(titulo),
                                             jsonobject.getString(observaciones),
+                                            jsonobject.getString("sentimiento"),
+                                            jsonobject.getString("evaluacion"),
+                                            jsonobject.getString("analisis"),
+                                            jsonobject.getString("conclusion"),
+                                            jsonobject.getString("planaccion"),
                                             jsonobject.getString(padre)));
                                     adapter=new Adapter_Pubication(listpublicaciones, MainActivity.this);
                                     recyclerView.setAdapter(adapter);

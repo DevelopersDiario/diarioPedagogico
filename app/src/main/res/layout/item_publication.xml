@@ -100,6 +100,15 @@
                     android:id="@+id/rvItemPublication"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:hint="Sentimientos y Pesanmientos"/>
+               <TextView
+                   android:id="@+id/tvSentimientosRec"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content" />
 
             </LinearLayout>
 

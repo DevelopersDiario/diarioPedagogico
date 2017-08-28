@@ -37,6 +37,7 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
     public TextView titlePublication;
     public TextView tvFechaRec;
     public TextView tvPublicationRec;
+    public TextView tvSentimientosRec;
     public CircleImageView imProfileRec;
     public Button btnRPoster;
     MyLongClickListener longClickListener;
@@ -59,6 +60,7 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
         tvFechaRec = (TextView) itemView.findViewById(R.id.tvFechaRec);
         tvPublicationRec = (TextView) itemView.findViewById(R.id.tvPublicationRec);
         titlePublication = (TextView) itemView.findViewById(R.id.titlePublication);
+        tvSentimientosRec=(TextView)itemView.findViewById(R.id.tvSentimientosRec);
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
         btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);
 

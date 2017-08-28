@@ -12,13 +12,21 @@ public class Publication {
     private String fecha;
     private String titulo;
     private String observaciones;
+    private String sentimiento;
+    private String evaluacion;
+    private String analisis;
+    private String conclusion;
+    private String planaccion;
     private String padre;
 
     public Publication(){
 
     }
 
-    public Publication(String idpublicacion, String idusuario, String nombre, String foto, String fecha, String titulo, String observaciones, String padre) {
+    public Publication(String idpublicacion, String idusuario, String nombre,
+                       String foto, String fecha, String titulo, String observaciones, String sentimiento, String evaluacion,
+                       String analisis, String conclusion, String planaccion,
+                       String padre) {
         this.idpublicacion = idpublicacion;
         this.idusuario = idusuario;
         this.nombre = nombre;
@@ -26,6 +34,11 @@ public class Publication {
         this.fecha = fecha;
         this.titulo = titulo;
         this.observaciones = observaciones;
+        this.sentimiento=sentimiento;
+        this.evaluacion=evaluacion;
+        this.analisis=analisis;
+        this.conclusion=conclusion;
+        this.planaccion=planaccion;
         this.padre = padre;
     }
     public String getIdpublicacion() {
@@ -80,6 +93,46 @@ public class Publication {
         this.padre = padre;
     }
 
+    public String getSentimiento() {
+        return sentimiento;
+    }
+
+    public void setSentimiento(String sentimientos) {
+        this.sentimiento = sentimientos;
+    }
+
+    public String getEvaluacion() {
+        return evaluacion;
+    }
+
+    public void setEvaluacion(String evaluacion) {
+        this.evaluacion = evaluacion;
+    }
+
+    public String getAnalisis() {
+        return analisis;
+    }
+
+    public void setAnalisis(String analisis) {
+        this.analisis = analisis;
+    }
+
+    public String getConclusion() {
+        return conclusion;
+    }
+
+    public void setConclusion(String conclusion) {
+        this.conclusion = conclusion;
+    }
+
+    public String getPlanaccion() {
+        return planaccion;
+    }
+
+    public void setPlanaccion(String planaccion) {
+        this.planaccion = planaccion;
+    }
+
     @Override
     public String toString() {
         return "Publication{" +
@@ -90,6 +143,11 @@ public class Publication {
                 ", fecha='" + fecha + '\'' +
                 ", titulo='" + titulo + '\'' +
                 ", observaciones='" + observaciones + '\'' +
+                ", sentimiento='" + sentimiento + '\'' +
+                ", evaluacion='" + evaluacion + '\'' +
+                ", analisis='" + analisis + '\'' +
+                ", conclusion='" + conclusion+ '\'' +
+                ", planaccion='" + planaccion + '\'' +
                 ", padre='" + padre + '\'' +
                 '}';
     }
