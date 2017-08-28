@@ -131,6 +131,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 conclusion=etConclusion.getText().toString();
                 plan=etPlan.getText().toString();
 
+                try {
+                    RegisterPost(ed);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Snackbar snackbar = Snackbar
                         .make(view, "Datos obtenidos:"+ titulo
                                     +observaciones
@@ -297,7 +304,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         plan=etPlan.getText().toString();
         padre="0";
 
-        if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty() && ed=="") {
+        if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty()) {
 
 
 
