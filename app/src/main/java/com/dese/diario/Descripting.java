@@ -350,6 +350,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
                     textMore=etDescriptingM.getText().toString();
                     d.putExtra("Descripcion", textMore);
+                    //d.putExtra("Paths", paths);
 
                     //r.setObservaciones(textMore);
                     startActivity(d);

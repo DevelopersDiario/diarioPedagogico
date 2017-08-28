@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!--<Spinner
+             <Spinner
                     android:id="@+id/spGpoP"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -53,9 +53,9 @@
                     android:layout_marginBottom="10dp"
                     android:hint="Grupo"
                     android:textAlignment="center"
-                    android:background="@drawable/edit_text_design"/>-->
+                    android:background="@drawable/edit_text_design"/>
 
-                <fr.ganfra.materialspinner.MaterialSpinner
+              <!-- <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/spGpoP"
                     android:layout_width="fill_parent"
                     android:layout_height="40dp"
@@ -69,8 +69,7 @@
                     app:ms_floatingLabelText="floating label"
                     app:ms_hint="Tema"
                     app:ms_multiline="false"
-                    app:ms_thickness="2dp" />
-
+                    app:ms_thickness="2dp" />-->
             </LinearLayout>
 
             <LinearLayout

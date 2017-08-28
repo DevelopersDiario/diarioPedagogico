@@ -12,6 +12,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
@@ -33,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dese.diario.Adapter.Adapter_Item;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.Reflexion;
 import com.dese.diario.POJOS.VariablesLogin;
@@ -80,14 +83,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     //Bind
     EditText  etTitle, etGrupo, etDescripcion, etSenimientos, etEvaluacion, etAnalisis, etConclusion, etPlan;
     Button btnMoreFeels, btnMoreDesc, btnMoreTest, btnMoreAnalisis, btnMoreConclusion, btnMorePlan;
-    MaterialSpinner spGpoP;
+    Spinner spGpoP;
 
     //Spinner
     List leadsNames, leadsIdes;
     ArrayAdapter mLeadsAdapter;
     String ed;
 
-    ArrayList<String> paths = new ArrayList<>();
 
     //Upload
     Upload upload;
@@ -95,7 +97,11 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     String titulo;
     String observaciones, sentimientos, evaluacion, analisis, conclusion, plan ;
     String padre;
-    Intent actReq;
+
+    //RV
+    ArrayList<String> paths = new ArrayList<>();
+    private RecyclerView rcItems;
+    Adapter_Item ia;
 
 
     @Override
@@ -131,7 +137,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                                     +sentimientos
                                     +evaluacion
                                     + analisis
-                                    +conclusion
+                                    +conclusion+ "-----"
+                                + ed
                                 +plan, Snackbar.LENGTH_LONG);
 
                 snackbar.show();
@@ -159,6 +166,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
             getWindow().setStatusBarColor(colorPrimaryDark);
 
         }
+        rcItems = (RecyclerView) findViewById(R.id.rvItems);
+        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(3, 1);
+        rcItems.setLayoutManager(staggeredGridLayout);
         upload = new Upload();
         listGpos();
 
@@ -287,7 +297,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         plan=etPlan.getText().toString();
         padre="0";
 
-        if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty()) {
+        if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty() && ed=="") {
 
 
 
@@ -327,6 +337,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                             e.printStackTrace();
                         }
                     }
+                    Log.e("",error.getMessage());
                 }
             }) {
                 @Override
@@ -343,6 +354,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     params.put("planaccion", plan);
                     params.put(CONTENT_TYPE, APPLICATION);
                     return params;
+
                 }
 
             };
@@ -517,7 +529,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                                     leadsIdes.add(0, jsonobject.getString(KEY_IDGROUP));
 
 
-                                    spGpoP= (MaterialSpinner) findViewById(R.id.spGpoP);
+                                    spGpoP= (Spinner) findViewById(R.id.spGpoP);
                                     mLeadsAdapter = new ArrayAdapter<String>(Register.this,
                                             android.R.layout.simple_spinner_item, leadsNames);
                                     mLeadsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -529,10 +541,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                                         public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
                                         {
 
-                                            if(view.callOnClick()){
+
                                                 ed= (String) leadsIdes.get(pos);
-                                                spGpoP.setEnabled(true);
-                                            }
+
+                                                // spGpoP.setEnabled(true);
+                                                //Toast.makeText(Register.this, ed.toString(),Toast.LENGTH_SHORT).show();
+
+
 
                                         }
 
@@ -583,12 +598,15 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     if (getD != null) {
 
                         etDescripcion.setText(getD.getString("Descripcion"));
+                        //paths=getD.getStringArrayList("Paths");
                         etSenimientos.setText(getD.getString("Sentimientos"));
                         etEvaluacion.setText(getD.getString("Evaluacion"));
                         etAnalisis.setText(getD.getString("Analisis"));
                         etConclusion.setText(getD.getString("Conclusion"));
                         etPlan.setText(getD.getString("Plan"));
 
+                        //ia = new Adapter_Item(paths, Register.this);
+                        //rcItems.setAdapter(ia);
                     }
 
                 }

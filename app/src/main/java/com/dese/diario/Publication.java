@@ -348,10 +348,10 @@ public class Publication extends AppCompatActivity implements  View.OnClickListe
                                         public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
                                         {
 
-                                            if(view.callOnClick()){
+
                                                 ed= (String) leadsIdes.get(pos);
                                                 spGpoP.setEnabled(true);
-                                            }
+
 
                                         }
 
