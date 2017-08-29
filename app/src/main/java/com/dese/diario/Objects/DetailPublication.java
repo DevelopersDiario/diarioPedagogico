@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -29,6 +31,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -55,7 +59,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DetailPublication extends AppCompatActivity {
+public class DetailPublication extends AppCompatActivity implements  View.OnClickListener{
     //Theme
     SharedPreferences sharedPreferences, sharedPreferences2;
     SharedPreferences.Editor editor;
@@ -65,7 +69,9 @@ public class DetailPublication extends AppCompatActivity {
     Boolean homeButton = false, themeChanged;
     TextView tvTitlePubDetail, tvUserPubDetail, tvDatePubDetail, tvPubDetail;
     ImageView foto;
-    String t,u,d,p,f, pa, idepublicacion;
+    String t,u,d,p,f,sen, eva, ana, con, plan,  pa, idepublicacion;
+
+    public CardView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 
     Button btnPost;
 
@@ -94,7 +100,6 @@ public class DetailPublication extends AppCompatActivity {
     final String APPLICATION = "application/x-www-form-urlencoded";
 
 
-    //final static String urllistar = "http://192.168.20.25:8084/diariopws/api/1.0/publicacion/listrepublication";
     final static String urlListRepublication = Urls.listarrepublication;
 
     //
@@ -132,6 +137,18 @@ public class DetailPublication extends AppCompatActivity {
         tvPubDetail=(TextView) findViewById(R.id.tvPubDetail);
         foto=(ImageView) findViewById(R.id.imProfilPubDetail);
 
+        cvFeels =(CardView)findViewById(R.id.cvFeelsD);
+        cvTest  = (CardView)findViewById(R.id.cvTestD);
+        cvAnalyze= (CardView)findViewById(R.id.cvAnalyzeD);
+        cvConclusion= (CardView)findViewById(R.id.cvConclusionD);
+        cvPlan= (CardView)findViewById(R.id.cvPlanD);
+
+        cvFeels.setOnClickListener(this);
+        cvTest.setOnClickListener(this);
+        cvAnalyze.setOnClickListener(this);
+        cvConclusion.setOnClickListener(this);
+        cvPlan.setOnClickListener(this);
+
         Intent  i=this.getIntent();
         idepublicacion=i.getExtras().getString("_IDE_KEY");
         t=i.getExtras().getString("TITLE_KEY");
@@ -140,6 +157,13 @@ public class DetailPublication extends AppCompatActivity {
          p=i.getExtras().getString("PUBLI_KEY");
         f=i.getExtras().getString("FOTO_KEY");
         pa=i.getExtras().getString("PAPA");
+
+        sen=i.getExtras().getString("SEN_KEY");
+        eva=i.getExtras().getString("TES_KEY");
+        ana=i.getExtras().getString("ANA_KEY");
+        con=i.getExtras().getString("CON_KEY");
+        plan=i.getExtras().getString("PLAN_KEY");
+
 
         listarRe( idepublicacion);
         listarFile(idepublicacion);
@@ -164,7 +188,78 @@ public class DetailPublication extends AppCompatActivity {
                 .into(foto);
 
     }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cvFeelsD:
+                new MaterialDialog.Builder(this)
+                        .title("¿Que esta pensando y sintiendo?")
+                        .content(sen)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.cvTestD:
+                new MaterialDialog.Builder(this)
+                        .title("¿Que esta pensando y sintiendo?")
+                        .content(eva)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.cvAnalyzeD:
+                new MaterialDialog.Builder(this)
+                        .title("¿Que esta pensando y sintiendo?")
+                        .content(ana)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.cvConclusionD:
+                new MaterialDialog.Builder(this)
+                        .title("¿Que esta pensando y sintiendo?")
+                        .content(con)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+                break;
+            case R.id.cvPlanD:
+                new MaterialDialog.Builder(this)
+                        .title("¿Que esta pensando y sintiendo?")
+                        .content(plan)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+                break;
 
+        }
+
+    }
 
     private  void inicializarToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbarDP);
@@ -564,5 +659,6 @@ public class DetailPublication extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
 
 }

@@ -64,15 +64,21 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     int theme;
 
     //KEYS
-    final  String KEY_VALUE="VALUES";
-    final  String KEY_THEME="THEME";
+    final String KEY_VALUE="VALUES";
+    final String KEY_THEME="THEME";
     final String KEY_NAMEG = "nombregrupo";
-    final  String KEY_IDUSUARIO="idusuario";
-    final  String KEY_TITULO="titulo";
+    final String KEY_IDUSUARIO="idusuario";
+    final String KEY_TITULO="titulo";
     final String KEY_OBSERVACIONES="observaciones";
-    final  String KEY_IDGROUP="idgrupo";
-    final  String CONTENT_TYPE="Content-Type";
-    final  String APPLICATION="application/x-www-form-urlencoded";
+    final String KEY_IDGROUP="idgrupo";
+    final String KEY_FEELS="sentimiento";
+    final String KEY_TEST="evaluacion";
+    final String KEY_ANLYSE="analisis";
+    final String KEY_CONCLUSION="conclusion";
+    final String KEY_PLAN="planaccion";
+
+    final String CONTENT_TYPE="Content-Type";
+    final String APPLICATION="application/x-www-form-urlencoded";
 
     //Toolbar
     private static final int TIME_DELAY = 2000;
@@ -97,7 +103,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     String titulo;
     String observaciones, sentimientos, evaluacion, analisis, conclusion, plan ;
     String padre;
-
+    Intent actReq;
     //RV
     ArrayList<String> paths = new ArrayList<>();
     private RecyclerView rcItems;
@@ -313,8 +319,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         @Override
                         public void onResponse(String response) {
 
-                            //upload.recorrerListPaths(paths, Register.this, actReq, ed);
-                            // upload.uploadMultipart(Publication.this, actReq, ed);
+                            upload.recorrerListPaths(paths, Register.this, actReq, ed);
                           //  failed_regpublication.setText(R.string.message_succes_publication);
 
                             openMainactivity();

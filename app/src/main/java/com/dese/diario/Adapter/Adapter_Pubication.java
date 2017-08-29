@@ -2,11 +2,14 @@ package com.dese.diario.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderP;
 import com.dese.diario.Objects.DetailPublication;
@@ -16,6 +19,8 @@ import com.dese.diario.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import static com.dese.diario.R.style.AppTheme;
 
 /**
  * Created by Eduardo on 04/04/2017.
@@ -66,7 +71,90 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.tvPublicationRec.setText(p);
         holder.tvUserRec.setText(u);
         holder.titlePublication.setText(t);
-        holder.tvSentimientosRec.setText(sen);
+       // holder.tvSentimientosRec.setText(sen);
+
+        holder.cvFeels.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(context)
+                        .title("¿Que esta pensando y sintiendo?")
+                        .content(sen)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                            }
+                        })
+                        .show();
+
+            }
+        });
+        holder.cvTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(context)
+                        .title("¿Que es lo bueno y malo de esta experiencia?")
+                        .content(eva)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
+        holder.cvAnalyze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(context)
+                        .title("¿Que sentido puede tener esta experiencia?")
+                        .content(ana)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
+       holder.cvConclusion.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               new MaterialDialog.Builder(context)
+                       .title("¿Qué mas podria haber hecho?")
+                       .content(con)
+                       .positiveText("Listo")
+                       .onPositive(new MaterialDialog.SingleButtonCallback() {
+                           @Override
+                           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                               dialog.dismiss();
+                           }
+                       })
+                       .show();
+           }
+       });
+
+        holder.cvPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new MaterialDialog.Builder(context)
+                        .title("¿Qué haría en una experiencia similar?")
+                        .content(plan)
+                        .positiveText("Listo")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }
+        });
         Picasso.with(context)
                 .load(Urls.download + f)
                 .resize(250, 250)
@@ -76,7 +164,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                openDetailActivity(_ide,t, u, d, p, f, pa);
+                openDetailActivity(_ide,t, u, d, p, f, pa, sen, eva, ana, con, plan);
 
                 //Toast.makeText(context,"Entra a itemClicklistener "+ pa,Toast.LENGTH_SHORT).show();
             }
@@ -86,10 +174,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             @Override
             public void onClick(View v) {
                 ListRepublication rp= new ListRepublication();
-
-             //   DetailPublication dr= new DetailPublication();
                 rp.AlertRepublication(pa, context);
-               // dr.listarRe(pa);
             }
         });
 
@@ -104,7 +189,8 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     }
 
 
-    private void openDetailActivity(String _ide, String t, String u, String d, String p, String f , final String pa ) {
+    private void openDetailActivity(String _ide, String t, String u, String d, String p, String f ,final String pa,
+                                    String sen, String tes, String ana, String con, String plan ) {
         Intent i = new Intent(context, DetailPublication.class);
         ListRepublication rp= new ListRepublication();
 
@@ -116,6 +202,13 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         i.putExtra("PUBLI_KEY", p);
         i.putExtra("FOTO_KEY", f);
         i.putExtra("PAPA", pa);
+        i.putExtra("SEN_KEY", sen);
+        i.putExtra("TES_KEY", tes);
+        i.putExtra("ANA_KEY", ana);
+        i.putExtra("CON_KEY", con);
+        i.putExtra("PLAN_KEY", plan);
+
+
 
         //open activity
 

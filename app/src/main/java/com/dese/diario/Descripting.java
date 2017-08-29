@@ -190,7 +190,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
             case R.id.imMic:
                 Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intentA.addCategory(Intent.CATEGORY_OPENABLE);
-                intentA.setType("audio*//*");
+                intentA.setType("audio/*");
                 intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 startActivityForResult(intentA, PICK_AUD_REQUEST);
 

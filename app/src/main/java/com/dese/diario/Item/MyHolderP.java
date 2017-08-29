@@ -1,6 +1,7 @@
 package com.dese.diario.Item;
 
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.ContextMenu;
@@ -19,6 +20,7 @@ import com.dese.diario.MainActivity;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
+import com.gc.materialdesign.views.Card;
 
 import org.json.JSONException;
 
@@ -37,21 +39,19 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
     public TextView titlePublication;
     public TextView tvFechaRec;
     public TextView tvPublicationRec;
-    public TextView tvSentimientosRec;
+    //public TextView tvSentimientosRec;
+
+    public CardView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
+
     public CircleImageView imProfileRec;
     public Button btnRPoster;
     MyLongClickListener longClickListener;
-    ItemClickListener itemClickListener
-            ;
-    public TextView tvUserRecR;
-    public TextView titlePublicationR;
-    public TextView tvPublicationRecR;
-    public CircleImageView imProfileRecR;
+    ItemClickListener itemClickListener;
 
     //Multiple
-    private int resource;
-    private boolean modoSeleccion;
-    private SparseBooleanArray seleccionados;
+//    private int resource;
+//    private boolean modoSeleccion;
+   private SparseBooleanArray seleccionados;
 
     public MyHolderP(View itemView) {
         super(itemView);
@@ -60,7 +60,14 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
         tvFechaRec = (TextView) itemView.findViewById(R.id.tvFechaRec);
         tvPublicationRec = (TextView) itemView.findViewById(R.id.tvPublicationRec);
         titlePublication = (TextView) itemView.findViewById(R.id.titlePublication);
-        tvSentimientosRec=(TextView)itemView.findViewById(R.id.tvSentimientosRec);
+
+//        tvSentimientosRec=(TextView)itemView.findViewById(R.id.tvSentimientosRec);
+        cvFeels =(CardView)itemView.findViewById(R.id.cvFeels);
+        cvTest  = (CardView)itemView.findViewById(R.id.cvTest);
+        cvAnalyze= (CardView)itemView.findViewById(R.id.cvAnalyze);
+        cvConclusion= (CardView)itemView.findViewById(R.id.cvConclusion);
+        cvPlan= (CardView)itemView.findViewById(R.id.cvPlan);
+
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
         btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);
 

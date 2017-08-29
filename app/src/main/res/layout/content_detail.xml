@@ -101,6 +101,106 @@
                     android:paddingBottom="10dp"
                     android:hint="@string/tag_lorem"
                     style="@style/TextAppearance.AppCompat"/>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvFeelsD"
+                    card_view:cardBackgroundColor="?colorAccent"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="14dp"
+                    android:clickable="true"
+                    card_view:cardCornerRadius="10dp"
+                    android:foreground="?selectableItemBackground"
+                    app:cardElevation="@dimen/cardview_elevation_9">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:text="Sentimientos y Pensamientos"/>
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvTestD"
+                    card_view:cardBackgroundColor="?colorAccent"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="14dp"
+                    android:clickable="true"
+                    card_view:cardCornerRadius="10dp"
+                    android:foreground="?selectableItemBackground"
+                    app:cardElevation="@dimen/cardview_elevation_9">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:text="Evaluación"/>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvAnalyzeD"
+                    card_view:cardBackgroundColor="?colorAccent"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="14dp"
+                    android:clickable="true"
+                    card_view:cardCornerRadius="10dp"
+                    android:foreground="?selectableItemBackground"
+                    app:cardElevation="@dimen/cardview_elevation_9">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:text="Analisis"/>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvConclusionD"
+                    card_view:cardBackgroundColor="?colorAccent"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="14dp"
+                    android:clickable="true"
+                    card_view:cardCornerRadius="10dp"
+                    android:foreground="?selectableItemBackground"
+                    app:cardElevation="@dimen/cardview_elevation_9">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:text="Conclusión"/>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cvPlanD"
+                    card_view:cardBackgroundColor="?colorAccent"
+                    android:layout_width="match_parent"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="14dp"
+                    android:clickable="true"
+                    card_view:cardCornerRadius="10dp"
+                    android:foreground="?selectableItemBackground"
+                    app:cardElevation="@dimen/cardview_elevation_9">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:text="Plan de Acción"/>
+                </android.support.v7.widget.CardView>
 
              <android.support.v7.widget.RecyclerView
                  android:id="@+id/rvItemDetailPublicacion"

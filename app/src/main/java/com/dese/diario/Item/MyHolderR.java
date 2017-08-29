@@ -1,5 +1,6 @@
 package com.dese.diario.Item;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.ContextMenu;
@@ -26,6 +27,8 @@ public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongCli
     public TextView tvPublicationRecR;
     public CircleImageView imProfileRecR;
 
+    public CardView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
+
     //Multiple
     private int resource;
     private boolean modoSeleccion;
@@ -39,6 +42,12 @@ public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongCli
         tvUserRecR= (TextView)itemView.findViewById(R.id.tvUserRecR);
         imProfileRecR = (CircleImageView) itemView.findViewById(R.id.imProfileRecR);
         tvPublicationRecR= (TextView) itemView.findViewById(R.id.tvPublicationRecR);
+
+        cvFeels =(CardView)itemView.findViewById(R.id.cvFeelsD);
+        cvTest  = (CardView)itemView.findViewById(R.id.cvTestD);
+        cvAnalyze= (CardView)itemView.findViewById(R.id.cvAnalyzeD);
+        cvConclusion= (CardView)itemView.findViewById(R.id.cvConclusionD);
+        cvPlan= (CardView)itemView.findViewById(R.id.cvPlanD);
 
         itemView.setOnLongClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
