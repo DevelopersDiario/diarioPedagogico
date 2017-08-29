@@ -296,6 +296,8 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                         String idgrupe = ed;
                         String papa = pa;
 
+                       // Toast.makeText(DetailPublication.this, titulo + " -"+ publica+" "+idgrupe+" "+papa,Toast.LENGTH_SHORT).show();
+
                         registerRePost(titulo, publica, papa, idgrupe);
 
                     }
@@ -471,6 +473,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                     String getGruop=jsonObject.getString("nombregrupo").toString();
                                     gpo.setText(getGruop);
                                     gpo.setEnabled(false);
+                                    ed=jsonObject.getString("idgrupo").toString();
 
                                    // Toast.makeText(DetailPublication.this, "Lista"+ getGruop, Toast.LENGTH_LONG).show();
                                     //recyclerView.setAdapter(adaptergpo);

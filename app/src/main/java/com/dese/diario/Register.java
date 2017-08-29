@@ -301,13 +301,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();
         idusuario= varlogin.getIdusuario();
-        titulo = etTitle.getText().toString();
-        observaciones = etDescripcion.getText().toString();
-        sentimientos=etSenimientos.getText().toString();
-        evaluacion =etEvaluacion.getText().toString();
-        analisis=etAnalisis.getText().toString();
-        conclusion=etConclusion.getText().toString();
-        plan=etPlan.getText().toString();
+        titulo = etTitle.getText().toString().trim();
+        observaciones = etDescripcion.getText().toString().trim();
+        sentimientos=etSenimientos.getText().toString().trim();
+        evaluacion =etEvaluacion.getText().toString().trim();
+        analisis=etAnalisis.getText().toString().trim();
+        conclusion=etConclusion.getText().toString().trim();
+        plan=etPlan.getText().toString().trim();
         padre="0";
 
         if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty()) {
