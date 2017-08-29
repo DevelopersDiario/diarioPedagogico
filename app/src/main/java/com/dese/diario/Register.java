@@ -604,16 +604,18 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     Bundle getD = getIntent().getExtras();
                     if (getD != null) {
 
+
                         etDescripcion.setText(getD.getString("Descripcion"));
-                        //paths=getD.getStringArrayList("Paths");
+                        paths= getIntent().getStringArrayListExtra("Paths");
+                     //   Toast.makeText(this, paths.size(), Toast.LENGTH_LONG).show();
                         etSenimientos.setText(getD.getString("Sentimientos"));
                         etEvaluacion.setText(getD.getString("Evaluacion"));
                         etAnalisis.setText(getD.getString("Analisis"));
                         etConclusion.setText(getD.getString("Conclusion"));
                         etPlan.setText(getD.getString("Plan"));
+                          ia = new Adapter_Item(paths, Register.this);
+                         rcItems.setAdapter(ia);
 
-                        //ia = new Adapter_Item(paths, Register.this);
-                        //rcItems.setAdapter(ia);
                     }
 
                 }

@@ -1916,12 +1916,12 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-nodpi\\emoji_1f503.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\release\\drawable-nodpi-v4\\emoji_1f448.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-nodpi\\emoji_1f448.png"
-    },
-    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\release\\drawable-nodpi-v4\\emoji_1f64e.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-nodpi\\emoji_1f64e.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\release\\drawable-nodpi-v4\\emoji_1f448.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-nodpi\\emoji_1f448.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\release\\drawable-nodpi-v4\\emoji_1f4a6.png",

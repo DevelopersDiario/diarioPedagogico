@@ -43,17 +43,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@drawable/edit_text_border">
 
              <Spinner
                     android:id="@+id/spGpoP"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="1dp"
                     android:layout_marginBottom="10dp"
                     android:hint="Grupo"
-                    android:textAlignment="center"
-                    android:background="@drawable/edit_text_design"/>
+                    android:textAlignment="center"/>
 
               <!-- <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/spGpoP"
@@ -86,7 +86,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
-                    android:hint="¿Que esta pasando?"
+                    android:hint="¿Que paso?"
                     android:inputType="textMultiLine"
                     android:textAlignment="center" />
 
@@ -127,7 +127,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
-                    android:hint="Describa sus sentimientos y pensamientos"
+                    android:hint="¿Que estaba pensando y sintiendo?"
                     android:inputType="textMultiLine"
                     android:textAlignment="center" />
 
@@ -153,7 +153,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
-                    android:hint="Evaluación del procedimiento de reflexión"
+                    android:hint="¿Que es lo bueno y malo de esta experiencia?"
                     android:inputType="textMultiLine"
                     android:textAlignment="center" />
 
@@ -179,7 +179,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
-                    android:hint="Analisis del proceso de reflexión"
+                    android:hint="¿Qué sentido puede tener esta experiencia?"
                     android:inputType="textMultiLine"
                     android:textAlignment="center" />
 
@@ -205,7 +205,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
-                    android:hint="Conclusión del proceso de reflexion"
+                    android:hint="¿Qué más podria haber hecho?"
                     android:inputType="textMultiLine"
                     android:textAlignment="center" />
 
@@ -231,7 +231,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
-                    android:hint="Plan de acción"
+                    android:hint="¿Qué haria en una experiencia similar?"
                     android:inputType="textMultiLine"
                     android:textAlignment="center" />
 

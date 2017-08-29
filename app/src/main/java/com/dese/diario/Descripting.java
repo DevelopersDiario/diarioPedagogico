@@ -346,13 +346,10 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
             case R.id.action_post:
                 Intent d= new Intent(Descripting.this, Register.class);
                 if(!etDescriptingM.getText().equals(null)){
-                    Reflexion r= new Reflexion();
 
                     textMore=etDescriptingM.getText().toString();
                     d.putExtra("Descripcion", textMore);
-                    //d.putExtra("Paths", paths);
-
-                    //r.setObservaciones(textMore);
+                     d.putExtra("Paths", paths);
                     startActivity(d);
                     finish();
 
