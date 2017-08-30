@@ -41,7 +41,7 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
     public TextView tvPublicationRec;
     //public TextView tvSentimientosRec;
 
-    public CardView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
+    public ImageView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 
     public CircleImageView imProfileRec;
     public Button btnRPoster;
@@ -62,11 +62,11 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
         titlePublication = (TextView) itemView.findViewById(R.id.titlePublication);
 
 //        tvSentimientosRec=(TextView)itemView.findViewById(R.id.tvSentimientosRec);
-        cvFeels =(CardView)itemView.findViewById(R.id.cvFeels);
-        cvTest  = (CardView)itemView.findViewById(R.id.cvTest);
-        cvAnalyze= (CardView)itemView.findViewById(R.id.cvAnalyze);
-        cvConclusion= (CardView)itemView.findViewById(R.id.cvConclusion);
-        cvPlan= (CardView)itemView.findViewById(R.id.cvPlan);
+        cvFeels =(ImageView) itemView.findViewById(R.id.imvFeels);
+        cvTest  = (ImageView) itemView.findViewById(R.id.imvTest);
+        cvAnalyze= (ImageView) itemView.findViewById(R.id.imvAnalyze);
+        cvConclusion= (ImageView) itemView.findViewById(R.id.imvConclusion);
+        cvPlan= (ImageView) itemView.findViewById(R.id.imvPlan);
 
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
         btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);

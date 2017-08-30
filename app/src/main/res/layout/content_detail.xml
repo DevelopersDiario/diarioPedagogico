@@ -121,17 +121,18 @@
 
                             <ImageView
                                 android:id="@+id/imvFeelsD"
-                                android:src="@drawable/idea"
                                 android:layout_weight="1"
                                 android:background="?colorAccent"
-                                android:textColor="#000000"
+                                android:gravity="center"
                                 android:padding="20dip"
-                                android:gravity="center"/>
+                                android:src="@drawable/idea"
+                                android:textColor="#000000" />
+
                             <ImageView
                                 android:id="@+id/imvTestD"
                                 android:gravity="center"
                                 android:padding="20dip"
-                                android:background="?colorPrimary"
+                                android:background="?colorControlHighlight"
                                 android:src="@drawable/test"
                                 android:textColor="#000000" />
 
@@ -159,7 +160,7 @@
                                 android:id="@+id/imvConclusionD"
                                android:src="@drawable/goal"
                                 android:layout_weight="1"
-                                android:background="?colorPrimary"
+                                android:background="?colorControlHighlight"
                                 android:textColor="#000000"
                                 android:padding="20dip"
                                 android:gravity="center"/>
@@ -184,8 +185,7 @@
                                 android:id="@+id/rvItemDetailPublicacion"
                                 android:layout_width="match_parent"
                                 android:layout_span="3"
-                                android:padding="18dip"
-                                android:layout_height="100dp"/>
+                                android:layout_height="wrap_content"/>
 
                         </TableRow>
 
