@@ -18,7 +18,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
-        <LinearLayout
+         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -95,16 +95,17 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tag_lorem" />
 
-                <android.support.v7.widget.RecyclerView
+              <!--  <android.support.v7.widget.RecyclerView
                     android:layout_marginTop="20dp"
                     android:id="@+id/rvItemPublication"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"/>-->
 
                 <TableLayout
                     xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="220dp"
+                    android:layout_marginTop="20dp"
                     android:shrinkColumns="*"
                     android:stretchColumns="*" android:background="#ffffff">
 
@@ -186,18 +187,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:background="@color/base10"
                 android:gravity="end">
 
-                <Button
+                <ImageView
                     android:id="@+id/btnRPoster"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/action_post"
-                    android:visibility="gone"
-                    android:background="@drawable/button_rectangule"
-                    android:layout_gravity="center"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:theme="@style/buttonRaised"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:backgroundTint="?colorAccent"
+                    android:background="@drawable/ic_file_download_black_24dp"
+                    />
 
 
 

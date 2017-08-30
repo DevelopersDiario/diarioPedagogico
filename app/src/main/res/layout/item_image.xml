@@ -9,6 +9,7 @@
       android:layout_width="match_parent"
       android:layout_height="@dimen/dimens_200dp"
       android:id="@+id/ivItem"
+      android:src="@drawable/filepng"
       />
   <TextView
       android:hint="Valuen Nmae"
