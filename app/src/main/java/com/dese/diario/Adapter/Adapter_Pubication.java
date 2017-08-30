@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -16,6 +17,7 @@ import com.dese.diario.Objects.DetailPublication;
 import com.dese.diario.Objects.Publication;
 import com.dese.diario.Objects.Urls;
 import com.dese.diario.R;
+import com.dese.diario.Utils.ExportPDF;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -166,18 +168,25 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             public void onItemClick(int pos) {
                 openDetailActivity(_ide,t, u, d, p, f, pa, sen, eva, ana, con, plan);
 
-                //Toast.makeText(context,"Entra a itemClicklistener "+ pa,Toast.LENGTH_SHORT).show();
             }
         });
 
-        holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
+        holder.imvDowloandPDF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                exportPDF(_ide,t, u, d, p, f, pa, sen, eva, ana, con, plan);
+            }
+        });
+
+
+        /*holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ListRepublication rp= new ListRepublication();
                 rp.AlertRepublication(pa, context);
             }
         });
-
+*/
 
     }
 
@@ -189,11 +198,11 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     }
 
 
-    private void openDetailActivity(String _ide, String t, String u, String d, String p, String f ,final String pa,
-                                    String sen, String tes, String ana, String con, String plan ) {
+    private void openDetailActivity(String _ide, String t, String u, String d, String p, String f ,
+                                    final String pa, String sen, String tes, String ana, String con,
+                                    String plan ) {
         Intent i = new Intent(context, DetailPublication.class);
         ListRepublication rp= new ListRepublication();
-
         //PACK DATA TO SEND
         i.putExtra("_IDE_KEY", _ide);
         i.putExtra("TITLE_KEY", t);
@@ -207,13 +216,33 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         i.putExtra("ANA_KEY", ana);
         i.putExtra("CON_KEY", con);
         i.putExtra("PLAN_KEY", plan);
-
-
-
         //open activity
-
         context.startActivity(i);
 
+    }
+
+    private void exportPDF(String _ide, String t, String u, String d, String p, String f ,
+                           final String pa, String sen, String tes, String ana, String con,
+                           String plan ) {
+
+        // TODO Auto-generated method stub
+        String filename =t; //
+        String filecontent = "Descripción" +"  "+p+"  "+"Fecha:"+d
+                    +"\n"+f + "  Autor:"+u
+                    +"\n"+ "Sentimientos  "+sen
+                    +"\n"+ "Evaluaci+on "+tes
+                    +"\n"+ "Analisis "+ ana
+                    +"\n"+  "Conclusión "+ con
+                    +"\n"+ "Plan de acci+on  "+plan;
+        ExportPDF fop = new ExportPDF();
+        if (fop.write(filename, filecontent)) {
+            Toast.makeText(context,
+                    filename + ".pdf created", Toast.LENGTH_SHORT)
+                    .show();
+        } else {
+            Toast.makeText(context, "I/O error",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

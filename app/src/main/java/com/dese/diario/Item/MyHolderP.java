@@ -45,6 +45,7 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
 
     public CircleImageView imProfileRec;
     public Button btnRPoster;
+    public ImageView imvDowloandPDF;
     MyLongClickListener longClickListener;
     ItemClickListener itemClickListener;
 
@@ -68,8 +69,10 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
         cvConclusion= (ImageView) itemView.findViewById(R.id.imvConclusion);
         cvPlan= (ImageView) itemView.findViewById(R.id.imvPlan);
 
+        imvDowloandPDF=(ImageView) itemView.findViewById(R.id.imvDowloandPDF);
+
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
-        btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);
+      //  btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);
 
 
         itemView.setOnLongClickListener(this);

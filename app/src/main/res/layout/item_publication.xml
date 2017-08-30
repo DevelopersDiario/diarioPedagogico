@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         card_view:cardCornerRadius="@dimen/cardvier_CornerRadius_20"
-        card_view:cardElevation="@dimen/elevacion_card"
+        card_view:cardElevation="30dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
@@ -187,11 +187,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@color/base10"
+                android:background="?met_floatingLabelTextColor"
                 android:gravity="end">
 
                 <ImageView
-                    android:id="@+id/btnRPoster"
+                    android:id="@+id/imvDowloandPDF"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:backgroundTint="?colorAccent"

@@ -63,8 +63,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class MainActivity extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener,
-        SwipeRefreshLayout.OnRefreshListener,
-        View.OnClickListener{
+        SwipeRefreshLayout.OnRefreshListener{
     final static String url= Urls.listpublicacion;
     final String idpublicacion= "idpublicacion";
     final String nombre= "nombre";
@@ -536,8 +535,4 @@ public class MainActivity extends AppCompatActivity
     }// Fin conectionPublication
 
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }
