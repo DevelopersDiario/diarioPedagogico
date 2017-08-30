@@ -21,6 +21,7 @@ android {
         versionCode 5
         versionName "1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -142,9 +143,10 @@ dependencies {
     compile 'com.github.ganfra:material-spinner:1.1.1'
     //Pdf Export
 
-    compile 'com.afollestad.material-dialogs:core:0.9.4.5'
+   /* compile 'com.afollestad.material-dialogs:core:0.9.4.5'
     compile 'com.madgag:scpkix-jdk15on:1.47.0.1'
-    compile 'com.itextpdf:itextpdf:5.0.6'
+    compile 'com.itextpdf:itextpdf:5.0.6'*/
+
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

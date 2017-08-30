@@ -75,7 +75,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.titlePublication.setText(t);
        // holder.tvSentimientosRec.setText(sen);
 
-        holder.cvFeels.setOnClickListener(new View.OnClickListener() {
+       /* holder.cvFeels.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(context)
@@ -156,7 +156,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                         })
                         .show();
             }
-        });
+        });*/
         Picasso.with(context)
                 .load(Urls.download + f)
                 .resize(250, 250)
@@ -171,12 +171,12 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             }
         });
 
-        holder.imvDowloandPDF.setOnClickListener(new View.OnClickListener() {
+     /*   holder.imvDowloandPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                exportPDF(_ide,t, u, d, p, f, pa, sen, eva, ana, con, plan);
+                //exportPDF(_ide,t, u, d, p, f, pa, sen, eva, ana, con, plan);
             }
-        });
+        });*/
 
 
         /*holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
@@ -221,29 +221,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
 
     }
 
-    private void exportPDF(String _ide, String t, String u, String d, String p, String f ,
-                           final String pa, String sen, String tes, String ana, String con,
-                           String plan ) {
 
-        // TODO Auto-generated method stub
-        String filename =t; //
-        String filecontent = "Descripción" +"  "+p+"  "+"Fecha:"+d
-                    +"\n"+f + "  Autor:"+u
-                    +"\n"+ "Sentimientos  "+sen
-                    +"\n"+ "Evaluaci+on "+tes
-                    +"\n"+ "Analisis "+ ana
-                    +"\n"+  "Conclusión "+ con
-                    +"\n"+ "Plan de acci+on  "+plan;
-        ExportPDF fop = new ExportPDF();
-        if (fop.write(filename, filecontent)) {
-            Toast.makeText(context,
-                    filename + ".pdf created", Toast.LENGTH_SHORT)
-                    .show();
-        } else {
-            Toast.makeText(context, "I/O error",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
 
 }
 
