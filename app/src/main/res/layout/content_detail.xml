@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -20,219 +21,197 @@
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
         android:layout_height="match_parent">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="1">
-
-
-            <!-- Title-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?colorControlHighlight" >
-                <TextView
-                    android:id="@+id/tvTitlePubDetail"
-                    android:textAlignment="center"
-                    android:hint="@string/tag_title"
-                    android:gravity="center"
-                    android:layout_centerInParent="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-            </RelativeLayout>
-
-            <!-- Body-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:paddingTop="10dp"
-                >
-
-                <ImageView
-                    android:id="@+id/imProfilPubDetail"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/ic_contact_icon"
-                    android:layout_alignParentStart="true"
-                   />
-
-                <TextView
-                    android:id="@+id/tvDatePubDetail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/tvUserRec"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="false"
-                    android:text="@string/tag_date"
-                    style="@style/TextAppearance.AppCompat"/>
-
-                <TextView
-                    android:id="@+id/tvUserPubDetail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_toEndOf="@+id/imProfileRec"
-                    android:text="@string/tag_name_user"
-                    android:paddingTop="@dimen/padding_5dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginLeft="79dp"
-                    android:paddingBottom="8dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-            </RelativeLayout>
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:paddingTop="3dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/tvPubDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:hint="@string/tag_lorem"
-                    style="@style/TextAppearance.AppCompat"/>
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cvFeelsD"
-                    card_view:cardBackgroundColor="?colorAccent"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="14dp"
-                    android:clickable="true"
-                    card_view:cardCornerRadius="10dp"
-                    android:foreground="?selectableItemBackground"
-                    app:cardElevation="@dimen/cardview_elevation_9">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:text="Sentimientos y Pensamientos"/>
-                </android.support.v7.widget.CardView>
-
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cvTestD"
-                    card_view:cardBackgroundColor="?colorAccent"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="14dp"
-                    android:clickable="true"
-                    card_view:cardCornerRadius="10dp"
-                    android:foreground="?selectableItemBackground"
-                    app:cardElevation="@dimen/cardview_elevation_9">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:text="Evaluación"/>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cvAnalyzeD"
-                    card_view:cardBackgroundColor="?colorAccent"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="14dp"
-                    android:clickable="true"
-                    card_view:cardCornerRadius="10dp"
-                    android:foreground="?selectableItemBackground"
-                    app:cardElevation="@dimen/cardview_elevation_9">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:text="Analisis"/>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cvConclusionD"
-                    card_view:cardBackgroundColor="?colorAccent"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="14dp"
-                    android:clickable="true"
-                    card_view:cardCornerRadius="10dp"
-                    android:foreground="?selectableItemBackground"
-                    app:cardElevation="@dimen/cardview_elevation_9">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:text="Conclusión"/>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cvPlanD"
-                    card_view:cardBackgroundColor="?colorAccent"
-                    android:layout_width="match_parent"
-                    android:layout_height="23dp"
-                    android:layout_marginTop="14dp"
-                    android:clickable="true"
-                    card_view:cardCornerRadius="10dp"
-                    android:foreground="?selectableItemBackground"
-                    app:cardElevation="@dimen/cardview_elevation_9">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:text="Plan de Acción"/>
-                </android.support.v7.widget.CardView>
-
-             <android.support.v7.widget.RecyclerView
-                 android:id="@+id/rvItemDetailPublicacion"
-                 android:layout_width="match_parent"
-                 android:layout_height="100dp"/>
-
-               </LinearLayout>
-
-    </ScrollView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerRepost"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"
-                    tools:listitem="@layout/card_layout_repost"
-                    />
-
-            </LinearLayout>
+                    android:weightSum="1">
 
 
+                    <!-- Title-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?colorControlHighlight" >
+                        <TextView
+                            android:id="@+id/tvTitlePubDetail"
+                            android:textAlignment="center"
+                            android:hint="@string/tag_title"
+                            android:gravity="center"
+                            android:layout_centerInParent="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-        </LinearLayout>
-</ScrollView>
+                    </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+                    <!-- Body-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:paddingTop="10dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imProfilPubDetail"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/ic_contact_icon"
+                            android:layout_alignParentStart="true"
+                           />
+
+                        <TextView
+                            android:id="@+id/tvDatePubDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/tvUserRec"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="false"
+                            android:text="@string/tag_date"
+                            style="@style/TextAppearance.AppCompat"/>
+
+                        <TextView
+                            android:id="@+id/tvUserPubDetail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/imProfileRec"
+                            android:text="@string/tag_name_user"
+                            android:paddingTop="@dimen/padding_5dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginLeft="79dp"
+                            android:paddingBottom="8dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:paddingTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvPubDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:hint="@string/tag_lorem"
+                            style="@style/TextAppearance.AppCompat"/>
+                        </LinearLayout>
+
+                    <TableLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:shrinkColumns="*"
+                        android:stretchColumns="*" android:background="#ffffff">
+
+
+                        <!-- Row 1 with single column -->
+                        <TableRow
+                            android:layout_height="wrap_content"
+                            android:layout_width="fill_parent"
+                            android:gravity="center_horizontal">
+
+
+                            <ImageView
+                                android:id="@+id/imvFeelsD"
+                                android:src="@drawable/idea"
+                                android:layout_weight="1"
+                                android:background="?colorAccent"
+                                android:textColor="#000000"
+                                android:padding="20dip"
+                                android:gravity="center"/>
+                            <ImageView
+                                android:id="@+id/imvTestD"
+                                android:gravity="center"
+                                android:padding="20dip"
+                                android:background="?colorPrimary"
+                                android:src="@drawable/test"
+                                android:textColor="#000000" />
+
+                            <ImageView
+                                android:id="@+id/imvAnalyzeD"
+                               android:src="@drawable/analytics"
+                                android:layout_weight="1"
+                                android:background="?colorAccent"
+                                android:textColor="#000000"
+                                android:padding="20dip"
+                                android:gravity="center"/>
+
+
+                        </TableRow>
+
+                        <!-- Row 2 with 3 columns -->
+
+
+                        <TableRow
+                            android:id="@+id/tableRow1"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imvConclusionD"
+                               android:src="@drawable/goal"
+                                android:layout_weight="1"
+                                android:background="?colorPrimary"
+                                android:textColor="#000000"
+                                android:padding="20dip"
+                                android:gravity="center"/>
+
+                            <ImageView
+                                android:id="@+id/imvPlanD"
+                                android:layout_weight="1"
+                                android:background="?colorAccent"
+                                android:gravity="center"
+                                android:padding="20dip"
+                                 android:src="@drawable/plan"
+                                android:textColor="#000000" />
+
+
+                        </TableRow>
+                        <TableRow
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="center_horizontal">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rvItemDetailPublicacion"
+                                android:layout_width="match_parent"
+                                android:layout_span="3"
+                                android:padding="18dip"
+                                android:layout_height="100dp"/>
+
+                        </TableRow>
+
+                    </TableLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerRepost"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerInParent="true"
+                            tools:listitem="@layout/card_layout_repost"
+                            />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </ScrollView>
+
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>

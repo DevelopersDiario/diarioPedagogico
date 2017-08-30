@@ -43,11 +43,11 @@ public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongCli
         imProfileRecR = (CircleImageView) itemView.findViewById(R.id.imProfileRecR);
         tvPublicationRecR= (TextView) itemView.findViewById(R.id.tvPublicationRecR);
 
-        cvFeels =(CardView)itemView.findViewById(R.id.cvFeelsD);
-        cvTest  = (CardView)itemView.findViewById(R.id.cvTestD);
-        cvAnalyze= (CardView)itemView.findViewById(R.id.cvAnalyzeD);
-        cvConclusion= (CardView)itemView.findViewById(R.id.cvConclusionD);
-        cvPlan= (CardView)itemView.findViewById(R.id.cvPlanD);
+        cvFeels =(CardView)itemView.findViewById(R.id.imvFeelsD);
+        cvTest  = (CardView)itemView.findViewById(R.id.imvTestD);
+        cvAnalyze= (CardView)itemView.findViewById(R.id.imvAnalyzeD);
+        cvConclusion= (CardView)itemView.findViewById(R.id.imvConclusionD);
+        cvPlan= (CardView)itemView.findViewById(R.id.imvPlanD);
 
         itemView.setOnLongClickListener(this);
         itemView.setOnCreateContextMenuListener(this);

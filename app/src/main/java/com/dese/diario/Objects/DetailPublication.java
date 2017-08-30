@@ -71,7 +71,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     ImageView foto;
     String t,u,d,p,f,sen, eva, ana, con, plan,  pa, idepublicacion;
 
-    public CardView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
+    public ImageView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 
     Button btnPost;
 
@@ -137,11 +137,11 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         tvPubDetail=(TextView) findViewById(R.id.tvPubDetail);
         foto=(ImageView) findViewById(R.id.imProfilPubDetail);
 
-        cvFeels =(CardView)findViewById(R.id.cvFeelsD);
-        cvTest  = (CardView)findViewById(R.id.cvTestD);
-        cvAnalyze= (CardView)findViewById(R.id.cvAnalyzeD);
-        cvConclusion= (CardView)findViewById(R.id.cvConclusionD);
-        cvPlan= (CardView)findViewById(R.id.cvPlanD);
+        cvFeels =(ImageView) findViewById(R.id.imvFeelsD);
+        cvTest  = (ImageView) findViewById(R.id.imvTestD);
+        cvAnalyze= (ImageView) findViewById(R.id.imvAnalyzeD);
+        cvConclusion= (ImageView) findViewById(R.id.imvConclusionD);
+        cvPlan= (ImageView) findViewById(R.id.imvPlanD);
 
         cvFeels.setOnClickListener(this);
         cvTest.setOnClickListener(this);
@@ -191,7 +191,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.cvFeelsD:
+            case R.id.imvFeelsD:
                 new MaterialDialog.Builder(this)
                         .title("¿Que esta pensando y sintiendo?")
                         .content(sen)
@@ -204,7 +204,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                         })
                         .show();
                 break;
-            case R.id.cvTestD:
+            case R.id.imvTestD:
                 new MaterialDialog.Builder(this)
                         .title("¿Que esta pensando y sintiendo?")
                         .content(eva)
@@ -217,7 +217,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                         })
                         .show();
                 break;
-            case R.id.cvAnalyzeD:
+            case R.id.imvAnalyzeD:
                 new MaterialDialog.Builder(this)
                         .title("¿Que esta pensando y sintiendo?")
                         .content(ana)
@@ -230,7 +230,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                         })
                         .show();
                 break;
-            case R.id.cvConclusionD:
+            case R.id.imvConclusionD:
                 new MaterialDialog.Builder(this)
                         .title("¿Que esta pensando y sintiendo?")
                         .content(con)
@@ -243,7 +243,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                         })
                         .show();
                 break;
-            case R.id.cvPlanD:
+            case R.id.imvPlanD:
                 new MaterialDialog.Builder(this)
                         .title("¿Que esta pensando y sintiendo?")
                         .content(plan)
