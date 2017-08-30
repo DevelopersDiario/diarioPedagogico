@@ -75,7 +75,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.titlePublication.setText(t);
        // holder.tvSentimientosRec.setText(sen);
 
-       /* holder.cvFeels.setOnClickListener(new View.OnClickListener() {
+        holder.cvFeels.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(context)
@@ -156,7 +156,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
                         })
                         .show();
             }
-        });*/
+        });
         Picasso.with(context)
                 .load(Urls.download + f)
                 .resize(250, 250)

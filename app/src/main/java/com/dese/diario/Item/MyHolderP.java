@@ -62,12 +62,11 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
         tvPublicationRec = (TextView) itemView.findViewById(R.id.tvPublicationRec);
         titlePublication = (TextView) itemView.findViewById(R.id.titlePublication);
 
-//        tvSentimientosRec=(TextView)itemView.findViewById(R.id.tvSentimientosRec);
-       /* cvFeels =(ImageView) itemView.findViewById(R.id.imvFeels);
+        cvFeels =(ImageView) itemView.findViewById(R.id.imvFeels);
         cvTest  = (ImageView) itemView.findViewById(R.id.imvTest);
         cvAnalyze= (ImageView) itemView.findViewById(R.id.imvAnalyze);
         cvConclusion= (ImageView) itemView.findViewById(R.id.imvConclusion);
-        cvPlan= (ImageView) itemView.findViewById(R.id.imvPlan);*/
+        cvPlan= (ImageView) itemView.findViewById(R.id.imvPlan);
 
        // imvDowloandPDF=(ImageView) itemView.findViewById(R.id.imvDowloandPDF);
 

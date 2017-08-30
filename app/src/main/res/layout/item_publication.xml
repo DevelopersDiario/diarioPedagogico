@@ -95,13 +95,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/tag_lorem" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/rvItemPublication"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
 
-                 <TableLayout
+                <TableLayout
                    xmlns:android="http://schemas.android.com/apk/res/android"
                    android:layout_width="match_parent"
                    android:layout_height="220dp"
