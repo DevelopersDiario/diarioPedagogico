@@ -13,5 +13,5 @@ public class Constants {
     public static final String mDirectoryPictures = "/Mi Diario/Perfil/";
     public static final String mDirectoryProfile = "/Mi Diario/Perfil/"+"Profile"+variablesLogin.getIdusuario().toString()+".jpg";
     public static final String mDirectoryHolder = "/Mi Diario/Perfil/"+"Holder"+variablesLogin.getIdusuario().toString()+".jpg";
-    public static final String mDownloadDirectory = "/Mi Diario/Descargas";
+    public static final String mDownloadDirectory = "/Mi Diario/Descargas/";
 }

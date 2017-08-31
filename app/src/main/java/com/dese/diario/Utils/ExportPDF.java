@@ -1,7 +1,7 @@
 package com.dese.diario.Utils;
-/*
+
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.PdfWriter;*/
+import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class ExportPDF {
     public Boolean write(String fname, String fcontent) {
-       /* try {
+        try {
             String fpath = "/sdcard"+Constants.mDownloadDirectory + fname + ".pdf";
             File file = new File(fpath);
 
@@ -44,7 +44,6 @@ public class ExportPDF {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
-        }*/
-        return false;
+        }
     }
 }

@@ -21,6 +21,7 @@ android {
         versionCode 5
         versionName "1.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
 
     }
 
@@ -142,7 +143,7 @@ dependencies {
     compile 'cn.zhaiyifan:rememberedittext:0.9.0'
     compile 'com.github.ganfra:material-spinner:1.1.1'
     //Pdf Export
-
+    compile 'com.itextpdf:itextpdf:5.0.6'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

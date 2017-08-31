@@ -50,6 +50,7 @@ import com.dese.diario.Adapter.Adapter_RePubication;
 import com.dese.diario.Adapter.ListRepublication;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Publication;
+import com.dese.diario.Utils.ExportPDF;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -672,6 +673,8 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                 break;
 
             case R.id.action_download:
+                exportPDF(t,u,d,p,f,sen, eva, ana, con, plan,  pa );
+
                 break;
             case R.id.action_help:
                 break;
@@ -682,6 +685,33 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         return super.onOptionsItemSelected(item);
 
     }
+
+    private void exportPDF(String t, String u, String d, String p,
+                           String f, String sen, String eva, String ana,
+                           String con, String plan, String pa) {
+
+
+            // TODO Auto-generated method stub
+            String filename =t; //
+            String filecontent = "Autor: "+u + "                 Fecha: "+d+ "\n"+
+                                 "Titulo: "+ t+ "\n"+
+                                    "Descripción: "+p + "\n"+
+                                    "Sentimientos: "+sen+ "\n"+
+                                    "Evaluación: "+eva+ "\n"+
+                                    "Analisis: "+ ana+ "\n"+
+                                    "Conclusión: "+con+ "\n"+
+                                    "Plan de Acción: "+plan;
+            ExportPDF e = new ExportPDF();
+            if (e.write(filename, filecontent)) {
+                Toast.makeText(getApplicationContext(),
+                        filename + ".pdf created", Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                Toast.makeText(getApplicationContext(), "I/O error",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
 
 
 }
