@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -113,6 +114,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         theme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_publication);
+
         recyclerView = (RecyclerView)findViewById(R.id.recyclerRepost);
         linearLayoutManager= new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -127,8 +129,9 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
 
         rcItems = (RecyclerView) findViewById(R.id.rvItemDetailPublicacion);
-        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(3, 1);
-        rcItems.setLayoutManager(staggeredGridLayout);
+       StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(4,1);
+      // rcItems.setLayoutManager(staggeredGridLayout);
+
 
 
         tvTitlePubDetail = (TextView) findViewById(R.id.tvTitlePubDetail);
@@ -413,8 +416,9 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                             jsonobject.getString("nombre"),
                                             jsonobject.getString("idusuario")));
                                     adapter = new Adapter_RePubication(listRepublicaciones,DetailPublication.this);
-                                  // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
                                     recyclerView.setAdapter(adapter);
+
+                                    // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
 
 
                                   //&  System.out.println(listRepublicaciones);
@@ -530,8 +534,15 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                     String file=jsonobject.getString("descripcion");
                                     filename.add(file);
                                     if(file!=" "){
+
                                         ia = new Adapter_File(filename, DetailPublication.this);
                                         rcItems.setAdapter(ia);
+
+                                        //rcItems.setItemAnimator(new DefaultItemAnimator());
+                                        //rcItems.setLayoutManager(new LinearLayoutManager(DetailPublication.this));
+
+                                        rcItems.setItemAnimator(new DefaultItemAnimator());
+                                        rcItems.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
                                         System.out.println(paths);
                                     }
 
@@ -626,7 +637,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-       // getMenuInflater().inflate(R.menu.main, menu);
+       getMenuInflater().inflate(R.menu.menu_detail, menu);
         return true;
     }
 
@@ -654,6 +665,11 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
                 }
 
+                break;
+
+            case R.id.action_download:
+                break;
+            case R.id.action_help:
                 break;
 
 

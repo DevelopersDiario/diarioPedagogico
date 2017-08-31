@@ -1,11 +1,14 @@
 package com.dese.diario.Adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dese.diario.Item.Item;
 import com.dese.diario.Item.MyHolderView;
 import com.dese.diario.R;
 import com.squareup.picasso.Picasso;
@@ -41,6 +44,7 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
 
 
     @Override public void onBindViewHolder(MyHolderView holder, int position) {
+
         File f= new File(paths.get(position));
         String fname=f.getName().toString();
         String type = fname.substring(fname.lastIndexOf(".") + 1);
@@ -48,6 +52,9 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
 
 
         holder.tvItem.setText(fname);
+        // Span the item if active
+
+
 
         switch (type){
             case  "jpg":
@@ -113,7 +120,11 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
 
         }
 
+
+
+
     }
+
 
     @Override public int getItemCount() {
         return paths.size();

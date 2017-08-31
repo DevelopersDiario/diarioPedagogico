@@ -107,7 +107,7 @@
                     <TableLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="500dp"
                         android:shrinkColumns="*"
                         android:stretchColumns="*" android:background="#ffffff">
 
@@ -178,14 +178,14 @@
                         </TableRow>
                         <TableRow
                             android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:gravity="center_horizontal">
+                            android:layout_width="match_parent">
 
                             <android.support.v7.widget.RecyclerView
                                 android:id="@+id/rvItemDetailPublicacion"
                                 android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_span="3"
-                                android:layout_height="wrap_content"/>
+                               />
 
                         </TableRow>
 
