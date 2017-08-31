@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.nfc.Tag;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,7 +76,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
     public ImageView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 
-    Button btnPost;
+    FloatingActionButton btnPost;
 
     //ListarGpo
     final static String urlLisGpo= Urls.listgrupo;
@@ -83,6 +85,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     Adapter_RePubication adapter;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
+    LinearLayout lyContentImagenDetail;
     String ed;
 
     List leadsNames, leadsIdes;
@@ -125,7 +128,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
     private void bindData() {
         final ListRepublication lp =new ListRepublication();
-        btnPost= (Button) findViewById(R.id.btnRep);
+        btnPost= (FloatingActionButton) findViewById(R.id.btnRep);
 
 
         rcItems = (RecyclerView) findViewById(R.id.rvItemDetailPublicacion);
@@ -133,7 +136,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
       // rcItems.setLayoutManager(staggeredGridLayout);
 
 
-
+        lyContentImagenDetail= (LinearLayout) findViewById(R.id.lyContentImagenDetail);
         tvTitlePubDetail = (TextView) findViewById(R.id.tvTitlePubDetail);
         tvUserPubDetail=(TextView) findViewById(R.id.tvUserPubDetail);
         tvDatePubDetail =(TextView) findViewById(R.id.tvDatePubDetail);
@@ -541,8 +544,9 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                         //rcItems.setItemAnimator(new DefaultItemAnimator());
                                         //rcItems.setLayoutManager(new LinearLayoutManager(DetailPublication.this));
 
+                                        lyContentImagenDetail.setVisibility(View.VISIBLE);
                                         rcItems.setItemAnimator(new DefaultItemAnimator());
-                                        rcItems.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
+                                        rcItems.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                                         System.out.println(paths);
                                     }
 
