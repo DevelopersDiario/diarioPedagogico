@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
@@ -19,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,14 +33,22 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.Adapter.Adapter_Item;
 import com.dese.diario.Item.Search_friends;
 import com.dese.diario.POJOS.Reflexion;
+import com.dese.diario.Utils.CheckForSDCard;
+import com.dese.diario.Utils.Constants;
 import com.dese.diario.Utils.Upload;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 import com.sangcomz.fishbun.FishBun;
 import com.sangcomz.fishbun.define.Define;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
+import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
+import cafe.adriel.androidaudiorecorder.model.AudioChannel;
+import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
+import cafe.adriel.androidaudiorecorder.model.AudioSource;
 
 public class Descripting extends AppCompatActivity implements View.OnClickListener {
 
@@ -58,7 +68,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
     //REQUEST FILE
     private final int SELECT_PICTURE = 300;
     private final int PICK_DOC_REQUEST = 1;
-    private final int PICK_IMG_REQUEST = 2;
+    private final int PICK_AUD_REC_REQUEST = 2;
     private final int PICK_AUD_REQUEST = 3;
     private final int PICK_VID_REQUEST = 4;
 
@@ -72,7 +82,9 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
     //Bind
     EditText etDescriptingM;
 
-
+    private static  String AUDIO_FILE_PATH =
+            Environment.getExternalStorageDirectory().getPath() + Constants.mAudioDirectory+ "/Audio";
+    private static String AUDIO_FILE_PATH_FULL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -188,12 +200,37 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.imMic:
-                Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+               /* Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intentA.addCategory(Intent.CATEGORY_OPENABLE);
-                intentA.setType("audio/*");
+                intentA.setType("audio*//*");
                 intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 startActivityForResult(intentA, PICK_AUD_REQUEST);
+*/  final CharSequence[] option = { "Grabar", "Buscar"};
+                new MaterialDialog.Builder(this)
+                        .title("Seleccione")
+                        .items(option)
+                        .itemsCallback(new MaterialDialog.ListCallback() {
+                            @Override
+                            public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                                switch (which){
+                                    case 0:
+                                        recordingAudio();
+                                        Toast.makeText(Descripting.this, text.toString(), Toast.LENGTH_LONG).show();
+                                        break;
 
+                                    case 1:
+                                        Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                                        intentA.addCategory(Intent.CATEGORY_OPENABLE);
+                                        intentA.setType("audio*//*");
+                                        intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                                        startActivityForResult(intentA, PICK_AUD_REQUEST);
+
+                                        Toast.makeText(Descripting.this, text.toString(), Toast.LENGTH_LONG).show();
+                                        break;
+                                }
+                            }
+                        })
+                        .show();
 
 
                 break;
@@ -219,7 +256,39 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
         morph.hide();
 
     }//enOnClick
+    private void recordingAudio() {
+        File apkStorage = null;
+        File outputFile = null;
+        //Get File if SD card is present
+        if (new CheckForSDCard().isSDCardPresent()) {
 
+            apkStorage = new File(
+                    Environment.getExternalStorageDirectory() + Constants.mAudioDirectory);
+        } else
+            Toast.makeText(this, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
+
+        //If File is not present create directory
+        if (!apkStorage.exists()) {
+            apkStorage.mkdir();
+
+        }
+            Long timestamp = System.currentTimeMillis() / 1000;
+        AUDIO_FILE_PATH_FULL=AUDIO_FILE_PATH+timestamp+".mp3";
+        AndroidAudioRecorder.with(Descripting.this)
+                // Required
+                .setFilePath(AUDIO_FILE_PATH_FULL)
+                .setColor(ContextCompat.getColor(Descripting.this, R.color.base10))
+                .setRequestCode(PICK_AUD_REC_REQUEST)
+                // Optional
+                .setSource(AudioSource.MIC)
+                .setChannel(AudioChannel.STEREO)
+                .setSampleRate(AudioSampleRate.HZ_48000)
+                .setAutoStart(false)
+                .setKeepDisplayOn(true)
+                // Start recording
+                .record();
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -237,7 +306,19 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                 case PICK_AUD_REQUEST:
                     actReq=data;
 
-                   clipdataSelect(data);
+                    clipdataSelect(data);
+                    break;
+                case PICK_AUD_REC_REQUEST:
+                    if (resultCode == RESULT_OK) {
+
+                        Toast.makeText(this, "Audio recorded successfully!", Toast.LENGTH_SHORT).show();
+                        if(!AUDIO_FILE_PATH_FULL.isEmpty())
+                        paths.add(AUDIO_FILE_PATH_FULL);
+                        ia = new Adapter_Item(paths, Descripting.this);
+                        rcItems.setAdapter(ia);
+                    } else if (resultCode == RESULT_CANCELED) {
+                        Toast.makeText(this, "Audio was not recorded", Toast.LENGTH_SHORT).show();
+                    }
                     break;
 
                 case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:

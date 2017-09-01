@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Register"
-    android:layout_marginLeft="16dp"
+    android:layout_marginLeft="5dp"
     android:layout_marginRight="16dp">
 
 
@@ -28,23 +28,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:paddingBottom="10dp"/>
 
                 <EditText
                     android:id="@+id/etTitle"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/edit_text_design"
+
                     android:hint="Titulo"
                     android:textAlignment="center" />
+                <!--android:background="@drawable/edit_text_design"-->
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:background="@drawable/edit_text_border">
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingBottom="@dimen/padding_5dp">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:paddingBottom="10dp"/>
 
              <Spinner
                     android:id="@+id/spGpoP"
@@ -54,7 +68,11 @@
                     android:layout_marginBottom="10dp"
                     android:hint="Grupo"
                     android:textAlignment="center"/>
-
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:paddingTop="10dp"/>
               <!-- <fr.ganfra.materialspinner.MaterialSpinner
                     android:id="@+id/spGpoP"
                     android:layout_width="fill_parent"
@@ -71,34 +89,54 @@
                     app:ms_multiline="false"
                     app:ms_thickness="2dp" />-->
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <EditText
-                    android:id="@+id/etDescripcion"
-                    android:layout_width="290dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_text_design"
-                    android:ems="10"
-                    android:hint="¿Que paso?"
-                    android:inputType="textMultiLine"
-                    android:textAlignment="center" />
-
-                <Button
-                    android:id="@+id/btnMoreDesc"
-                    android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/padding_5dp"
+                android:paddingBottom="5dp">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:paddingBottom="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right" />
+                    android:orientation="horizontal"
+                   >
 
+
+                    <EditText
+                        android:id="@+id/etDescripcion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="10dp"
+                        android:hint="¿Que esta pasando?"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+
+                    <!--android:background="@drawable/edit_text_design"-->
+
+
+                    <Button
+                        android:id="@+id/btnMoreDesc"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_menu_right" />
+
+                </LinearLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:paddingTop="10dp"/>
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"

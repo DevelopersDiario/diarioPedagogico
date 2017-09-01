@@ -22,23 +22,23 @@ public class ExportPDF {
             File apkStorage = null;
             String fpath = Environment.getExternalStorageDirectory() + Constants.mMainDirectory+"/" + fname + ".pdf";
             String fpath2 = "/sdcard/" + fname + ".pdf";
-           /* File file = new File(fpath);
+         File file = new File(fpath);
 
-            if (!file.exists()) {
-                file.createNewFile();
-            }*/
+
             //Get File if SD card is present
 
             if (new CheckForSDCard().isSDCardPresent()) {
 
-                apkStorage = new File(fpath);
+                apkStorage = new File( Environment.getExternalStorageDirectory() + Constants.mDownloadDirectory);
             } else
 
             if (!apkStorage.exists()) {
                 apkStorage.mkdir();
                 Log.e(TAG, "Directory Created.");
             }
-
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 
             com.itextpdf.text.Font bfBold12 = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN, 12, com.itextpdf.text.Font.BOLD, new BaseColor(0, 0, 0));
             com.itextpdf.text.Font bf12 = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN, 12);
