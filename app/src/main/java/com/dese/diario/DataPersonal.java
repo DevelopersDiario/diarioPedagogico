@@ -26,6 +26,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -171,6 +172,10 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
 
                     try {
                         body = new String(error.networkResponse.data, "UTF-8");
+                        new MaterialDialog.Builder(DataPersonal.this)
+                                .content(body)
+                                .show();
+
 
                         Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
 
@@ -394,8 +399,6 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
                 try {
                     getRadioButtonesDate();
                     Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
-
-
                     updatedatos();
                 } catch (JSONException e) {
                     e.printStackTrace();

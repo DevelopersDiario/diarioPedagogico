@@ -6,15 +6,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -41,8 +44,11 @@ import com.sangcomz.fishbun.FishBun;
 import com.sangcomz.fishbun.define.Define;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
@@ -81,6 +87,9 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
     //Bind
     EditText etDescriptingM;
+    static final int REQUEST_IMAGE_CAPTURE = 90;
+    private Bitmap mImageBitmap;
+    private String mCurrentPhotoPath;
 
     private static  String AUDIO_FILE_PATH =
             Environment.getExternalStorageDirectory().getPath() + Constants.mAudioDirectory+ "/Audio";
@@ -178,6 +187,9 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.imCamera:
 
+                    selectOpion();
+
+/*
                 FishBun.with(Descripting.this)
                         .MultiPageMode()
                         .setMaxCount(4)
@@ -196,6 +208,9 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                         .setActionBarTitle("Seleccione ")
                         .textOnNothingSelected("Seleccione como maximo cuatro")
                         .startAlbum();
+*/
+
+
 
                 break;
 
@@ -205,10 +220,10 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                 intentA.setType("audio*//*");
                 intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 startActivityForResult(intentA, PICK_AUD_REQUEST);
-*/  final CharSequence[] option = { "Grabar", "Buscar"};
+*/  final CharSequence[] optione = { "Grabar", "Buscar"};
                 new MaterialDialog.Builder(this)
                         .title("Seleccione")
-                        .items(option)
+                        .items(optione)
                         .itemsCallback(new MaterialDialog.ListCallback() {
                             @Override
                             public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
@@ -256,6 +271,81 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
         morph.hide();
 
     }//enOnClick
+
+    private void selectOpion() {
+        final CharSequence[] option = { "Camara", "Buscar Imagen"};
+        new MaterialDialog.Builder(this)
+                .title("Seleccione")
+                .items(option)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        switch (which){
+                            case 0:
+                                OpenCamera();
+
+                                break;
+
+                            case 1:
+                                FishBun.with(Descripting.this)
+                                        .MultiPageMode()
+                                        .setMaxCount(4)
+                                        .setMinCount(1)
+                                        .setPickerSpanCount(5)
+                                        .setActionBarColor(Color.DKGRAY, Color.DKGRAY)
+                                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                                        .setAlbumSpanCount(2, 3)
+                                        .setButtonInAlbumActivity(true)
+                                        .setCamera(true)
+                                        .exceptGif(true)
+                                        .setReachLimitAutomaticClose(true)
+                                        .setHomeAsUpIndicatorDrawable(ContextCompat.getDrawable(Descripting.this, R.drawable.ic_arrow_back_white_24dp))
+                                        .setOkButtonDrawable(ContextCompat.getDrawable(Descripting.this, R.drawable.ic_add_a_photo_white_24dp))
+                                        .setAllViewTitle("Todos")
+                                        .setActionBarTitle("Seleccione ")
+                                        .textOnNothingSelected("Seleccione como maximo cuatro")
+                                        .startAlbum();
+                                break;
+                        }
+                    }
+                })
+                .show();
+    }
+
+    private void OpenCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Log.i("Descripting", "IOException");
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider",photoFile));
+                startActivityForResult(cameraIntent, 90);
+            }
+        }
+    }
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File( Environment.getExternalStorageDirectory()+Constants.mImageDirectory);
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
     private void recordingAudio() {
         File apkStorage = null;
         File outputFile = null;
@@ -316,6 +406,9 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                         paths.add(AUDIO_FILE_PATH_FULL);
                         ia = new Adapter_Item(paths, Descripting.this);
                         rcItems.setAdapter(ia);
+                        new MaterialDialog.Builder(this)
+                                .content(AUDIO_FILE_PATH_FULL+"\n"+paths.get(0).toString())
+                                .show();
                     } else if (resultCode == RESULT_CANCELED) {
                         Toast.makeText(this, "Audio was not recorded", Toast.LENGTH_SHORT).show();
                     }
@@ -324,7 +417,6 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                 case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
 
                     paths = data.getStringArrayListExtra(com.veer.multiselect.Util.Constants.GET_PATHS);
-
                     ia = new Adapter_Item(paths, Descripting.this);
                     rcItems.setAdapter(ia);
 
@@ -350,6 +442,17 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                     rcItems.setAdapter(ia);
 
                     //You can get image path(ArrayList<Uri>) Version 0.6.2 or later
+                    break;
+                case 90:
+
+                     //   mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
+
+                        paths.add(mCurrentPhotoPath);
+                        ia = new Adapter_Item(paths, Descripting.this);
+                        rcItems.setAdapter(ia);
+                    new MaterialDialog.Builder(this)
+                            .content(mCurrentPhotoPath+"\n"+paths.get(0).toString())
+                            .show();
                     break;
 
             }

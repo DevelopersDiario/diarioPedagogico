@@ -57,4 +57,5 @@ public class MiFirebaseMessagingService extends FirebaseMessagingService {
         notificationManager.notify(0, notificationBuilder.build());
 
     }
+
 }

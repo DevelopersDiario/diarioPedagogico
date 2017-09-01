@@ -144,7 +144,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Snackbar snackbar = Snackbar
+                /*Snackbar snackbar = Snackbar
                         .make(view, "Datos obtenidos:"+ titulo
                                     +observaciones
                                     +sentimientos
@@ -153,8 +153,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                                     +conclusion+ "-----"
                                 + ed
                                 +plan, Snackbar.LENGTH_LONG);
-
-                snackbar.show();
+*/
+             //   snackbar.show();
             }
         });
 
@@ -170,7 +170,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TypedValue typedValueColorPrimaryDark = new TypedValue();
         Register.this.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValueColorPrimaryDark, true);
@@ -426,6 +426,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         }
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -445,8 +446,40 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 break;
 
             case android.R.id.home:
+                if (homeButton) {
 
-                if (!homeButton) {
+                    if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+                        back_pressed = System.currentTimeMillis();
+                        intent = new Intent(Register.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        return  true;
+                    } else {
+                        final AlertDialog alert = new AlertDialog.Builder(this).create();
+
+                        alert.setMessage("Desea salir del registro de experiencia");
+                        alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //   Toast.makeText(Publication.this, R.string.salvar, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        alert.setButton(Dialog.BUTTON_NEGATIVE, ("Descartar"), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+
+                        alert.show();
+
+
+                       }
+
+                    }
+
+              /*  if (!homeButton) {
                     NavUtils.navigateUpFromSameTask(Register.this);
                 }
                 if (homeButton) {
@@ -454,21 +487,54 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         editor = sharedPreferences.edit();
                         editor.putBoolean(getString(R.string.download), false);
                         editor.apply();
-                    }
-                    intent = new Intent(Register.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                    return true;
 
 
+                    }*/
+                  //  intent = new Intent(Register.this, MainActivity.class);
+                    //startActivity(intent);
+                    //finish();
+
+                     /* if(etDescripcion.getText().toString()!=" "&&etDescripcion.getText().toString().isEmpty()){
+                      if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+                            back_pressed = System.currentTimeMillis();
+                            intent = new Intent(Register.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                            return  true;
+                        } else {
+                            final AlertDialog alert = new AlertDialog.Builder(this).create();
+
+                            alert.setMessage("Desea salir del registro de experiencia");
+                            alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //   Toast.makeText(Publication.this, R.string.salvar, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            alert.setButton(Dialog.BUTTON_NEGATIVE, ("Descartar"), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            });
+
+                            alert.show();
+*/
+
+                     //   }
+
+                   // }
+            break;
+           //  return false;
 
 
-                }
 
+               // }
+       //return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
     /*------------Theme choose by user--------------------*/
     private void theme() {

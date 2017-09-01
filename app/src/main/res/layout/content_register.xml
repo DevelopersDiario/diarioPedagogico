@@ -115,6 +115,7 @@
                         android:hint="¿Que esta pasando?"
                         android:layout_gravity="center"
                         android:gravity="center"
+                        android:background="@drawable/edit_text_design"
                         android:layout_weight="1"/>
 
                     <!--android:background="@drawable/edit_text_design"-->

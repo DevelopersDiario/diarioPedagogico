@@ -28,7 +28,7 @@
                             android:inputType="textMultiLine"
                             android:lines="20"
                             android:minLines="20"
-                            android:gravity="center"
+                            android:gravity="center|top"
                             android:maxLines="10"
                             android:layout_height="wrap_content"
                             android:layout_width="match_parent"
