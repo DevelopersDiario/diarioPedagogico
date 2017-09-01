@@ -196,7 +196,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="5dp"
                             android:layout_width="match_parent"
-                            android:layout_height="5dp"
+                            android:layout_height="1dp"
                             android:background="?colorAccent"/>
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rvItemDetailPublicacion"
@@ -217,7 +217,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="5dp"
+                        android:layout_height="1dp"
                         android:background="?colorAccent"/>
 
                         <LinearLayout
@@ -228,9 +228,8 @@
                                 android:id="@+id/imvDowloandPDF"
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:backgroundTint="?colorAccent"
-                                android:tint="@color/colorPrimaryDark"
-                                app:srcCompat="@drawable/ic_file_download_black_24dp"
+                                android:tint="?colorPrimaryDark"
+                                app:srcCompat="@drawable/ic_file_download_white_24dp"
                                 />
 
                         </LinearLayout>
@@ -238,7 +237,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:layout_width="match_parent"
-                        android:layout_height="5dp"
+                        android:layout_height="1dp"
                         android:background="?colorAccent"/>
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/recyclerRepost"

@@ -74,6 +74,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     TextView tvTitlePubDetail, tvUserPubDetail, tvDatePubDetail, tvPubDetail;
     ImageView foto;
     String t,u,d,p,f,sen, eva, ana, con, plan,  pa, idepublicacion;
+    ImageView imvDowloandPDF;
 
     public ImageView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 
@@ -155,6 +156,9 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         cvAnalyze.setOnClickListener(this);
         cvConclusion.setOnClickListener(this);
         cvPlan.setOnClickListener(this);
+
+        imvDowloandPDF= (ImageView)findViewById(R.id.imvDowloandPDF);
+        imvDowloandPDF.setOnClickListener(this);
 
         Intent  i=this.getIntent();
         idepublicacion=i.getExtras().getString("_IDE_KEY");
@@ -262,6 +266,9 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                             }
                         })
                         .show();
+                break;
+            case R.id.imvDowloandPDF:
+                exportPDF(t,u,d,p,f,sen, eva, ana, con, plan,  pa );
                 break;
 
         }
@@ -672,10 +679,10 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
                 break;
 
-            case R.id.action_download:
+          /*  case R.id.action_download:
                 exportPDF(t,u,d,p,f,sen, eva, ana, con, plan,  pa );
 
-                break;
+                break;*/
             case R.id.action_help:
                 break;
 
