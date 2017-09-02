@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "538625938434",
-    "project_id": "diariop-162202"
+    "project_number": "982827931332",
+    "project_id": "midiario-adaef"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:538625938434:android:7d303910c293b787",
+        "mobilesdk_app_id": "1:982827931332:android:7d303910c293b787",
         "android_client_info": {
           "package_name": "com.dese.diario"
         }
       },
       "oauth_client": [
         {
-          "client_id": "538625938434-2rdaoc4kg445880lvrp0j6t12sn3ebrk.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "538625938434-k2l0mia7g25sp110u71j2u18a0nujlh0.apps.googleusercontent.com",
+          "client_id": "982827931332-f6sqi2oa62o9hp5uhf3tgsmd9s06h3gq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.dese.diario",
             "certificate_hash": "4e36818b2a3e035d490ec611b0ba05b0e951b07a"
           }
+        },
+        {
+          "client_id": "982827931332-psrn8ovcctlai9fol9fs5lvqj30q66vd.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAalYZLsolFp0M1H96HJY7wLBufTfu3gkY"
+          "current_key": "AIzaSyBX2GwLJG_2l1gihQaFyrGMR_5m-C36wc0"
         }
       ],
       "services": {

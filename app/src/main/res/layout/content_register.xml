@@ -73,33 +73,10 @@
                     android:layout_height="1dp"
                     android:background="?colorPrimary"
                     android:paddingTop="10dp"/>
-              <!-- <fr.ganfra.materialspinner.MaterialSpinner
-                    android:id="@+id/spGpoP"
-                    android:layout_width="fill_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/edit_text_design"
-                    app:ms_alignLabels="false"
-                    app:ms_arrowSize="16dp"
-                    app:ms_baseColor="?colorPrimary"
-                    app:ms_enableErrorLabel="false"
-                    app:ms_enableFloatingLabel="false"
-                    app:ms_floatingLabelColor="?colorPrimary"
-                    app:ms_floatingLabelText="floating label"
-                    app:ms_hint="Tema"
-                    app:ms_multiline="false"
-                    app:ms_thickness="2dp" />-->
+
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="@dimen/padding_5dp"
-                android:paddingBottom="5dp">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?colorPrimary"
-                    android:paddingBottom="10dp"/>
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,13 +87,13 @@
                     <EditText
                         android:id="@+id/etDescripcion"
                         android:layout_width="wrap_content"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="10dp"
-                        android:hint="¿Que esta pasando?"
+                        android:layout_height="200dp"
                         android:layout_gravity="center"
-                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
                         android:background="@drawable/edit_text_design"
-                        android:layout_weight="1"/>
+                        android:gravity="center"
+                        android:hint="¿Que esta pasando?" />
 
                     <!--android:background="@drawable/edit_text_design"-->
 
@@ -129,12 +106,8 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_menu_right" />
 
-                </LinearLayout>
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?colorPrimary"
-                    android:paddingTop="10dp"/>
+
+
             </LinearLayout>
 
 

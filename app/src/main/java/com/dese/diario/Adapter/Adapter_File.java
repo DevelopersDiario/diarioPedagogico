@@ -39,7 +39,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             @Override
             public MyHolderItem onCreateViewHolder(ViewGroup parent, int viewType) {
                 View itemView =
-                        LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
+                        LayoutInflater.from(parent.getContext()).inflate(R.layout.item_file, parent, false);
                 return new MyHolderItem(itemView);
             }
 

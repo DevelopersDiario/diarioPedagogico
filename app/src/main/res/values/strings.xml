@@ -194,6 +194,14 @@
     <string name="ed">ed=</string>
     <string name="message_aceptar_acuerdo">Debe aceptar el acuerdo para proceder con el registro</string>
     <string name="formato">FORMATO</string>
+    <!--Register-->
+    <string name="input_desc"> ¿Qué esta pasando?</string>
+    <string name="input_sent">¿Qué estaba pensando y sintiendo?</string>
+    <string name="input_eval">¿Qué es lo bueno y malo de esta experiencia?</string>
+    <string name="input_analis">¿Qué sentido puede tener esta experiencia?</string>
+    <string name="input_concl">¿Qué más podria haber hecho?</string>
+    <string name="input_plan">¿Qué haria en una experiencia similar?</string>
+
 
     <!--SelectAccount-->
     <string name="public_profile">public_profile</string>

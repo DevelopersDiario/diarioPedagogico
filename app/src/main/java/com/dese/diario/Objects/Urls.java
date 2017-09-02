@@ -94,7 +94,8 @@ public class Urls {
 
     */
     /**LOCAL**/
-    /**
+    /***/
+
     //URL usuario login
     public static final String login =  "http://192.168.0.105:8080/diariopws/api/1.0/user/autenticar";                        //en uso
     public static final String createaccount =  "http://192.168.0.105:8080/diariopws/api/1.0/usuario/insert";                //en uso
@@ -125,6 +126,11 @@ public class Urls {
     public static final String publicararchivo= "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/publicarArchivo";
     public static final String obtenerdetallepublicacion="http://192.168.0.105:8080/diariopws/api/1.0/publicacion/listdetpublication";
 
+    public static final String updateSentimientos="http://192.168.1.78:8084/diariopws/api/1.0/publicacion/updatesentimiento";
+    public static final String updateEvaluacion= "http://192.168.1.78:8084/diariopws/api/1.0/publicacion/updateevaluacion";
+    public static final String updateAnalisis= "http://192.168.1.78:8084/diariopws/api/1.0/publicacion/updateanalisis";
+    public static final String updateConclusion= "http://192.168.1.78:8084/diariopws/api/1.0/publicacion/updateconclusion";
+
     //URLs Grupo
     public static final String listgrupo ="http://192.168.0.105:8080/diariopws/api/1.0/grupo/list";            //Funcional en server
     public static final String listgpoxid ="http://192.168.0.105:8080/diariopws/api/1.0/grupo/listgpoxid";     //Funcional en server " requiere parametro idgrupo"
@@ -135,7 +141,6 @@ public class Urls {
     //URLs Grupodetalle
     public static final String listgpodetalle ="http://192.168.0.105:8080/diariopws/api/1.0/grupodetalle/list";   //Funcional en server
     public static final String addparticipante ="http://192.168.0.105:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
-*/
 
     /**Sitesa
 
@@ -181,7 +186,7 @@ public class Urls {
     public static final String addparticipante ="http://192.168.20.28:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
   */
 
-
+/**
     public static final String login =  "http://192.168.1.78:8080/diariopws/api/1.0/user/autenticar";                        //en uso
     public static final String createaccount =  "http://192.168.1.78:8080/diariopws/api/1.0/usuario/insert";                //en uso
 
@@ -224,7 +229,7 @@ public class Urls {
 
 
 
-
+**/
 
 
 }

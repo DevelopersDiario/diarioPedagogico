@@ -1,5 +1,6 @@
 package com.dese.diario;
 
+import android.animation.Animator;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
@@ -28,6 +29,8 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -76,7 +79,8 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
     private final int PICK_DOC_REQUEST = 1;
     private final int PICK_AUD_REC_REQUEST = 2;
     private final int PICK_AUD_REQUEST = 3;
-    private final int PICK_VID_REQUEST = 4;
+    private final int PICK_IMG_REQUEST = 4;
+    //private final int PICK_VID_REQUEST = 6;
 
     //ReclyclerView and Upload
     ArrayList<String> paths = new ArrayList<>();
@@ -87,8 +91,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
     //Bind
     EditText etDescriptingM;
-    static final int REQUEST_IMAGE_CAPTURE = 90;
-    private Bitmap mImageBitmap;
+
     private String mCurrentPhotoPath;
 
     private static  String AUDIO_FILE_PATH =
@@ -130,11 +133,59 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
         etDescriptingM= (EditText)findViewById(R.id.etDescriptingM);
 
+        validateWriteEditText();
+
     }//endView
+
+    private void validateWriteEditText() {
+        if(etDescriptingM.isActivated()){
+            fab.setScaleX(0);
+            fab.setScaleY(0);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                final Interpolator interpolador = AnimationUtils.loadInterpolator(getBaseContext(),
+                        android.R.interpolator.fast_out_slow_in);
+
+                fab.animate()
+                        .scaleX(1)
+                        .scaleY(1)
+                        .setInterpolator(interpolador)
+                        .setDuration(2600)
+                        .setStartDelay(1000)
+                        .setListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                fab.animate()
+                                        .scaleY(0)
+                                        .scaleX(0)
+                                        .setInterpolator(interpolador)
+                                        .setDuration(600)
+                                        .start();
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animation) {
+
+                            }
+                        });
+            }
+
+        }
+    }
 
     private void initListener() {
 
-        View uno, dos, tres, cuatro, cinco, seis;
+        View uno, dos, tres, cuatro, cinco, seis, siete;
 
         uno = findViewById(R.id.imFont);
         dos = findViewById(R.id.imGIF);
@@ -142,6 +193,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
         cuatro = findViewById(R.id.imDoc);
         cinco = findViewById(R.id.imMic);
         seis = findViewById(R.id.imSeleced);
+        siete= findViewById(R.id.imGallery);
 
         fab.setOnClickListener(this);
         uno.setOnClickListener(this);
@@ -150,7 +202,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
         cuatro.setOnClickListener(this);
         cinco.setOnClickListener(this);
         seis.setOnClickListener(this);
-
+        siete.setOnClickListener(this);
 
 
     }//endListener
@@ -183,13 +235,11 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
                 }*/
 
-
                 break;
             case R.id.imCamera:
-
-                    selectOpion();
-
-/*
+                OpenCamera();
+                break;
+            case R.id.imGallery:
                 FishBun.with(Descripting.this)
                         .MultiPageMode()
                         .setMaxCount(4)
@@ -208,19 +258,11 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                         .setActionBarTitle("Seleccione ")
                         .textOnNothingSelected("Seleccione como maximo cuatro")
                         .startAlbum();
-*/
-
-
-
                 break;
 
             case R.id.imMic:
-               /* Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intentA.addCategory(Intent.CATEGORY_OPENABLE);
-                intentA.setType("audio*//*");
-                intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                startActivityForResult(intentA, PICK_AUD_REQUEST);
-*/  final CharSequence[] optione = { "Grabar", "Buscar"};
+
+          final CharSequence[] optione = { "Grabar", "Buscar"};
                 new MaterialDialog.Builder(this)
                         .title("Seleccione")
                         .items(optione)
@@ -272,45 +314,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
     }//enOnClick
 
-    private void selectOpion() {
-        final CharSequence[] option = { "Camara", "Buscar Imagen"};
-        new MaterialDialog.Builder(this)
-                .title("Seleccione")
-                .items(option)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        switch (which){
-                            case 0:
-                                OpenCamera();
 
-                                break;
-
-                            case 1:
-                                FishBun.with(Descripting.this)
-                                        .MultiPageMode()
-                                        .setMaxCount(4)
-                                        .setMinCount(1)
-                                        .setPickerSpanCount(5)
-                                        .setActionBarColor(Color.DKGRAY, Color.DKGRAY)
-                                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
-                                        .setAlbumSpanCount(2, 3)
-                                        .setButtonInAlbumActivity(true)
-                                        .setCamera(true)
-                                        .exceptGif(true)
-                                        .setReachLimitAutomaticClose(true)
-                                        .setHomeAsUpIndicatorDrawable(ContextCompat.getDrawable(Descripting.this, R.drawable.ic_arrow_back_white_24dp))
-                                        .setOkButtonDrawable(ContextCompat.getDrawable(Descripting.this, R.drawable.ic_add_a_photo_white_24dp))
-                                        .setAllViewTitle("Todos")
-                                        .setActionBarTitle("Seleccione ")
-                                        .textOnNothingSelected("Seleccione como maximo cuatro")
-                                        .startAlbum();
-                                break;
-                        }
-                    }
-                })
-                .show();
-    }
 
     private void OpenCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -326,7 +330,7 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider",photoFile));
-                startActivityForResult(cameraIntent, 90);
+                startActivityForResult(cameraIntent, PICK_IMG_REQUEST);
             }
         }
     }
@@ -401,16 +405,14 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                 case PICK_AUD_REC_REQUEST:
                     if (resultCode == RESULT_OK) {
 
-                        Toast.makeText(this, "Audio recorded successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Audio Grabado Correctamente!", Toast.LENGTH_SHORT).show();
                         if(!AUDIO_FILE_PATH_FULL.isEmpty())
                         paths.add(AUDIO_FILE_PATH_FULL);
                         ia = new Adapter_Item(paths, Descripting.this);
                         rcItems.setAdapter(ia);
-                        new MaterialDialog.Builder(this)
-                                .content(AUDIO_FILE_PATH_FULL+"\n"+paths.get(0).toString())
-                                .show();
+
                     } else if (resultCode == RESULT_CANCELED) {
-                        Toast.makeText(this, "Audio was not recorded", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "El audio no se grabo correctamente", Toast.LENGTH_SHORT).show();
                     }
                     break;
 
@@ -443,16 +445,11 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
                     //You can get image path(ArrayList<Uri>) Version 0.6.2 or later
                     break;
-                case 90:
-
-                     //   mImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(mCurrentPhotoPath));
-
-                        paths.add(mCurrentPhotoPath);
+                case PICK_IMG_REQUEST:
+                       paths.add(mCurrentPhotoPath);
                         ia = new Adapter_Item(paths, Descripting.this);
                         rcItems.setAdapter(ia);
-                    new MaterialDialog.Builder(this)
-                            .content(mCurrentPhotoPath+"\n"+paths.get(0).toString())
-                            .show();
+
                     break;
 
             }

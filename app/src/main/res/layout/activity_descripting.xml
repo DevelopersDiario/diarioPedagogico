@@ -88,13 +88,22 @@
                 android:src="@drawable/ic_insert_emoticon_black_24dp" />
 
             <ImageView
-                android:id="@+id/imCamera"
+                android:id="@+id/imGallery"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="centerInside"
                 android:tint="@color/md_white_1000"
                 android:src="@drawable/ic_image_black_24dp" />
+
+            <ImageView
+                android:id="@+id/imCamera"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerInside"
+                android:tint="@color/md_white_1000"
+                android:src="@drawable/ic_photo_camera_black_24dp" />
 
             <ImageView
                 android:id="@+id/imDoc"
