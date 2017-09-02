@@ -8,12 +8,11 @@
         <RelativeLayout
             android:layout_width="@dimen/dimens_200dp"
             android:layout_height="@dimen/dimens_200dp">
+
             <ImageView
-                android:layout_width="180dp"
+                android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/ivItem"
-
-                android:background="@drawable/circle_item"
                 android:src="@drawable/filepng"
                 />
 

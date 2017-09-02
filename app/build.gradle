@@ -145,6 +145,7 @@ dependencies {
     //Pdf Export
     compile 'com.itextpdf:itextpdf:5.0.6'
     compile 'com.github.adrielcafe:AndroidAudioRecorder:0.3.0'
+    compile 'com.mikhaellopez:circularimageview:3.0.2'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

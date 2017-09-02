@@ -407,7 +407,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         } else {
             final AlertDialog alert = new AlertDialog.Builder(this).create();
 
-            alert.setMessage(getResources().getString(R.string.message_whis_saved));
+            alert.setMessage("Desea salir del registro de experiencia");
             alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
 
                 @Override

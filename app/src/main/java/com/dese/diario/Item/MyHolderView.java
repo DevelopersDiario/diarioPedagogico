@@ -6,12 +6,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dese.diario.R;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 /**
  * Created by Eduardo on 14/07/2017.
  */
 
 public class MyHolderView extends RecyclerView.ViewHolder {
+    //public CircularImageView ivItem;
     public ImageView ivItem;
     public TextView tvItem;
     public MyHolderView(View itemView) {
