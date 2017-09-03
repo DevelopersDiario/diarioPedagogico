@@ -19,20 +19,48 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/test"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tag_instructions_testing"
+                    android:layout_marginStart="10dp"
+                    style="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="15dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginBottom="10dp"
+                    />
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?colorPrimary"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                />
 
             <EditText
                 android:id="@+id/etTestingM"
                 android:layout_gravity="center"
-                android:hint="Evaluación de la experiencia"
+                android:hint="@string/input_eval"
                 android:inputType="textMultiLine"
                 android:lines="20"
                 android:minLines="20"
-                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:gravity="start"
                 android:maxLines="10"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:background="@drawable/edit_text_design" />
+                android:background="@drawable/edit_text_unbording"/>
 
 
         </LinearLayout>

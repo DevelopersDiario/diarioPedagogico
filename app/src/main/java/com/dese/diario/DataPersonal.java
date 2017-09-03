@@ -151,59 +151,65 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
     }
 
     private void  updatedatos()  throws JSONException{
+        if(!etPhone.getText().toString().isEmpty()){
+            final VariablesLogin varlogin =new VariablesLogin();
+            final StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
+                    new Response.Listener<String>() {
 
-        final VariablesLogin varlogin =new VariablesLogin();
-        final StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
-                new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(DataPersonal.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
+                            openactivity();
 
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(DataPersonal.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
-                        openactivity();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    String body;
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if (error.networkResponse.data != null) {
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                if (error.networkResponse.data != null) {
-
-                    try {
-                        body = new String(error.networkResponse.data, "UTF-8");
-                        new MaterialDialog.Builder(DataPersonal.this)
-                                .content(body)
-                                .show();
-
-
-                        Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
+                        try {
+                            body = new String(error.networkResponse.data, "UTF-8");
+                            new MaterialDialog.Builder(DataPersonal.this)
+                                    .content(body)
+                                    .show();
 
 
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
+                            // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
+
+
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
 
 
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_IDUSUARIO,varlogin.getIdusuario() );
-                params.put(KEY_NAME,etName.getText().toString() );
-                params.put(KEY_LASTNAME, etLastName.getText().toString());
-                params.put(KEY_PHONE, etPhone.getText().toString());
-                params.put(KEY_MATCH, rdResult.toString());
-                params.put(KEY_DATE, etDateBithdayEdit.getText().toString());
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put(KEY_IDUSUARIO,varlogin.getIdusuario() );
+                    params.put(KEY_NAME,etName.getText().toString() );
+                    params.put(KEY_LASTNAME, etLastName.getText().toString());
+                    params.put(KEY_PHONE, etPhone.getText().toString());
+                    params.put(KEY_MATCH, rdResult.toString());
+                    params.put(KEY_DATE, etDateBithdayEdit.getText().toString());
+                    params.put("Content-Type", "application/x-www-form-urlencoded");
+                    return params;
+                }
 
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(this);
+            requestQueue.add(stringRequest);
+        }else{
+            Toast.makeText(DataPersonal.this, "Necesita agregar fecha de nacimiento ", Toast.LENGTH_LONG).show();
+
+        }
+
+
 
     } //fin updatedatos
 

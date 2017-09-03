@@ -29,20 +29,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/padding_5dp"
-                android:paddingBottom="@dimen/padding_5dp">
+                android:paddingBottom="@dimen/padding_5dp"
+                android:paddingTop="@dimen/padding_5dp">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?colorPrimary"
-                    android:paddingBottom="10dp"/>
+                    android:paddingBottom="10dp" />
 
                 <EditText
                     android:id="@+id/etTitle"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
-
                     android:hint="Titulo"
                     android:textAlignment="center" />
                 <!--android:background="@drawable/edit_text_design"-->
@@ -52,64 +52,64 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/padding_5dp"
-                android:paddingBottom="@dimen/padding_5dp">
+                android:paddingBottom="@dimen/padding_5dp"
+                android:paddingTop="@dimen/padding_5dp">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?colorPrimary"
-                    android:paddingBottom="10dp"/>
+                    android:paddingBottom="10dp" />
 
-             <Spinner
+                <Spinner
                     android:id="@+id/spGpoP"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginTop="1dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="1dp"
                     android:hint="Grupo"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center" />
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="?colorPrimary"
-                    android:paddingTop="10dp"/>
+                    android:paddingTop="10dp" />
 
             </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/etDescripcion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_text_design"
+                    android:gravity="center"
+                    android:hint="¿Que esta pasando?" />
+
+                <!--android:background="@drawable/edit_text_design"-->
+
+
+                <Button
+                    android:id="@+id/btnMoreDesc"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                   >
-
-
-                    <EditText
-                        android:id="@+id/etDescripcion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="200dp"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/edit_text_design"
-                        android:gravity="center"
-                        android:hint="¿Que esta pasando?" />
-
-                    <!--android:background="@drawable/edit_text_design"-->
-
-
-                    <Button
-                        android:id="@+id/btnMoreDesc"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_menu_right" />
-
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/ic_menu_right" />
 
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -121,8 +121,8 @@
                     android:id="@+id/rvItems"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layoutMode="clipBounds" />
+                    android:layout_centerVertical="true" />
+
             </LinearLayout>
 
 
@@ -145,8 +145,9 @@
 
                 <Button
                     android:id="@+id/btnMoreFeels"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/ic_menu_right" />
 
@@ -171,8 +172,9 @@
 
                 <Button
                     android:id="@+id/btnMoreTest"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/ic_menu_right" />
 
@@ -197,10 +199,11 @@
 
                 <Button
                     android:id="@+id/btnMoreAnalisi"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right" />
+                    android:background="@drawable/ic_menu_right"/>
 
             </LinearLayout>
 
@@ -223,10 +226,11 @@
 
                 <Button
                     android:id="@+id/btnMoreConclusion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right" />
+                    android:background="@drawable/ic_menu_right"/>
 
             </LinearLayout>
 
@@ -249,10 +253,11 @@
 
                 <Button
                     android:id="@+id/btnMorePlan"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right" />
+                    android:background="@drawable/ic_menu_right"/>
 
             </LinearLayout>
 

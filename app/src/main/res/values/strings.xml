@@ -385,4 +385,10 @@
     <string name="title_activity_plan">Plan de Acción</string>
     <string name="action_help">Ayuda</string>
     <string name="action_download">Descargar</string>
+    <string name="tag_instructions_descripting">Elabore una descripción detallada de         la experiencia o situación de aprendizaje en que se generó la evidencia.</string>
+    <string name="tag_instructions_feelings">En esta sección describe cuáles eran tus pensamientos y sentimientos más significativos en torno a la experiencia de aprendizaje en donde se produjo la evidencia.</string>
+    <string name="tag_instructions_analyze">En esta sección realizará un análisis de la experiencia de aprendizaje en que se generó la evidencia, así pues, considera lo que podría haber ayudado u obstaculizado los resultados asociadas a la misma.</string>
+    <string name="tag_instructions_testing">En este apartado realiza una evaluación de la experiencia en que se desarrolló la evidencia, para ello haz un recuento de los alcances y limitaciones de la experiencia de aprendizaje y de la propia evidencia.</string>
+    <string name="tag_instructions_conclusion">Escribe una conclusión. Se trata de una evaluación de tu comportamiento en la experiencia o situación de aprendizaje en que se produjo la evidencia.</string>
+    <string name="tag_instructions_plan">Escribe un plan de acción. Considera lo que podrías hacer de manera diferente, si te enfrentaras a una situación de aprendizaje similar.</string>
 </resources>
