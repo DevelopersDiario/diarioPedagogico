@@ -1,4 +1,4 @@
-package com.dese.diario.Item;
+package com.dese.diario.Utils.Dialogs;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

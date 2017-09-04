@@ -8,8 +8,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.dese.diario.Objects.Urls;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;

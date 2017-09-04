@@ -11,11 +11,12 @@ import android.view.ViewGroup;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.Item.ItemClickListener;
+import com.dese.diario.Item.MyHolderMP;
 import com.dese.diario.Item.MyHolderP;
 import com.dese.diario.Objects.DetailPublication;
 import com.dese.diario.Objects.Publication;
-import com.dese.diario.Utils.Urls;
 import com.dese.diario.R;
+import com.dese.diario.Utils.Urls;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,12 +25,12 @@ import java.util.ArrayList;
  * Created by Eduardo on 04/04/2017.
  */
 
-public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
+public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
     ArrayList<Publication> listapublicaciones;
     Context context;
     View.OnLongClickListener longClickListener;
 
-    public Adapter_Pubication(ArrayList<Publication> listapublicaciones, Context context) {
+    public Adapter_MyPubication(ArrayList<Publication> listapublicaciones, Context context) {
 
 
         this.listapublicaciones = listapublicaciones;
@@ -38,17 +39,17 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
     }
 
     @Override
-    public MyHolderP onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyHolderMP onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_publication, parent, false);
+                .inflate(R.layout.item_mypublication, parent, false);
 
 
 
-        return new MyHolderP(view);
+        return new MyHolderMP(view);
     }
 
     @Override
-    public void onBindViewHolder(MyHolderP holder, int position) {
+    public void onBindViewHolder(MyHolderMP holder, int position) {
         final String _ide= listapublicaciones.get(position).getIdpublicacion();
 
 
@@ -167,22 +168,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             }
         });
 
-     /*   holder.imvDowloandPDF.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //exportPDF(_ide,t, u, d, p, f, pa, sen, eva, ana, con, plan);
-            }
-        });*/
 
-
-        /*holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ListRepublication rp= new ListRepublication();
-                rp.AlertRepublication(pa, context);
-            }
-        });
-*/
 
     }
 

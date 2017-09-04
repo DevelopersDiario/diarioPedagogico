@@ -16,7 +16,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Eduardo on 15/05/2017.
  */
 
-public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnCreateContextMenuListener, View.OnClickListener {
+public class MyHolderMP extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnCreateContextMenuListener, View.OnClickListener {
     public TextView tvUserRec;
     public TextView titlePublication;
     public TextView tvFechaRec;
@@ -36,7 +36,7 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
 //    private boolean modoSeleccion;
    private SparseBooleanArray seleccionados;
 
-    public MyHolderP(View itemView) {
+    public MyHolderMP(View itemView) {
         super(itemView);
 
         tvUserRec = (TextView) itemView.findViewById(R.id.tvUserRec);

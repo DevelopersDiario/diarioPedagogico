@@ -1,7 +1,6 @@
 package com.dese.diario.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +11,8 @@ import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolder;
 import com.dese.diario.Item.MyHolderF;
 import com.dese.diario.Item.MyLongClickListener;
-import com.dese.diario.Item.Search_friends;
 import com.dese.diario.Objects.DataFriends;
-import com.dese.diario.Objects.Urls;
+import com.dese.diario.Utils.Urls;
 import com.dese.diario.R;
 import com.doodle.android.chips.ChipsView;
 import com.doodle.android.chips.model.Contact;

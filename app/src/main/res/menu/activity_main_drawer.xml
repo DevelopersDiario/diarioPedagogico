@@ -12,7 +12,7 @@
             android:checked="true"
             android:id="@+id/item_navigation_drawer_mypublication"
             android:icon="@drawable/ic_directions_run_black_24dp"
-            android:title="@string/action_home" />
+            android:title="@string/action_my_publication" />
         <tem
             android:id="@+id/item_navigation_drawer_publication"
             android:icon="@drawable/ic_hardware_phone_android"
