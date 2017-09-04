@@ -4,12 +4,11 @@
     android:layout_height="178dp"
     android:background="@drawable/header"
     android:orientation="vertical"
-    android:id="@+id/lytHeader"
-    android:weightSum="1">
+    android:id="@+id/lytHeader">
     <ImageView
         android:id="@+id/imType"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
         />
 
 

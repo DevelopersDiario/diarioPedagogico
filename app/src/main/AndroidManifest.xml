@@ -270,6 +270,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity
+            android:name=".DetailMyPublication"
+            android:label="@string/title_activity_detail_my_publication"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

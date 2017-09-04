@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.dese.diario.DetailMyPublication;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderMP;
 import com.dese.diario.Item.MyHolderP;
@@ -183,8 +184,8 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
     private void openDetailActivity(String _ide, String t, String u, String d, String p, String f ,
                                     final String pa, String sen, String tes, String ana, String con,
                                     String plan ) {
-        Intent i = new Intent(context, DetailPublication.class);
-        ListRepublication rp= new ListRepublication();
+        Intent i = new Intent(context, DetailMyPublication.class);
+
         //PACK DATA TO SEND
         i.putExtra("_IDE_KEY", _ide);
         i.putExtra("TITLE_KEY", t);

@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -27,6 +28,8 @@ import com.dese.diario.Adapter.Adapter_MyPubication;
 import com.dese.diario.Adapter.Adapter_Pubication;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +38,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyPublication extends AppCompatActivity implements  SwipeRefreshLayout.OnRefreshListener{
     //Theme
@@ -64,6 +69,8 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
     private SwipeRefreshLayout swipeContainer;
     LinearLayoutManager linearLayoutManager;
 
+    CircleImageView imProfileMyPub;
+    TextView tvUserMyPub;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -86,6 +93,7 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
     private void iniToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TypedValue typedValueColorPrimaryDark = new TypedValue();
         MyPublication.this.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValueColorPrimaryDark, true);
         final int colorPrimaryDark = typedValueColorPrimaryDark.data;
@@ -111,6 +119,10 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
 
         listMyPublications();
 
+        tvUserMyPub= (TextView) findViewById(R.id.tvUserMyPub);
+       imProfileMyPub= (CircleImageView)findViewById(R.id.imProfileMyPub);
+
+        //tvUserMyPub.setText(listpublicaciones.get(2).toString());
 
     }
     private void initRecyclerView() {
@@ -175,10 +187,16 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
                                             jsonobject.getString(plan),
                                             jsonobject.getString(padre)));
                                     adapter=new Adapter_MyPubication(listpublicaciones, MyPublication.this);
-                                   recyclerView.setAdapter(adapter);
-                                  System.out.println(listpublicaciones);
+                                    recyclerView.setAdapter(adapter);
+                                    tvUserMyPub.setText(jsonobject.getString(nombre));
+                                    //System.out.println(listpublicaciones);
                                   //  drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+                                    Picasso.with(MyPublication.this)
+                                            .load(Urls.download+ jsonobject.getString(foto))
+                                            .resize(200, 200)
+                                            .centerCrop()
+                                            .into( imProfileMyPub);
 
 
                                 }

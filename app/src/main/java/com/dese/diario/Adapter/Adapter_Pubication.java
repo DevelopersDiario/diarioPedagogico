@@ -167,22 +167,6 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             }
         });
 
-     /*   holder.imvDowloandPDF.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //exportPDF(_ide,t, u, d, p, f, pa, sen, eva, ana, con, plan);
-            }
-        });*/
-
-
-        /*holder.btnRPoster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ListRepublication rp= new ListRepublication();
-                rp.AlertRepublication(pa, context);
-            }
-        });
-*/
 
     }
 

@@ -393,4 +393,5 @@
     <string name="tag_instructions_plan">Escribe un plan de acción. Considera lo que podrías hacer de manera diferente, si te enfrentaras a una situación de aprendizaje similar.</string>
     <string name="title_activity_my_publication">Mis Publicaciones</string>
     <string name="action_my_publication">Mis Publicaciones</string>
+    <string name="title_activity_detail_my_publication">DetailMyPublication</string>
 </resources>

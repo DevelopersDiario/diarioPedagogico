@@ -16,7 +16,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Eduardo on 15/05/2017.
  */
 
-public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnCreateContextMenuListener, View.OnClickListener {
+public class MyHolderP extends RecyclerView.ViewHolder implements /*View.OnLongClickListener,View.OnCreateContextMenuListener,*/ View.OnClickListener {
     public TextView tvUserRec;
     public TextView titlePublication;
     public TextView tvFechaRec;
@@ -32,8 +32,8 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
     ItemClickListener itemClickListener;
 
     //Multiple
-//    private int resource;
-//    private boolean modoSeleccion;
+    //    private int resource;
+    //    private boolean modoSeleccion;
    private SparseBooleanArray seleccionados;
 
     public MyHolderP(View itemView) {
@@ -50,14 +50,13 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
         cvConclusion= (ImageView) itemView.findViewById(R.id.imvConclusion);
         cvPlan= (ImageView) itemView.findViewById(R.id.imvPlan);
 
-       // imvDowloandPDF=(ImageView) itemView.findViewById(R.id.imvDowloandPDF);
+
 
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
-      //  btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);
 
 
-        itemView.setOnLongClickListener(this);
-        itemView.setOnCreateContextMenuListener(this);
+        //itemView.setOnLongClickListener(this);
+        //itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);
 
         seleccionados = new SparseBooleanArray();
@@ -65,7 +64,7 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
 
     }
 
-    public void setLongClickListener(MyLongClickListener longClickListener) {
+    /*public void setLongClickListener(MyLongClickListener longClickListener) {
         this.longClickListener = longClickListener;
     }
 
@@ -79,11 +78,11 @@ public class MyHolderP extends RecyclerView.ViewHolder implements View.OnLongCli
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
         //OUR CONTEXT MENU
-         /*menu.setHeaderTitle("Seleccione: ");
+         *//*menu.setHeaderTitle("Seleccione: ");
            menu.add(0,0,0,"Agregar a Grupo");
-*/
+*//*
 
-    }
+    }*/
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;

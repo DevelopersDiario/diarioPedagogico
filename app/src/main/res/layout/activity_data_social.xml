@@ -202,7 +202,7 @@
                 android:id="@+id/etViewFriends"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/prompt_friends"
+                android:hint="@string/action_my_publication"
                 android:drawableTint="?colorAccent"
                 android:imeOptions="actionNext"
                 android:inputType="text"

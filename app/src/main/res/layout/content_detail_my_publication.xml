@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="80dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    tools:context="com.dese.diario.DetailMyPublication"
+    tools:showIn="@layout/activity_detail_my_publication">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/etTitleMyPubE"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/tag_title"/>
+                        <EditText
+                            android:id="@+id/etGrupoMyPubE"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/prompt_group"
+                            android:visibility="gone"
+                            android:enabled="false"/>
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?colorPrimary"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            />
+
+                        <EditText
+                            android:id="@+id/etDescriptingMyPubE"
+                            android:layout_gravity="center"
+                            android:hint="@string/input_desc"
+                            android:inputType="textMultiLine"
+                            android:lines="10"
+                            android:gravity="start"
+                            android:maxLines="10"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/edit_text_unbording" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?colorPrimary"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            />
+                        <EditText
+                            android:id="@+id/etFeelingsMyPubE"
+                            android:layout_gravity="center"
+                            android:hint="@string/input_sent"
+                            android:inputType="textMultiLine"
+                            android:lines="10"
+                            android:minLines="20"
+                            android:gravity="start"
+                            android:maxLines="10"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/edit_text_unbording" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?colorPrimary"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            />
+
+                        <EditText
+                            android:id="@+id/etTestingMyPubE"
+                            android:layout_gravity="center"
+                            android:hint="@string/input_eval"
+                            android:inputType="textMultiLine"
+                            android:lines="10"
+                            android:minLines="20"
+                            android:gravity="start"
+                            android:maxLines="10"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/edit_text_unbording"/>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?colorPrimary"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            />
+
+
+                        <EditText
+                            android:id="@+id/etAnalyzeMyPubE"
+                            android:layout_gravity="center"
+                            android:hint="@string/input_analis"
+                            android:inputType="textMultiLine"
+                            android:lines="10"
+                            android:minLines="20"
+                            android:gravity="start"
+                            android:maxLines="10"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/edit_text_unbording"/>
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?colorPrimary"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            />
+
+                        <EditText
+                            android:id="@+id/etConclusionMyPubE"
+                            android:layout_gravity="center"
+                            android:hint="@string/input_concl"
+                            android:inputType="textMultiLine"
+                            android:lines="10"
+                            android:minLines="20"
+                            android:gravity="start"
+                            android:maxLines="10"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/edit_text_unbording" />
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="?colorPrimary"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            />
+
+
+                        <EditText
+                            android:id="@+id/etPlanMyPubE"
+                            android:layout_gravity="center"
+                            android:hint="@string/input_plan"
+                            android:inputType="textMultiLine"
+                            android:lines="10"
+                            android:minLines="20"
+                            android:gravity="start"
+                            android:maxLines="10"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/edit_text_unbording" />
+
+                </LinearLayout>
+        </ScrollView>
+
+
+
+</LinearLayout>
