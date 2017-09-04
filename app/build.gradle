@@ -109,6 +109,7 @@ dependencies {
     compile project(':Emoji')
     //PickerDate
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    //Pdf Export
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.0'
@@ -142,7 +143,6 @@ dependencies {
     compile 'com.github.jhonnyx2012:horizontal-picker:1.0.5'
     compile 'cn.zhaiyifan:rememberedittext:0.9.0'
     compile 'com.github.ganfra:material-spinner:1.1.1'
-    //Pdf Export
     compile 'com.itextpdf:itextpdf:5.0.6'
     compile 'com.github.adrielcafe:AndroidAudioRecorder:0.3.0'
     compile 'com.mikhaellopez:circularimageview:3.0.2'

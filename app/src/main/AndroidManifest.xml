@@ -17,8 +17,12 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />
-    <uses-feature android:name="android.hardware.camera" android:required="false"></uses-feature>
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -256,6 +260,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Register" />
         </activity>
+        <activity
+            android:name=".MyPublication"
+            android:label="@string/title_activity_my_publication"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -143,18 +143,7 @@ public class MainActivity extends AppCompatActivity
        // getSelect();
     }//Fin onCreate
 
-    private boolean isFirstTime()
-    {
-        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-        boolean ranBefore = preferences.getBoolean("RanBefore", false);
-        if (!ranBefore) {
-            // first time
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("RanBefore", true);
-            editor.commit();
-        }
-        return !ranBefore;
-    }
+
     @Override
     protected void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
@@ -437,6 +426,13 @@ public class MainActivity extends AppCompatActivity
                                 startActivity(new Intent(getBaseContext(), SelectAccount.class)
                                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
                                 finish();
+                                break;
+                            case R.id.item_navigation_drawer_mypublication:
+                                menuItem.setChecked(true);
+                                //  Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+
+                                Intent ip= new Intent(MainActivity.this, MyPublication.class);
+                                startActivity(ip);
                                 break;
                         }
                         return true;

@@ -8,6 +8,11 @@
             android:id="@+id/item_navigation_drawer_home"
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/action_home" />
+        <item
+            android:checked="true"
+            android:id="@+id/item_navigation_drawer_mypublication"
+            android:icon="@drawable/ic_directions_run_black_24dp"
+            android:title="@string/action_home" />
         <tem
             android:id="@+id/item_navigation_drawer_publication"
             android:icon="@drawable/ic_hardware_phone_android"
@@ -38,7 +43,7 @@
                 android:title="@string/action_share"/>
             <item
                 android:id="@+id/item_navigation_drawer_about"
-                android:icon="@drawable/informationblack"
+                android:icon="@drawable/ic_info_black_24dp"
                 android:title="@string/action_about"/>
             <item
             android:id="@+id/item_navigation_drawer_exit"

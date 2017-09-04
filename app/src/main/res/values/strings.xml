@@ -125,7 +125,7 @@
     <string name="action_publication">Publicación</string>
     <string name="action_settings">Ajustes</string>
     <string name="action_information">Información</string>
-    <string name="action_profile">Perfil</string>
+    <string name="action_profile">Acerca de mi</string>
     <string name="action_coach">Asesor</string>
     <string name="action_asesorado">Asesorado</string>
     <string name="action_friends">Amigos</string>
@@ -391,4 +391,5 @@
     <string name="tag_instructions_testing">En este apartado realiza una evaluación de la experiencia en que se desarrolló la evidencia, para ello haz un recuento de los alcances y limitaciones de la experiencia de aprendizaje y de la propia evidencia.</string>
     <string name="tag_instructions_conclusion">Escribe una conclusión. Se trata de una evaluación de tu comportamiento en la experiencia o situación de aprendizaje en que se produjo la evidencia.</string>
     <string name="tag_instructions_plan">Escribe un plan de acción. Considera lo que podrías hacer de manera diferente, si te enfrentaras a una situación de aprendizaje similar.</string>
+    <string name="title_activity_my_publication">MyPublication</string>
 </resources>
