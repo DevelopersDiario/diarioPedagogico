@@ -86,16 +86,33 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
+             <!--   <ScrollView
+                    android:id="@+id/scrollView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">-->
+                        <EditText
+                            android:id="@+id/etDescripcion"
+                            android:inputType="textMultiLine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="@drawable/edit_text_design"
+                            android:gravity="center"
+                            android:lines="10"
+                            android:enabled="true"
+                            android:minLines="6"
+                            android:maxLines="6"
+                            android:isScrollContainer="true"
+                            android:hint="¿Que esta pasando?" />
+                   <!-- </LinearLayout>
 
-                <EditText
-                    android:id="@+id/etDescripcion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="200dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_text_design"
-                    android:gravity="center"
-                    android:hint="¿Que esta pasando?" />
+                </ScrollView>-->
+
+
 
                 <!--android:background="@drawable/edit_text_design"-->
 
@@ -141,7 +158,7 @@
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
                     android:hint="¿Que estaba pensando y sintiendo?"
-                    android:inputType="textMultiLine"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:textAlignment="center" />
 
                 <Button
@@ -154,6 +171,7 @@
                     android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"

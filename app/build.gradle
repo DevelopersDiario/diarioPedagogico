@@ -18,8 +18,8 @@ android {
         applicationId "com.dese.diario"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 5
-        versionName "1.0.5"
+        versionCode 6
+        versionName "1.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -146,6 +146,7 @@ dependencies {
     compile 'com.itextpdf:itextpdf:5.0.6'
     compile 'com.github.adrielcafe:AndroidAudioRecorder:0.3.0'
     compile 'com.mikhaellopez:circularimageview:3.0.2'
+    compile 'com.github.mostafaaryan:transitional-imageview:v0.2.2'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

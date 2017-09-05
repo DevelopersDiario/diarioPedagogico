@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dese.diario.R;
+import com.mostafaaryan.transitionalimageview.TransitionalImageView;
 
 /**
  * Created by Eduardo on 14/07/2017.
@@ -14,6 +15,7 @@ import com.dese.diario.R;
 public class MyHolderItem extends RecyclerView.ViewHolder implements View.OnClickListener {
     public ImageView ivItem;
     public TextView tvItem;
+   public ImageView imageView;
 
     ItemClickListener itemClickListener;
 
@@ -22,7 +24,7 @@ public class MyHolderItem extends RecyclerView.ViewHolder implements View.OnClic
 
         ivItem  = (ImageView) itemView.findViewById(R.id.ivItem);
         tvItem  = (TextView) itemView.findViewById(R.id.tvItem);
-
+        imageView = (ImageView) itemView.findViewById(R.id.imgShow);
           itemView.setOnClickListener(this);
     }
     public void setItemClickListener(ItemClickListener itemClickListener) {

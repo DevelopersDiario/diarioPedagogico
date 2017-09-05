@@ -344,7 +344,7 @@
     <string name="tag_date">Fecha de publicación</string>
     <string name="tag_lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="action_information_personal">Información personal</string>
-    <string name="action_information_academic">Información escolar</string>
+    <string name="action_information_academic">Formacion Academica</string>
     <string name="action_information_social">Información social</string>
     <string name="tag_font">Fuente</string>
     <string name="tag_create_group">Crea una colaboración</string>

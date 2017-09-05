@@ -22,15 +22,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Scroller;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -192,6 +195,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         }
     }
     private void initLitener() {
+        HorizontalPicker picker= (HorizontalPicker) findViewById(R.id.datePicker);
+        picker
+                .setListener(Register.this)
+                .init();
+        picker.setDate(new DateTime().plusDays(4));
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -226,11 +236,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
             }
         });
 
-        HorizontalPicker picker= (HorizontalPicker) findViewById(R.id.datePicker);
-        picker
-                .setListener(Register.this)
-                .init();
-        picker.setDate(new DateTime().plusDays(4));
+
 
 
         View uno, dos, tres, cuatro, cinco, seis, siete;
@@ -284,14 +290,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         etPlan=(EditText) this.findViewById(R.id.etPlan);
 
 
-       // etTitle.setOnClickListener(this);
-      //  etDescripcion.setOnClickListener(this);
-      //  etSenimientos.setOnClickListener(this);
-       // etEvaluacion.setOnClickListener(this);
-        //etAnalisis.setOnClickListener(this);
-       // etConclusion.setOnClickListener(this);
-       // etPlan.setOnClickListener(this);
-
         btnMoreFeels= (Button) findViewById(R.id.btnMoreFeels);
         btnMoreDesc= (Button) findViewById(R.id.btnMoreDesc);
         btnMoreTest= (Button) findViewById(R.id.btnMoreTest);
@@ -306,7 +304,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         btnMoreAnalisis.setOnClickListener(this);
         btnMoreConclusion.setOnClickListener(this);
         btnMorePlan.setOnClickListener(this);
-
 
         getData();
     }

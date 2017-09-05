@@ -2,16 +2,23 @@ package com.dese.diario.Adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderItem;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.R;
 import com.dese.diario.Utils.DownloadTask;
+import com.mostafaaryan.transitionalimageview.model.TransitionalImage;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,6 +31,8 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             private static String download = Urls.download;
             ArrayList<String> nombrefile;
             Context context;
+
+          boolean isImageFitToScreen;
 
             private ProgressDialog pDialog;
             public static final int progress_bar_type = 0;
@@ -43,7 +52,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             }
 
             @Override
-            public void onBindViewHolder(MyHolderItem holder, final int position) {
+            public void onBindViewHolder(final MyHolderItem holder, final int position) {
                // File f= new File(paths.get(position));
                 String fname=nombrefile.get(position);
                 String type = fname.substring(fname.lastIndexOf(".") + 1);
@@ -54,9 +63,38 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
 
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
-                    public void onItemClick(int pos) {
-                        String urlDescarga= download+nombrefile.get(pos);
-                        new DownloadTask(context, null, urlDescarga);
+                    public void onItemClick(final int pos) {
+                        new MaterialDialog.Builder(context)
+                                .title("Deseadescargar ")
+                                .positiveText("Descargar")
+                                .negativeText("cancelar")
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        // TODO
+                                        String urlDescarga= download+nombrefile.get(pos);
+                                        new DownloadTask(context, null, urlDescarga);
+                                    }
+                                })
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                                     /*   String urlDescarga= download+nombrefile.get(pos);
+                                        if(isImageFitToScreen) {
+                                            isImageFitToScreen=false;
+                                            holder.ivItem.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+                                            holder.ivItem.setAdjustViewBounds(true);
+                                        }else{
+                                            isImageFitToScreen=true;
+                                            holder.ivItem.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+                                            holder.ivItem.setScaleType(ImageView.ScaleType.FIT_XY);
+                                        }*/
+
+                                    }
+                                })
+                                .show();
+
 
                     }
                 });
@@ -77,7 +115,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             case  "jpg":
                 Picasso.with(context)
                         .load(download+name)
-                        .resize(200, 200)
+                        .resize(1200, 1200)
                         .centerCrop()
                         .into(holder.ivItem);
                 break;

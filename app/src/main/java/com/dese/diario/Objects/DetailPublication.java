@@ -549,7 +549,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                         lyContentImagenDetail.setVisibility(View.VISIBLE);
                                         rcItems.setItemAnimator(new DefaultItemAnimator());
                                         rcItems.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                                        System.out.println(paths);
+                                       // System.out.println(paths);
                                     }
 
                                 }
