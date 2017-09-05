@@ -58,13 +58,33 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
 
         switch (type){
             case  "jpg":
-                LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
+                Picasso.with(context)
+                        .load(R.drawable.filejpg)
+                        .resize(200, 200)
+                        .centerCrop()
+                        .into(holder.imType);
+                Picasso.with(context)
+                        .load(paths.get(position))
+                        .resize(200, 200)
+                        .centerCrop()
+                        .into(holder.ivItem);
+               // LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
                 break;
             case "png":
+                Picasso.with(context)
+                        .load(R.drawable.filepng)
+                        .resize(200, 200)
+                        .centerCrop()
+                        .into(holder.imType);
                 LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
 
                 break;
             case "gif":
+                Picasso.with(context)
+                        .load(R.drawable.unknowfile)
+                        .resize(200, 200)
+                        .centerCrop()
+                        .into(holder.imType);
                 LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
                 break;
             case "doc":
@@ -73,49 +93,49 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
                         .load(R.drawable.filedoc)
                         .resize(200, 200)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.imType);
                 break;
             case "pdf":
                 Picasso.with(context)
                         .load(R.drawable.filepdf)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.imType);
                 break;
             case "xls":
                 Picasso.with(context)
                         .load(R.drawable.filexls)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.imType);
                 break;
             case "ppt":
                 Picasso.with(context)
                         .load(R.drawable.fileppt)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.imType);
                 break;
             case "mp3":
                 Picasso.with(context)
                         .load(R.drawable.filemp3)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.imType);
                 break;
             case "avi":
                 Picasso.with(context)
                         .load(R.drawable.fileavi)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.imType);
                 break;
             case "wav":
                 Picasso.with(context)
                         .load(R.drawable.filewav)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.imType);
                 break;
 
         }

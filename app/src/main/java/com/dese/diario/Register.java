@@ -270,7 +270,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         morph = (FABToolbarLayout) findViewById(R.id.fabtoolbar);
 
         rcItems = (RecyclerView) findViewById(R.id.rvItems);
-        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(3, 1);
+        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(1, 1);
         rcItems.setLayoutManager(staggeredGridLayout);
         upload = new Upload();
         listGpos();
@@ -464,7 +464,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                                    case 1:
                                        Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                                        intentA.addCategory(Intent.CATEGORY_OPENABLE);
-                                       intentA.setType("audio*//*");
+                                       intentA.setType("audio/*");
                                        intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                                        startActivityForResult(intentA, PICK_AUD_REQUEST);
 

@@ -14,12 +14,13 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 
 public class MyHolderView extends RecyclerView.ViewHolder {
     //public CircularImageView ivItem;
-    public ImageView ivItem;
+    public ImageView ivItem, imType;
     public TextView tvItem;
     public MyHolderView(View itemView) {
         super(itemView);
 
         ivItem  = (ImageView) itemView.findViewById(R.id.ivItem);
+        imType= (ImageView) itemView.findViewById(R.id.imType);
         tvItem  = (TextView) itemView.findViewById(R.id.tvItem);
     }
 }
