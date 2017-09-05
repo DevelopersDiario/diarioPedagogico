@@ -1,13 +1,22 @@
 package com.dese.diario;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +26,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Objects.DetailPublication;
@@ -35,6 +45,13 @@ public class DetailMyPublication extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     int theme;
+
+    //Toolbar
+    private static final int TIME_DELAY = 2000;
+    private static long back_pressed;
+    Intent intent;
+    Boolean homeButton = false, themeChanged;
+
 
     String t,u,d,p,f,sen, eva, ana, con, plan,  pa, idepublicacion;
     EditText etTitleMyPubE, etGrupoMyPubE, etDescriptingMyPubE,
@@ -58,19 +75,27 @@ public class DetailMyPublication extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        TypedValue typedValueColorPrimaryDark = new TypedValue();
+        DetailMyPublication.this.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValueColorPrimaryDark, true);
+        final int colorPrimaryDark = typedValueColorPrimaryDark.data;
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(colorPrimaryDark);
+
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-
-                    updateSenMyPublication();
-                    updateEvaMyPublication();
-                    updateAnaMyPublication();
-                    updateConMyPublication();
-                    updatePlanMyPublication();
+                    updateMyPublication();
+                   // updateSenMyPublication();
+                    //updateEvaMyPublication();
+                    //updateAnaMyPublication();
+                    //updateConMyPublication();
+                    //updatePlanMyPublication();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -114,19 +139,16 @@ public class DetailMyPublication extends AppCompatActivity {
         etConclusionMyPubE.setText(con);
         etPlanMyPubE.setText(plan);
     }
-
-
-
-    private void  updateSenMyPublication()  throws JSONException {
-
+    private void  updateMyPublication()  throws JSONException {
+        if(!etTitleMyPubE.getText().toString().isEmpty()){
             final VariablesLogin varlogin =new VariablesLogin();
-            final StringRequest stringRequest = new StringRequest(Request.Method.PUT, Urls.updateSentimientos,
+            final StringRequest stringRequest = new StringRequest(Request.Method.PUT, Urls.updateMyPublication,
                     new Response.Listener<String>() {
 
                         @Override
                         public void onResponse(String response) {
                             Toast.makeText(DetailMyPublication.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
-                        //    openactivity();
+                            openactivity();
 
                         }
                     }, new Response.ErrorListener() {
@@ -143,14 +165,13 @@ public class DetailMyPublication extends AppCompatActivity {
                                     .content(body)
                                     .show();
 
-
                             // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
-
 
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
                     }
+
                 }
 
 
@@ -159,7 +180,13 @@ public class DetailMyPublication extends AppCompatActivity {
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("idpublicacion",idepublicacion );
+                    params.put("titulo", etTitleMyPubE.getText().toString());
+                    params.put("observaciones", etDescriptingMyPubE.getText().toString());
                     params.put("sentimiento",etFeelingsMyPubE.getText().toString() );
+                    params.put("evaluacion",etTestingMyPubE.getText().toString() );
+                    params.put("analisis",etAnalyzeMyPubE.getText().toString() );
+                    params.put("conclusion",etConclusionMyPubE.getText().toString() );
+                    params.put("planaccion",etPlanMyPubE.getText().toString() );
                     params.put("Content-Type", "application/x-www-form-urlencoded");
                     return params;
                 }
@@ -168,227 +195,17 @@ public class DetailMyPublication extends AppCompatActivity {
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
 
+        }else{
+            Toast.makeText(DetailMyPublication.this, "Necesita agregar un título", Toast.LENGTH_LONG).show();
+        }
 
-
-
-    } //fin updatedatos
-
-    private void  updateEvaMyPublication()  throws JSONException {
-
-        final VariablesLogin varlogin =new VariablesLogin();
-        final StringRequest stringRequest = new StringRequest(Request.Method.PUT, Urls.updateEvaluacion,
-                new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(DetailMyPublication.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
-                      //  openactivity();
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                if (error.networkResponse.data != null) {
-
-                    try {
-                        body = new String(error.networkResponse.data, "UTF-8");
-                        new MaterialDialog.Builder(DetailMyPublication.this)
-                                .content(body)
-                                .show();
-
-
-                        // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
-
-
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("idpublicacion",idepublicacion );
-                params.put("sentimiento",etTestingMyPubE.getText().toString() );
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
 
 
 
 
     } //fin updatedatos
-    private void  updateAnaMyPublication()  throws JSONException {
-
-        final VariablesLogin varlogin =new VariablesLogin();
-        final StringRequest stringRequest = new StringRequest(Request.Method.PUT, Urls.updateAnalisis,
-                new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(DetailMyPublication.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
-                      //  openactivity();
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                if (error.networkResponse.data != null) {
-
-                    try {
-                        body = new String(error.networkResponse.data, "UTF-8");
-                        new MaterialDialog.Builder(DetailMyPublication.this)
-                                .content(body)
-                                .show();
 
 
-                        // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
-
-
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("idpublicacion",idepublicacion );
-                params.put("evaluacion",etAnalyzeMyPubE.getText().toString() );
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
-
-    } //fin updatedatos
-    private void  updateConMyPublication()  throws JSONException {
-
-        final VariablesLogin varlogin =new VariablesLogin();
-        final StringRequest stringRequest = new StringRequest(Request.Method.PUT, Urls.updateConclusion,
-                new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(DetailMyPublication.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
-                      //  openactivity();
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                if (error.networkResponse.data != null) {
-
-                    try {
-                        body = new String(error.networkResponse.data, "UTF-8");
-                        new MaterialDialog.Builder(DetailMyPublication.this)
-                                .content(body)
-                                .show();
-
-
-                        // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
-
-
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("idpublicacion",idepublicacion );
-                params.put("sentimiento",etConclusionMyPubE.getText().toString() );
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
-    } //fin updatedatos
-
-    private void  updatePlanMyPublication()  throws JSONException {
-
-        final VariablesLogin varlogin =new VariablesLogin();
-        final StringRequest stringRequest = new StringRequest(Request.Method.PUT, Urls.updatePlan,
-                new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(DetailMyPublication.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
-                        openactivity();
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                if (error.networkResponse.data != null) {
-
-                    try {
-                        body = new String(error.networkResponse.data, "UTF-8");
-                        new MaterialDialog.Builder(DetailMyPublication.this)
-                                .content(body)
-                                .show();
-
-
-                        // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
-
-
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("idpublicacion",idepublicacion );
-                params.put("sentimiento",etPlanMyPubE.getText().toString() );
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-
-
-
-
-    } //fin updatedatos
 
 
     private void openactivity() {
@@ -442,5 +259,99 @@ public class DetailMyPublication extends AppCompatActivity {
                 setTheme(R.style.AppTheme);
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+       // getMenuInflater().inflate(R.menu.menu_publication, menu);
+        return true;
+    }
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+            back_pressed = System.currentTimeMillis();
+            intent = new Intent(DetailMyPublication.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            final AlertDialog alert = new AlertDialog.Builder(this).create();
+
+            alert.setMessage("Desea salir sin guardar cambios");
+            alert.setButton(Dialog.BUTTON_POSITIVE,("Guardar"),new DialogInterface.OnClickListener(){
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    try {
+                        updateMyPublication();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            alert.setButton(Dialog.BUTTON_NEGATIVE, ("Salir"), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+
+            alert.show();
+        }
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        switch (id) {
+
+
+
+            case android.R.id.home:
+                final Intent upIntent = NavUtils.getParentActivityIntent(this);
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+
+                    TaskStackBuilder.create(this)
+
+                            .addNextIntentWithParentStack(upIntent)
+                            .startActivities();
+                } else {
+
+
+                    if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+                        back_pressed = System.currentTimeMillis();
+                        intent = new Intent(DetailMyPublication.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        final AlertDialog alert = new AlertDialog.Builder(this).create();
+
+                        alert.setMessage("Desea salir sin guardar cambios");
+                        alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alert.setButton(Dialog.BUTTON_NEGATIVE, ("Salir"), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // finish();
+                                NavUtils.navigateUpTo(DetailMyPublication.this, upIntent);
+
+                            }
+                        });
+
+                        alert.show();
+                    }
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

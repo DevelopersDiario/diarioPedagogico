@@ -128,6 +128,7 @@ public class Urls {
     public static final String publicararchivo= "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/publicarArchivo";
     public static final String obtenerdetallepublicacion="http://192.168.0.105:8080/diariopws/api/1.0/publicacion/listdetpublication";
 
+    public static final String updateMyPublication="http://192.168.0.105:8080/diariopws/api/1.0/publicacion/updatepublicacionpadre";
     public static final String updateSentimientos="http://192.168.0.105:8080/diariopws/api/1.0/publicacion/updatesentimiento";
     public static final String updateEvaluacion= "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/updateevaluacion";
     public static final String updateAnalisis= "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/updateanalisis";

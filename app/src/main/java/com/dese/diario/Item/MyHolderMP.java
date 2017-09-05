@@ -16,14 +16,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Eduardo on 15/05/2017.
  */
 
-public class MyHolderMP extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnCreateContextMenuListener, View.OnClickListener {
+public class MyHolderMP extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
     public TextView tvUserRec;
-    public TextView titlePublication;
-    public TextView tvFechaRec;
-    public TextView tvPublicationRec;
+    public TextView titlePublicationMP;
+    public TextView tvFechaRecMP;
+    public TextView tvPublicationRecMP;
     //public TextView tvSentimientosRec;
 
-    public ImageView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
+    public ImageView cvFeelsMP, cvTestMP, cvAnalyzeMP, cvConclusionMP, cvPlanMP;
 
     public CircleImageView imProfileRec;
     public Button btnRPoster;
@@ -40,24 +40,21 @@ public class MyHolderMP extends RecyclerView.ViewHolder implements View.OnLongCl
         super(itemView);
 
         tvUserRec = (TextView) itemView.findViewById(R.id.tvUserRec);
-        tvFechaRec = (TextView) itemView.findViewById(R.id.tvFechaRec);
-        tvPublicationRec = (TextView) itemView.findViewById(R.id.tvPublicationRec);
-        titlePublication = (TextView) itemView.findViewById(R.id.titlePublication);
+        tvFechaRecMP = (TextView) itemView.findViewById(R.id.tvFechaRecMP);
+        tvPublicationRecMP = (TextView) itemView.findViewById(R.id.tvPublicationRecMP);
+        titlePublicationMP = (TextView) itemView.findViewById(R.id.titlePublicationMP);
 
-        cvFeels =(ImageView) itemView.findViewById(R.id.imvFeels);
-        cvTest  = (ImageView) itemView.findViewById(R.id.imvTest);
-        cvAnalyze= (ImageView) itemView.findViewById(R.id.imvAnalyze);
-        cvConclusion= (ImageView) itemView.findViewById(R.id.imvConclusion);
-        cvPlan= (ImageView) itemView.findViewById(R.id.imvPlan);
+        cvFeelsMP =(ImageView) itemView.findViewById(R.id.imvFeelsMP);
+        cvTestMP  = (ImageView) itemView.findViewById(R.id.imvTestMP);
+        cvAnalyzeMP= (ImageView) itemView.findViewById(R.id.imvAnalyzeMP);
+        cvConclusionMP= (ImageView) itemView.findViewById(R.id.imvConclusionMP);
+        cvPlanMP= (ImageView) itemView.findViewById(R.id.imvPlanMP);
 
-       // imvDowloandPDF=(ImageView) itemView.findViewById(R.id.imvDowloandPDF);
 
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
-      //  btnRPoster = (Button) itemView.findViewById(R.id.btnRPoster);
 
 
         itemView.setOnLongClickListener(this);
-        itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);
 
         seleccionados = new SparseBooleanArray();
@@ -75,15 +72,6 @@ public class MyHolderMP extends RecyclerView.ViewHolder implements View.OnLongCl
         return false;
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
-        //OUR CONTEXT MENU
-         /*menu.setHeaderTitle("Seleccione: ");
-           menu.add(0,0,0,"Agregar a Grupo");
-*/
-
-    }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;

@@ -32,7 +32,7 @@
                 android:background="?colorControlHighlight"
                 >
                 <TextView
-                    android:id="@+id/titlePublication"
+                    android:id="@+id/titlePublicationMP"
                     android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                         android:visibility="gone"/>
 
                     <TextView
-                        android:id="@+id/tvFechaRec"
+                        android:id="@+id/tvFechaRecMP"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/tvUserRec"
@@ -97,7 +97,7 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/tvPublicationRec"
+                    android:id="@+id/tvPublicationRecMP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/tag_lorem" />
@@ -122,7 +122,7 @@
 
 
                           <ImageView
-                              android:id="@+id/imvFeels"
+                              android:id="@+id/imvFeelsMP"
                               android:layout_weight="1"
                               android:background="?colorAccent"
                               android:gravity="center"
@@ -131,7 +131,7 @@
                               android:textColor="#000000" />
 
                           <ImageView
-                              android:id="@+id/imvTest"
+                              android:id="@+id/imvTestMP"
                               android:gravity="center"
                               android:padding="20dip"
                               android:background="?colorControlHighlight"
@@ -139,7 +139,7 @@
                               android:textColor="#000000" />
 
                           <ImageView
-                              android:id="@+id/imvAnalyze"
+                              android:id="@+id/imvAnalyzeMP"
                               android:src="@drawable/analytics"
                               android:layout_weight="1"
                               android:background="?colorAccent"
@@ -157,7 +157,7 @@
                           android:layout_width="match_parent">
 
                           <ImageView
-                              android:id="@+id/imvConclusion"
+                              android:id="@+id/imvConclusionMP"
                               android:src="@drawable/goal"
                               android:layout_weight="1"
                               android:background="?colorControlHighlight"
@@ -166,7 +166,7 @@
                               android:gravity="center"/>
 
                           <ImageView
-                              android:id="@+id/imvPlan"
+                              android:id="@+id/imvPlanMP"
                               android:layout_weight="1"
                               android:background="?colorAccent"
                               android:gravity="center"

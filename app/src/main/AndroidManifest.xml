@@ -273,7 +273,13 @@
         <activity
             android:name=".DetailMyPublication"
             android:label="@string/title_activity_detail_my_publication"
-            android:theme="@style/AppTheme"></activity>
+            android:parentActivityName=".MyPublication">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MyPublication" />
+        </activity>
     </application>
 
 </manifest>

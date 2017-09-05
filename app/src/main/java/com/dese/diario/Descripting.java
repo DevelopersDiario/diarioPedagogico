@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
@@ -66,6 +67,12 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
     SharedPreferences.Editor editor;
     int theme;
 
+    //Toolbar
+    private static final int TIME_DELAY = 2000;
+    private static long back_pressed;
+    Intent intent;
+    Boolean homeButton = false, themeChanged;
+
     //KEYS
     final  String KEY_VALUE="VALUES";
     final  String KEY_THEME="THEME";
@@ -97,6 +104,8 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
     private static  String AUDIO_FILE_PATH =
             Environment.getExternalStorageDirectory().getPath() + Constants.mAudioDirectory+ "/Audio";
     private static String AUDIO_FILE_PATH_FULL;
+
+    String T;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -133,7 +142,13 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
         etDescriptingM= (EditText)findViewById(R.id.etDescriptingM);
 
-        etDescriptingM.setFocusable(false);
+        //etDescriptingM.setFocusable(false);
+
+        Bundle getD = getIntent().getExtras();
+
+        if (getD != null)
+            T=(getD.getString("Titulo"));
+
 
     }//endView
 
@@ -463,15 +478,6 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
     }
 
 
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_publication, menu);
-        return true;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -481,32 +487,69 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
 
             case R.id.action_post:
-                Intent d= new Intent(Descripting.this, Register.class);
-                if(!etDescriptingM.getText().equals(null)){
+                Intent d = new Intent(Descripting.this, Register.class);
+                if (!etDescriptingM.getText().equals(null)) {
 
-                    textMore=etDescriptingM.getText().toString();
+                    textMore = etDescriptingM.getText().toString();
+                    d.putExtra("Titulo", T);
                     d.putExtra("Descripcion", textMore);
-                     d.putExtra("Paths", paths);
+                    d.putExtra("Paths", paths);
                     startActivity(d);
                     finish();
 
 
-                   // Toast.makeText(this, "Texto"+textMore, Toast.LENGTH_SHORT).show();
-                }else{
+                    // Toast.makeText(this, "Texto"+textMore, Toast.LENGTH_SHORT).show();
+                } else {
                     Toast.makeText(this, "No guardo", Toast.LENGTH_SHORT).show();
                 }
 
 
-
                 // failed_regpublication.setText("");
                 break;
+            case android.R.id.home:
+                final Intent upIntent = NavUtils.getParentActivityIntent(this);
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
 
-            default:
-                break;
+                    TaskStackBuilder.create(this)
+                            .addNextIntentWithParentStack(upIntent)
+                            .startActivities();
+                } else {
 
+
+
+                    if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+                        back_pressed = System.currentTimeMillis();
+                        intent = new Intent(Descripting.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        final AlertDialog alert = new AlertDialog.Builder(this).create();
+
+                        alert.setMessage("Desea salir de su descripción");
+                        alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alert.setButton(Dialog.BUTTON_NEGATIVE, ("Descartar"), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                               // finish();
+                                NavUtils.navigateUpTo(Descripting.this, upIntent);
+
+                            }
+                        });
+
+                        alert.show();
+                    }
+                }
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
+
+
     }
     private void clipdataSelect(Intent data) {
 
@@ -554,6 +597,42 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
 
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_publication, menu);
+        return true;
+    }
+    @Override
+    public void onBackPressed() {
+        if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
+            back_pressed = System.currentTimeMillis();
+            intent = new Intent(Descripting.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            final AlertDialog alert = new AlertDialog.Builder(this).create();
+
+            alert.setMessage("Desea salir del registro de experiencia");
+            alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //   Toast.makeText(Publication.this, R.string.salvar, Toast.LENGTH_SHORT).show();
+                }
+            });
+            alert.setButton(Dialog.BUTTON_NEGATIVE, ("Descartar"), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+
+            alert.show();
+        }
+
     }
 
 }

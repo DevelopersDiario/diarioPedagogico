@@ -145,7 +145,7 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
 
                 listMyPublications();
             }
-        }, 3000);
+        }, 2000);
     }
 
 
@@ -172,13 +172,14 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
                                     //  System.out.println(jsonobject);
                                     VariablesLogin varllogin=new VariablesLogin();
 
-                                    listpublicaciones.add(new com.dese.diario.Objects.Publication(
+                                    listpublicaciones.add(new com.dese.diario.Objects.MyPublication(
                                             jsonobject.getString(idpublicacion),
                                             jsonobject.getString(idusuario),
                                             jsonobject.getString(nombre),
                                             jsonobject.getString(foto),
                                             jsonobject.getString(fecha),
                                             jsonobject.getString(titulo),
+                                            jsonobject.getString("cuenta"),
                                             jsonobject.getString(observaciones),
                                             jsonobject.getString(setimientos),
                                             jsonobject.getString(evaluacion),
@@ -189,7 +190,7 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
                                     adapter=new Adapter_MyPubication(listpublicaciones, MyPublication.this);
                                     recyclerView.setAdapter(adapter);
                                     tvUserMyPub.setText(jsonobject.getString(nombre));
-                                    //System.out.println(listpublicaciones);
+                                    System.out.println(listpublicaciones);
                                   //  drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
                                     Picasso.with(MyPublication.this)

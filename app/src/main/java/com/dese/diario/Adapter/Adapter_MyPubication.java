@@ -15,6 +15,7 @@ import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderMP;
 import com.dese.diario.Item.MyHolderP;
 import com.dese.diario.Objects.DetailPublication;
+import com.dese.diario.Objects.MyPublication;
 import com.dese.diario.Objects.Publication;
 import com.dese.diario.R;
 import com.dese.diario.Utils.Urls;
@@ -27,11 +28,11 @@ import java.util.ArrayList;
  */
 
 public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
-    ArrayList<Publication> listapublicaciones;
+    ArrayList<MyPublication> listapublicaciones;
     Context context;
     View.OnLongClickListener longClickListener;
 
-    public Adapter_MyPubication(ArrayList<Publication> listapublicaciones, Context context) {
+    public Adapter_MyPubication(ArrayList<MyPublication> listapublicaciones, Context context) {
 
 
         this.listapublicaciones = listapublicaciones;
@@ -54,11 +55,13 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
         final String _ide= listapublicaciones.get(position).getIdpublicacion();
 
 
-        final String d = listapublicaciones.get(position).getFecha();
-        final String p = listapublicaciones.get(position).getObservaciones();
-        final String u = listapublicaciones.get(position).getNombre();
-        final String t = listapublicaciones.get(position).getTitulo();
-        final String f = listapublicaciones.get(position).getFoto();
+        final String fecha = listapublicaciones.get(position).getFecha();
+        final String observaciones = listapublicaciones.get(position).getObservaciones();
+        final String nombre = listapublicaciones.get(position).getNombre();
+        //final String cuenta=listapublicaciones.get(position).getCuenta();
+
+        final String titulo = listapublicaciones.get(position).getTitulo();
+        final String foto = listapublicaciones.get(position).getFoto();
         final String pa = listapublicaciones.get(position).getIdpublicacion();
         final String sen=listapublicaciones.get(position).getSentimiento();
         final String eva=listapublicaciones.get(position).getEvaluacion();
@@ -67,13 +70,13 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
         final String plan=listapublicaciones.get(position).getPlanaccion();
 
 
-        holder.tvFechaRec.setText(d);
-        holder.tvPublicationRec.setText(p);
-        holder.tvUserRec.setText(u);
-        holder.titlePublication.setText(t);
+        holder.tvFechaRecMP.setText(fecha);
+        holder.tvPublicationRecMP.setText(observaciones);
+        holder.tvUserRec.setText(nombre);
+        holder.titlePublicationMP.setText(titulo);
        // holder.tvSentimientosRec.setText(sen);
 
-        holder.cvFeels.setOnClickListener(new View.OnClickListener() {
+        holder.cvFeelsMP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(context)
@@ -90,7 +93,7 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
 
             }
         });
-        holder.cvTest.setOnClickListener(new View.OnClickListener() {
+        holder.cvTestMP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(context)
@@ -106,7 +109,7 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
                         .show();
             }
         });
-        holder.cvAnalyze.setOnClickListener(new View.OnClickListener() {
+        holder.cvAnalyzeMP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(context)
@@ -122,7 +125,7 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
                         .show();
             }
         });
-       holder.cvConclusion.setOnClickListener(new View.OnClickListener() {
+       holder.cvConclusionMP.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                new MaterialDialog.Builder(context)
@@ -139,7 +142,7 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
            }
        });
 
-        holder.cvPlan.setOnClickListener(new View.OnClickListener() {
+        holder.cvPlanMP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MaterialDialog.Builder(context)
@@ -156,7 +159,7 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
             }
         });
         Picasso.with(context)
-                .load(Urls.download + f)
+                .load(Urls.download + foto)
                 .resize(250, 250)
                 .centerCrop()
                 .into(holder.imProfileRec);
@@ -164,7 +167,7 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                openDetailActivity(_ide,t, u, d, p, f, pa, sen, eva, ana, con, plan);
+                openDetailActivity(_ide,titulo, nombre, fecha, observaciones, foto, pa, sen, eva, ana, con, plan);
 
             }
         });

@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -104,6 +106,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     Adapter_Item ia;
 
 
+    //Reservar
+    SharedPreferences.Editor edito;
+    SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -114,9 +119,40 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
         initLitener();
 
+        // getShadesPreferences();
+
+    }
+    public void setShadesPreferences(){
+        edito = getSharedPreferences("Register", MODE_PRIVATE).edit();
+        if(!etTitle.getText().toString().isEmpty()){
+            edito.putString("Titulo", etTitle.getText().toString());
+            edito.putString("Descripcion", etDescripcion.getText().toString());
+            edito.putString("Sentimientos", etSenimientos.getText().toString());
+            edito.putString("Evaluacion", etEvaluacion.getText().toString());
+            edito.putString("Analisis", etAnalisis.getText().toString());
+            edito.putString("Conclusion", etConclusion.getText().toString());
+            edito.putString("Plan", etPlan.getText().toString());
+            edito.apply();
+        }
+
+
 
     }
 
+    public void getShadesPreferences(){
+         prefs = getSharedPreferences("Register", MODE_PRIVATE);
+        String restoredText = prefs.getString("text", null);
+        if (restoredText != null) {
+            String T = prefs.getString("Titulo", "No name defined");
+            String D = prefs.getString("Descripcion", "No name defined");
+            String S = prefs.getString("Sentimientos", "No name defined");
+            String E =  prefs.getString("Evaluacion", "No name defined");
+            String A =  prefs.getString("Analisis", "No name defined");
+            String C = prefs.getString("Conclusion", "No name defined");
+            String P =  prefs.getString("Plan", "No name defined");
+            etTitle.setText(T);
+        }
+    }
     private void initLitener() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -159,12 +195,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         picker.setDate(new DateTime().plusDays(4));
 
 
+
     }
 
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TypedValue typedValueColorPrimaryDark = new TypedValue();
         Register.this.getTheme().resolveAttribute(R.attr.colorPrimaryDark, typedValueColorPrimaryDark, true);
@@ -221,15 +258,21 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
 
             case R.id.btnMoreDesc:
-                Intent desc= new Intent(Register.this, Descripting.class);
-                startActivity(desc);
+
+                    Intent desc = new Intent(Register.this, Descripting.class);
+                  if(!etDescripcion.getText().toString().isEmpty()){
+                      desc.putExtra("Descripcion", etDescripcion.getText().toString());
+                  }
+                      desc.putExtra("Titulo", etTitle.getText().toString());
+                    startActivity(desc);
+
+                //
                 break;
            case R.id.btnMoreFeels:
                 Intent feelss= new Intent(Register.this, Feelings.class);
                if(etDescripcion.getText().toString().isEmpty()){
                    new MaterialDialog.Builder(this)
-                           .title("Alerta!")
-                           .content("Necesita agregar primero una descrición")
+                           .content("Necesita agregar primero una descripción")
                            .show();
 
                }else {
@@ -440,95 +483,48 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 break;
 
             case android.R.id.home:
-                if (homeButton) {
+                final Intent upIntent = NavUtils.getParentActivityIntent(this);
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+
+                    TaskStackBuilder.create(this)
+
+                            .addNextIntentWithParentStack(upIntent)
+                            .startActivities();
+                } else {
+
 
                     if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
                         back_pressed = System.currentTimeMillis();
                         intent = new Intent(Register.this, MainActivity.class);
                         startActivity(intent);
                         finish();
-                        return  true;
                     } else {
                         final AlertDialog alert = new AlertDialog.Builder(this).create();
 
-                        alert.setMessage("Desea salir del registro de experiencia");
-                        alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
+                        alert.setMessage("Desea salir de su descripción");
+                        alert.setButton(Dialog.BUTTON_POSITIVE,("Continuar"),new DialogInterface.OnClickListener(){
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //   Toast.makeText(Publication.this, R.string.salvar, Toast.LENGTH_SHORT).show();
+
                             }
                         });
-                        alert.setButton(Dialog.BUTTON_NEGATIVE, ("Descartar"), new DialogInterface.OnClickListener() {
+                        alert.setButton(Dialog.BUTTON_NEGATIVE, ("Salir"), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
+                                // finish();
+                                NavUtils.navigateUpTo(Register.this, upIntent);
+
                             }
                         });
 
                         alert.show();
-
-
-                       }
-
                     }
-
-              /*  if (!homeButton) {
-                    NavUtils.navigateUpFromSameTask(Register.this);
                 }
-                if (homeButton) {
-                    if (!themeChanged) {
-                        editor = sharedPreferences.edit();
-                        editor.putBoolean(getString(R.string.download), false);
-                        editor.apply();
-
-
-                    }*/
-                  //  intent = new Intent(Register.this, MainActivity.class);
-                    //startActivity(intent);
-                    //finish();
-
-                     /* if(etDescripcion.getText().toString()!=" "&&etDescripcion.getText().toString().isEmpty()){
-                      if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
-                            back_pressed = System.currentTimeMillis();
-                            intent = new Intent(Register.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                            return  true;
-                        } else {
-                            final AlertDialog alert = new AlertDialog.Builder(this).create();
-
-                            alert.setMessage("Desea salir del registro de experiencia");
-                            alert.setButton(Dialog.BUTTON_POSITIVE,("Cancelar"),new DialogInterface.OnClickListener(){
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //   Toast.makeText(Publication.this, R.string.salvar, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            alert.setButton(Dialog.BUTTON_NEGATIVE, ("Descartar"), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            });
-
-                            alert.show();
-*/
-
-                     //   }
-
-                   // }
-            break;
-           //  return false;
-
-
-
-               // }
-       //return true;
+                return true;
         }
+        return super.onOptionsItemSelected(item);
 
-        return false;
     }
     /*------------Theme choose by user--------------------*/
     private void theme() {
@@ -669,10 +665,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     Bundle getD = getIntent().getExtras();
                     if (getD != null) {
 
-
+                        etTitle.setText(getD.getString("Titulo"));
                         etDescripcion.setText(getD.getString("Descripcion"));
                         paths= getIntent().getStringArrayListExtra("Paths");
-                     //   Toast.makeText(this, paths.size(), Toast.LENGTH_LONG).show();
                         etSenimientos.setText(getD.getString("Sentimientos"));
                         etEvaluacion.setText(getD.getString("Evaluacion"));
                         etAnalisis.setText(getD.getString("Analisis"));
@@ -684,6 +679,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     }
 
                 }
+
+
 
 
 }
