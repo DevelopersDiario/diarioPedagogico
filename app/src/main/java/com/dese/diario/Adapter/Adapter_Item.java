@@ -62,13 +62,13 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
                         .load(R.drawable.filejpg)
                         .resize(200, 200)
                         .centerCrop()
-                        .into(holder.imType);
+                        .into(holder.imType);/*
                 Picasso.with(context)
                         .load(paths.get(position))
                         .resize(200, 200)
                         .centerCrop()
-                        .into(holder.ivItem);
-               // LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
+                        .into(holder.ivItem);*/
+               LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
                 break;
             case "png":
                 Picasso.with(context)
