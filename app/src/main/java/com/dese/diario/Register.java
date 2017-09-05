@@ -1,15 +1,22 @@
 package com.dese.diario;
 
 import android.app.Dialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -36,22 +43,37 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Item;
+import com.dese.diario.Utils.CheckForSDCard;
+import com.dese.diario.Utils.Constants;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Upload;
+import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
+import com.sangcomz.fishbun.FishBun;
+import com.sangcomz.fishbun.define.Define;
 
 import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
+import cafe.adriel.androidaudiorecorder.model.AudioChannel;
+import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
+import cafe.adriel.androidaudiorecorder.model.AudioSource;
 
 public class Register extends AppCompatActivity implements DatePickerListener,  View.OnClickListener{
     //Theme
@@ -105,10 +127,26 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     private RecyclerView rcItems;
     Adapter_Item ia;
 
-
+    //FAB
+    private FABToolbarLayout morph;
+    FloatingActionButton fab;
     //Reservar
     SharedPreferences.Editor edito;
     SharedPreferences prefs;
+
+    //  //REQUEST FILE
+    private final int SELECT_PICTURE = 300;
+    private final int PICK_DOC_REQUEST = 1;
+    private final int PICK_AUD_REC_REQUEST = 2;
+    private final int PICK_AUD_REQUEST = 3;
+    private final int PICK_IMG_REQUEST = 4;
+    private String mCurrentPhotoPath;
+
+    private static  String AUDIO_FILE_PATH =
+            Environment.getExternalStorageDirectory().getPath() + Constants.mAudioDirectory+ "/Audio";
+    private static String AUDIO_FILE_PATH_FULL;
+    //ReclyclerView and Upload
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -195,6 +233,24 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         picker.setDate(new DateTime().plusDays(4));
 
 
+        View uno, dos, tres, cuatro, cinco, seis, siete;
+
+        uno = findViewById(R.id.imFont);
+        dos = findViewById(R.id.imGIF);
+        tres = findViewById(R.id.imCamera);
+        cuatro = findViewById(R.id.imDoc);
+        cinco = findViewById(R.id.imMic);
+        seis = findViewById(R.id.imSeleced);
+        siete= findViewById(R.id.imGallery);
+
+        fab.setOnClickListener(this);
+        uno.setOnClickListener(this);
+        dos.setOnClickListener(this);
+        tres.setOnClickListener(this);
+        cuatro.setOnClickListener(this);
+        cinco.setOnClickListener(this);
+        seis.setOnClickListener(this);
+        siete.setOnClickListener(this);
 
     }
 
@@ -210,6 +266,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
             getWindow().setStatusBarColor(colorPrimaryDark);
 
         }
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        morph = (FABToolbarLayout) findViewById(R.id.fabtoolbar);
+
         rcItems = (RecyclerView) findViewById(R.id.rvItems);
         StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(3, 1);
         rcItems.setLayoutManager(staggeredGridLayout);
@@ -252,7 +311,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         getData();
     }
 
-    @Override
+   /* @Override
     public void onClick(View v) {
         switch (v.getId()){
 
@@ -334,7 +393,257 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 break;
         }
     }
+*/
+   @Override
+   public void onClick(View v) {
 
+       switch (v.getId()) {
+
+           case R.id.fab:
+
+               morph.show();
+               break;
+           case R.id.imFont:
+
+               //selectFont();
+
+               break;
+           case R.id.imGIF:
+
+                /*if(!emojicons.isShown()){
+
+                    emojicons.setVisibility(View.VISIBLE);
+                    setEmojiconFragment(Boolean.FALSE);
+                    //Hide softKeyboard
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                }else{
+                    emojicons.setVisibility(View.GONE);
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                }*/
+
+               break;
+           case R.id.imCamera:
+               OpenCamera();
+               break;
+           case R.id.imGallery:
+               FishBun.with(Register.this)
+                       .MultiPageMode()
+                       .setMaxCount(4)
+                       .setMinCount(1)
+                       .setPickerSpanCount(5)
+                       .setActionBarColor(Color.DKGRAY, Color.DKGRAY)
+                       .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                       .setAlbumSpanCount(2, 3)
+                       .setButtonInAlbumActivity(true)
+                       .setCamera(true)
+                       .exceptGif(true)
+                       .setReachLimitAutomaticClose(true)
+                       .setHomeAsUpIndicatorDrawable(ContextCompat.getDrawable(Register.this, R.drawable.ic_arrow_back_white_24dp))
+                       .setOkButtonDrawable(ContextCompat.getDrawable(Register.this, R.drawable.ic_add_a_photo_white_24dp))
+                       .setAllViewTitle("Todos")
+                       .setActionBarTitle("Seleccione ")
+                       .textOnNothingSelected("Seleccione como maximo cuatro")
+                       .startAlbum();
+               break;
+
+           case R.id.imMic:
+
+               final CharSequence[] optione = { "Grabar", "Buscar"};
+               new MaterialDialog.Builder(this)
+                       .title("Seleccione")
+                       .items(optione)
+                       .itemsCallback(new MaterialDialog.ListCallback() {
+                           @Override
+                           public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                               switch (which){
+                                   case 0:
+                                       recordingAudio();
+                                       Toast.makeText(Register.this, text.toString(), Toast.LENGTH_LONG).show();
+                                       break;
+
+                                   case 1:
+                                       Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                                       intentA.addCategory(Intent.CATEGORY_OPENABLE);
+                                       intentA.setType("audio*//*");
+                                       intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                                       startActivityForResult(intentA, PICK_AUD_REQUEST);
+
+                                       Toast.makeText(Register.this, text.toString(), Toast.LENGTH_LONG).show();
+                                       break;
+                               }
+                           }
+                       })
+                       .show();
+
+
+               break;
+           case R.id.imDoc:
+
+
+               Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+               intent.addCategory(Intent.CATEGORY_OPENABLE);
+               String [] mimeTypes = {"application/msword", "application/pdf", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"};
+               intent.setType("*/*");
+               intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+               intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+               startActivityForResult(intent, PICK_DOC_REQUEST);
+
+               break;
+
+
+           default:
+               morph.hide();
+               break;
+
+       }
+       morph.hide();
+
+   }//enOnClick
+
+
+
+    private void OpenCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Log.i("Descripting", "IOException");
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider",photoFile));
+                startActivityForResult(cameraIntent, PICK_IMG_REQUEST);
+            }
+        }
+    }
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File( Environment.getExternalStorageDirectory()+Constants.mImageDirectory);
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    private void recordingAudio() {
+        File apkStorage = null;
+        File outputFile = null;
+        //Get File if SD card is present
+        if (new CheckForSDCard().isSDCardPresent()) {
+
+            apkStorage = new File(
+                    Environment.getExternalStorageDirectory() + Constants.mAudioDirectory);
+        } else
+            Toast.makeText(this, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
+
+        //If File is not present create directory
+        if (!apkStorage.exists()) {
+            apkStorage.mkdir();
+
+        }
+        Long timestamp = System.currentTimeMillis() / 1000;
+        AUDIO_FILE_PATH_FULL=AUDIO_FILE_PATH+timestamp+".mp3";
+        AndroidAudioRecorder.with(Register.this)
+                // Required
+                .setFilePath(AUDIO_FILE_PATH_FULL)
+                .setColor(ContextCompat.getColor(Register.this, R.color.base10))
+                .setRequestCode(PICK_AUD_REC_REQUEST)
+                // Optional
+                .setSource(AudioSource.MIC)
+                .setChannel(AudioChannel.STEREO)
+                .setSampleRate(AudioSampleRate.HZ_48000)
+                .setAutoStart(false)
+                .setKeepDisplayOn(true)
+                // Start recording
+                .record();
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Adapter_Item ia;
+        if (resultCode == RESULT_OK) {
+            switch (requestCode){
+
+                case PICK_DOC_REQUEST:
+                    actReq=data;
+                    clipdataSelect(data);
+
+                    break;
+
+
+                case PICK_AUD_REQUEST:
+                    actReq=data;
+
+                    clipdataSelect(data);
+                    break;
+                case PICK_AUD_REC_REQUEST:
+                    if (resultCode == RESULT_OK) {
+
+                        Toast.makeText(this, "Audio Grabado Correctamente!", Toast.LENGTH_SHORT).show();
+                        if(!AUDIO_FILE_PATH_FULL.isEmpty())
+                            paths.add(AUDIO_FILE_PATH_FULL);
+                        ia = new Adapter_Item(paths, Register.this);
+                        rcItems.setAdapter(ia);
+
+                    } else if (resultCode == RESULT_CANCELED) {
+                        Toast.makeText(this, "El audio no se grabo correctamente", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+                case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
+
+                    paths = data.getStringArrayListExtra(com.veer.multiselect.Util.Constants.GET_PATHS);
+                    ia = new Adapter_Item(paths, Register.this);
+                    rcItems.setAdapter(ia);
+
+                    break;
+                case Define.ALBUM_REQUEST_CODE:
+
+
+                    ArrayList<Uri> pathUri;
+                    pathUri = data.getParcelableArrayListExtra(Define.INTENT_PATH);
+                    for (int i = 0; i < pathUri.size(); i++) {
+                        String realpath= " ";
+                        try {
+
+                            realpath = upload.getFilePath(Register.this, pathUri.get(i));
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+
+                        paths.add(realpath);
+
+                    }
+                    ia = new Adapter_Item(paths, Register.this);
+                    rcItems.setAdapter(ia);
+
+                    //You can get image path(ArrayList<Uri>) Version 0.6.2 or later
+                    break;
+                case PICK_IMG_REQUEST:
+                    paths.add(mCurrentPhotoPath);
+                    ia = new Adapter_Item(paths, Register.this);
+                    rcItems.setAdapter(ia);
+
+                    break;
+
+            }
+
+
+        }//Fin resultCode
+
+    }// Fin onActivityResult
 
     private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();
@@ -432,7 +741,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-     //   getMenuInflater().inflate(R.menu.menu_publication, menu);
+       getMenuInflater().inflate(R.menu.menu_publication, menu);
         return true;
     }
     @Override
@@ -686,6 +995,53 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 }
 
 
+    private void clipdataSelect(Intent data) {
+
+        String imageEncoded;
+        Uri mImageUri;
+        if (data.getData() != null) {
+            mImageUri = Uri.parse(data.getDataString());
+            // Get the cursor
+            try {
+                imageEncoded= upload.getFilePath(Register.this, mImageUri);
+                paths.add(imageEncoded);
+
+                ia = new Adapter_Item(paths, Register.this);
+                rcItems.setAdapter(ia);
+
+//                Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
+
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
+
+        } else{
+            if (data.getClipData() != null) {
+                ClipData mClipData = data.getClipData();
+                ArrayList<Uri> mArrayUri = new ArrayList<Uri>();
+                for (int i = 0; i < mClipData.getItemCount(); i++) {
+                    try {
+                        ClipData.Item item = mClipData.getItemAt(i);
+                        Uri uri = item.getUri();
+
+                        String realpath = upload.getFilePath(Register.this, uri);
+
+                        mArrayUri.add(uri);
+
+
+                        paths.add(realpath);
+                        ia = new Adapter_Item(paths, Register.this);
+                        rcItems.setAdapter(ia);
+                       // Toast.makeText(Register.this, "Clipdata"+realpath, Toast.LENGTH_SHORT).show();
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        }
+    }
 
 
 }

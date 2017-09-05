@@ -106,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/ic_menu_right" />
 
 
@@ -134,7 +135,7 @@
                 <EditText
                     android:id="@+id/etSenimientos"
                     android:layout_width="290dp"
-                    android:layout_height="100dp"
+                    android:layout_height="200dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
@@ -149,6 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
@@ -161,7 +163,7 @@
                 <EditText
                     android:id="@+id/etEvaluacion"
                     android:layout_width="290dp"
-                    android:layout_height="90dp"
+                    android:layout_height="200dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
@@ -176,6 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/ic_menu_right" />
 
             </LinearLayout>
@@ -188,13 +191,14 @@
                 <EditText
                     android:id="@+id/etAnalisis"
                     android:layout_width="290dp"
-                    android:layout_height="100dp"
+                    android:layout_height="200dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
                     android:hint="¿Qué sentido puede tener esta experiencia?"
                     android:inputType="textMultiLine"
+
                     android:textAlignment="center" />
 
                 <Button
@@ -203,6 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/ic_menu_right"/>
 
             </LinearLayout>
@@ -215,7 +220,7 @@
                 <EditText
                     android:id="@+id/etConclusion"
                     android:layout_width="290dp"
-                    android:layout_height="100dp"
+                    android:layout_height="200dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
@@ -230,6 +235,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/ic_menu_right"/>
 
             </LinearLayout>
@@ -242,7 +248,7 @@
                 <EditText
                     android:id="@+id/etPlan"
                     android:layout_width="290dp"
-                    android:layout_height="90dp"
+                    android:layout_height="200dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_text_design"
@@ -257,6 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/ic_menu_right"/>
 
             </LinearLayout>
