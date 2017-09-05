@@ -31,7 +31,7 @@ public class Feelings extends AppCompatActivity {
     EditText etFeelingsM;
 
     //Intents State
-    String D;
+    String D, paths;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class Feelings extends AppCompatActivity {
 
         if (getD != null)
             D=(getD.getString("Descripcion"));
+            paths=getD.getString("Paths");
 
 
     }
@@ -81,7 +82,8 @@ public class Feelings extends AppCompatActivity {
                     textMore=etFeelingsM.getText().toString();
                      f.putExtra("Sentimientos", textMore);
                      f.putExtra("Descripcion", D);
-                   // r.setSentimiento(textMore);
+                 f.putExtra("Paths", paths);
+
                     startActivity(f);
                     finish();
 

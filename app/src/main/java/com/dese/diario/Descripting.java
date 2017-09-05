@@ -537,7 +537,16 @@ public class Descripting extends AppCompatActivity implements View.OnClickListen
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                // finish();
-                                NavUtils.navigateUpTo(Descripting.this, upIntent);
+                                Intent d = new Intent(Descripting.this, Register.class);
+                                String textMore;
+
+
+
+                                    startActivity(d);
+
+
+
+                                    NavUtils.navigateUpTo(Descripting.this, upIntent);
 
                             }
                         });

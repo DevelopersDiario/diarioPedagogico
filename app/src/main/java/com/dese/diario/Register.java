@@ -289,6 +289,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                 }else {
                     testing.putExtra("Descripcion", etDescripcion.getText().toString());
+                    testing.putExtra("Paths", paths);
                     testing.putExtra("Sentimientos", etSenimientos.getText().toString());
                     startActivity(testing);
                 }
@@ -431,7 +432,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_publication, menu);
+     //   getMenuInflater().inflate(R.menu.menu_publication, menu);
         return true;
     }
     @Override
@@ -673,8 +674,12 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         etAnalisis.setText(getD.getString("Analisis"));
                         etConclusion.setText(getD.getString("Conclusion"));
                         etPlan.setText(getD.getString("Plan"));
-                          ia = new Adapter_Item(paths, Register.this);
-                         rcItems.setAdapter(ia);
+
+                        if(!paths.isEmpty()){
+                            ia = new Adapter_Item(paths, Register.this);
+                            rcItems.setAdapter(ia);
+                        }
+
 
                     }
 
