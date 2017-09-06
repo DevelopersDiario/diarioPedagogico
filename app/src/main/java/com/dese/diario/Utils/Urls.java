@@ -63,7 +63,7 @@ public class Urls {
         */
 /**Server Two**/
 
-        //URL usuario login
+        /*//URL usuario login
         public static final String login =  "http://192.168.1.78:8080/diariopws/api/1.0/user/autenticar";                        //en uso
     public static final String createaccount =  "http://192.168.1.78:8080/diariopws/api/1.0/usuario/insert";                //en uso
 
@@ -112,9 +112,9 @@ public class Urls {
     //URLs Grupodetalle
     public static final String listgpodetalle ="http://192.168.1.78:8080/diariopws/api/1.0/grupodetalle/list";   //Funcional en server
     public static final String addparticipante ="http://192.168.1.78:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
-
+*/
     /**LOCAL**/
-    /**
+
 
     //URL usuario login
     public static final String login =  "http://192.168.0.105:8080/diariopws/api/1.0/user/autenticar";                        //en uso
@@ -165,7 +165,7 @@ public class Urls {
     //URLs Grupodetalle
     public static final String listgpodetalle ="http://192.168.0.105:8080/diariopws/api/1.0/grupodetalle/list";   //Funcional en server
     public static final String addparticipante ="http://192.168.0.105:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
-**/
+
 /**
  * **/
 
