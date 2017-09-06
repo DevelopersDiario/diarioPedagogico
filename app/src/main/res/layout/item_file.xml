@@ -13,14 +13,14 @@
                 android:layout_height="200dp"
                 android:id="@+id/ivItem"
                 />
-            <ImageView
+            <!--<ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_file_download_white_24dp"
                 android:tint="?colorAccent"
                 android:layout_marginRight="15dp"
                 android:layout_alignEnd="@id/ivItem"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"/>-->
         </RelativeLayout>
 
         <TextView

@@ -67,6 +67,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(final int pos) {
+                        final ImagePopup imagePopup = new ImagePopup(context);
                         final CharSequence[] optione = { "View", "Descargar"};
                         new MaterialDialog.Builder(context)
                                 .items(optione)
@@ -77,13 +78,18 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                             case 0:
                                                 switch (type){
                                                     case "jpg":
-                                                        final ImagePopup imagePopup = new ImagePopup(context);
-                                                        imagePopup.setWindowHeight(900); // Optional
-                                                        imagePopup.setWindowWidth(900); // Optional
-                                                        imagePopup.initiatePopup(holder.ivItem.getDrawable());
-                                                        // imagePopup.viewPopup();
 
-                                                        imagePopup.initiatePopupWithPicasso(download+fname);
+
+                                                        imagePopup.initiatePopup(holder.ivItem.getDrawable());
+                                                         imagePopup.viewPopup();
+                                                        Toast.makeText(context, "Audio jpg", Toast.LENGTH_SHORT).show();
+
+                                                        break;
+                                                    case "png":
+
+                                                        imagePopup.initiatePopup(holder.ivItem.getDrawable());
+                                                        imagePopup.viewPopup();
+                                                        Toast.makeText(context, "Audio PNG", Toast.LENGTH_SHORT).show();
                                                         break;
 
                                                     case "mp3":
