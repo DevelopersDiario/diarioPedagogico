@@ -66,6 +66,7 @@ public class ShowProgressDialog {
         new MaterialDialog.Builder(context)
                 .content("Cargando..")
                 .progress(status, 0)
+                .cancelable(false)
                 .show();
     }
 

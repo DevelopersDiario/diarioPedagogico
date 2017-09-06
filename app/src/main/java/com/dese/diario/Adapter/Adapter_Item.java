@@ -60,7 +60,7 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
             case  "jpg":
                 Picasso.with(context)
                         .load(R.drawable.filejpg)
-                        .resize(200, 200)
+                        .resize(1200, 1200)
                         .centerCrop()
                         .into(holder.imType);/*
                 Picasso.with(context)
@@ -73,7 +73,7 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
             case "png":
                 Picasso.with(context)
                         .load(R.drawable.filepng)
-                        .resize(200, 200)
+                        .resize(1200, 1200)
                         .centerCrop()
                         .into(holder.imType);
                 LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);
@@ -82,7 +82,7 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
             case "gif":
                 Picasso.with(context)
                         .load(R.drawable.unknowfile)
-                        .resize(200, 200)
+                        .resize(1200, 1200)
                         .centerCrop()
                         .into(holder.imType);
                 LoadBitmap.loadBitmap(paths.get(position), holder.ivItem);

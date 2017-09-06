@@ -77,44 +77,58 @@
                     android:paddingTop="10dp" />
 
             </LinearLayout>
-
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-             <!--   <ScrollView
-                    android:id="@+id/scrollView1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">-->
-                        <EditText
-                            android:id="@+id/etDescripcion"
-                            android:inputType="textMultiLine"
-                            android:layout_width="wrap_content"
-                            android:layout_height="200dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:background="@drawable/edit_text_design"
-                            android:gravity="center"
-                            android:lines="10"
-                            android:enabled="true"
-                            android:minLines="6"
-                            android:maxLines="6"
-                            android:isScrollContainer="true"
-                            android:hint="¿Que esta pasando?" />
-                   <!-- </LinearLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    />
 
-                </ScrollView>-->
+                <!--   <EditText
+                       android:id="@+id/etDescripcion"
+                       android:inputType="textMultiLine"
+                       android:layout_width="wrap_content"
+                       android:layout_height="200dp"
+                       android:layout_gravity="center"
+                       android:layout_weight="1"
+                       android:background="@drawable/edit_text_design"
+                       android:gravity="center"
+                       android:lines="10"
+                       android:enabled="true"
+                       android:minLines="6"
+                       android:maxLines="6"
+                       android:isScrollContainer="true"
+                       android:hint="¿Que esta pasando?" />-->
+
+                <EditText
+                    android:id="@+id/etDescripcion"
+                    android:layout_gravity="center"
+                    android:hint="@string/input_desc"
+                    android:inputType="textMultiLine"
+                    android:lines="10"
+                    android:minLines="10"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:maxLines="10"
+                    android:isScrollContainer="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/edit_text_unbording" />
 
 
 
-                <!--android:background="@drawable/edit_text_design"-->
 
 
                 <Button
@@ -128,7 +142,7 @@
 
 
             </LinearLayout>
-
+        </ScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,17 +161,27 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    />
                 <EditText
                     android:id="@+id/etSenimientos"
-                    android:layout_width="290dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_text_design"
-                    android:ems="10"
-                    android:hint="¿Que estaba pensando y sintiendo?"
+                    android:lines="10"
+                    android:minLines="10"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:maxLines="10"
+                    android:isScrollContainer="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:scrollbars="vertical"
+                    android:overScrollMode="always"
+                    android:hint="@string/input_sent"
                     android:inputType="textCapSentences|textMultiLine"
                     android:textAlignment="center" />
 
@@ -176,14 +200,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    />
                 <EditText
                     android:id="@+id/etEvaluacion"
-                    android:layout_width="290dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
+                    android:lines="10"
+                    android:minLines="10"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:maxLines="10"
+                    android:isScrollContainer="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:scrollbars="vertical"
+                    android:overScrollMode="always"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
                     android:hint="¿Que es lo bueno y malo de esta experiencia?"
@@ -204,14 +240,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    />
                 <EditText
                     android:id="@+id/etAnalisis"
-                    android:layout_width="290dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
+                    android:lines="10"
+                    android:minLines="10"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:maxLines="10"
+                    android:isScrollContainer="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:scrollbars="vertical"
+                    android:overScrollMode="always"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
                     android:hint="¿Qué sentido puede tener esta experiencia?"
@@ -233,14 +281,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    />
                 <EditText
                     android:id="@+id/etConclusion"
-                    android:layout_width="290dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
+                    android:lines="10"
+                    android:minLines="10"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:maxLines="10"
+                    android:isScrollContainer="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:scrollbars="vertical"
+                    android:overScrollMode="always"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
                     android:hint="¿Qué más podria haber hecho?"
@@ -261,14 +321,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorPrimary"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    />
                 <EditText
                     android:id="@+id/etPlan"
-                    android:layout_width="290dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
+                    android:lines="10"
+                    android:minLines="10"
+                    android:layout_marginStart="10dp"
+                    android:gravity="start"
+                    android:maxLines="10"
+                    android:isScrollContainer="true"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:scrollbars="vertical"
+                    android:overScrollMode="always"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
                     android:hint="¿Qué haria en una experiencia similar?"

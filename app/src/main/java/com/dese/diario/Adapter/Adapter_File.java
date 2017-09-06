@@ -2,6 +2,8 @@ package com.dese.diario.Adapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderItem;
+import com.dese.diario.Register;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.R;
 import com.dese.diario.Utils.DownloadTask;
@@ -32,10 +37,8 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             ArrayList<String> nombrefile;
             Context context;
 
-          boolean isImageFitToScreen;
 
-            private ProgressDialog pDialog;
-            public static final int progress_bar_type = 0;
+
 
             public Adapter_File(ArrayList<String> nombrefile, Context context) {
 
@@ -54,8 +57,8 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             @Override
             public void onBindViewHolder(final MyHolderItem holder, final int position) {
                // File f= new File(paths.get(position));
-                String fname=nombrefile.get(position);
-                String type = fname.substring(fname.lastIndexOf(".") + 1);
+                final String fname=nombrefile.get(position);
+                final String type = fname.substring(fname.lastIndexOf(".") + 1);
                 holder.tvItem.setText(fname);
                 getExtensionFile(type, holder, fname);
 
@@ -64,37 +67,43 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(final int pos) {
+                        final CharSequence[] optione = { "View", "Descargar"};
                         new MaterialDialog.Builder(context)
-                                .title("Deseadescargar ")
-                                .positiveText("Descargar")
-                                .negativeText("cancelar")
-                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                .items(optione)
+                                .itemsCallback(new MaterialDialog.ListCallback() {
                                     @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                        // TODO
-                                        String urlDescarga= download+nombrefile.get(pos);
-                                        new DownloadTask(context, null, urlDescarga);
-                                    }
-                                })
-                                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                    @Override
-                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                                        switch (which){
+                                            case 0:
+                                                switch (type){
+                                                    case "jpg":
+                                                        final ImagePopup imagePopup = new ImagePopup(context);
+                                                        imagePopup.setWindowHeight(900); // Optional
+                                                        imagePopup.setWindowWidth(900); // Optional
+                                                        imagePopup.initiatePopup(holder.ivItem.getDrawable());
+                                                        // imagePopup.viewPopup();
 
-                                     /*   String urlDescarga= download+nombrefile.get(pos);
-                                        if(isImageFitToScreen) {
-                                            isImageFitToScreen=false;
-                                            holder.ivItem.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-                                            holder.ivItem.setAdjustViewBounds(true);
-                                        }else{
-                                            isImageFitToScreen=true;
-                                            holder.ivItem.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
-                                            holder.ivItem.setScaleType(ImageView.ScaleType.FIT_XY);
-                                        }*/
+                                                        imagePopup.initiatePopupWithPicasso(download+fname);
+                                                        break;
 
+                                                    case "mp3":
+                                                        Toast.makeText(context, "Audio Preview", Toast.LENGTH_SHORT).show();
+                                                        break;
+                                                }
+
+                                                break;
+
+                                            case 1:
+                                                String urlDescarga= download+nombrefile.get(pos);
+                                                new DownloadTask(context, null, urlDescarga);
+                                                break;
+                                            default:
+                                                dialog.dismiss();
+                                                break;
+                                        }
                                     }
                                 })
                                 .show();
-
 
                     }
                 });

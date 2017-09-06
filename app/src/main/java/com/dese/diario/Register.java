@@ -289,6 +289,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         etConclusion= (EditText) this.findViewById(R.id.etConclusion);
         etPlan=(EditText) this.findViewById(R.id.etPlan);
 
+//        setScroll();
 
         btnMoreFeels= (Button) findViewById(R.id.btnMoreFeels);
         btnMoreDesc= (Button) findViewById(R.id.btnMoreDesc);
@@ -308,89 +309,185 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         getData();
     }
 
-   /* @Override
-    public void onClick(View v) {
-        switch (v.getId()){
+    private void setScroll() {
 
+        etDescripcion.setOnTouchListener(new View.OnTouchListener() {
 
-            case R.id.btnMoreDesc:
-
-                    Intent desc = new Intent(Register.this, Descripting.class);
-                  if(!etDescripcion.getText().toString().isEmpty()){
-                      desc.putExtra("Descripcion", etDescripcion.getText().toString());
-                  }
-                      desc.putExtra("Titulo", etTitle.getText().toString());
-                    startActivity(desc);
-
-                //
-                break;
-           case R.id.btnMoreFeels:
-                Intent feelss= new Intent(Register.this, Feelings.class);
-               if(etDescripcion.getText().toString().isEmpty()){
-                   new MaterialDialog.Builder(this)
-                           .content("Necesita agregar primero una descripción")
-                           .show();
-
-               }else {
-                   feelss.putExtra("Descripcion", etDescripcion.getText().toString());
-                   startActivity(feelss);
-               }
-
-                break;
-
-            case R.id.btnMoreTest:
-                Intent testing= new Intent(Register.this, Testing.class);
-                if(etSenimientos.getText().toString().isEmpty()){
-
-
-                }else {
-                    testing.putExtra("Descripcion", etDescripcion.getText().toString());
-                    testing.putExtra("Paths", paths);
-                    testing.putExtra("Sentimientos", etSenimientos.getText().toString());
-                    startActivity(testing);
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.etDescripcion) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
                 }
+                return false;
+            }
+        });
+        etSenimientos.setOnTouchListener(new View.OnTouchListener() {
 
-                break;
-            case R.id.btnMoreAnalisi:
-                Intent Analisis= new Intent(Register.this, Analyze.class);
-                if(etEvaluacion.getText().toString().isEmpty()){
-
-                }else {
-                    Analisis.putExtra("Descripcion", etDescripcion.getText().toString());
-                    Analisis.putExtra("Sentimientos", etSenimientos.getText().toString());
-                    Analisis.putExtra("Evaluacion", etEvaluacion.getText().toString());
-                    startActivity(Analisis);
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.etSenimientos) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
                 }
-                break;
-            case R.id.btnMoreConclusion:
-                Intent Conc= new Intent(Register.this, Conclusion.class);
-                if(etAnalisis.getText().toString().isEmpty()){
+                return false;
+            }
+        });
+        etEvaluacion.setOnTouchListener(new View.OnTouchListener() {
 
-                }else {
-                    Conc.putExtra("Descripcion", etDescripcion.getText().toString());
-                    Conc.putExtra("Sentimientos", etSenimientos.getText().toString());
-                    Conc.putExtra("Evaluacion", etEvaluacion.getText().toString());
-                    Conc.putExtra("Analisis", etAnalisis.getText().toString());
-                    startActivity(Conc);
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.etEvaluacion) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
                 }
-                break;
+                return false;
+            }
+        });
 
-            case R.id.btnMorePlan:
-                Intent plan= new Intent(Register.this, Plan.class);
-                if(etAnalisis.getText().toString().isEmpty()){
+        etAnalisis.setOnTouchListener(new View.OnTouchListener() {
 
-                }else {
-                    plan.putExtra("Descripcion", etDescripcion.getText().toString());
-                    plan.putExtra("Sentimientos", etSenimientos.getText().toString());
-                    plan.putExtra("Evaluacion", etEvaluacion.getText().toString());
-                    plan.putExtra("Conclusion", etConclusion.getText().toString());
-                    plan.putExtra("Analisis", etAnalisis.getText().toString());
-                    startActivity(plan);
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.etAnalisis) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
                 }
-                break;
-        }
+                return false;
+            }
+        });
+
+        etConclusion.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.etConclusion) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
+        etPlan.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.etPlan) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
     }
-*/
+
+    /* @Override
+     public void onClick(View v) {
+         switch (v.getId()){
+
+
+             case R.id.btnMoreDesc:
+
+                     Intent desc = new Intent(Register.this, Descripting.class);
+                   if(!etDescripcion.getText().toString().isEmpty()){
+                       desc.putExtra("Descripcion", etDescripcion.getText().toString());
+                   }
+                       desc.putExtra("Titulo", etTitle.getText().toString());
+                     startActivity(desc);
+
+                 //
+                 break;
+            case R.id.btnMoreFeels:
+                 Intent feelss= new Intent(Register.this, Feelings.class);
+                if(etDescripcion.getText().toString().isEmpty()){
+                    new MaterialDialog.Builder(this)
+                            .content("Necesita agregar primero una descripción")
+                            .show();
+
+                }else {
+                    feelss.putExtra("Descripcion", etDescripcion.getText().toString());
+                    startActivity(feelss);
+                }
+
+                 break;
+
+             case R.id.btnMoreTest:
+                 Intent testing= new Intent(Register.this, Testing.class);
+                 if(etSenimientos.getText().toString().isEmpty()){
+
+
+                 }else {
+                     testing.putExtra("Descripcion", etDescripcion.getText().toString());
+                     testing.putExtra("Paths", paths);
+                     testing.putExtra("Sentimientos", etSenimientos.getText().toString());
+                     startActivity(testing);
+                 }
+
+                 break;
+             case R.id.btnMoreAnalisi:
+                 Intent Analisis= new Intent(Register.this, Analyze.class);
+                 if(etEvaluacion.getText().toString().isEmpty()){
+
+                 }else {
+                     Analisis.putExtra("Descripcion", etDescripcion.getText().toString());
+                     Analisis.putExtra("Sentimientos", etSenimientos.getText().toString());
+                     Analisis.putExtra("Evaluacion", etEvaluacion.getText().toString());
+                     startActivity(Analisis);
+                 }
+                 break;
+             case R.id.btnMoreConclusion:
+                 Intent Conc= new Intent(Register.this, Conclusion.class);
+                 if(etAnalisis.getText().toString().isEmpty()){
+
+                 }else {
+                     Conc.putExtra("Descripcion", etDescripcion.getText().toString());
+                     Conc.putExtra("Sentimientos", etSenimientos.getText().toString());
+                     Conc.putExtra("Evaluacion", etEvaluacion.getText().toString());
+                     Conc.putExtra("Analisis", etAnalisis.getText().toString());
+                     startActivity(Conc);
+                 }
+                 break;
+
+             case R.id.btnMorePlan:
+                 Intent plan= new Intent(Register.this, Plan.class);
+                 if(etAnalisis.getText().toString().isEmpty()){
+
+                 }else {
+                     plan.putExtra("Descripcion", etDescripcion.getText().toString());
+                     plan.putExtra("Sentimientos", etSenimientos.getText().toString());
+                     plan.putExtra("Evaluacion", etEvaluacion.getText().toString());
+                     plan.putExtra("Conclusion", etConclusion.getText().toString());
+                     plan.putExtra("Analisis", etAnalisis.getText().toString());
+                     startActivity(plan);
+                 }
+                 break;
+         }
+     }
+ */
    @Override
    public void onClick(View v) {
 

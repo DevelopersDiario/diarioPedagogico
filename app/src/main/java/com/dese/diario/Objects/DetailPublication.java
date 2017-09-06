@@ -198,7 +198,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         switch (v.getId()){
             case R.id.imvFeelsD:
                 new MaterialDialog.Builder(this)
-                        .title("¿Que esta pensando y sintiendo?")
+                        .title(R.string.input_sent)
                         .content(sen)
                         .positiveText("Listo")
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -211,7 +211,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                 break;
             case R.id.imvTestD:
                 new MaterialDialog.Builder(this)
-                        .title("¿Que esta pensando y sintiendo?")
+                        .title(R.string.input_eval)
                         .content(eva)
                         .positiveText("Listo")
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -224,7 +224,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                 break;
             case R.id.imvAnalyzeD:
                 new MaterialDialog.Builder(this)
-                        .title("¿Que esta pensando y sintiendo?")
+                        .title(R.string.input_analis)
                         .content(ana)
                         .positiveText("Listo")
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -237,7 +237,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                 break;
             case R.id.imvConclusionD:
                 new MaterialDialog.Builder(this)
-                        .title("¿Que esta pensando y sintiendo?")
+                        .title(R.string.input_concl)
                         .content(con)
                         .positiveText("Listo")
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -250,7 +250,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                 break;
             case R.id.imvPlanD:
                 new MaterialDialog.Builder(this)
-                        .title("¿Que esta pensando y sintiendo?")
+                        .title(R.string.input_plan)
                         .content(plan)
                         .positiveText("Listo")
                         .onPositive(new MaterialDialog.SingleButtonCallback() {
