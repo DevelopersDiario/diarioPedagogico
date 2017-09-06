@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -68,7 +70,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                     @Override
                     public void onItemClick(final int pos) {
                         final ImagePopup imagePopup = new ImagePopup(context);
-                        final CharSequence[] optione = { "View", "Descargar"};
+                                              final CharSequence[] optione = { "View", "Descargar"};
                         new MaterialDialog.Builder(context)
                                 .items(optione)
                                 .itemsCallback(new MaterialDialog.ListCallback() {
@@ -79,7 +81,8 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                                 switch (type){
                                                     case "jpg":
 
-
+                                                        imagePopup.setWindowHeight(1000); // Optional
+                                                        imagePopup.setWindowWidth(1000); // Optional
                                                         imagePopup.initiatePopup(holder.ivItem.getDrawable());
                                                          imagePopup.viewPopup();
                                                         Toast.makeText(context, "Audio jpg", Toast.LENGTH_SHORT).show();
@@ -93,6 +96,8 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                                         break;
 
                                                     case "mp3":
+                                                        final MediaPlayer  mp = MediaPlayer.create(context, Uri.parse(download+fname));
+                                                        mp.start();
                                                         Toast.makeText(context, "Audio Preview", Toast.LENGTH_SHORT).show();
                                                         break;
                                                 }
