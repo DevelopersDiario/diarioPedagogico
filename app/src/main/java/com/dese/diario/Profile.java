@@ -39,6 +39,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dese.diario.Utils.CheckForSDCard;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Constants;
@@ -50,9 +51,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,8 +92,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
 
     //Image View
-    private static String APP_DIRECTORY = "DiarioApp/";
-    private static String MEDIA_DIRECTORY = APP_DIRECTORY + "DiarioVirtual";
+
+    private String mCurrentPhotoPath;
 
     private final int MY_PERMISSIONS = 100;
     private final int PHOTO_CODE = 200;
@@ -578,7 +582,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     /*------------------Imagen Profile-------------------*/
 
     private void showOptions() {
-        final CharSequence[] option = { getString(R.string.galeria)/*,getString(R.string.camara)*/};
+        final CharSequence[] option = { getString(R.string.galeria),getString(R.string.camara)};
         final AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
        // builder.setTitle(R.string.elija_opcion);
         builder.setInverseBackgroundForced(true);
@@ -587,8 +591,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
             public void onClick(DialogInterface dialog, int which) {
                 if(option[which] == getString(R.string.camara)){
 
-                    //agregarFotoCamara();
-                    openCamera();
+                    OpenCamera();
 
                 }else if(option[which] == getString(R.string.galeria)){
                       //Gallery
@@ -596,9 +599,6 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                     galleryIntent.setType(getString(R.string.imageda));
                     startActivityForResult(galleryIntent, SELECT_PICTURE);
 
-                  //  Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    //intent.setType(getString(R.string.imageda));
-                    //startActivityForResult(intent.createChooser(intent, getString(R.string.selecciona_app_imagen)), SELECT_PICTURE);
 
                 }else {
                     dialog.dismiss();
@@ -610,43 +610,54 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
     }
 
 
-    private void openCamera() {
-       /* File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
-        boolean isDirectoryCreated = file.exists();
-
-        if(!isDirectoryCreated)
-            isDirectoryCreated = file.mkdirs();
-
-        if(isDirectoryCreated){
-            Long timestamp = System.currentTimeMillis() / 1000;
-            String imageName = timestamp.toString() + R.string.jpg;
-
-            mPath = Environment.getExternalStorageDirectory() + File.separator + MEDIA_DIRECTORY
-                    + File.separator + imageName;
-
-            File newFile = new File(mPath);
-
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider", newFile));
-            startActivityForResult(intent, PHOTO_CODE);
-
-        }*/
-       Intent cameraIntent = new Intent(
-               android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-       //Creamos una carpeta en la memeria del terminal
-       File imagesFolder = new File(Environment.getExternalStorageDirectory(), "Mi diario/Perfil/");
-       imagesFolder.mkdirs();
-       File image = null;
-       //añadimos el nombre de la imagen
-       if (ide == "profile") 
-            image= new File(imagesFolder, "Profile"+Vrlog.getIdusuario().toString()+".jpg");
-       else if(ide=="holder")
-           image= new File(imagesFolder, "Holder"+Vrlog.getIdusuario().toString()+".jpg");
-
-       cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider", image));
-       startActivityForResult(cameraIntent, PHOTO_CODE);
+    private void OpenCamera() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Log.i("Profile", "IOException");
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider",photoFile));
+                startActivityForResult(cameraIntent, PHOTO_CODE);
+            }
+        }
     }
+    private File createImageFile() throws IOException {
+        File apkStorage = null;
+        File outputFile = null;
+        //Get File if SD card is present
+        if (new CheckForSDCard().isSDCardPresent()) {
 
+            apkStorage = new File(
+                    Environment.getExternalStorageDirectory() + Constants.mImageDirectory);
+        } else
+            Toast.makeText(this, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
+
+        //If File is not present create directory
+        if (!apkStorage.exists()) {
+            apkStorage.mkdir();
+
+        }
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = new File( Environment.getExternalStorageDirectory()+Constants.mImageDirectory);
+        File image = File.createTempFile(
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
 
 
 
@@ -655,7 +666,8 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         super.onActivityResult(requestCode, resultCode, data);
 
         Upload up = new Upload();
-
+        DatosUsr datosUsr= new DatosUsr();
+        String fname;
         if(resultCode == RESULT_OK && data != null){
 
 
@@ -666,31 +678,29 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                     String path;
                     Bitmap bMap ;
                     if (ide == "profile") {
-                        path=  Environment.getExternalStorageDirectory()+
-                                Constants.mDirectoryProfile;
+                        path=  mCurrentPhotoPath;
+                        File f= new File(path);
+                        fname= f.getName();
 
 
                         bMap = BitmapFactory.decodeFile(path);
 
-                        cViewImagen.setImageBitmap(bMap);
-                      //  Toast.makeText(this, "Data->"+path, Toast.LENGTH_LONG).show();
-                        up.uploadPictureProfile(Profile.this, path);
+                        cViewImagen.setImageURI(Uri.parse(mCurrentPhotoPath));
+                        up.uploadPictureProfile(Profile.this, mCurrentPhotoPath);
+                        Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
 
                     } else if (ide=="holder") {
-                        path= Environment.getExternalStorageDirectory()+
-                                Constants.mDirectoryHolder;
+                        path= mCurrentPhotoPath;
                         bMap = BitmapFactory.decodeFile(path);
-
+                        File f= new File(path);
+                        fname= f.getName();
                         up.uploadPictureHolder(Profile.this, path);
 
                         mPortada.setImageBitmap(bMap);
-                       // Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
+                        //datosUsr.setFportada(fname);
+                        Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
 
                     }
-
-
-
-
 
                     break;
                 case SELECT_PICTURE:
@@ -699,15 +709,16 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                     String pathito;
                     try {
                          pathito=up.getFilePath(Profile.this, filePath);
-                        Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
-
+                       // Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
+                        File f= new File(pathito);
+                        fname= f.getName();
                         if (ide == "holder") {
-                          //  Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
                             mPortada.setImageURI(filePath);
 
                             up.uploadPictureHolder(this, pathito);
                         } else if (ide=="profile") {
-                           // Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
+                            File f2= new File(String.valueOf(filePath));
+                            fname= f2.getName();
                             cViewImagen.setImageURI(filePath);
                             up.uploadPictureProfile(this, pathito);
                         }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -307,7 +308,10 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         btnMorePlan.setOnClickListener(this);
 
         getData();
+
     }
+
+
 
     private void setScroll() {
 
@@ -574,13 +578,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
            case R.id.imDoc:
 
 
-               Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-               intent.addCategory(Intent.CATEGORY_OPENABLE);
-               String [] mimeTypes = {"application/msword", "application/pdf", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"};
-               intent.setType("*/*");
-               intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-               intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-               startActivityForResult(intent, PICK_DOC_REQUEST);
+              Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+             intent.addCategory(Intent.CATEGORY_OPENABLE);
+              String [] mimeTypes = {"application/msword", "application/pdf", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"};
+                intent.setType("*/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+                 startActivityForResult(intent, PICK_DOC_REQUEST);
 
                break;
 
@@ -672,6 +676,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                 case PICK_DOC_REQUEST:
                     actReq=data;
+
                     clipdataSelect(data);
 
                     break;
