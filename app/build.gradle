@@ -18,8 +18,8 @@ android {
         applicationId "com.dese.diario"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 7
-        versionName "1.0.7"
+        versionCode 8
+        versionName "1.0.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -148,6 +148,7 @@ dependencies {
     compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.github.mostafaaryan:transitional-imageview:v0.2.2'
     compile 'com.github.chathuralakmal:AndroidImagePopup:1.0.9'
+    compile 'io.github.jeancsanchez.jcplayer:jcplayer:2.6.0-alpha'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -4,16 +4,21 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -25,6 +30,7 @@ import com.dese.diario.Register;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.R;
 import com.dese.diario.Utils.DownloadTask;
+import com.example.jean.jcplayer.JcAudio;
 import com.mostafaaryan.transitionalimageview.model.TransitionalImage;
 import com.squareup.picasso.Picasso;
 
@@ -69,38 +75,18 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(final int pos) {
-                        final ImagePopup imagePopup = new ImagePopup(context);
+
                                               final CharSequence[] optione = { "View", "Descargar"};
                         new MaterialDialog.Builder(context)
                                 .items(optione)
                                 .itemsCallback(new MaterialDialog.ListCallback() {
                                     @Override
                                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+
                                         switch (which){
                                             case 0:
-                                                switch (type){
-                                                    case "jpg":
+                                                previewFile(type, holder, fname);
 
-                                                        imagePopup.setWindowHeight(1000); // Optional
-                                                        imagePopup.setWindowWidth(1000); // Optional
-                                                        imagePopup.initiatePopup(holder.ivItem.getDrawable());
-                                                         imagePopup.viewPopup();
-                                                        Toast.makeText(context, "Audio jpg", Toast.LENGTH_SHORT).show();
-
-                                                        break;
-                                                    case "png":
-
-                                                        imagePopup.initiatePopup(holder.ivItem.getDrawable());
-                                                        imagePopup.viewPopup();
-                                                        Toast.makeText(context, "Audio PNG", Toast.LENGTH_SHORT).show();
-                                                        break;
-
-                                                    case "mp3":
-                                                        final MediaPlayer  mp = MediaPlayer.create(context, Uri.parse(download+fname));
-                                                        mp.start();
-                                                        Toast.makeText(context, "Audio Preview", Toast.LENGTH_SHORT).show();
-                                                        break;
-                                                }
 
                                                 break;
 
@@ -120,13 +106,108 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 });
 
             }
-
-
     @Override
     public int getItemCount() {
 
         return nombrefile.size();
     }
+    private void previewFile(String type, MyHolderItem holder, final String fname) {
+
+        final ImagePopup imagePopup = new ImagePopup(context);
+        final MediaPlayer  mp;
+
+        switch (type){
+            case "jpg":
+
+                imagePopup.setWindowHeight(1000); // Optional
+                imagePopup.setWindowWidth(1000); // Optional
+                imagePopup.initiatePopup(holder.ivItem.getDrawable());
+                imagePopup.viewPopup();
+
+                break;
+            case "png":
+
+                imagePopup.initiatePopup(holder.ivItem.getDrawable());
+                imagePopup.viewPopup();
+                //  Toast.makeText(context, "Audio PNG", Toast.LENGTH_SHORT).show();
+                break;
+            case "gif":
+                imagePopup.initiatePopup(holder.ivItem.getDrawable());
+                imagePopup.viewPopup();
+                break;
+            case "mp3":
+                 mp = MediaPlayer.create(context, Uri.parse(download+fname));
+                dialogPlayer(mp, fname);
+
+                break;
+            case "avi":
+                mp = MediaPlayer.create(context, Uri.parse(download+fname));
+                dialogPlayer(mp, fname);
+                break;
+            case "wav":
+                mp = MediaPlayer.create(context, Uri.parse(download+fname));
+                dialogPlayer(mp, fname);
+                break;
+            case "doc":
+
+                break;
+            case "pdf":
+
+                break;
+            case "xls":
+
+                break;
+            case "ppt":
+
+                break;
+
+        }
+    }
+
+    private void dialogPlayer(final MediaPlayer mp, final String fname) {
+        boolean wrapInScrollView = true;
+        final MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .customView(R.layout.dialog_audio, wrapInScrollView)
+                .show();
+        View view = dialog.getCustomView();
+        final Button start= (Button) view.findViewById(R.id.btnStart);
+        Button stop = (Button) view.findViewById(R.id.btnStop);
+        Button pause= (Button)view.findViewById(R.id.btnReplay);
+        ImageView exit = (ImageView) view.findViewById(R.id.btnExit);
+
+        final TextView state= (TextView)view.findViewById(R.id.text_dialog);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.isClickable())
+                mp.start();
+                state.setText(fname+ "....");
+            }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.stop();
+                state.setText("Stop");
+            }
+        });
+        pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mp.pause();
+                state.setText("Pausa");
+            }
+        });
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+
 
 
 
@@ -183,25 +264,27 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                         .into(holder.ivItem);
                 break;
             case "mp3":
+
+
                 Picasso.with(context)
                         .load(R.drawable.filemp3)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.ivSound);
                 break;
             case "avi":
                 Picasso.with(context)
                         .load(R.drawable.fileavi)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.ivSound);
                 break;
             case "wav":
                 Picasso.with(context)
                         .load(R.drawable.filewav)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.ivSound);
                 break;
 
         }

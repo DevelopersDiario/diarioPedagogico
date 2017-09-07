@@ -76,14 +76,14 @@
 
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="@string/action_replay"
+            android:text="@string/action_pause"
             android:id="@+id/btnReplay"
             android:gravity="center_vertical|center_horizontal"
             android:layout_below="@+id/text_dialog"
             android:layout_marginBottom="20dp"
             android:background="@drawable/btn_flat_red_selector"
             android:layout_centerHorizontal="true"
-            android:drawableTop="@drawable/ic_replay_black_24dp"
+            android:drawableTop="@drawable/ic_pause_circle_outline_black_24dp"
             android:drawableTint="@color/md_white_1000"
             android:textColor="@color/md_white_1000"/>
     </LinearLayout>

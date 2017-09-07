@@ -305,7 +305,7 @@
         <item>PW Scolarpaper</item>
 
     </string-array>
-    <string name="title_activity_choose_color">ChooseColor</string>
+    <string name="title_activity_choose_color">Tema </string>
     <string name="quila_name">quila_name</string>
     <string name="quila_tagline">quila_tagline</string>
     <string name="lorem">ESLOREM ES UNA COSA MUY GRANDE PORQUE EN ESTE CASO NECESITA MUCHO DE AMONTON TECTPOS QUE NO SE DONDE SACAR Y NO ME PERMITE MI MORAL, PONER TEXTO ALETARORIO SIN SENTIDO BUENO OSEA PALABRAS O LETRAS CARATCERES SIN SENTIDO, SOLO CON EL FIN DE RELLANER.. SOLO LO QUE HAGO ES ESCRIBIR MIO JUSTIFICACION DE ESTE TEXTO UTILIZANDOP EL TEXTO MISMO</string>
@@ -368,7 +368,7 @@
     <string name="action_colaboration">Colaboraciones</string>
     <string name="tag_new_colaboration">Nueva Colaboración</string>
     <string name="action_replay">Replay</string>
-    <string name="action_play">Grabar</string>
+    <string name="action_play">Reproducir</string>
     <string name="action_stop">Stop</string>
 
     <string name="hello_world">Hello world!</string>
@@ -393,5 +393,6 @@
     <string name="tag_instructions_plan">Escribe un plan de acción. Considera lo que podrías hacer de manera diferente, si te enfrentaras a una situación de aprendizaje similar.</string>
     <string name="title_activity_my_publication">Mis Publicaciones</string>
     <string name="action_my_publication">Mis Publicaciones</string>
-    <string name="title_activity_detail_my_publication">DetailMyPublication</string>
+    <string name="title_activity_detail_my_publication">Edicion de Mi Publicación</string>
+    <string name="action_pause">Pausar</string>
 </resources>

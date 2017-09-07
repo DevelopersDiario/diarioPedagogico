@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dese.diario.R;
+import com.example.jean.jcplayer.JcPlayerView;
 import com.mostafaaryan.transitionalimageview.TransitionalImageView;
 
 /**
@@ -14,8 +15,10 @@ import com.mostafaaryan.transitionalimageview.TransitionalImageView;
 
 public class MyHolderItem extends RecyclerView.ViewHolder implements View.OnClickListener {
     public ImageView ivItem;
+    public ImageView ivSound;
     public TextView tvItem;
-   public ImageView imageView;
+    public ImageView imageView;
+   // public JcPlayerView jcplayerView;
 
     ItemClickListener itemClickListener;
 
@@ -23,8 +26,10 @@ public class MyHolderItem extends RecyclerView.ViewHolder implements View.OnClic
         super(itemView);
 
         ivItem  = (ImageView) itemView.findViewById(R.id.ivItem);
+        ivSound =( ImageView)itemView.findViewById(R.id.ivSound);
         tvItem  = (TextView) itemView.findViewById(R.id.tvItem);
         imageView = (ImageView) itemView.findViewById(R.id.imgShow);
+       // jcplayerView = (JcPlayerView) itemView.findViewById(R.id.jcplayer);
           itemView.setOnClickListener(this);
     }
     public void setItemClickListener(ItemClickListener itemClickListener) {
