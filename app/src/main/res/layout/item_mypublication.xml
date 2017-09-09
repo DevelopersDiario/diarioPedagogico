@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
     app:context=".MainActivity">
 
     <android.support.v7.widget.CardView
@@ -181,25 +182,25 @@
 
             </LinearLayout>
 
-            <!-- Acciones -->
+            <!-- Files -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="end">
-
-                <Button
-                    android:id="@+id/btnRPoster"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/action_post"
-                    android:visibility="gone"
-                    android:background="@drawable/button_rectangule"
-                    android:layout_gravity="center"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:theme="@style/buttonRaised"/>
-
-
+                android:id="@+id/lyContentImagenDetail"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <FrameLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?colorAccent"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvItemMyPublicacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_file"
+                    />
 
             </LinearLayout>
         </LinearLayout>

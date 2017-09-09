@@ -8,35 +8,41 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.dese.diario.Objects.DetailPublication;
+import com.dese.diario.Adapter.Adapter_File;
 import com.dese.diario.POJOS.VariablesLogin;
-import com.dese.diario.Utils.Constants;
 import com.dese.diario.Utils.Urls;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +62,14 @@ public class DetailMyPublication extends AppCompatActivity {
     String t,u,d,p,f,sen, eva, ana, con, plan,  pa, idepublicacion;
     EditText etTitleMyPubE, etGrupoMyPubE, etDescriptingMyPubE,
             etFeelingsMyPubE, etTestingMyPubE, etAnalyzeMyPubE, etConclusionMyPubE, etPlanMyPubE;
+
+
+
+    //Files
+    private ArrayList<String> filename = new ArrayList<>();
+    private RecyclerView rcItems;
+    private Adapter_File ia;
+    private LinearLayout lyContentImagenDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -113,6 +127,9 @@ public class DetailMyPublication extends AppCompatActivity {
         etConclusionMyPubE= (EditText)findViewById(R.id.etConclusionMyPubE);
         etPlanMyPubE= (EditText)findViewById(R.id.etPlanMyPubE);
 
+        rcItems = (RecyclerView) findViewById(R.id.rvItemMyDetailPublicacion);
+        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(4,1);
+        lyContentImagenDetail= (LinearLayout) findViewById(R.id.lyContentImagenDetail);
     }
 
     public void getParams() {
@@ -130,7 +147,7 @@ public class DetailMyPublication extends AppCompatActivity {
         ana = i.getExtras().getString("ANA_KEY");
         con = i.getExtras().getString("CON_KEY");
         plan = i.getExtras().getString("PLAN_KEY");
-
+        listarFile(idepublicacion);
         etTitleMyPubE.setText(t);
         etDescriptingMyPubE.setText(p);
         etFeelingsMyPubE.setText(sen);
@@ -205,6 +222,72 @@ public class DetailMyPublication extends AppCompatActivity {
 
     } //fin updatedatos
 
+
+    public  void listarFile( final String ide){
+
+        RequestQueue queue = Volley.newRequestQueue(DetailMyPublication.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.obtenerdetallepublicacion,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                                // paths = new ArrayList<>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (int i = 0; i < jsonarray.length(); i++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    String file=jsonobject.getString("descripcion");
+                                    filename.add(file);
+                                    if(file!=" "){
+
+                                        ia = new Adapter_File(filename, DetailMyPublication.this);
+                                        rcItems.setAdapter(ia);
+
+                                        //rcItems.setItemAnimator(new DefaultItemAnimator());
+                                        //rcItems.setLayoutManager(new LinearLayoutManager(DetailPublication.this));
+
+                                        lyContentImagenDetail.setVisibility(View.VISIBLE);
+                                        rcItems.setItemAnimator(new DefaultItemAnimator());
+                                        rcItems.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                                        // System.out.println(paths);
+                                    }
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Detail Publicacion", "Problema con" + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Horror", "Response--->"+error);
+            }
+
+        }
+
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idpublicacion", ide);
+                //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
+    }
 
 
 

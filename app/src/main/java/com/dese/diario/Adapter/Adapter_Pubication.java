@@ -12,7 +12,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderP;
-import com.dese.diario.Objects.DetailPublication;
+import com.dese.diario.DetailPublication;
 import com.dese.diario.Objects.Publication;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.R;

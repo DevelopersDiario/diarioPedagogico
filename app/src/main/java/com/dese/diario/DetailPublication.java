@@ -1,4 +1,4 @@
-package com.dese.diario.Objects;
+package com.dese.diario;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -38,7 +38,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.dese.diario.*;
 import com.dese.diario.Adapter.Adapter_File;
 import com.dese.diario.Adapter.Adapter_RePubication;
 import com.dese.diario.Adapter.ListRepublication;

@@ -9,12 +9,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -24,8 +27,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dese.diario.Adapter.Adapter_File;
 import com.dese.diario.Adapter.Adapter_MyPubication;
 import com.dese.diario.Adapter.Adapter_Pubication;
+import com.dese.diario.Utils.Constants;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -71,6 +76,13 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
 
     CircleImageView imProfileMyPub;
     TextView tvUserMyPub;
+
+    //Files
+    private ArrayList<String> filename = new ArrayList<>();
+    private RecyclerView rcItems;
+    private Adapter_File ia;
+    private LinearLayout lyContentImagenDetail;
+    String idepublicacion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -118,11 +130,15 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
 
 
         listMyPublications();
+        //listarFile(idepublicacion);
 
         tvUserMyPub= (TextView) findViewById(R.id.tvUserMyPub);
        imProfileMyPub= (CircleImageView)findViewById(R.id.imProfileMyPub);
 
         //tvUserMyPub.setText(listpublicaciones.get(2).toString());
+        rcItems = (RecyclerView) findViewById(R.id.rvItemMyPublicacion);
+        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(4,1);
+        lyContentImagenDetail= (LinearLayout) findViewById(R.id.lyContentImagenDetail);
 
     }
     private void initRecyclerView() {
@@ -150,7 +166,7 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
 
 
     public void listMyPublications(){
-    VariablesLogin vl= new VariablesLogin();
+        VariablesLogin vl= new VariablesLogin();
         final String id=vl.getIdusuario().toString();
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -190,7 +206,9 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
                                     adapter=new Adapter_MyPubication(listpublicaciones, MyPublication.this);
                                     recyclerView.setAdapter(adapter);
                                     tvUserMyPub.setText(jsonobject.getString(nombre));
-                                    System.out.println(listpublicaciones);
+                                    idepublicacion= jsonobject.getString(idpublicacion);
+                                    listarFile(idepublicacion);
+                                   // System.out.println(listpublicaciones);
                                   //  drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
                                     Picasso.with(MyPublication.this)
@@ -234,6 +252,72 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
 
     }// Fin conectionPublication
 
+
+    public  void listarFile( final String ide){
+
+        RequestQueue queue = Volley.newRequestQueue(MyPublication.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.obtenerdetallepublicacion,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                                // paths = new ArrayList<>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (int i = 0; i < jsonarray.length(); i++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    String file=jsonobject.getString("descripcion");
+                                    filename.add(file);
+                                    if(file!=" "){
+
+                                        ia = new Adapter_File(filename, MyPublication.this);
+                                        rcItems.setAdapter(ia);
+
+                                        //rcItems.setItemAnimator(new DefaultItemAnimator());
+                                        //rcItems.setLayoutManager(new LinearLayoutManager(DetailPublication.this));
+
+                                        lyContentImagenDetail.setVisibility(View.VISIBLE);
+                                        rcItems.setItemAnimator(new DefaultItemAnimator());
+                                        rcItems.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                                        // System.out.println(paths);
+                                    }
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Detail Publicacion", "Problema con" + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Horror", "Response--->"+error);
+            }
+
+        }
+
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idpublicacion", ide);
+                //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
+    }
 
 
 

@@ -164,7 +164,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Profile" />
         </activity>
-        <activity android:name=".Objects.DetailPublication">
+        <activity
+            android:name=".DetailPublication"
+            android:label="Publicaciones">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
