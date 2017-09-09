@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -37,6 +38,7 @@ import com.dese.diario.Adapter.Adapter_File;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Urls;
 
+import org.apache.http.HttpStatus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -147,7 +149,9 @@ public class DetailMyPublication extends AppCompatActivity {
         ana = i.getExtras().getString("ANA_KEY");
         con = i.getExtras().getString("CON_KEY");
         plan = i.getExtras().getString("PLAN_KEY");
-        listarFile(idepublicacion);
+
+        //listarFile(idepublicacion);
+
         etTitleMyPubE.setText(t);
         etDescriptingMyPubE.setText(p);
         etFeelingsMyPubE.setText(sen);
@@ -174,25 +178,41 @@ public class DetailMyPublication extends AppCompatActivity {
                     String body;
                     String statusCode = String.valueOf(error.networkResponse.statusCode);
                     //get response body and parse with appropriate encoding
-                    if (error.networkResponse.data != null) {
+                    NetworkResponse networkResponse = error.networkResponse;
+                    if (networkResponse != null && networkResponse.statusCode == HttpStatus.SC_UNAUTHORIZED) {
+                        // HTTP Status Code: 401 Unauthorized
+                        if (error.networkResponse.data != null) {
 
-                        try {
-                            body = new String(error.networkResponse.data, "UTF-8");
-                            new MaterialDialog.Builder(DetailMyPublication.this)
-                                    .content(body)
-                                    .show();
+                            try {
+                                body = new String(error.networkResponse.data, "UTF-8");
+                                new MaterialDialog.Builder(DetailMyPublication.this)
+                                        .content(body)
+                                        .show();
 
-                            // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
+                                // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
 
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        NetworkResponse response = error.networkResponse;
+                        if(response != null && response.data != null){
+                            switch(response.statusCode){
+                                case 403:
+                                    new MaterialDialog.Builder(DetailMyPublication.this)
+                                            .content(response.statusCode)
+                                            .show();
+                                    break;
+                            }
                         }
                     }
+                    /**/
 
                 }
 
 
-            }) {
+            })
+            {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();

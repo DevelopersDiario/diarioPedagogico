@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -35,6 +36,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Pubication;
+import com.dese.diario.Utils.Constants;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
@@ -45,6 +47,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -296,6 +299,20 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        File f = new File(Environment.getExternalStorageDirectory() + Constants.mMainDirectory);
+// Comprobamos si la carpeta está ya creada
+
+// Si la carpeta no está creada, la creamos.
+
+        if(!f.isDirectory()) {
+            String newFolder = "/cualquierCarpeta"; //cualquierCarpeta es el nombre de la Carpeta que vamos a crear
+            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+            File myNewFolder = new File(extStorageDirectory + newFolder);
+            myNewFolder.mkdir(); //creamos la carpeta
+        }else{
+            Log.d("MAIN","La carpeta ya estaba creada");
+        }
 
 
     }

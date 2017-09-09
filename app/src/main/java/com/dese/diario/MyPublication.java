@@ -136,9 +136,7 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
        imProfileMyPub= (CircleImageView)findViewById(R.id.imProfileMyPub);
 
         //tvUserMyPub.setText(listpublicaciones.get(2).toString());
-        rcItems = (RecyclerView) findViewById(R.id.rvItemMyPublicacion);
-        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(4,1);
-        lyContentImagenDetail= (LinearLayout) findViewById(R.id.lyContentImagenDetail);
+
 
     }
     private void initRecyclerView() {
@@ -207,9 +205,7 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
                                     recyclerView.setAdapter(adapter);
                                     tvUserMyPub.setText(jsonobject.getString(nombre));
                                     idepublicacion= jsonobject.getString(idpublicacion);
-                                    listarFile(idepublicacion);
-                                   // System.out.println(listpublicaciones);
-                                  //  drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
 
                                     Picasso.with(MyPublication.this)
                                             .load(Urls.download+ jsonobject.getString(foto))
@@ -217,7 +213,7 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
                                             .centerCrop()
                                             .into( imProfileMyPub);
 
-
+                                   // listarFile(idepublicacion);
                                 }
                             }
 
@@ -282,8 +278,8 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
                                         //rcItems.setLayoutManager(new LinearLayoutManager(DetailPublication.this));
 
                                         lyContentImagenDetail.setVisibility(View.VISIBLE);
-                                        rcItems.setItemAnimator(new DefaultItemAnimator());
-                                        rcItems.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                                       // rcItems.setItemAnimator(new DefaultItemAnimator());
+                                        //rcItems.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                                         // System.out.println(paths);
                                     }
 
