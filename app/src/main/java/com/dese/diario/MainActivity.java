@@ -1,8 +1,13 @@
 package com.dese.diario;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,6 +15,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +48,7 @@ import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
+import com.thanosfisherman.mayi.Mayi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +60,10 @@ import java.util.ArrayList;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.RECORD_AUDIO;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity
 
@@ -110,7 +121,7 @@ public class MainActivity extends AppCompatActivity
     private static final int TIME_DELAY = 2000;
     private static long back_pressed;
 
-
+    private final int MY_PERMISSIONS = 100;
 
 
 
@@ -133,8 +144,12 @@ public class MainActivity extends AppCompatActivity
 
         reciclerViewinit();
 
+        mayRequestStoragePermission();
+
        // getSelect();
     }//Fin onCreate
+
+
 
 
     @Override
@@ -538,5 +553,64 @@ public class MainActivity extends AppCompatActivity
         swipeContainer.setRefreshing(false);
     }// Fin conectionPublication
 
+    private boolean mayRequestStoragePermission() {
 
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return true;
+
+        if((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
+                (checkSelfPermission(RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED))
+            return true;
+
+        if((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) || (shouldShowRequestPermissionRationale(CAMERA))){
+            Snackbar.make(swipeContainer, R.string.Los_permisos_son_necesarios,
+                    Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener() {
+                @TargetApi(Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View v) {
+                    requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, MY_PERMISSIONS);
+                }
+            });
+        }else{
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, MY_PERMISSIONS);
+        }
+        return false;
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == MY_PERMISSIONS){
+            if(grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(MainActivity.this, R.string.message_permisos_aceptados, Toast.LENGTH_SHORT).show();
+                // fab.setEnabled(true);
+            }
+        }else{
+            showExplanation();
+        }
+    }
+    private void showExplanation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.message_permisos_denegados);
+        builder.setMessage(R.string.message_funciones);
+        builder.setPositiveButton(R.string.btnAgree, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent();
+
+                Uri uri = Uri.fromParts(getString(R.string.packge), getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.btnDisagree, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+
+        builder.show();
+    }
 }
