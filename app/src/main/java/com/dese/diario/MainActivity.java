@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity
 // Si la carpeta no está creada, la creamos.
 
         if(!f.isDirectory()) {
-            String newFolder = "/cualquierCarpeta"; //cualquierCarpeta es el nombre de la Carpeta que vamos a crear
+            String newFolder =Constants.mMainDirectory; //cualquierCarpeta es el nombre de la Carpeta que vamos a crear
             String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
             File myNewFolder = new File(extStorageDirectory + newFolder);
             myNewFolder.mkdir(); //creamos la carpeta

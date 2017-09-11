@@ -159,7 +159,7 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
 
                 listMyPublications();
             }
-        }, 2000);
+        }, 1000);
     }
 
 
