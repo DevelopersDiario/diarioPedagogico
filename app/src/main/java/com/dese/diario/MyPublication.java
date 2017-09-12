@@ -1,13 +1,18 @@
 package com.dese.diario;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,8 +21,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -30,9 +38,11 @@ import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_File;
 import com.dese.diario.Adapter.Adapter_MyPubication;
 import com.dese.diario.Adapter.Adapter_Pubication;
+import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.Utils.Constants;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.facebook.login.LoginManager;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
@@ -46,7 +56,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MyPublication extends AppCompatActivity implements  SwipeRefreshLayout.OnRefreshListener{
+public class MyPublication extends AppCompatActivity implements  SwipeRefreshLayout.OnRefreshListener {
     //Theme
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -76,6 +86,8 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
 
     CircleImageView imProfileMyPub;
     TextView tvUserMyPub;
+
+
 
     //Files
     private ArrayList<String> filename = new ArrayList<>();
@@ -364,6 +376,4 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
                 break;
         }
     }
-
-
 }

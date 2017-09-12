@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.ShowProgressDialog;
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     private String email;
     private String password;
     VariablesLogin var_Login;
+    DatosUsr du;
     ShowProgressDialog spd;
 
 
@@ -80,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     }//Fin oNCreate
 
     private void inicializarButton() {
+        du= new DatosUsr();
         mEmailView= (EditText) findViewById(R.id.tvEmail_Login);
         //       populateAutoComplete();
         failedLoginMessage = (TextView)findViewById(R.id.failed_login);
@@ -326,7 +329,10 @@ public class LoginActivity extends AppCompatActivity {
                         var_Login.setCorreo(json.getString(correo));
                         var_Login.setTelefono(json.getString(telefono));
                         var_Login.setTelefono(json.getString(foto));
-                     //   var_Login.setFportada(json.getString("fportada"));
+                          var_Login.setFportada(json.getString("fportada"));
+
+                        du.setFoto(json.getString(foto));
+                        du.setFportada(json.getString("fportada"));
 
 
                     }

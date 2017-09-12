@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
 
         implements NavigationView.OnNavigationItemSelectedListener,
         SwipeRefreshLayout.OnRefreshListener{
+
     final static String url= Urls.listpublicacion;
     final String idpublicacion= "idpublicacion";
     final String nombre= "nombre";
@@ -181,19 +182,24 @@ public class MainActivity extends AppCompatActivity
         nvloginaccount=(TextView)hView.findViewById(R.id.nvloginaccount);
         nvemaillogin.setText(varlogin.getCorreo().toString());
         nvloginaccount.setText(varlogin.getCuenta().toString());
-
+        fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile);
+        imType=(ImageView) hView.findViewById(R.id.imType);
+        varlogin= new VariablesLogin();
 
         Picasso.with(MainActivity.this)
+
                 .load(Urls.download+du.getFoto())
                 .resize(200, 200)
                 .centerCrop()
-                .into(  fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile));
+                .into( fotouser);
 
             Picasso.with(MainActivity.this)
                 .load(Urls.download+du.getFportada())
                 .resize(2000, 1200)
                 .centerCrop()
-                .into(  imType=(ImageView) hView.findViewById(R.id.imType));
+                .into(  imType);
+
+
 
 
 
@@ -244,9 +250,14 @@ public class MainActivity extends AppCompatActivity
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
 
+
         }
 
         setupNavigationDrawerContent(navigationView);
+
+
+
+
     }
 
     /*------------Theme choose by user--------------------*/
@@ -381,7 +392,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void setupNavigationDrawerContent(NavigationView navigationView) {
+    private void setupNavigationDrawerContent(final NavigationView navigationView) {
 
 
         navigationView.setNavigationItemSelectedListener(
@@ -392,7 +403,7 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         //   textView = (TextView) findViewById(R.id.textView);
-
+// NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 
                         switch (menuItem.getItemId()) {
                             case R.id.item_navigation_drawer_home:
@@ -456,6 +467,7 @@ public class MainActivity extends AppCompatActivity
                                 Intent ip= new Intent(MainActivity.this, MyPublication.class);
                                 startActivity(ip);
                                 break;
+
                         }
                         return true;
                     }

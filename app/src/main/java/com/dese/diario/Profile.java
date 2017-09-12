@@ -265,14 +265,14 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
         Picasso.with(Profile.this)
                 .load(Urls.download+du.getFoto())
-                .error(R.drawable.image_cloud_sad)
+                .error(R.drawable.logo)
                 .resize(200, 200)
                 .centerCrop()
                 .into(  cViewImagen=(CircleImageView) findViewById(R.id.imCircleView));
 
         Picasso.with(Profile.this)
                 .load(Urls.download+du.getFportada())
-                .error(R.drawable.image_cloud_sad)
+                .error(R.drawable.empty_drawable)
                 .resize(2000, 1200)
                 .centerCrop()
                 .into( mPortada);
@@ -679,25 +679,24 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                     Bitmap bMap ;
                     if (ide == "profile") {
                         path=  mCurrentPhotoPath;
-                        File f= new File(path);
-                        fname= f.getName();
 
-
+                      //  path=up.getFilePath(Profile.this, mCurrentPhotoPath);
                         bMap = BitmapFactory.decodeFile(path);
 
                         cViewImagen.setImageURI(Uri.parse(mCurrentPhotoPath));
                         up.uploadPictureProfile(Profile.this, mCurrentPhotoPath);
-                        Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
+
 
                     } else if (ide=="holder") {
                         path= mCurrentPhotoPath;
                         bMap = BitmapFactory.decodeFile(path);
                         File f= new File(path);
                         fname= f.getName();
-                        up.uploadPictureHolder(Profile.this, path);
+
 
                         mPortada.setImageBitmap(bMap);
-                        //datosUsr.setFportada(fname);
+                        up.uploadPictureHolder(Profile.this, path);
+                        datosUsr.setFportada(fname);
                         Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
 
                     }
@@ -709,16 +708,18 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                     String pathito;
                     try {
                          pathito=up.getFilePath(Profile.this, filePath);
-                       // Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
-                        File f= new File(pathito);
-                        fname= f.getName();
-                        if (ide == "holder") {
-                            mPortada.setImageURI(filePath);
 
+
+
+                        if (ide == "holder") {
+
+                            mPortada.setImageURI(filePath);
                             up.uploadPictureHolder(this, pathito);
+
                         } else if (ide=="profile") {
-                            File f2= new File(String.valueOf(filePath));
-                            fname= f2.getName();
+
+                          //  Toast.makeText(this, pathito, Toast.LENGTH_LONG).show();
+
                             cViewImagen.setImageURI(filePath);
                             up.uploadPictureProfile(this, pathito);
                         }
