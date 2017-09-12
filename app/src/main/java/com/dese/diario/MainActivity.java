@@ -48,7 +48,6 @@ import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
-import com.thanosfisherman.mayi.Mayi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
