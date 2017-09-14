@@ -32,7 +32,7 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:replace="icon">
+        tools:replace="icon,android:theme">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"
@@ -42,10 +42,13 @@
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
+                android:resource="@xml/provider_paths"
+                tools:replace="android:resource"
+           />
         </provider>
 
         <activity
@@ -282,6 +285,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MyPublication" />
         </activity>
+        <activity android:name="com.desmond.squarecamera.CameraActivity" />
     </application>
 
 </manifest>

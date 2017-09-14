@@ -224,6 +224,7 @@ public class Upload {
                             .setMaxRetries(2)
                             .setNotificationConfig(new UploadNotificationConfig()
                                     .setInProgressMessage(filename)
+                                    .setIcon(R.mipmap.ic_logo_mi_diario)
                                     .setCompletedMessage("Completado!")
                                     .setTitle("Gestor de Archivos ")
                             )

@@ -17,6 +17,8 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialcamera.MaterialCamera;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,12 +47,11 @@ import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Constants;
 import com.dese.diario.Utils.Upload;
+import com.desmond.squarecamera.CameraActivity;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -276,6 +278,9 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                 .resize(2000, 1200)
                 .centerCrop()
                 .into( mPortada);
+
+
+
 
     }
 
@@ -611,7 +616,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
 
     private void OpenCamera() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+       /* Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (cameraIntent.resolveActivity(getPackageManager()) != null) {
             // Create the File where the photo should go
             File photoFile = null;
@@ -626,8 +631,14 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider",photoFile));
                 startActivityForResult(cameraIntent, PHOTO_CODE);
             }
-        }
-    }
+        }*/
+
+
+    // Start CameraActivity
+    Intent startCustomCameraIntent = new Intent(this, CameraActivity.class);
+    startActivityForResult(startCustomCameraIntent, PHOTO_CODE);
+
+}
     private File createImageFile() throws IOException {
         File apkStorage = null;
         File outputFile = null;
@@ -674,43 +685,36 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
             switch (requestCode){
                 case PHOTO_CODE:
 
+                    Uri photoUri = data.getData();
 
                     String path;
-                    Bitmap bMap ;
-                    if (ide == "profile") {
-                        path=  mCurrentPhotoPath;
+                    try {
+                        path=up.getFilePath(Profile.this, photoUri);
 
-                      //  path=up.getFilePath(Profile.this, mCurrentPhotoPath);
-                        bMap = BitmapFactory.decodeFile(path);
+                        if (ide == "profile") {
 
-                        cViewImagen.setImageURI(Uri.parse(mCurrentPhotoPath));
-                        up.uploadPictureProfile(Profile.this, mCurrentPhotoPath);
-
-
-                    } else if (ide=="holder") {
-                        path= mCurrentPhotoPath;
-                        bMap = BitmapFactory.decodeFile(path);
-                        File f= new File(path);
-                        fname= f.getName();
+                            Toast.makeText(this, "Saved to: "+path, Toast.LENGTH_LONG).show();
+                             cViewImagen.setImageURI(photoUri);
+                            up.uploadPictureProfile(Profile.this, path);
 
 
-                        mPortada.setImageBitmap(bMap);
-                        up.uploadPictureHolder(Profile.this, path);
-                        datosUsr.setFportada(fname);
-                        Toast.makeText(this, "Data"+path, Toast.LENGTH_LONG).show();
+                        } else if (ide=="holder") {
 
+                            mPortada.setImageURI(photoUri);
+                            up.uploadPictureHolder(Profile.this, path);
+
+                        }
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
                     }
+
 
                     break;
                 case SELECT_PICTURE:
-
-                        Uri filePath = data.getData();
+                    Uri filePath = data.getData();
                     String pathito;
                     try {
                          pathito=up.getFilePath(Profile.this, filePath);
-
-
-
                         if (ide == "holder") {
 
                             mPortada.setImageURI(filePath);
