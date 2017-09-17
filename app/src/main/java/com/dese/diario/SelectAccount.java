@@ -93,10 +93,11 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     private GoogleApiClient mGoogleApiClient;
     //Signin constant to check the activity result
     private int RC_SIGN_IN = 100;
-
-    //facebook Resource
+    //facebook Reource
     private LoginButton loginButton;
     CallbackManager callbackManager;
+
+
     //Parametres
     final String KEY_NOMBRE = "nombre";
     final String KEY_APELLIDOS = "apellidos";
@@ -346,7 +347,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             //Calling signin}
          signIn();
 
-           spd.progressDilog(SelectAccount.this, true);
+          spd.progressDilog(SelectAccount.this, true);
 
         }
 
@@ -396,19 +397,20 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //If signin
+
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            //Calling a new function to handle signin
-            new MaterialDialog.Builder(SelectAccount.this)
-                    .title("Sucess Gmail")
-                    .content(result.getStatus().toString())
-                    .canceledOnTouchOutside(false)
-                    .show();
-          //  Toast.makeText(this, "Result"+result.getStatus().toString(), Toast.LENGTH_SHORT).show();
+            if(!result.getStatus().isSuccess()){
+                new MaterialDialog.Builder(SelectAccount.this)
+                        .title("Error al Logear con Gmail")
+                        .content(result.getStatus().toString())
+                        .canceledOnTouchOutside(false)
+                        .show();
+                spd.progressDilog(SelectAccount.this, false);
+            }
 
+            else
             handleSignInResult(result);
-
         }//end if
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }

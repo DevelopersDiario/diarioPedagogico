@@ -68,17 +68,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
          spd= new ShowProgressDialog();
+
         inicializarButton();
 
         //Hide softKeyboard
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
     }//Fin oNCreate
 
     private void inicializarButton() {
@@ -88,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         failedLoginMessage = (TextView)findViewById(R.id.failed_login);
         mPasswordView=(EditText)findViewById(R.id.tvPassword_Login);
         //    buttonLogin = (Button) findViewById(R.id.email_sign_in_button);
+
         Bundle i=(getIntent().getExtras());
             if (i == null)
                 mEmailView.setText("");
@@ -125,6 +127,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(fp);
             }
         });
+
+
     }
 
 

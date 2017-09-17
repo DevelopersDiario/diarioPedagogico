@@ -86,32 +86,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //Material Desgin
-    //floating
-    //Segement
-    //Onboardingcompile
-    //para pakage utileria
-    //Chips
-    //Upload Files
-    //Multiselec
-    //GFishbudd
+
     compile('com.sangcomz:FishBun:0.7.1@aar') {
         transitive = true
     }
-    //Material Librery
-
-    //Progres imagen vir
-
-    //Glide glie
-
-    //OK
     repositories {
         jcenter()
         maven { url "https://dl.bintray.com/drummer-aidan/maven" }
     }
     compile project(':Emoji')
-    //PickerDate
-    //Pdf Export
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
