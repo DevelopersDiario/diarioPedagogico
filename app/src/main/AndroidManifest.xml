@@ -286,6 +286,8 @@
                 android:value=".MyPublication" />
         </activity>
         <activity android:name="com.desmond.squarecamera.CameraActivity" />
+
+
     </application>
 
 </manifest>

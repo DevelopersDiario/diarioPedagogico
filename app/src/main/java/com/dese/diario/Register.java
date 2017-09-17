@@ -89,6 +89,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     int theme;
+    int Apptheme;
 
     //KEYS
     final String KEY_VALUE="VALUES";
@@ -588,7 +589,12 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 //                 startActivityForResult(intent, PICK_DOC_REQUEST);
 
             //  browseDocuments();
-              browserDocuments2();
+
+                   FilePickerBuilder fpb= new FilePickerBuilder();
+                 //  fpb.setActivityTheme(Apptheme);
+                   browserDocuments2(fpb);
+
+
                break;
 
 
@@ -602,10 +608,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
    }//enOnClick
 
 
-    private  void browserDocuments2(){
-        FilePickerBuilder.getInstance().setMaxCount(4)
+    private  void browserDocuments2(FilePickerBuilder fpb){
+        fpb.getInstance().setMaxCount(4)
                 .setSelectedFiles(paths)
-                .setActivityTheme(R.style.AppTheme2)
                 .pickFile(this);
     }
     private void browseDocuments(){
@@ -1011,36 +1016,57 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         switch (theme) {
             case 1:
                 setTheme(R.style.AppTheme11);
+                Apptheme=R.style.AppTheme11;
                 break;
             case 2:
                 setTheme(R.style.AppTheme2);
+                Apptheme=R.style.AppTheme2;
+
                 break;
             case 3:
                 setTheme(R.style.AppTheme3);
+                Apptheme=R.style.AppTheme3;
+
                 break;
             case 4:
                 setTheme(R.style.AppTheme4);
+                Apptheme=R.style.AppTheme4;
+
                 break;
             case 5:
                 setTheme(R.style.AppTheme5);
+                Apptheme=R.style.AppTheme5;
+
                 break;
             case 6:
                 setTheme(R.style.AppTheme6);
+                Apptheme=R.style.AppTheme6;
+
                 break;
             case 7:
                 setTheme(R.style.AppTheme7);
+                Apptheme=R.style.AppTheme7;
+
                 break;
             case 8:
                 setTheme(R.style.AppTheme8);
+                Apptheme=R.style.AppTheme8;
+
                 break;
             case 9:
                 setTheme(R.style.AppTheme9);
+                Apptheme=R.style.AppTheme9;
+
                 break;
             case 10:
                 setTheme(R.style.AppTheme10);
+                Apptheme=R.style.AppTheme10;
+
                 break;
             case 11:
                 setTheme(R.style.AppTheme);
+                Apptheme=R.style.AppTheme;
+
                 break;
             default:
                 setTheme(R.style.AppTheme);
