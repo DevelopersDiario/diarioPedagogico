@@ -605,7 +605,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     private  void browserDocuments2(){
         FilePickerBuilder.getInstance().setMaxCount(4)
                 .setSelectedFiles(paths)
-               // .enableDocSupport(true)
+                .setActivityTheme(R.style.AppTheme2)
                 .pickFile(this);
     }
     private void browseDocuments(){
