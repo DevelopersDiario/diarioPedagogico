@@ -174,7 +174,6 @@ public class MainActivity extends AppCompatActivity
         linearLayoutManager= new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView =  navigationView.getHeaderView(0);
 
@@ -198,10 +197,6 @@ public class MainActivity extends AppCompatActivity
                 .resize(2000, 1200)
                 .centerCrop()
                 .into(  imType);
-
-
-
-
 
     }
 
@@ -230,7 +225,6 @@ public class MainActivity extends AppCompatActivity
         }, 3000);
 
     }
-
 
 
     private void inicializarToolBar() {

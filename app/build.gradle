@@ -154,6 +154,7 @@ dependencies {
     compile 'io.github.jeancsanchez.jcplayer:jcplayer:2.6.0-alpha'
     compile 'com.afollestad:material-camera:0.4.4'
     compile 'com.github.boxme:squarecamera:1.1.0'
+    compile 'com.droidninja:filepicker:2.0.8'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'

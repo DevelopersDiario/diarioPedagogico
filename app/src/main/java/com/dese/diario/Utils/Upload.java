@@ -12,11 +12,13 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
+import com.dese.diario.Register;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
@@ -51,17 +53,21 @@ public class Upload {
             for (int i = 0; i < paths.size(); i++) {
 
 
-                Uri path = Uri.parse(paths.get(i)); //clipData.getItemAt(i).getUri();
+               // Uri path = Uri.parse(paths.get(i)); //clipData.getItemAt(i).getUri();
 
                 final String file_path = paths.get(i);
-                file= new File(file_path);
-                final String fname= file.getName();
-                upload(context, file_path, grupo);
+               // file= new File(file_path);
+              //  final String fname= file.getName();
+                Toast.makeText(context, "Paths to:" + paths.get(i).toString(), Toast.LENGTH_SHORT).show();
+               upload(context, file_path, grupo);
             }
         }else {
            file = new File(data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH));
             final String file_path = file.getAbsolutePath();
             final String fname= file.getName();
+
+            Toast.makeText(context, "Paths to2:" + file_path, Toast.LENGTH_SHORT).show();
+
             upload(context, file_path, grupo);
 
         }
@@ -74,6 +80,8 @@ public class Upload {
             public void run() {
                 final String id = varlogin.getIdusuario();
                 try {
+                  //  Toast.makeText(context, "Try Upload:" + path, Toast.LENGTH_SHORT).show();
+
                     File f= new File(path);
                     String fname=f.getName().toString();
                     String type = "."+fname.substring(fname.lastIndexOf(".") + 1);
@@ -93,6 +101,7 @@ public class Upload {
                             .setNotificationConfig(new UploadNotificationConfig()
                                     .setInProgressMessage(filename)
                                     .setCompletedMessage("Completado!")
+
                                     .setTitle("Gestor de Archivos ")
                             )
                             .setDelegate(new UploadStatusDelegate() {
@@ -104,21 +113,21 @@ public class Upload {
 
                                 @Override
                                 public void onError(UploadInfo uploadInfo, Exception e) {
-                                    Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                                    Log.e("Upload.Error", e.getMessage());
                                 }
 
                                 @Override
                                 public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
                                     //ELiminar imagen
-                                    File eliminar = new File(path);
+                                   /* File eliminar = new File(path);
                                     if (eliminar.exists()) {
                                         if (eliminar.delete()) {
                                             System.out.println("Archivo eliminado:" + eliminar.getPath());
                                         } else {
                                             System.out.println("Archivo no eliminado" + eliminar.getPath());
                                         }
-                                    }
+                                    }*/
                                     Toast.makeText(context.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
                                   }
 
@@ -129,7 +138,8 @@ public class Upload {
                             .startUpload();
 
                 } catch (Exception exc) {
-                    System.out.println(exc.getMessage() + " " + exc.getLocalizedMessage());
+                    System.out.println("Upload.Paths--->"+exc.getMessage() + " " + exc.getLocalizedMessage()+ " "+exc.getCause().toString());
+                    Log.e("Upload.Paths", exc.getMessage());
                 }
 
                     } });

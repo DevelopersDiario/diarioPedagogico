@@ -95,6 +95,15 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
                         .centerCrop()
                         .into(holder.imType);
                 break;
+            case "docx":
+                //LoadBitmap.loadBitmap(String.valueOf(R.drawable.filedoc ), holder.ivItem);
+                holder.ivItem.setMaxHeight(1);
+                Picasso.with(context)
+                        .load(R.drawable.filedoc)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.imType);
+                break;
             case "pdf":
                 Picasso.with(context)
                         .load(R.drawable.filepdf)
@@ -105,6 +114,20 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
             case "xls":
                 Picasso.with(context)
                         .load(R.drawable.filexls)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.imType);
+                break;
+            case "xlsx":
+                Picasso.with(context)
+                        .load(R.drawable.filexls)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.imType);
+                break;
+            case "pptx":
+                Picasso.with(context)
+                        .load(R.drawable.fileppt)
                         .resize(1120, 1120)
                         .centerCrop()
                         .into(holder.imType);

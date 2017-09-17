@@ -95,7 +95,7 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
     //Image View
 
-    private String mCurrentPhotoPath;
+
 
     private final int MY_PERMISSIONS = 100;
     private final int PHOTO_CODE = 200;
@@ -198,24 +198,19 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
             public void onErrorResponse(VolleyError error) {
                 String body;
 
-                if(error.networkResponse.data!=null) {
+                if (error.networkResponse.data != null) {
 
                     try {
-                        body = new String(error.networkResponse.data,"UTF-8");
+                        body = new String(error.networkResponse.data, "UTF-8");
 
                         Toast.makeText(Profile.this, body, Toast.LENGTH_LONG).show();
-
 
 
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
                 }
-                //do stuff with the body...
-            }//Fin onErrorResponse */
-                /*public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(CreateAccount.this, "!!!", Toast.LENGTH_LONG).show();
-                }*/
+            }
 
         }) {
             @Override
@@ -616,59 +611,11 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
 
 
     private void OpenCamera() {
-       /* Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-                Log.i("Profile", "IOException");
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() +".provider",photoFile));
-                startActivityForResult(cameraIntent, PHOTO_CODE);
-            }
-        }*/
-
-
     // Start CameraActivity
     Intent startCustomCameraIntent = new Intent(this, CameraActivity.class);
     startActivityForResult(startCustomCameraIntent, PHOTO_CODE);
 
 }
-    private File createImageFile() throws IOException {
-        File apkStorage = null;
-        File outputFile = null;
-        //Get File if SD card is present
-        if (new CheckForSDCard().isSDCardPresent()) {
-
-            apkStorage = new File(
-                    Environment.getExternalStorageDirectory() + Constants.mImageDirectory);
-        } else
-            Toast.makeText(this, "Oops!! There is no SD Card.", Toast.LENGTH_SHORT).show();
-
-        //If File is not present create directory
-        if (!apkStorage.exists()) {
-            apkStorage.mkdir();
-
-        }
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = new File( Environment.getExternalStorageDirectory()+Constants.mImageDirectory);
-        File image = File.createTempFile(
-                imageFileName,  // prefix
-                ".jpg",         // suffix
-                storageDir      // directory
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
 
 
 
@@ -677,29 +624,20 @@ public class Profile extends AppCompatActivity implements AppBarLayout.OnOffsetC
         super.onActivityResult(requestCode, resultCode, data);
 
         Upload up = new Upload();
-        DatosUsr datosUsr= new DatosUsr();
-        String fname;
+
         if(resultCode == RESULT_OK && data != null){
-
-
             switch (requestCode){
                 case PHOTO_CODE:
-
                     Uri photoUri = data.getData();
-
                     String path;
                     try {
                         path=up.getFilePath(Profile.this, photoUri);
-
                         if (ide == "profile") {
-
                             Toast.makeText(this, "Saved to: "+path, Toast.LENGTH_LONG).show();
                              cViewImagen.setImageURI(photoUri);
                             up.uploadPictureProfile(Profile.this, path);
 
-
                         } else if (ide=="holder") {
-
                             mPortada.setImageURI(photoUri);
                             up.uploadPictureHolder(Profile.this, path);
 

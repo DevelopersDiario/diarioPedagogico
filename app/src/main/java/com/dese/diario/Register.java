@@ -1,5 +1,7 @@
 package com.dese.diario;
 
+import android.*;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
@@ -78,6 +80,9 @@ import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
 import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
 import cafe.adriel.androidaudiorecorder.model.AudioSource;
+import droidninja.filepicker.FilePickerBuilder;
+import droidninja.filepicker.FilePickerConst;
+import droidninja.filepicker.utils.Orientation;
 
 public class Register extends AppCompatActivity implements DatePickerListener,  View.OnClickListener{
     //Theme
@@ -216,13 +221,10 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 conclusion=etConclusion.getText().toString();
                 plan=etPlan.getText().toString();
 
-                try {
-                    RegisterPost(ed);
+                //RegisterPost(ed);
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
                 /*Snackbar snackbar = Snackbar
                         .make(view, "Datos obtenidos:"+ titulo
                                     +observaciones
@@ -576,16 +578,17 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                break;
            case R.id.imDoc:
+//              Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+//
+//              intent.addCategory(Intent.CATEGORY_OPENABLE);
+//               String [] mimeTypes = {"application/msword", "application/pdf","application/", "application/vnd.ms-powerpoint", "application/vnd.ms-excel", "application/excel"};
+//               intent.setType("*/*");
+//                //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+//                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+//                 startActivityForResult(intent, PICK_DOC_REQUEST);
 
-
-              Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-             intent.addCategory(Intent.CATEGORY_OPENABLE);
-              String [] mimeTypes = {"application/msword", "application/pdf", "application/vnd.ms-powerpoint", "application/vnd.ms-excel"};
-                intent.setType("*/*");
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-                 startActivityForResult(intent, PICK_DOC_REQUEST);
-
+            //  browseDocuments();
+              browserDocuments2();
                break;
 
 
@@ -598,6 +601,41 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
    }//enOnClick
 
+
+    private  void browserDocuments2(){
+        FilePickerBuilder.getInstance().setMaxCount(4)
+                .setSelectedFiles(paths)
+               // .enableDocSupport(true)
+                .pickFile(this);
+    }
+    private void browseDocuments(){
+
+        String[] mimeTypes =
+                {"application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
+                        "application/vnd.ms-powerpoint","application/vnd.openxmlformats-officedocument.presentationml.presentation", // .ppt & .pptx
+                        "application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xls & .xlsx
+                        "text/plain",
+                        "application/pdf",
+                        "application/zip"};
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
+            if (mimeTypes.length > 0) {
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+            }
+        } else {
+            String mimeTypesStr = "";
+            for (String mimeType : mimeTypes) {
+                mimeTypesStr += mimeType + "|";
+            }
+            intent.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
+        }
+        startActivityForResult(Intent.createChooser(intent,"ChooseFile"), PICK_DOC_REQUEST);
+
+    }
 
 
     private void OpenCamera() {
@@ -677,7 +715,26 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 case PICK_DOC_REQUEST:
                     actReq=data;
 
-                    clipdataSelect(data);
+                    //clipdataSelect(data);
+                    String imageEncoded;
+                    Uri mImageUri;
+                    if (data.getData() != null) {
+                        mImageUri = Uri.parse(data.getDataString());
+                        // Get the cursor
+                        try {
+                            imageEncoded = upload.getFilePath(Register.this, mImageUri);
+                            paths.add(imageEncoded);
+
+                            ia = new Adapter_Item(paths, Register.this);
+                            rcItems.setAdapter(ia);
+                            Toast.makeText(this, "Saved to:" + imageEncoded, Toast.LENGTH_SHORT).show();
+
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                   // Toast.makeText(this, "Saved to:" , Toast.LENGTH_LONG).show();
+
 
                     break;
 
@@ -735,6 +792,15 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     ia = new Adapter_Item(paths, Register.this);
                     rcItems.setAdapter(ia);
 
+                    break;
+                case FilePickerConst.REQUEST_CODE_DOC:
+                    if(resultCode== Activity.RESULT_OK && data!=null)
+                    {
+
+                        paths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
+                        ia = new Adapter_Item(paths, Register.this);
+                        rcItems.setAdapter(ia);
+                    }
                     break;
 
             }
@@ -883,11 +949,11 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
             case R.id.action_post:
                 try {
                     RegisterPost(ed);
-
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+
 
                 break;
 

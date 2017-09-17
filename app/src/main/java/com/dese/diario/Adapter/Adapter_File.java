@@ -15,6 +15,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -34,6 +39,7 @@ import com.example.jean.jcplayer.JcAudio;
 import com.mostafaaryan.transitionalimageview.model.TransitionalImage;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -86,8 +92,6 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                         switch (which){
                                             case 0:
                                                 previewFile(type, holder, fname);
-
-
                                                 break;
 
                                             case 1:
@@ -149,9 +153,10 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 dialogPlayer(mp, fname);
                 break;
             case "doc":
-
+                dialogDocument(fname);
                 break;
             case "pdf":
+              //  dialogDocument(fname);
 
                 break;
             case "xls":
@@ -164,6 +169,40 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
         }
     }
 
+    private void IntenDoc(String fname){
+        File temp_file=new File(download+fname);
+        Intent intent = new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(temp_file),getMimeType(temp_file.getAbsolutePath()));
+        context.startActivity(intent);
+
+    }
+    private String getMimeType(String url)
+    {
+        String parts[]=url.split("\\.");
+        String extension=parts[parts.length-1];
+        String type = null;
+        if (extension != null) {
+            MimeTypeMap mime = MimeTypeMap.getSingleton();
+            type = mime.getMimeTypeFromExtension(extension);
+        }
+        return type;
+    }
+    private void dialogDocument(String fname) {
+        boolean wrapInScrollView = true;
+
+        File file = new File(download+fname);
+        final MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .customView(R.layout.dialog_read_document, wrapInScrollView)
+                .show();
+        View view = dialog.getCustomView();
+        WebView webview = (WebView) view.findViewById(R.id.fileWebView);
+        webview.getSettings().setJavaScriptEnabled(true);
+        String pdf = download+fname;
+        webview.loadUrl("http://drive.google.com/viewerng/viewer?embedded=true&url=" + pdf);
+
+
+    }
     private void dialogPlayer(final MediaPlayer mp, final String fname) {
         boolean wrapInScrollView = true;
         final MaterialDialog dialog = new MaterialDialog.Builder(context)
@@ -240,32 +279,52 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                         .load(R.drawable.filedoc)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.ivSound);
+                break;
+            case "docx":
+                //LoadBitmap.loadBitmap(String.valueOf(R.drawable.filedoc ), holder.ivItem);
+                Picasso.with(context)
+                        .load(R.drawable.filedoc)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivSound);
                 break;
             case "pdf":
                 Picasso.with(context)
                         .load(R.drawable.filepdf)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.ivSound);
                 break;
             case "xls":
                 Picasso.with(context)
                         .load(R.drawable.filexls)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.ivSound);
+                break;
+            case "xlsx":
+                Picasso.with(context)
+                        .load(R.drawable.filexls)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivSound);
+                break;
+            case "pptx":
+                Picasso.with(context)
+                        .load(R.drawable.fileppt)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivSound);
                 break;
             case "ppt":
                 Picasso.with(context)
                         .load(R.drawable.fileppt)
                         .resize(1120, 1120)
                         .centerCrop()
-                        .into(holder.ivItem);
+                        .into(holder.ivSound);
                 break;
             case "mp3":
-
-
                 Picasso.with(context)
                         .load(R.drawable.filemp3)
                         .resize(1120, 1120)

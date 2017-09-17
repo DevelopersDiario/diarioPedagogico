@@ -23,7 +23,7 @@ public class MyHolderF extends RecyclerView.ViewHolder implements View.OnLongCli
         public TextView cuen;
         public TextView name;
         public  TextView tvIdRol;
-          public CircleImageView imProfileRec;
+    public CircleImageView imProfileRec;
 
        MyLongClickListener longClickListener;
       ItemClickListener itemClickListener;
