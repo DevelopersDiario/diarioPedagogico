@@ -209,6 +209,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                                                         .getCurrentAccessToken()
                                                         .toString());
 
+                                        //get data here
                                         final String name = com.facebook.Profile.getCurrentProfile().getName();
                                         final String mail = object.getString("email");
                                         final String lastname = com.facebook.Profile.getCurrentProfile().getLastName();
@@ -216,7 +217,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                                         final String account = com.facebook.Profile.getCurrentProfile().getName();
 
                                         Toast.makeText(SelectAccount.this, name, Toast.LENGTH_LONG).show();
-
                                         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                                                 new Response.Listener<String>() {
                                                     @Override
@@ -267,12 +267,17 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                                 }
                             }
 
-                        });
+                            });
                 request.executeAsync();
-                Bundle parameters = new Bundle();
+                            Bundle parameters = new Bundle();
                 parameters.putString(getResources().getString(R.string.fields), getResources().getString(R.string.id_name_email)); // se controlan los datos q se obtienen
                 request.setParameters(parameters);
                 request.executeAsync();
+
+
+
+
+
             }
 
             @Override
