@@ -4,12 +4,12 @@
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-mdpi\\orca_attach_photo_normal.png"
     },
     {
-        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\orca_emoji_category_cars.png",
-        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-mdpi\\orca_emoji_category_cars.png"
-    },
-    {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\orca_composer_divider_horizontal.9.png",
         "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-mdpi\\orca_composer_divider_horizontal.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\orca_emoji_category_cars.png",
+        "source": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\src\\main\\res\\drawable-mdpi\\orca_emoji_category_cars.png"
     },
     {
         "merged": "C:\\Users\\Eduardo\\Documents\\Developer\\Android\\diario\\Emoji\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\sym_keyboard_delete_holo_dark.png",
