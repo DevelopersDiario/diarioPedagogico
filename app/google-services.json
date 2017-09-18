@@ -1,19 +1,21 @@
 {
   "project_info": {
-    "project_number": "982827931332",
-    "project_id": "midiario-adaef"
+    "project_number": "1097132598423",
+    "firebase_url": "https://diario-86b69.firebaseio.com",
+    "project_id": "diario-86b69",
+    "storage_bucket": "diario-86b69.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:982827931332:android:7d303910c293b787",
+        "mobilesdk_app_id": "1:1097132598423:android:7d303910c293b787",
         "android_client_info": {
           "package_name": "com.dese.diario"
         }
       },
       "oauth_client": [
         {
-          "client_id": "982827931332-f6sqi2oa62o9hp5uhf3tgsmd9s06h3gq.apps.googleusercontent.com",
+          "client_id": "1097132598423-jnjj0tskg7ttukn232oi51us585d6lk2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.dese.diario",
@@ -21,13 +23,13 @@
           }
         },
         {
-          "client_id": "982827931332-psrn8ovcctlai9fol9fs5lvqj30q66vd.apps.googleusercontent.com",
+          "client_id": "1097132598423-hipsm9c7vcii89nfmlflidlu0ad1htjb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBX2GwLJG_2l1gihQaFyrGMR_5m-C36wc0"
+          "current_key": "AIzaSyBH7G9MiCl5N56lEq8Z7rGbbBkm7uwuqxM"
         }
       ],
       "services": {
@@ -35,11 +37,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097132598423-hipsm9c7vcii89nfmlflidlu0ad1htjb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

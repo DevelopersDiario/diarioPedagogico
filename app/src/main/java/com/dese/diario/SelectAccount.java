@@ -17,6 +17,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -402,7 +403,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if(!result.getStatus().isSuccess()){
                 new MaterialDialog.Builder(SelectAccount.this)
-                        .title("Error al Logear con Gmail")
+                        .title("Error  Gmail")
                         .content(result.getStatus().toString())
                         .canceledOnTouchOutside(false)
                         .show();
