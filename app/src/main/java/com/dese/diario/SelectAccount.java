@@ -360,6 +360,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         //Initializing google signin option
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
+                .requestProfile()
                 .build();
 
         //Initializing signinbutton
@@ -378,39 +379,39 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     }
 
     private void signIn() {
-        //Creating an intent
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
 
-        //Starting intent for result
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
 
     }
-    public void signOut() {
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
 
-                    }
-                });
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Stop the Google Client when activity is stopped
+        if(mGoogleApiClient.isConnected())
+        {
+            mGoogleApiClient.disconnect();
+        }
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if(!result.getStatus().isSuccess()){
-                new MaterialDialog.Builder(SelectAccount.this)
-                        .title("Error  Gmail")
-                        .content(result.getStatus().toString())
-                        .canceledOnTouchOutside(false)
-                        .show();
-                spd.progressDilog(SelectAccount.this, false);
-            }
 
-            else
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+                /*if(!result.getStatus().isSuccess()){
+                    new MaterialDialog.Builder(SelectAccount.this)
+                            .title("Error  Gmail")
+                            .content(result.getStatus().toString())
+                            .canceledOnTouchOutside(false)
+                            .show();
+                    spd.progressDilog(SelectAccount.this, false);
+                }
+
+                else*/
             handleSignInResult(result);
         }//end if
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -449,6 +450,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
+                    }else{
+                        Log.e("SelectAccount", "Network Response is Null");
                     }
                 }//Fin onErrorResponse
 
@@ -475,7 +478,13 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         }//End if
         else {
             //If login fails
-            Toast.makeText(this, R.string.Login_Failed, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, R.string.Login_Failed, Toast.LENGTH_LONG).show();
+            new MaterialDialog.Builder(SelectAccount.this)
+                    .title(R.string.Login_Failed)
+                    .content(result.getStatus().toString())
+                    .canceledOnTouchOutside(false)
+                    .show();
+            spd.progressDilog(SelectAccount.this, false);
         }//end else
 
     }//end handleSignInResult
@@ -622,6 +631,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
         state1();
+        mGoogleApiClient.connect();
 
     }
 

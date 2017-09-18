@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1097132598423-qm696iop9lmsig6l9qhqtv9gnqvefn7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dese.diario",
+            "certificate_hash": "ba06864b5f4cb75b7cea5e493bcef7973f7996d9"
+          }
+        },
+        {
           "client_id": "1097132598423-jnjj0tskg7ttukn232oi51us585d6lk2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
