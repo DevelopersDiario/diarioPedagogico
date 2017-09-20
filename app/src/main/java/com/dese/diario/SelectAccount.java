@@ -166,17 +166,21 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                                 .content(loginResult.toString() )
                                 .canceledOnTouchOutside(false)
                                 .show();
+                       // finishLogin();
 
                     }
 
                     @Override
                     public void onCancel() {
                         // App code
+                        Toast.makeText(SelectAccount.this, "onCancel", Toast.LENGTH_LONG).show();
+
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
+                        Log.e("SelectAccount.FacebookLogin.onError", exception.toString());
 
                     }
                 });
@@ -223,7 +227,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                                                     public void onResponse(String response) {
                                                         Toast.makeText(SelectAccount.this, R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
                                                         finishLogin();
-                                                    }
+                                                }
                                                 }, new Response.ErrorListener() {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
@@ -235,7 +239,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                                                         body = new String(error.networkResponse.data, "UTF-8");
                                                         userLogin(mail, token);
 
-
+                                                        Toast.makeText(SelectAccount.this, "onErrorResponse", Toast.LENGTH_LONG).show();
                                                     } catch (UnsupportedEncodingException e) {
                                                         e.printStackTrace();
                                                     }
@@ -289,7 +293,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             @Override
             public void onError(FacebookException error) {
 
-                Log.e("(*<*)---->", error.toString());
+                Log.e("SelectAccount.FacebookLogin", error.toString());
             }
         });
 
@@ -1057,7 +1061,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
     private void finishLogin( ) {
         Intent main = new Intent(this, MainActivity.class);
-
         startActivity(main);
         finish();
     }

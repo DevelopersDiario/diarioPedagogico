@@ -119,7 +119,8 @@ dependencies {
     compile 'com.android.support:cardview-v7:25.3.0'
     compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'com.google.android.gms:play-services-auth:10.2.4'
-    compile 'com.facebook.android:facebook-android-sdk:4.+'
+
+    compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     compile 'com.squareup.picasso:picasso:2.5.0'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     compile 'com.android.support:support-v4:25.3.0'
