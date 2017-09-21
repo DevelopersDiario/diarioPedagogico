@@ -174,8 +174,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Resource Id -->
-    <string name="facebook_app_id">650316601835760</string>
-
+    <!--<string name="facebook_app_id">650316601835760</string>-->
+    <string name="facebook_app_id">1788988017796346</string>
+    <string name="fb_login_protocol_scheme">fb1788988017796346</string>
 
     <!--Publication-->
     <string name="action_save">Guardar</string>

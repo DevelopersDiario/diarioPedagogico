@@ -54,8 +54,7 @@ repositories {
         url "http://dl.bintray.com/lukaville/maven"
     }
 }
-repositories
-        {
+repositories {
             jcenter()
             maven
                     {
@@ -80,38 +79,26 @@ allprojects {
     }
 }
 
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //Material Desgin
-    //floating
-    //Segement
-    //Onboardingcompile
-    //para pakage utileria
-    //Chips
-    //Upload Files
-    //Multiselec
-    //GFishbudd
     compile('com.sangcomz:FishBun:0.7.1@aar') {
         transitive = true
     }
-    //Material Librery
-
-    //Progres imagen vir
-
-    //Glide glie
-
-    //OK
     repositories {
         jcenter()
         maven { url "https://dl.bintray.com/drummer-aidan/maven" }
     }
+    allprojects {
+        repositories {
+            // ...
+            maven { url "https://maven.google.com" }
+        }
+    }
     compile project(':Emoji')
-    //PickerDate
-    //Pdf Export
+
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
@@ -119,8 +106,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:25.3.0'
     compile 'com.android.support:recyclerview-v7:25.3.0'
     compile 'com.google.android.gms:play-services-auth:10.2.4'
-
-    compile 'com.facebook.android:facebook-android-sdk:4.0.0'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.squareup.picasso:picasso:2.5.0'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     compile 'com.android.support:support-v4:25.3.0'
@@ -156,6 +142,10 @@ dependencies {
     compile 'com.afollestad:material-camera:0.4.4'
     compile 'com.github.boxme:squarecamera:1.1.0'
     compile 'com.droidninja:filepicker:2.0.8'
+    compile 'com.google.firebase:firebase-core:10.2.4'
+    compile 'com.google.firebase:firebase-database:11.4.0'
+    compile "com.google.android.gms:play-services-gcm:9.2.0"
     testCompile 'junit:junit:4.12'
+
 }
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
