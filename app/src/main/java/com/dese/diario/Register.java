@@ -1,6 +1,5 @@
 package com.dese.diario;
 
-import android.*;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -8,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -25,7 +23,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -36,7 +33,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Scroller;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -49,11 +45,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Item;
+import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.CheckForSDCard;
 import com.dese.diario.Utils.Constants;
-import com.dese.diario.Utils.Urls;
-import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Utils.FirebaseService.FirebaseConection;
 import com.dese.diario.Utils.Upload;
+import com.dese.diario.Utils.Urls;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
@@ -82,7 +79,6 @@ import cafe.adriel.androidaudiorecorder.model.AudioSampleRate;
 import cafe.adriel.androidaudiorecorder.model.AudioSource;
 import droidninja.filepicker.FilePickerBuilder;
 import droidninja.filepicker.FilePickerConst;
-import droidninja.filepicker.utils.Orientation;
 
 public class Register extends AppCompatActivity implements DatePickerListener,  View.OnClickListener{
     //Theme
@@ -837,8 +833,13 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         public void onResponse(String response) {
 
                             upload.recorrerListPaths(paths, Register.this, actReq, ed);
+
                           //  failed_regpublication.setText(R.string.message_succes_publication);
 
+                            FirebaseConection fbC= new FirebaseConection();
+                            fbC.notification(Register.this);
+                            fbC.setDatabasePublication(Register.this,idusuario, titulo, observaciones,
+                                    sentimientos, evaluacion, analisis, conclusion, plan, padre);
                             openMainactivity();
                         }
                     }, new Response.ErrorListener() {
