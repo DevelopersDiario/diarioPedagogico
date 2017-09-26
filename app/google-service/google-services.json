@@ -1,27 +1,43 @@
 {
   "project_info": {
-    "project_number": "233402963830",
-    "firebase_url": "https://diario-tecnopedagogico-724fe.firebaseio.com",
-    "project_id": "diario-tecnopedagogico-724fe",
-    "storage_bucket": "diario-tecnopedagogico-724fe.appspot.com"
+    "project_number": "1097132598423",
+    "firebase_url": "https://diario-86b69.firebaseio.com",
+    "project_id": "diario-86b69",
+    "storage_bucket": "diario-86b69.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:233402963830:android:7d303910c293b787",
+        "mobilesdk_app_id": "1:1097132598423:android:7d303910c293b787",
         "android_client_info": {
           "package_name": "com.dese.diario"
         }
       },
       "oauth_client": [
         {
-          "client_id": "233402963830-8u1rh71chnao469j0qejjm959h4n6qei.apps.googleusercontent.com",
+          "client_id": "1097132598423-qm696iop9lmsig6l9qhqtv9gnqvefn7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dese.diario",
+            "certificate_hash": "ba06864b5f4cb75b7cea5e493bcef7973f7996d9"
+          }
+        },
+        {
+          "client_id": "1097132598423-jnjj0tskg7ttukn232oi51us585d6lk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dese.diario",
+            "certificate_hash": "4e36818b2a3e035d490ec611b0ba05b0e951b07a"
+          }
+        },
+        {
+          "client_id": "1097132598423-hipsm9c7vcii89nfmlflidlu0ad1htjb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAaL9u1hrdRonHfcvZUyB5mNxW2_ixlU7Y"
+          "current_key": "AIzaSyBH7G9MiCl5N56lEq8Z7rGbbBkm7uwuqxM"
         }
       ],
       "services": {
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097132598423-hipsm9c7vcii89nfmlflidlu0ad1htjb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

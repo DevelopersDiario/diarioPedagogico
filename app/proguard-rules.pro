@@ -15,7 +15,11 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-dontwarn javax.servlet.**
+-dontwarn org.joda.time.**
+-dontwarn org.w3c.dom.**
 -ignorewarnings
+
 -keep class * {
     public private *;
 }

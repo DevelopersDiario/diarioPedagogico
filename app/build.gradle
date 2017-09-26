@@ -11,15 +11,15 @@ android {
             storePassword 'safa2017'
         }
     }
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '25.0.3'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.dese.diario"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 10
-        versionName "1.1.0."
+        versionName "1.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -32,8 +32,18 @@ android {
             minifyEnabled true   // This must be after shrinkResources
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+            buildConfigField "String", "BASE_URL", "\"http://release.com/\""
+        }
+        debug {
+            testCoverageEnabled false
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
         }
 
+    }
+    aaptOptions {
+        cruncherEnabled = false
     }
 
     lintOptions {
@@ -78,7 +88,14 @@ allprojects {
         jcenter()
     }
 }
-
+allprojects {
+    repositories {
+        jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
+    }
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -125,7 +142,7 @@ dependencies {
     compile 'com.github.karanvs:multiselect:v1.2'
     compile 'com.afollestad.material-dialogs:core:0.9.4.5'
     compile 'com.github.safetysystemtechnology:progress-image-view-android:v1.0'
-    compile 'com.github.bumptech.glide:glide:3.6.1'
+
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.jhonnyx2012:horizontal-picker:1.0.5'
@@ -140,11 +157,12 @@ dependencies {
     compile 'com.afollestad:material-camera:0.4.4'
     compile 'com.github.boxme:squarecamera:1.1.0'
     compile 'com.droidninja:filepicker:2.0.8'
-    compile 'com.google.firebase:firebase-database:10.2.6'
-    compile 'com.google.firebase:firebase-core:10.2.6'
-    compile 'com.google.firebase:firebase-messaging:10.2.6'
-    compile 'com.google.firebase:firebase-auth:10.2.6'
 
+    compile 'com.google.firebase:firebase-database:11.0.1'
+    compile 'com.google.firebase:firebase-core:11.0.1'
+    compile 'com.google.firebase:firebase-messaging:11.0.1'
+    compile 'com.google.firebase:firebase-auth:11.0.1'
+    compile 'com.google.android.gms:play-services-auth:11.0.1'
     testCompile 'junit:junit:4.12'
 
 }
