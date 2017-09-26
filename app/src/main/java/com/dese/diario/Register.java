@@ -837,9 +837,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                           //  failed_regpublication.setText(R.string.message_succes_publication);
 
                             FirebaseConection fbC= new FirebaseConection();
-                            fbC.notification(Register.this);
-                            fbC.setDatabasePublication(Register.this,idusuario, titulo, observaciones,
-                                    sentimientos, evaluacion, analisis, conclusion, plan, padre);
+                            //fbC.notification(Register.this);
+                           /* fbC.setDatabasePublication(Register.this,idusuario, titulo, observaciones,
+                                    sentimientos, evaluacion, analisis, conclusion, plan, padre);*/
                             openMainactivity();
                         }
                     }, new Response.ErrorListener() {
