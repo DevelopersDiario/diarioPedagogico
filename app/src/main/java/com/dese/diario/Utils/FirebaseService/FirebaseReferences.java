@@ -5,6 +5,7 @@ package com.dese.diario.Utils.FirebaseService;
  */
 
 public class FirebaseReferences {
+    final public static String AMDI= "AMDI";
     final public static String PUBLICATION= "Publication";
     final public static String REPUBLICATION= "RePublication";
     final public static String USUARIO= "Usuario";

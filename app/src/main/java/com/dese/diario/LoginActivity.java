@@ -339,8 +339,7 @@ public class LoginActivity extends AppCompatActivity {
                         du.setFoto(json.getString(foto));
                         du.setFportada(json.getString("fportada"));
 
-                        FirebaseConection FC= new FirebaseConection();
-                        FC.setDatabaseUser(LoginActivity.this,json.getString(cuenta), " " );
+
                     }
                     //openProfile();
                     finishLogin();

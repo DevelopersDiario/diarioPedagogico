@@ -1,7 +1,5 @@
 package com.dese.diario.Utils.FirebaseService;
 
-import android.content.Context;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,12 +44,23 @@ public class FirebaseConection {
         });
     }*/
 
-    public void setDatabaseUser(Context c,String User, String Token ){
-        FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child(FirebaseReferences.USUARIO);
+    public void setDatabaseUser(String User, String Token ) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference(FirebaseReferences.AMDI);
+        databaseReference.child(FirebaseReferences.USUARIO).child("Token").setValue(Token);
+        databaseReference.child(FirebaseReferences.USUARIO).child("Users").setValue(User);
+        /*databaseReference.child(FirebaseReferences.USUARIO).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        databaseReference.setValue(User);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
     }
 
 }

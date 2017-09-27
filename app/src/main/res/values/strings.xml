@@ -396,4 +396,6 @@
     <string name="action_my_publication">Mis Publicaciones</string>
     <string name="title_activity_detail_my_publication">Edicion de Mi Publicación</string>
     <string name="action_pause">Pausar</string>
+    <string name="cancel_login">Sesión cancelada</string>
+    <string name="error_login">Error en Sesión</string>
 </resources>

@@ -1,11 +1,12 @@
 package com.dese.diario;
 
-            import android.annotation.TargetApi;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,11 +39,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.LoggingBehavior;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -52,9 +49,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -125,7 +128,10 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     ShowProgressDialog spd;
 
 
-    @Override
+    //FirebaseLogin
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -154,152 +160,128 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
         callbackManager = CallbackManager.Factory.create();
 
-        LoginManager.getInstance().registerCallback(callbackManager,
-                new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                        new MaterialDialog.Builder(SelectAccount.this)
-                                .title("Sucess Facebook")
-                                .content(loginResult.toString() )
-                                .canceledOnTouchOutside(false)
-                                .show();
-                       // finishLogin();
+        loginButton = (LoginButton) findViewById(R.id.login_facebook);
 
-                    }
+        loginButton.setReadPermissions(Arrays.asList("email"));
 
-                    @Override
-                    public void onCancel() {
-                        // App code
-                        Toast.makeText(SelectAccount.this, "onCancel", Toast.LENGTH_LONG).show();
-
-                    }
-
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
-                        Log.e("SelectAccount.FacebookLogin.onError", exception.toString());
-
-                    }
-                });
-
-        callbackManager = CallbackManager.Factory.create();   // para hacer llamado al manager de facebook y hacer el login
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_facebook); // Boton desde el cual se hace el llamado
-        loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));  // nos da los permisos para obtener algunos datos del face para el caso del email es necesario especificarlo
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() { // metodo para hacer el logeo se dividira en las tres posibles opciones
-            // el onSucces que es un acceso correcto, onCancel que es cancelado y onError
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
-                // login ok get access token
-                GraphRequest request = GraphRequest.newMeRequest(
-                        AccessToken.getCurrentAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object,
-                                                    GraphResponse response) {
-                                try {
-
-                                    if (BuildConfig.DEBUG) {
-                                        FacebookSdk.setIsDebugEnabled(true);
-                                        FacebookSdk
-                                                .addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
-
-                                        System.out
-                                                .println(R.string.AccessToken_getCurrentAccessToken
-                                                        + AccessToken
-                                                        .getCurrentAccessToken()
-                                                        .toString());
-
-                                        //get data here
-                                        final String name = com.facebook.Profile.getCurrentProfile().getName();
-                                        final String mail = object.getString("email");
-                                        final String lastname = com.facebook.Profile.getCurrentProfile().getLastName();
-                                        final String token = com.facebook.Profile.getCurrentProfile().getId();
-                                        final String account = com.facebook.Profile.getCurrentProfile().getName();
-
-                                        Toast.makeText(SelectAccount.this, name, Toast.LENGTH_LONG).show();
-                                        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                                                new Response.Listener<String>() {
-                                                    @Override
-                                                    public void onResponse(String response) {
-                                                        Toast.makeText(SelectAccount.this, R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
-                                                        finishLogin();
-                                                }
-                                                }, new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                String body;
-
-                                                if (error.networkResponse.data != null) {
-
-                                                    try {
-                                                        body = new String(error.networkResponse.data, "UTF-8");
-                                                        userLogin(mail, token);
-
-                                                        Toast.makeText(SelectAccount.this, "onErrorResponse", Toast.LENGTH_LONG).show();
-                                                    } catch (UnsupportedEncodingException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            }//Fin onErrorResponse
-
-
-                                        }) {
-                                            @Override
-                                            protected Map<String, String> getParams() {
-                                                Map<String, String> params = new HashMap<String, String>();
-                                                params.put(KEY_NOMBRE, name);
-                                                params.put(KEY_APELLIDOS, lastname);
-                                                params.put(KEY_EMAIL, mail);
-                                                params.put(KEY_PASSWORD, token);
-                                                params.put(KEY_CUENTA, account);
-                                                params.put(KEY_VIGENCIA, KEY_9999);
-                                                params.put(CONTENT_TYPE, APPLICATION);
-                                                return params;
-                                            }
-
-                                        };
-                                        RequestQueue requestQueue = Volley.newRequestQueue(SelectAccount.this);
-                                        requestQueue.add(stringRequest);
-
-                                    }
-                                } catch (JSONException e) {
-                                    Log.e(getResources().getString(R.string.cero), e.toString());
-                                }
-                            }
-
-                            });
-                request.executeAsync();
-                            Bundle parameters = new Bundle();
-                parameters.putString(getResources().getString(R.string.fields), getResources().getString(R.string.id_name_email)); // se controlan los datos q se obtienen
-                request.setParameters(parameters);
-                request.executeAsync();
-
-
-
-
-
+                handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
             public void onCancel() {
-
-                Toast.makeText(SelectAccount.this, "Cancelado", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException error) {
-
-                Log.e("SelectAccount.FacebookLogin", error.toString());
+                Toast.makeText(getApplicationContext(), R.string.error_login, Toast.LENGTH_SHORT).show();
             }
         });
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    registerFacebook();
+                    goMainScreen();
+                }
+            }
+        };
+    }
+    private void goMainScreen() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 
+    private void handleFacebookAccessToken(AccessToken accessToken) {
+        AuthCredential credential= FacebookAuthProvider.getCredential(accessToken.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(!task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), R.string.message_ocurrio_error, Toast.LENGTH_SHORT).show();
+                }
 
+            }
+        });
+    }
+        private void registerFacebook(){
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            final String name, mail, uid, lastname, token, account;
+            if (user != null) {
+                name = user.getDisplayName();
+                mail = user.getEmail();
+                Uri photoUrl = user.getPhotoUrl();
+                token = user.getUid();
+                lastname= " ";
+                account=user.getDisplayName();
+
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(SelectAccount.this, R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
+                                finishLogin();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        String body;
+
+                        if (error.networkResponse.data != null) {
+
+                            try {
+                                body = new String(error.networkResponse.data, "UTF-8");
+                                userLogin(mail, token);
+
+                                Toast.makeText(SelectAccount.this, "onErrorResponse", Toast.LENGTH_LONG).show();
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }//Fin onErrorResponse
+
+
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put(KEY_NOMBRE, name);
+                      //  params.put(KEY_APELLIDOS, lastname);
+                        params.put(KEY_EMAIL, mail);
+                        params.put(KEY_PASSWORD, token);
+                        params.put(KEY_CUENTA, account);
+                        params.put(KEY_VIGENCIA, KEY_9999);
+                        params.put(CONTENT_TYPE, APPLICATION);
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(SelectAccount.this);
+                requestQueue.add(stringRequest);
+
+
+            } else {
+                goLoginScreen();
+            }
+
+
+
+
+}
+    private void goLoginScreen() {
+        Intent intent = new Intent(this, SelectAccount.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
     private void inicializarResources() {
         getOnBoarding();
         tv1 = (TextView) findViewById(R.id.tvMessageWelcome);
@@ -401,6 +383,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         {
             mGoogleApiClient.disconnect();
         }
+
+        firebaseAuth.removeAuthStateListener(firebaseAuthListener);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -443,7 +427,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                         public void onResponse(String response) {
 
                             Toast.makeText(SelectAccount.this,R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
-                            finishLogin();
+                            //finishLogin();
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -639,6 +623,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         super.onStart();
         state1();
         mGoogleApiClient.connect();
+        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
 
     }
 
