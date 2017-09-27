@@ -181,6 +181,7 @@ public class MainActivity extends AppCompatActivity
         nvloginaccount=(TextView)hView.findViewById(R.id.nvloginaccount);
         nvemaillogin.setText(varlogin.getCorreo().toString());
         nvloginaccount.setText(varlogin.getCuenta().toString());
+
         fotouser=(CircleImageView)hView.findViewById(R.id.cvProfile);
         imType=(ImageView) hView.findViewById(R.id.imType);
         varlogin= new VariablesLogin();

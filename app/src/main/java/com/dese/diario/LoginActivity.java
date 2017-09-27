@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dese.diario.POJOS.DatosUsr;
+import com.dese.diario.Utils.FirebaseService.FirebaseConection;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.ShowProgressDialog;
@@ -338,7 +339,8 @@ public class LoginActivity extends AppCompatActivity {
                         du.setFoto(json.getString(foto));
                         du.setFportada(json.getString("fportada"));
 
-
+                        FirebaseConection FC= new FirebaseConection();
+                        FC.setDatabaseUser(LoginActivity.this,json.getString(cuenta), " " );
                     }
                     //openProfile();
                     finishLogin();

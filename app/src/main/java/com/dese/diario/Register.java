@@ -48,7 +48,6 @@ import com.dese.diario.Adapter.Adapter_Item;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.CheckForSDCard;
 import com.dese.diario.Utils.Constants;
-import com.dese.diario.Utils.FirebaseService.FirebaseConection;
 import com.dese.diario.Utils.Upload;
 import com.dese.diario.Utils.Urls;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
@@ -836,10 +835,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                           //  failed_regpublication.setText(R.string.message_succes_publication);
 
-                            FirebaseConection fbC= new FirebaseConection();
-                            //fbC.notification(Register.this);
-                           /* fbC.setDatabasePublication(Register.this,idusuario, titulo, observaciones,
-                                    sentimientos, evaluacion, analisis, conclusion, plan, padre);*/
+
                             openMainactivity();
                         }
                     }, new Response.ErrorListener() {
