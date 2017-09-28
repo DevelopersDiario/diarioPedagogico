@@ -55,6 +55,9 @@ import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
 import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
 import com.sangcomz.fishbun.FishBun;
 import com.sangcomz.fishbun.define.Define;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.RequestBody;
 
 import org.joda.time.DateTime;
 import org.json.JSONArray;
@@ -809,7 +812,35 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         }//Fin resultCode
 
     }// Fin onActivityResult
+    public void notificationPublication(String idusuario, String titulo){
+        try {
+            OkHttpClient client = new OkHttpClient();
 
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\r\n  \"" +
+                    "to\": \"clV68IC0LmU:APA91bFjYbpjVKCE5bsfBT0hMYb_AdwQQGKXbCvTZL6M63Q33LJ769pxN5IKinYt8qLD9l_qXLLCS3CrJiNUq5cXRsVCtiUiNECuSDSFw7ZIl2KfBdn8QLYAaxjVc5wFlQGp0A2VpuHZ\",\r\n  \"" +
+                    "notification\": {\r\n     " +
+                    "\"title\": \"Noticia desde el servidoddr\",\r\n    " +
+                    " \"body\": \"Descripción de la noticia desde el servidor\"\r\n  },\r\n  " +
+                    "\"data\": {\r\n     \"titulo\": \"Este es el titular\",\r\n     " +
+                    "\"descripcion\": \"Aquí estará todo el contenido de la noticia\"\r\n  }\r\n}");
+            com.squareup.okhttp.Request request = new com.squareup.okhttp.Request.Builder()
+                    .url("https://fcm.googleapis.com/fcm/send")
+                    .post(body)
+                    .addHeader("authorization", "key=AAAA_3Iy5Jc:APA91bHVmICBI1cYSipI6YaKwKZAqZKTQ5ajayT_79AmaWNQnl7DT893p0mgPXU67ymAMDFtmQo_ioCjkVKs3i-vJJPdx9YBF0XZrX2FPEGuMfhHJOgBAVNno0c7qODrmPNdaknT7eyw")
+                    .addHeader("content-type", "application/json")
+                    .addHeader("cache-control", "no-cache")
+                    .addHeader("postman-token", "23ef9a28-3c9e-cd36-88ed-038b849ee170")
+                    .build();
+
+
+            com.squareup.okhttp.Response response = client.newCall(request).execute();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("notificacion fallida",e.getMessage());
+        }
+    }
     private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();
         idusuario= varlogin.getIdusuario();
@@ -834,7 +865,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                             upload.recorrerListPaths(paths, Register.this, actReq, ed);
 
                           //  failed_regpublication.setText(R.string.message_succes_publication);
-
+                           //notificationPublication(idusuario, titulo);
 
                             openMainactivity();
                         }

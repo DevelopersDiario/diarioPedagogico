@@ -1,5 +1,6 @@
 package com.dese.diario.Utils.FirebaseService;
 
+import com.dese.diario.POJOS.VariablesLogin;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -10,45 +11,12 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FirebaseConection {
 
 
+    public void setDatabaseUser(VariablesLogin variablesLogin) {
 
- /*   public void notification(final Context c){
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Publication pub= dataSnapshot.getValue(Publication.class);
-
-                NotificationCompat.Builder mBuilder;
-                NotificationManager mNotifyMgr =(NotificationManager) c.getSystemService(NOTIFICATION_SERVICE);
-
-                int icono = R.mipmap.ic_launcher;
-                Intent intent = new Intent(c, Publication.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(c, 0,intent, 0);
-
-                mBuilder =new NotificationCompat.Builder(c)
-                        .setContentIntent(pendingIntent)
-                        .setSmallIcon(icono)
-                        .setContentTitle("Nueva Publicación")
-                        .setContentText(pub.getTitle())
-                        .setVibrate(new long[] {100, 250, 100, 500})
-                        .setAutoCancel(true);
-
-                mNotifyMgr.notify(1, mBuilder.build());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e("FirebaseConection.error",databaseError.getMessage());
-            }
-        });
-    }*/
-
-    public void setDatabaseUser(String User, String Token ) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference(FirebaseReferences.AMDI);
-        databaseReference.child(FirebaseReferences.USUARIO).child("Token").setValue(Token);
-        databaseReference.child(FirebaseReferences.USUARIO).child("Users").setValue(User);
+        databaseReference.child(FirebaseReferences.USUARIO).setValue(variablesLogin);
+
         /*databaseReference.child(FirebaseReferences.USUARIO).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

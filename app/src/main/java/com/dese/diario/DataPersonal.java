@@ -24,16 +24,15 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Utils.Urls;
 
 import org.json.JSONException;
 
@@ -169,12 +168,12 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
 
                         try {
                             body = new String(error.networkResponse.data, "UTF-8");
-                            new MaterialDialog.Builder(DataPersonal.this)
+                          /*  new MaterialDialog.Builder(DataPersonal.this)
                                     .content(body)
                                     .show();
 
-
-                            // Toast.makeText(DataPersonal.this, body, Toast.LENGTH_LONG).show();
+*/
+                            Toast.makeText(DataPersonal.this, "Necesita actualizar un campo", Toast.LENGTH_LONG).show();
 
 
                         } catch (UnsupportedEncodingException e) {

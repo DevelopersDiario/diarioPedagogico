@@ -1,10 +1,6 @@
 package com.dese.diario.POJOS;
 
-import com.dese.diario.Objects.Publication;
-import com.dese.diario.Profile;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by TOSHIBA on 24/04/2017.
@@ -25,6 +21,7 @@ public class DatosUsr implements Serializable{
     public  static   String estado;
     public  static   String foto;
     public  static   String fportada;
+    public  static   String token;
 
     public static DatosUsr instance;
 
@@ -123,6 +120,14 @@ public class DatosUsr implements Serializable{
 
     public  void setFoto(String foto) {
         this.foto = foto;
+    }
+
+    public static String getToken() {
+        return token;
+    }
+
+    public static void setToken(String token) {
+        DatosUsr.token = token;
     }
 
     public  void setInstance(DatosUsr instance) {

@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.dese.diario.MainActivity;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.R;
 import com.google.firebase.messaging.RemoteMessage;
 
 /**
@@ -58,7 +59,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(com.example.jean.jcplayer.R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
@@ -70,4 +71,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         notificationManager.notify(0, notificationBuilder.build());
 
     }
+
+
 }

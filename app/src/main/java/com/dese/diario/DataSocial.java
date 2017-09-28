@@ -391,6 +391,7 @@ public class DataSocial extends AppCompatActivity implements View.OnClickListene
                 setCurrentDateOnView();
                 break;
 
+
         }
     }
 

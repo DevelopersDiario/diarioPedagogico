@@ -10,9 +10,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -29,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Utils.Urls;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 
@@ -46,6 +47,7 @@ public class CreateAccount extends AppCompatActivity {
     final  String KEY_PASSWORD="password";
     final  String KEY_EMAIL="correo";
     final  String KEY_CUENTA="cuenta";
+    final  String KEY_TOKEN="token";
 
     String name;
     String lastname;
@@ -170,6 +172,9 @@ public class CreateAccount extends AppCompatActivity {
             // final String cue ta=account.toString();
             password=etPassword_CreateAcc.getText().toString().trim();
 
+       final String token =  FirebaseInstanceId.getInstance().getToken();
+
+
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
@@ -179,7 +184,7 @@ public class CreateAccount extends AppCompatActivity {
                                 openLogin(email);
                             } else {
                                 new MaterialDialog.Builder(CreateAccount.this)
-                                        .title("¡Error de conexión!")
+                                            .title("¡Error de conexión!")
                                         .content("Lo lamentamos pero hubo un error en el servidor")
                                         .show();
                             }
@@ -217,6 +222,7 @@ public class CreateAccount extends AppCompatActivity {
                     params.put(KEY_EMAIL, email);
                     params.put(KEY_PASSWORD, password);
                     params.put(KEY_CUENTA, account);
+                    params.put(KEY_TOKEN, token);
                     params.put("vigencia", "9999-12-31");
                     params.put("Content-Type", "application/x-www-form-urlencoded");
                     return params;

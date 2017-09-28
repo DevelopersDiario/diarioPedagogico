@@ -1,7 +1,5 @@
 package com.dese.diario.Objects;
 
-import java.util.StringTokenizer;
-
 /**
  * Created by Eduardo on 20/03/2017.
  */
@@ -19,6 +17,7 @@ public class Usuario {
     private  String _institucion;
     private String _grupo;
     private String  _foto;
+
 
     public  Usuario (){
 

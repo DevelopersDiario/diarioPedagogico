@@ -14,6 +14,7 @@ public class VariablesLogin implements Serializable{
     public  static String foto;
     public  static String fportada;
     public  static String telefono;
+    public  static String token;
 
 
     public static VariablesLogin instance;
@@ -36,6 +37,14 @@ public class VariablesLogin implements Serializable{
 
     public static String getFportada() {
         return fportada;
+    }
+
+    public static String getToken() {
+        return token;
+    }
+
+    public static void setToken(String token) {
+        VariablesLogin.token = token;
     }
 
     public static void setFportada(String fportada) {

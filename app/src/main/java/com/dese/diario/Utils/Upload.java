@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
-import com.dese.diario.Register;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
@@ -186,16 +185,7 @@ public class Upload {
                                         @Override
                                         public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
-                                            //ELiminar imagen
-                                            File eliminar = new File(path);
-                                            if (eliminar.exists()) {
-                                                if (eliminar.delete()) {
-                                                    System.out.println("Archivo eliminado:" + eliminar.getPath());
-                                                } else {
-                                                    System.out.println("Archivo no eliminado" + eliminar.getPath());
-                                                }
-                                            }
-                                            Toast.makeText(context.getApplicationContext(),"Imagen subida exitosamente.", Toast.LENGTH_SHORT).show();
+
                                         }
 
                                         @Override
@@ -234,7 +224,6 @@ public class Upload {
                             .setMaxRetries(2)
                             .setNotificationConfig(new UploadNotificationConfig()
                                     .setInProgressMessage(filename)
-                                    .setIcon(R.mipmap.ic_logo_mi_diario)
                                     .setCompletedMessage("Completado!")
                                     .setTitle("Gestor de Archivos ")
                             )

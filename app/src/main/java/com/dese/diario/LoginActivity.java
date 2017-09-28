@@ -12,10 +12,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,10 +27,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dese.diario.POJOS.DatosUsr;
-import com.dese.diario.Utils.FirebaseService.FirebaseConection;
-import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Utils.FirebaseService.FirebaseConection;
 import com.dese.diario.Utils.ShowProgressDialog;
+import com.dese.diario.Utils.Urls;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
     View focusView = null;
     private String email;
     private String password;
-    VariablesLogin var_Login;
+
     DatosUsr du;
     ShowProgressDialog spd;
 
@@ -318,7 +319,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String resultado){
             try {
 
-
+                VariablesLogin var_Login;
                 String datoslogin;
                 JSONObject jsonObject = new JSONObject(resultado.toString());
                 //   txtToken.setText(jsonObject.getString("success"));
@@ -335,13 +336,16 @@ public class LoginActivity extends AppCompatActivity {
                         var_Login.setTelefono(json.getString(telefono));
                         var_Login.setTelefono(json.getString(foto));
                         var_Login.setFportada(json.getString("fportada"));
-
+                        //var_Login.setToken(json.getString("token"));
                         du.setFoto(json.getString(foto));
                         du.setFportada(json.getString("fportada"));
+                       // du.setToken(json.getString("token"));
 
 
                     }
                     //openProfile();
+                    FirebaseConection fc= new FirebaseConection();
+                    fc.setDatabaseUser(var_Login);
                     finishLogin();
 
                 }
@@ -352,6 +356,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
             } catch (Exception e) {
+                Log.e("Login.ObtenerDatos", e.getMessage());
 
             }
 
