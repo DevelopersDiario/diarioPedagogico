@@ -336,7 +336,7 @@ public class LoginActivity extends AppCompatActivity {
                         var_Login.setTelefono(json.getString(telefono));
                         var_Login.setTelefono(json.getString(foto));
                         var_Login.setFportada(json.getString("fportada"));
-                        //var_Login.setToken(json.getString("token"));
+                        var_Login.setToken(json.getString("token"));
                         du.setFoto(json.getString(foto));
                         du.setFportada(json.getString("fportada"));
                        // du.setToken(json.getString("token"));
