@@ -2,8 +2,6 @@ package com.dese.diario.Utils.FirebaseService;
 
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by Eduardo on 20/09/2017.
