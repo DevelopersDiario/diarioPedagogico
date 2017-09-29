@@ -2,10 +2,11 @@ package com.dese.diario.Item;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -26,9 +27,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Friends;
 import com.dese.diario.Objects.DataFriends;
-import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
+import com.dese.diario.Utils.Urls;
 import com.doodle.android.chips.ChipsView;
 import com.doodle.android.chips.model.Contact;
 
@@ -89,6 +90,8 @@ public class Search_friends extends AppCompatActivity  {
 
     Contact contact;
     ArrayList listMembers;
+    String foto;
+    Uri urifoto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -382,8 +385,11 @@ public class Search_friends extends AppCompatActivity  {
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
                                     final String email= jsonobject.getString("cuenta");
+                                    //listContact(jsonobject.getString("idusuario"));
 
-                                    contact  = new Contact(null, null, null, email, null);
+                                   // Uri urifoto= Uri.parse(Urls.download+foto);
+
+                                    contact  = new Contact(null, null, null, email, null );
                                     mChipsView.addChip(email, "", contact);
 
                                     listMembers.add(jsonobject.getString("cuenta"));
@@ -421,7 +427,64 @@ public class Search_friends extends AppCompatActivity  {
         queue.add(stringRequest);
     }
 
+    private void listContact(final String iduser) {
 
+        VariablesLogin variablesLogin = new VariablesLogin();
+
+        RequestQueue queue = Volley.newRequestQueue(Search_friends.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listxiduser,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                                //listMembers = new ArrayList<>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (int i = 0; i < jsonarray.length(); i++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+
+                                 foto = jsonobject.getString("foto");
+                                    urifoto= Uri.parse(Urls.download+foto);
+                                    Toast.makeText(Search_friends.this, foto, Toast.LENGTH_LONG).show();
+
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Search Friends", "Error +->" + e);
+                            }
+
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Search Friends", "Response--->"+error);
+            }
+
+        }
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idusuario", iduser);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
+
+    }
     private void registerGroup(final String g, final String u, final String r) throws JSONException{
         final DataFriends dataFriends= new DataFriends();
         StringRequest stringRequest = new StringRequest(Request.Method.POST , urlgpodetalle,

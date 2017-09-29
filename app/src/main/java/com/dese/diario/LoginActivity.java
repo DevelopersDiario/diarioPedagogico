@@ -334,18 +334,19 @@ public class LoginActivity extends AppCompatActivity {
                         var_Login.setCuenta(json.getString(cuenta));
                         var_Login.setCorreo(json.getString(correo));
                         var_Login.setTelefono(json.getString(telefono));
-                        var_Login.setTelefono(json.getString(foto));
+                        var_Login.setFoto(json.getString(foto));
                         var_Login.setFportada(json.getString("fportada"));
                         var_Login.setToken(json.getString("token"));
+                          //  Toast.makeText(LoginActivity.this, json.getString("token"), Toast.LENGTH_LONG).show();
                         du.setFoto(json.getString(foto));
                         du.setFportada(json.getString("fportada"));
-                       // du.setToken(json.getString("token"));
+                        du.setToken(json.getString("token"));
 
-
+                        FirebaseConection fc= new FirebaseConection();
+                        fc.setDatabaseUser(var_Login);
                     }
                     //openProfile();
-                    FirebaseConection fc= new FirebaseConection();
-                    fc.setDatabaseUser(var_Login);
+
                     finishLogin();
 
                 }

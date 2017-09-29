@@ -1,5 +1,6 @@
 package com.dese.diario.Utils.FirebaseService;
 
+import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -15,20 +16,15 @@ public class FirebaseConection {
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference(FirebaseReferences.AMDI);
-        databaseReference.child(FirebaseReferences.USUARIO).setValue(variablesLogin);
+        databaseReference.child(FirebaseReferences.USUARIO).push().setValue(variablesLogin);
 
-        /*databaseReference.child(FirebaseReferences.USUARIO).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-            }
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });*/
-
+    public void setDatabaseDatosUser(DatosUsr du){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference(FirebaseReferences.AMDI);
+        databaseReference.child(FirebaseReferences.DatosUsers).push().setValue(du);
     }
 
 }

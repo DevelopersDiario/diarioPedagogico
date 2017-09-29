@@ -43,6 +43,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Pubication;
 import com.dese.diario.Utils.Constants;
+import com.dese.diario.Utils.FirebaseService.FirebaseConection;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
@@ -198,7 +199,8 @@ public class MainActivity extends AppCompatActivity
                 .resize(2000, 1200)
                 .centerCrop()
                 .into(  imType);
-
+        FirebaseConection fc= new FirebaseConection();
+        fc.setDatabaseDatosUser(du);
     }
 
 
