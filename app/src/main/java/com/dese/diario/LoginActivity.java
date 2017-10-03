@@ -330,6 +330,8 @@ public class LoginActivity extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(jsonObject.getString(Success));
                     for (int x=0; x<jsonArray.length(); x++) {
                         JSONObject json = new JSONObject(jsonArray.get(x).toString());
+
+
                         var_Login.setIdusuario(json.getString(idusuario));
                         var_Login.setCuenta(json.getString(cuenta));
                         var_Login.setCorreo(json.getString(correo));
@@ -344,6 +346,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         FirebaseConection fc= new FirebaseConection();
                         fc.setDatabaseUser(var_Login);
+                        //spd.dismiss();
                     }
                     //openProfile();
 
@@ -353,11 +356,11 @@ public class LoginActivity extends AppCompatActivity {
                 else {
 
                     Toast.makeText(LoginActivity.this,R.string.Failded,Toast.LENGTH_LONG).show();
-                    spd.dismiss();
+                    //spd.dismiss();
                 }
 
             } catch (Exception e) {
-                Log.e("Login.ObtenerDatos", e.getMessage());
+                Log.e("Login.ObtenerDatos", e.getMessage()+ ">--<"+e.getLocalizedMessage());
 
             }
 
