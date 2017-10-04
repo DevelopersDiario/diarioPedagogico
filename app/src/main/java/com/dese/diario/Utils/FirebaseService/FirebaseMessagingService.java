@@ -78,7 +78,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
@@ -174,7 +174,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
                                     notificationPublication(c, token, titulo);
 
-                                    Toast.makeText(c, username, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(c, token , Toast.LENGTH_SHORT).show();
 
 
                                 }
