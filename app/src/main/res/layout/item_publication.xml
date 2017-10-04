@@ -13,8 +13,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        card_view:cardCornerRadius="@dimen/cardvier_CornerRadius_20"
-        card_view:cardElevation="@dimen/elevacion_card"
+        card_view:cardCornerRadius="40dp"
+        card_view:cardElevation="40dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 

@@ -36,7 +36,7 @@
     <string name="open_profile">open profile</string>
     <string name="user_Login_entra">user Login entra</string>
     <string name="Success">Success</string>
-    <string name="Failded">Failded!!...Verifique Email Y Password</string>
+    <string name="Failded">.Verifique Email y/o Contraseña</string>
     <string name="my_preferences2">my_preferences2</string>
     <string name="login_complete">login_complete</string>
 

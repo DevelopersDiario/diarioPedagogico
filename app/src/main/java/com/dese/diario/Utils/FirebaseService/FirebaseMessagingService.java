@@ -8,7 +8,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
-import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,9 +28,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+
+
 /**
  * Created by Eduardo on 26/09/2017.
  */
@@ -90,59 +90,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     }
 
-    public void notificationPublication(Context c, final String token, final String titulo) throws JSONException {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "https://fcm.googleapis.com/fcm/send",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+    public void notificationPublication(final Context c, final String token, final String titulo){
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String body;
-                String statusCode = String.valueOf(error.networkResponse.statusCode);
-                //get response body and parse with appropriate encoding
-                if (error.networkResponse.data != null) {
-
-                    try {
-                        if(error!=null && error.getMessage() !=null){
-                            Toast.makeText(getApplicationContext(),"error VOLLEY "+error.getMessage(),Toast.LENGTH_LONG).show();
-                        }
-                        else{
-                            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
-
-                        }
-                        body = new String(error.networkResponse.data, "UTF-8");
-
-                        // failed_regpublication.setText(body);
-
-
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Log.e("",error.getMessage());
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("to",token);
-                params.put("notification.title",titulo);
-                params.put("notification.body","Nueva notificación");
-                String creds = String.format("key", "AAAA_3Iy5Jc:APA91bHVmICBI1cYSipI6YaKwKZAqZKTQ5ajayT_79AmaWNQnl7DT893p0mgPXU67ymAMDFtmQo_ioCjkVKs3i-vJJPdx9YBF0XZrX2FPEGuMfhHJOgBAVNno0c7qODrmPNdaknT7eyw");
-                String auth = "Basic " + Base64.encodeToString(creds.getBytes(), Base64.DEFAULT);
-                params.put("Authorization", auth);
-                //params.put("Authorization", "key=AAAA_3Iy5Jc:APA91bHVmICBI1cYSipI6YaKwKZAqZKTQ5ajayT_79AmaWNQnl7DT893p0mgPXU67ymAMDFtmQo_ioCjkVKs3i-vJJPdx9YBF0XZrX2FPEGuMfhHJOgBAVNno0c7qODrmPNdaknT7eyw");
-                params.put("Content-Type", "application/json");
-                return params;
-
-            }
-
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(c);
-        requestQueue.add(stringRequest);
+     new PostJSON(null, titulo, token );
 
     }
 
@@ -165,7 +115,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
                                     final String _idUser = jsonobject.getString("idusuario");
 
-                                    Toast.makeText(register, _idUser, Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(register, _idUser, Toast.LENGTH_SHORT).show();
                                     getToken(register, _idUser, titulo);
 
                                 }
@@ -178,7 +128,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Search Friends", "Response--->" + error);
+                Log.e("FOREBASE", "Response--->" + error);
             }
 
         }
@@ -235,7 +185,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("Search Friends", "Response--->"+error);
+                Log.e("SFirebase Mesaje", "Response--->"+error);
             }
 
         }

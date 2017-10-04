@@ -157,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             if(isNetworkConnected()){
-            spd.MaterialDialog (LoginActivity.this, true);
+                spd.MaterialDialog (LoginActivity.this, true);
             userLogin();
             }else{
                 showAlertDialog(getResources().getString(R.string.title_conection_fail),
@@ -291,7 +291,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             if (isOnline()) {
                 System.out.println(R.string.user_Login_entra);
-                //URL url = new URL("http://192.168.1.87:8084/diariopws/api/1.0/user/autenticar");
+              //  spd.MaterialDialog (LoginActivity.this, true);
                 AsyncTask task = new ObtenerDatos();
                 String[][] parametros = {
                         {url.toString()},
@@ -300,6 +300,8 @@ public class LoginActivity extends AppCompatActivity {
                 task.execute(parametros);
 //                Toast.makeText(LoginActivity.this,mEmailView.getText().toString()+mPasswordView.getText().toString(),Toast.LENGTH_LONG).show();
 
+            }else{
+              //  spd.MaterialDialog (LoginActivity.this, false);
             }
         }catch (Exception ex){
             System.out.println(ex);
@@ -356,7 +358,7 @@ public class LoginActivity extends AppCompatActivity {
                 else {
 
                     Toast.makeText(LoginActivity.this,R.string.Failded,Toast.LENGTH_LONG).show();
-                    //spd.dismiss();
+                    spd.dismiss();
                 }
 
             } catch (Exception e) {
