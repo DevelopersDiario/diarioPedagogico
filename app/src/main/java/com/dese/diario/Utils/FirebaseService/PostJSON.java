@@ -58,11 +58,11 @@ public class PostJSON  {
             return response.body().string();
         }
     }
-    String bowlingJson(String player1, String player2) {
+    String bowlingJson(String token, String titulo) {
         return "{\n" +
-                "  \"to\": \""+player1+"\",\n" +
+                "  \"to\": \""+token+"\",\n" +
                 "  \"notification\": {\n" +
-                "     \"title\": \""+player2+"\",\n" +
+                "     \"title\": \""+titulo+"\",\n" +
                 "     \"body\": \"Nueva Notificación\"\n" +
                 "  },\n" +
                 "}";

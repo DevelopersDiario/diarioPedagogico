@@ -83,6 +83,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(soundUri)
+                .setVibrate(new long[100])
                 .setContentIntent(pedingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -169,10 +170,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
                                     final String token= jsonobject.getString("token");
+                                    final String username=  jsonobject.getString("nombre");
 
                                     notificationPublication(c, token, titulo);
 
-                                    Toast.makeText(c, token, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(c, username, Toast.LENGTH_SHORT).show();
 
 
                                 }
