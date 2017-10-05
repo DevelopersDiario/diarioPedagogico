@@ -2,10 +2,10 @@ package com.dese.diario.Item;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
-import android.view.ContextMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.dese.diario.R;
@@ -22,7 +22,7 @@ public class MyHolderP extends RecyclerView.ViewHolder implements /*View.OnLongC
     public TextView tvFechaRec;
     public TextView tvPublicationRec;
     //public TextView tvSentimientosRec;
-
+    public TableLayout tlMainSelect;
     public ImageView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 
     public CircleImageView imProfileRec;
@@ -50,11 +50,9 @@ public class MyHolderP extends RecyclerView.ViewHolder implements /*View.OnLongC
         cvConclusion= (ImageView) itemView.findViewById(R.id.imvConclusion);
         cvPlan= (ImageView) itemView.findViewById(R.id.imvPlan);
 
-
-
         imProfileRec = (CircleImageView) itemView.findViewById(R.id.imProfileRec);
 
-
+        tlMainSelect= (TableLayout)itemView.findViewById(R.id.tlMainSelect);
         //itemView.setOnLongClickListener(this);
         //itemView.setOnCreateContextMenuListener(this);
         itemView.setOnClickListener(this);

@@ -374,7 +374,7 @@ public class LoginActivity extends AppCompatActivity {
                 else {
 
                    spd.DialogProgress (LoginActivity.this, false);
-                    
+
                     new MaterialDialog.Builder(LoginActivity.this)
                           //  .title("Error al Logearse")
                             .content(R.string.Failded)

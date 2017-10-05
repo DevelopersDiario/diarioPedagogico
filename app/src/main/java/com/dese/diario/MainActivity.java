@@ -188,7 +188,6 @@ public class MainActivity extends AppCompatActivity
         varlogin= new VariablesLogin();
 
         Picasso.with(MainActivity.this)
-
                 .load(Urls.download+du.getFoto())
                 .resize(200, 200)
                 .centerCrop()

@@ -2,6 +2,7 @@ package com.dese.diario.Utils.FirebaseService;
 
 import android.util.Log;
 
+import com.dese.diario.POJOS.DatosUsr;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 /**
@@ -12,6 +13,7 @@ public class FirebaseInstanceIdService extends com.google.firebase.iid.FirebaseI
 
     public static final String TAG= "AMDI";
     public String token;
+    DatosUsr du= new DatosUsr();
 
     public FirebaseInstanceIdService() {
         super();
@@ -21,7 +23,8 @@ public class FirebaseInstanceIdService extends com.google.firebase.iid.FirebaseI
     public void onTokenRefresh() {
         super.onTokenRefresh();
        token = FirebaseInstanceId.getInstance().getToken();
-
+        if(token!=null)
+        du.setToken(token);
         Log.d(TAG, "Token: "+ token);
 
     }
