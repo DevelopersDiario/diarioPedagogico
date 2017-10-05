@@ -70,12 +70,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         super.onSendError(s, e);
     }
 
-    private void showNotification(String title, String body) {
+    private void showNotification( String title, String body) {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pedingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -91,11 +92,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     }
 
-    public void notificationPublication(final Context c, final String token, final String titulo){
-
-     new PostJSON(null, titulo, token );
-
-    }
 
     public void setUserGrup(final Register register, final String idgrupo, final String titulo) {
         RequestQueue queue = Volley.newRequestQueue(register);
@@ -172,7 +168,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                     final String token= jsonobject.getString("token");
                                     final String username=  jsonobject.getString("nombre");
 
-                                    notificationPublication(c, token, titulo);
+                                    notificationPublication(token, titulo, username);
 
                                     Toast.makeText(c, token , Toast.LENGTH_SHORT).show();
 
@@ -187,9 +183,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e("SFirebase Mesaje", "Response--->"+error);
+                Log.e("Firebase Mesaje", "Response--->"+error);
             }
-
         }
         ) {
             /**
@@ -203,10 +198,15 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 return headers;
             }
         };
-
-
         queue.add(stringRequest);
 
     }
+
+    public void notificationPublication(final String token, final String titulo, String username){
+
+        new PostJSON(username, titulo, token );
+
+    }
+
 }
 

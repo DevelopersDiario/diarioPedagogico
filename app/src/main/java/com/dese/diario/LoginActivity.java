@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -24,8 +25,9 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.FirebaseService.FirebaseConection;
@@ -101,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                     if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                       // attemptLogin();
+                        attemptLogin();
                         return true;
                     }
                     return false;
@@ -157,7 +159,9 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             if(isNetworkConnected()){
-                spd.MaterialDialog (LoginActivity.this, true);
+                //spd.MaterialDialog (LoginActivity.this, true);
+                    //spd.MaterialDialogSeek(LoginActivity.this, true);
+
             userLogin();
             }else{
                 showAlertDialog(getResources().getString(R.string.title_conection_fail),
@@ -287,11 +291,13 @@ public class LoginActivity extends AppCompatActivity {
         return (networkInfo != null && networkInfo.isConnected());
     }
     private void userLogin() {
-        // System.out.println("prueba");
+
         try {
             if (isOnline()) {
                 System.out.println(R.string.user_Login_entra);
-              //  spd.MaterialDialog (LoginActivity.this, true);
+             // spd.MaterialDialog (LoginActivity.this, true);
+              //  spd.DialogProgress (LoginActivity.this, true);
+
                 AsyncTask task = new ObtenerDatos();
                 String[][] parametros = {
                         {url.toString()},
@@ -301,7 +307,10 @@ public class LoginActivity extends AppCompatActivity {
 //                Toast.makeText(LoginActivity.this,mEmailView.getText().toString()+mPasswordView.getText().toString(),Toast.LENGTH_LONG).show();
 
             }else{
-              //  spd.MaterialDialog (LoginActivity.this, false);
+               // showProgress(false);
+                spd.DialogProgress (LoginActivity.this, false);
+
+                // spd.MaterialDialog (LoginActivity.this, false);
             }
         }catch (Exception ex){
             System.out.println(ex);
@@ -319,7 +328,13 @@ public class LoginActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(String resultado){
+            final MaterialDialog.Builder dialogBuilder;
+
+
+            dialogBuilder = new MaterialDialog.Builder(LoginActivity.this);
+
             try {
+
 
                 VariablesLogin var_Login;
                 String datoslogin;
@@ -329,6 +344,7 @@ public class LoginActivity extends AppCompatActivity {
                 datoslogin = jsonObject.getString(Success);
 
                 if (datoslogin.length()>=10){
+                    spd.DialogProgress (LoginActivity.this, true);
                     JSONArray jsonArray = new JSONArray(jsonObject.getString(Success));
                     for (int x=0; x<jsonArray.length(); x++) {
                         JSONObject json = new JSONObject(jsonArray.get(x).toString());
@@ -341,7 +357,7 @@ public class LoginActivity extends AppCompatActivity {
                         var_Login.setFoto(json.getString(foto));
                         var_Login.setFportada(json.getString("fportada"));
                         var_Login.setToken(json.getString("token"));
-                          //  Toast.makeText(LoginActivity.this, json.getString("token"), Toast.LENGTH_LONG).show();
+
                         du.setFoto(json.getString(foto));
                         du.setFportada(json.getString("fportada"));
                         du.setToken(json.getString("token"));
@@ -357,8 +373,31 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
 
-                    Toast.makeText(LoginActivity.this,R.string.Failded,Toast.LENGTH_LONG).show();
-                    spd.dismiss();
+                   spd.DialogProgress (LoginActivity.this, false);
+                    
+                    new MaterialDialog.Builder(LoginActivity.this)
+                          //  .title("Error al Logearse")
+                            .content(R.string.Failded)
+                            .positiveText(R.string.reset)
+                            .negativeText(R.string.disagree)
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    userLogin();
+
+                                }
+                            })
+                            .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                  //  spd.DialogProgress (LoginActivity.this, false);
+
+                                }
+                            })
+                            .show();
+                    //Toast.makeText(LoginActivity.this,R.string.Failded,Toast.LENGTH_LONG).show();
+
                 }
 
             } catch (Exception e) {

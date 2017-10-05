@@ -36,7 +36,7 @@
     <string name="open_profile">open profile</string>
     <string name="user_Login_entra">user Login entra</string>
     <string name="Success">Success</string>
-    <string name="Failded">.Verifique Email y/o Contraseña</string>
+    <string name="Failded">Verifique Email y/o Contraseña</string>
     <string name="my_preferences2">my_preferences2</string>
     <string name="login_complete">login_complete</string>
 
@@ -398,4 +398,6 @@
     <string name="action_pause">Pausar</string>
     <string name="cancel_login">Sesión cancelada</string>
     <string name="error_login">Error en Sesión</string>
+    <string name="disagree">Cancelar</string>
+    <string name="reset">Reintentar</string>
 </resources>

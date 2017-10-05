@@ -18,12 +18,12 @@ import okhttp3.Response;
 public class PostJSON  {
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient();
-    String token, ruta, titulo;
+    String token, username, titulo;
 
 
-    public PostJSON(String ruta, String titulo, String token){
+    public PostJSON(String username, String titulo, String token){
         this.titulo=titulo;
-        this.ruta=ruta;
+        this.username=username;
         this.token=token;
 
         new PostingJSON().execute();
@@ -62,8 +62,8 @@ public class PostJSON  {
         return "{\n" +
                 "  \"to\": \""+token+"\",\n" +
                 "  \"notification\": {\n" +
-                "     \"title\": \""+titulo+"\",\n" +
-                "     \"body\": \"Nueva Notificación\"\n" +
+                "     \"title\": \"Nueva notificación de "+username+"\",\n" +
+                "     \"body\": \""+titulo+"\"\n" +
                 "  },\n" +
                 "}";
     }
