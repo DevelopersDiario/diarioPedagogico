@@ -208,7 +208,7 @@
                 android:inputType="text"
                 android:background="@drawable/edit_text_border"
                 android:maxLines="1"
-                android:enabled="false"
+                android:enabled="true"
                 android:gravity="center"/>
 
 

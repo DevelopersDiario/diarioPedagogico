@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dese.diario.Utils.ShowProgressDialog;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
@@ -328,7 +329,8 @@ public class DataSchool extends AppCompatActivity implements View.OnClickListene
             case  R.id.action_saved:
                 enableDates();
                 try {
-                    Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
+                    new ShowProgressDialog().MaterialDialogMsj(DataSchool.this, false, "Actualizando");
+                   // Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
                     updatedatos();
 
                 } catch (JSONException e) {

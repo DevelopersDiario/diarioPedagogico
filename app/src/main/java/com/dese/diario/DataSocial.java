@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -25,9 +26,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Utils.ShowProgressDialog;
+import com.dese.diario.Utils.Urls;
 
 import org.json.JSONException;
 
@@ -48,6 +50,7 @@ public class DataSocial extends AppCompatActivity implements View.OnClickListene
     Boolean homeButton = false, themeChanged;
 
     EditText etNameUserEdit, etEmailEdit,etPasswordEdit, etDateVigenciaEdit;
+    Button etViewFriends;
     private final String url= Urls.updateinfsocial;
 
     private int year;
@@ -71,7 +74,7 @@ public class DataSocial extends AppCompatActivity implements View.OnClickListene
         etNameUserEdit= (EditText)findViewById(R.id.etNameUserEdit);
         etEmailEdit= (EditText)findViewById(R.id.etEmailEdit);
         etDateVigenciaEdit= (EditText)findViewById(R.id.etDateVigenciaEdit);
-
+        etViewFriends= (Button) findViewById(R.id.etViewFriends);
 
 
 
@@ -228,6 +231,7 @@ public class DataSocial extends AppCompatActivity implements View.OnClickListene
         etDateVigenciaEdit = (EditText) findViewById(R.id.etDateVigenciaEdit);
         etDateVigenciaEdit.setOnClickListener(this);
         etDateVigenciaEdit.setTextColor(getResources().getColor(R.color.md_grey_500_50));
+        etViewFriends.setOnClickListener(this);
     }
 
 
@@ -350,7 +354,8 @@ public class DataSocial extends AppCompatActivity implements View.OnClickListene
             case  R.id.action_saved:
 
                 try {
-                    Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
+                    new ShowProgressDialog().MaterialDialogMsj(DataSocial.this, false, "Actualizando");
                     updatedatos();
                     enableDates();
                 } catch (JSONException e) {
@@ -389,6 +394,10 @@ public class DataSocial extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()) {
             case  R.id.etDateVigenciaEdit:
                 setCurrentDateOnView();
+                break;
+            case R.id.etViewFriends:
+                Intent t= new Intent(this, MyPublication.class);
+                startActivity(t);
                 break;
 
 

@@ -32,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
+import com.dese.diario.Utils.ShowProgressDialog;
 import com.dese.diario.Utils.Urls;
 
 import org.json.JSONException;
@@ -148,6 +149,7 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
 
     private void  updatedatos()  throws JSONException{
         if(!etPhone.getText().toString().isEmpty()){
+
             final VariablesLogin varlogin =new VariablesLogin();
             final StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                     new Response.Listener<String>() {
@@ -201,7 +203,8 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
         }else{
-            Toast.makeText(DataPersonal.this, "Necesita agregar fecha de nacimiento ", Toast.LENGTH_LONG).show();
+            new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, false, "Actualizando");
+            // Toast.makeText(DataPersonal.this, "Necesita agregar un telefono ", Toast.LENGTH_LONG).show();
 
         }
 
@@ -400,7 +403,8 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
                 enableDates();
                 try {
                     getRadioButtonesDate();
-                    Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
+                    new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, true, "Actualizando");
+                   // Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
                     updatedatos();
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -10,6 +10,7 @@ import android.view.View;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 
 /**
  * Created by Eduardo on 19/05/2017.
@@ -85,6 +86,26 @@ public class ShowProgressDialog {
                         }
                     });
 
+    }
+
+    public void MaterialDialogMsj(Context context, Boolean status, String msj){
+        if(status==true){
+            new MaterialDialog.Builder(context)
+                    .content(msj)
+                    .theme(Theme.DARK)
+                    .progress(true, 0)
+                    .show();
+        }
+        new MaterialDialog.Builder(context)
+                .content(msj)
+                .theme(Theme.DARK)
+                .progress(true, 0)
+                .dismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+
+                    }
+                });
     }
 
 
