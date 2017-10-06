@@ -201,8 +201,10 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         picker
                 .setListener(Register.this)
                 .init();
-        picker.setDate(new DateTime().plusDays(4));
 
+        picker.setBackgroundColor(Color.LTGRAY);
+        
+        picker.setDate(new DateTime());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 

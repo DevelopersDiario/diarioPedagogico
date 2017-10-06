@@ -77,26 +77,26 @@
                     android:paddingTop="10dp" />
 
             </LinearLayout>
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?colorPrimary"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    />
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
-                <!--   <EditText
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="?colorPrimary" />
+
+                    <!--   <EditText
                        android:id="@+id/etDescripcion"
                        android:inputType="textMultiLine"
                        android:layout_width="wrap_content"
@@ -112,37 +112,34 @@
                        android:isScrollContainer="true"
                        android:hint="¿Que esta pasando?" />-->
 
-                <EditText
-                    android:id="@+id/etDescripcion"
-                    android:layout_gravity="center"
-                    android:hint="@string/input_desc"
-                    android:inputType="textMultiLine"
-                    android:lines="10"
-                    android:minLines="10"
-                    android:layout_marginStart="10dp"
-                    android:gravity="start"
-                    android:maxLines="10"
-                    android:isScrollContainer="true"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:background="@drawable/edit_text_unbording" />
+                    <EditText
+                        android:id="@+id/etDescripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/edit_text_unbording"
+                        android:gravity="start"
+                        android:hint="@string/input_desc"
+                        android:inputType="textMultiLine"
+                        android:isScrollContainer="true"
+                        android:lines="10"
+                        android:maxLines="10"
+                        android:minLines="10" />
 
 
+                    <Button
+                        android:id="@+id/btnMoreDesc"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_menu_right"
+                        android:visibility="gone" />
 
 
-
-                <Button
-                    android:id="@+id/btnMoreDesc"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:background="@drawable/ic_menu_right" />
-
-
-            </LinearLayout>
-        </ScrollView>
+                </LinearLayout>
+            </ScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -162,27 +159,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?colorPrimary"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    />
+                    android:background="?colorPrimary" />
+
                 <EditText
                     android:id="@+id/etSenimientos"
-                    android:lines="10"
-                    android:minLines="10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:gravity="start"
-                    android:maxLines="10"
-                    android:isScrollContainer="true"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:scrollbars="vertical"
-                    android:overScrollMode="always"
                     android:hint="@string/input_sent"
                     android:inputType="textCapSentences|textMultiLine"
+                    android:isScrollContainer="true"
+                    android:lines="10"
+                    android:maxLines="10"
+                    android:minLines="10"
+                    android:overScrollMode="always"
+                    android:scrollbars="vertical"
                     android:textAlignment="center" />
 
                 <Button
@@ -191,8 +189,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:background="@drawable/ic_menu_right" />
+                    android:background="@drawable/ic_menu_right"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -201,29 +199,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?colorPrimary"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    />
+                    android:background="?colorPrimary" />
+
                 <EditText
                     android:id="@+id/etEvaluacion"
-                    android:lines="10"
-                    android:minLines="10"
-                    android:layout_marginStart="10dp"
-                    android:gravity="start"
-                    android:maxLines="10"
-                    android:isScrollContainer="true"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:scrollbars="vertical"
-                    android:overScrollMode="always"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:gravity="start"
                     android:hint="¿Que es lo bueno y malo de esta experiencia?"
                     android:inputType="textMultiLine"
+                    android:isScrollContainer="true"
+                    android:lines="10"
+                    android:maxLines="10"
+                    android:minLines="10"
+                    android:overScrollMode="always"
+                    android:scrollbars="vertical"
                     android:textAlignment="center" />
 
                 <Button
@@ -232,8 +231,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:background="@drawable/ic_menu_right" />
+                    android:background="@drawable/ic_menu_right"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -241,29 +240,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?colorPrimary"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    />
+                    android:background="?colorPrimary" />
+
                 <EditText
                     android:id="@+id/etAnalisis"
-                    android:lines="10"
-                    android:minLines="10"
-                    android:layout_marginStart="10dp"
-                    android:gravity="start"
-                    android:maxLines="10"
-                    android:isScrollContainer="true"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:scrollbars="vertical"
-                    android:overScrollMode="always"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:gravity="start"
                     android:hint="¿Qué sentido puede tener esta experiencia?"
                     android:inputType="textMultiLine"
+                    android:isScrollContainer="true"
+                    android:lines="10"
+                    android:maxLines="10"
+                    android:minLines="10"
+                    android:overScrollMode="always"
+                    android:scrollbars="vertical"
 
                     android:textAlignment="center" />
 
@@ -273,8 +273,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:background="@drawable/ic_menu_right"/>
+                    android:background="@drawable/ic_menu_right"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -282,29 +282,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?colorPrimary"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    />
+                    android:background="?colorPrimary" />
+
                 <EditText
                     android:id="@+id/etConclusion"
-                    android:lines="10"
-                    android:minLines="10"
-                    android:layout_marginStart="10dp"
-                    android:gravity="start"
-                    android:maxLines="10"
-                    android:isScrollContainer="true"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:scrollbars="vertical"
-                    android:overScrollMode="always"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:gravity="start"
                     android:hint="¿Qué más podria haber hecho?"
                     android:inputType="textMultiLine"
+                    android:isScrollContainer="true"
+                    android:lines="10"
+                    android:maxLines="10"
+                    android:minLines="10"
+                    android:overScrollMode="always"
+                    android:scrollbars="vertical"
                     android:textAlignment="center" />
 
                 <Button
@@ -313,8 +314,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:background="@drawable/ic_menu_right"/>
+                    android:background="@drawable/ic_menu_right"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -322,29 +323,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="?colorPrimary"
                     android:layout_marginBottom="5dp"
                     android:layout_marginTop="5dp"
-                    />
+                    android:background="?colorPrimary" />
+
                 <EditText
                     android:id="@+id/etPlan"
-                    android:lines="10"
-                    android:minLines="10"
-                    android:layout_marginStart="10dp"
-                    android:gravity="start"
-                    android:maxLines="10"
-                    android:isScrollContainer="true"
-                    android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:scrollbars="vertical"
-                    android:overScrollMode="always"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:background="@drawable/edit_text_design"
                     android:ems="10"
+                    android:gravity="start"
                     android:hint="¿Qué haria en una experiencia similar?"
                     android:inputType="textMultiLine"
+                    android:isScrollContainer="true"
+                    android:lines="10"
+                    android:maxLines="10"
+                    android:minLines="10"
+                    android:overScrollMode="always"
+                    android:scrollbars="vertical"
                     android:textAlignment="center" />
 
                 <Button
@@ -353,8 +355,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:visibility="gone"
-                    android:background="@drawable/ic_menu_right"/>
+                    android:background="@drawable/ic_menu_right"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
