@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
-    app:context=".MainActivity">
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <android.support.v7.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        card_view:cardCornerRadius="40dp"
-        card_view:cardElevation="40dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_marginBottom="16dp"
+        card_view:cardElevation="450dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +21,7 @@
 
             <!-- Title-->
             <RelativeLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginTop="0dp"
                 android:layout_weight="0.70"
@@ -104,8 +100,9 @@
                       android:layout_height="220dp"
                       android:layout_marginTop="20dp"
                       android:shrinkColumns="*"
-                         android:id="@+id/tlMainSelect"
+                      android:id="@+id/tlMainSelect"
                       android:stretchColumns="*"
+                     android:visibility="gone"
                       android:background="#ffffff">
 
 
@@ -199,6 +196,5 @@
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
+    </LinearLayout>
 
-
-</RelativeLayout>

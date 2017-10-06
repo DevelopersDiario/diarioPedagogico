@@ -71,6 +71,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.titlePublication.setText(t);
        // holder.tvSentimientosRec.setText(sen);
         if(!sen.isEmpty()){
+            holder.tlMainSelect.setVisibility(View.VISIBLE);
             holder.cvFeels.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -111,7 +112,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             });
         }else{
             holder.cvTest.setVisibility(View.GONE);
-            
+
         }
         if(!ana.isEmpty()){
 

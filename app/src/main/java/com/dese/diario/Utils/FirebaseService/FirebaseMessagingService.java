@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.MainActivity;
+import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
 import com.dese.diario.Register;
 import com.dese.diario.Utils.Urls;
@@ -95,6 +96,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     public void setUserGrup(final Register register, final String idgrupo, final String titulo) {
         RequestQueue queue = Volley.newRequestQueue(register);
+        final VariablesLogin variablesLogin= new VariablesLogin();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listuserxgpo,
                 new Response.Listener<String>() {
@@ -111,9 +113,12 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
                                     final String _idUser = jsonobject.getString("idusuario");
+                                    if(variablesLogin.getIdusuario()!=_idUser){
+                                        //Toast.makeText(register, _idUser, Toast.LENGTH_SHORT).show();
+                                        getToken(register, _idUser, titulo);
+                                    }
 
-                                    //Toast.makeText(register, _idUser, Toast.LENGTH_SHORT).show();
-                                    getToken(register, _idUser, titulo);
+
 
                                 }
                             } catch (JSONException e) {
