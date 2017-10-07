@@ -203,7 +203,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 .init();
 
         picker.setBackgroundColor(Color.LTGRAY);
-        
+
         picker.setDate(new DateTime());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -221,22 +221,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                 //RegisterPost(ed);
 
-
-
-                /*Snackbar snackbar = Snackbar
-                        .make(view, "Datos obtenidos:"+ titulo
-                                    +observaciones
-                                    +sentimientos
-                                    +evaluacion
-                                    + analisis
-                                    +conclusion+ "-----"
-                                + ed
-                                +plan, Snackbar.LENGTH_LONG);
-*/
-             //   snackbar.show();
             }
         });
-
 
 
 

@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -155,6 +154,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     public void getToken(final Context c, final String iduser, final String titulo ) {
         RequestQueue queue = Volley.newRequestQueue(c);
+        final VariablesLogin variablesLogin= new VariablesLogin();
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.filtrousuarioXid,
                 new Response.Listener<String>() {
@@ -173,9 +174,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                     final String token= jsonobject.getString("token");
                                     final String username=  jsonobject.getString("nombre");
 
+                                    if(token!=variablesLogin.getToken().toString())
                                     notificationPublication(token, titulo, username);
 
-                                    Toast.makeText(c, token , Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(c, token , Toast.LENGTH_SHORT).show();
 
 
                                 }
