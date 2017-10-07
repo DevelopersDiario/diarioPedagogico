@@ -18,8 +18,8 @@ android {
         applicationId "com.dese.diario"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 10
-        versionName "1.2.0"
+        versionCode 11
+        versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
