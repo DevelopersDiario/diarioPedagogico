@@ -5,12 +5,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,10 +22,10 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +53,6 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class DetailPublication extends AppCompatActivity implements  View.OnClickListener{
@@ -73,8 +72,6 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
     FloatingActionButton btnPost;
 
-    //ListarGpo
-    final static String urlLisGpo= Urls.listgrupo;
 
     ArrayList listRepublicaciones;
     Adapter_RePubication adapter;
@@ -83,8 +80,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     LinearLayout lyContentImagenDetail;
     String ed;
 
-    List leadsNames, leadsIdes;
-    ArrayAdapter mLeadsAdapter;
+    TableLayout tlMainSelectDetail;
 
     //repub
     final static String url= Urls.repuplication;
@@ -152,6 +148,8 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
         imvDowloandPDF= (ImageView)findViewById(R.id.imvDowloandPDF);
         imvDowloandPDF.setOnClickListener(this);
+        tlMainSelectDetail= (TableLayout)findViewById(R.id.tlMainSelectDetail   );
+
 
         Intent  i=this.getIntent();
         idepublicacion=i.getExtras().getString("_IDE_KEY");
@@ -167,6 +165,33 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         ana=i.getExtras().getString("ANA_KEY");
         con=i.getExtras().getString("CON_KEY");
         plan=i.getExtras().getString("PLAN_KEY");
+        if(!sen.isEmpty()){
+
+            tlMainSelectDetail.setVisibility(View.VISIBLE);
+            cvFeels.setVisibility(View.VISIBLE);
+        }else {
+            cvFeels.setVisibility(View.GONE);
+        }
+        if(!eva.isEmpty()){
+            cvTest.setVisibility(View.VISIBLE);
+        }else {
+            cvTest.setVisibility(View.GONE);
+        }
+        if(!ana.isEmpty()){
+            cvAnalyze.setVisibility(View.VISIBLE);
+        }else {
+            cvAnalyze.setVisibility(View.GONE);
+        }
+        if(!con.isEmpty()){
+            cvConclusion.setVisibility(View.VISIBLE);
+        }else {
+            cvConclusion.setVisibility(View.GONE);
+        }
+        if(!plan.isEmpty()){
+            cvPlan.setVisibility(View.VISIBLE);
+        }else {
+            cvPlan.setVisibility(View.GONE);
+        }
 
 
         listarRe( idepublicacion);
@@ -184,6 +209,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         tvUserPubDetail.setText(u);
         tvDatePubDetail.setText(d);
         tvPubDetail.setText(p);
+
         Picasso.with(DetailPublication.this)
                 .load(Urls.download+f)
                 .resize(1200, 1200)
