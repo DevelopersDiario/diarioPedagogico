@@ -48,6 +48,7 @@ import com.dese.diario.Adapter.Adapter_Item;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.CheckForSDCard;
 import com.dese.diario.Utils.Constants;
+import com.dese.diario.Utils.ShowProgressDialog;
 import com.dese.diario.Utils.Upload;
 import com.dese.diario.Utils.Urls;
 import com.github.fafaldo.fabtoolbar.widget.FABToolbarLayout;
@@ -562,22 +563,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                break;
            case R.id.imDoc:
-//              Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-//
-//              intent.addCategory(Intent.CATEGORY_OPENABLE);
-//               String [] mimeTypes = {"application/msword", "application/pdf","application/", "application/vnd.ms-powerpoint", "application/vnd.ms-excel", "application/excel"};
-//               intent.setType("*/*");
-//                //intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-//                 intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-//                 startActivityForResult(intent, PICK_DOC_REQUEST);
-
-            //  browseDocuments();
-
                    FilePickerBuilder fpb= new FilePickerBuilder();
                  //  fpb.setActivityTheme(Apptheme);
                    browserDocuments2(fpb);
-
-
                break;
 
 
@@ -722,14 +710,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         }
                     }
                    // Toast.makeText(this, "Saved to:" , Toast.LENGTH_LONG).show();
-
-
                     break;
-
-
                 case PICK_AUD_REQUEST:
                     actReq=data;
-
                     clipdataSelect(data);
                     break;
                 case PICK_AUD_REC_REQUEST:
@@ -755,24 +738,19 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     break;
                 case Define.ALBUM_REQUEST_CODE:
 
-
                     ArrayList<Uri> pathUri;
                     pathUri = data.getParcelableArrayListExtra(Define.INTENT_PATH);
                     for (int i = 0; i < pathUri.size(); i++) {
                         String realpath= " ";
                         try {
-
                             realpath = upload.getFilePath(Register.this, pathUri.get(i));
                         } catch (URISyntaxException e) {
                             e.printStackTrace();
                         }
-
                         paths.add(realpath);
-
                     }
                     ia = new Adapter_Item(paths, Register.this);
                     rcItems.setAdapter(ia);
-
                     //You can get image path(ArrayList<Uri>) Version 0.6.2 or later
                     break;
                 case PICK_IMG_REQUEST:
@@ -782,9 +760,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                     break;
                 case FilePickerConst.REQUEST_CODE_DOC:
-                    if(resultCode== Activity.RESULT_OK && data!=null)
-                    {
-
+                    if(resultCode== Activity.RESULT_OK && data!=null) {
                         paths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
                         ia = new Adapter_Item(paths, Register.this);
                         rcItems.setAdapter(ia);
@@ -812,7 +788,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
         if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty()) {
 
-
+            new ShowProgressDialog().MaterialDialogMsj(Register.this, true, "Publicando");
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.insertpublicacion,
                     new Response.Listener<String>() {
@@ -820,10 +796,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         public void onResponse(String response) {
 
                             upload.recorrerListPaths(paths, Register.this, actReq, ed);
-
                           //  failed_regpublication.setText(R.string.message_succes_publication);
                             com.dese.diario.Utils.FirebaseService.FirebaseMessagingService fms= new com.dese.diario.Utils.FirebaseService.FirebaseMessagingService();
-
                             fms.setUserGrup(Register.this, ide, titulo);
                             openMainactivity();
                         }
@@ -878,6 +852,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
         }//Fin isChecked
         else{
+            new ShowProgressDialog().MaterialDialogMsj(Register.this, false, "Publicando");
             String Mensaje=("Debe rellenar todos los campos");
             //failed_regpublication.setText(Mensaje);
             Toast.makeText(Register.this,Mensaje , Toast.LENGTH_LONG).show();
@@ -890,7 +865,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
     @Override
     public void onDateSelected(DateTime dateSelected) {
-
         Log.i("HorizontalPicker","Fecha seleccionada="+dateSelected.toString());
     }
 

@@ -161,9 +161,10 @@ public class LoginActivity extends AppCompatActivity {
             if(isNetworkConnected()){
                 //spd.MaterialDialog (LoginActivity.this, true);
                     //spd.MaterialDialogSeek(LoginActivity.this, true);
-
+                spd.DialogProgress (LoginActivity.this, true);
             userLogin();
             }else{
+                spd.DialogProgress (LoginActivity.this, false);
                 showAlertDialog(getResources().getString(R.string.title_conection_fail),
                         getResources().getString(R.string.message_need_conection));
             }

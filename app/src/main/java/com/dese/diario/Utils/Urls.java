@@ -30,7 +30,7 @@ public class Urls {
      //  public static final String listarpublicacionxiduser= "http://201.144.196.51:8080/diariopws/api/1.0/publicacion/listxiduser";
 
      public static final String listpublicacion =  "http://201.144.196.51:8080/diariopws/api/1.0/publicacion/list";                //en uso
-     public static final String listxiduser =  "http://201.144.196.51:8080/diariopws/api/1.0/publicacion/listxiduser";  //funcional server "Requiere idusuario" como header
+     public static final String listxiduser =  "http://201.144.197.51:8080/diariopws/api/1.0/publicacion/listxiduser";  //funcional server "Requiere idusuario" como header
 
      //URLs insertar  publicaciones
      public static final String insertpublicacion =  "http://201.144.196.51:8080/diariopws/api/1.0/publicacion/createpublicacionpadre";   //En reconstruccion
@@ -87,6 +87,7 @@ public class Urls {
     public static final String listxiduser =  "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/listxiduser";  //funcional server "Requiere idusuario" como header
 
     //URLs insertar  publicaciones
+
     public static final String insertpublicacion =  "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/createpublicacionpadre";   //En reconstruccion
     public static final String repuplication ="http://192.168.0.105:8080/diariopws/api/1.0/publicacion/republication";
     public static final String listarrepublication="http:///192.168.0.105:8080/diariopws/api/1.0/publicacion/listrepublication";
