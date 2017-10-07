@@ -1,42 +1,26 @@
 package com.dese.diario.Adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.net.Uri;
-import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderItem;
-import com.dese.diario.Register;
-import com.dese.diario.Utils.Urls;
 import com.dese.diario.R;
 import com.dese.diario.Utils.DownloadTask;
-import com.example.jean.jcplayer.JcAudio;
-import com.mostafaaryan.transitionalimageview.model.TransitionalImage;
+import com.dese.diario.Utils.Urls;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -50,8 +34,6 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             private static String download = Urls.download;
             ArrayList<String> nombrefile;
             Context context;
-
-
 
 
             public Adapter_File(ArrayList<String> nombrefile, Context context) {
@@ -81,8 +63,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(final int pos) {
-
-                                              final CharSequence[] optione = { "View", "Descargar"};
+                        final CharSequence[] optione = { "View", "Descargar"};
                         new MaterialDialog.Builder(context)
                                 .items(optione)
                                 .itemsCallback(new MaterialDialog.ListCallback() {
@@ -97,6 +78,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                             case 1:
                                                 String urlDescarga= download+nombrefile.get(pos);
                                                 new DownloadTask(context, null, urlDescarga);
+
                                                 break;
                                             default:
                                                 dialog.dismiss();
@@ -105,7 +87,37 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                     }
                                 })
                                 .show();
+                      /* if(type=="jpg" || type=="png"|| type=="gif"|| type=="mp3"|| type=="avi"|| type=="wav"){
+                           final CharSequence[] optione = { "View", "Descargar"};
+                           new MaterialDialog.Builder(context)
+                                   .items(optione)
+                                   .itemsCallback(new MaterialDialog.ListCallback() {
+                                       @Override
+                                       public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
 
+                                           switch (which){
+                                               case 0:
+                                                   previewFile(type, holder, fname);
+                                                   break;
+
+                                               case 1:
+                                                   String urlDescarga= download+nombrefile.get(pos);
+                                                   new DownloadTask(context, null, urlDescarga);
+
+                                                   break;
+                                               default:
+                                                   dialog.dismiss();
+                                                   break;
+                                           }
+                                       }
+                                   })
+                                   .show();
+                       }else{
+                           String urlDescarga= download+nombrefile.get(pos);
+                           new DownloadTask(context, null, urlDescarga);
+
+                       }
+*/
                     }
                 });
 
@@ -245,7 +257,6 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
             }
         });
     }
-
 
 
 
