@@ -81,8 +81,6 @@ public class MainActivity extends AppCompatActivity
     final String observaciones="observaciones";
     final String URL= Urls.filtrousuarioXid;
 
-
-
     //Bars
     Toolbar toolbar;
     ActionBar actionBar;
@@ -91,7 +89,6 @@ public class MainActivity extends AppCompatActivity
     TextView textView;
     DrawerLayout drawerLayout;
     RelativeLayout content;
-
 
     //Theme
     SharedPreferences sharedPreferences;
@@ -121,10 +118,7 @@ public class MainActivity extends AppCompatActivity
     //BackPress
     private static final int TIME_DELAY = 2000;
     private static long back_pressed;
-
     private final int MY_PERMISSIONS = 100;
-
-
 
 
     @Override

@@ -400,4 +400,6 @@
     <string name="error_login">Error en Sesión</string>
     <string name="disagree">Cancelar</string>
     <string name="reset">Reintentar</string>
+    <string name="title">Titulo</string>
+    <string name="prompt_title">Titulo</string>
 </resources>

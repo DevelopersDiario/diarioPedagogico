@@ -116,9 +116,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                         //Toast.makeText(register, _idUser, Toast.LENGTH_SHORT).show();
                                         getToken(register, _idUser, titulo);
                                     }
-
-
-
                                 }
                             } catch (JSONException e) {
                                 Log.e("Notifications UserGpo", "Error +->" + e);
@@ -145,10 +142,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 return headers;
             }
         };
-
-
         queue.add(stringRequest);
-
     }
 
 
@@ -156,30 +150,22 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         RequestQueue queue = Volley.newRequestQueue(c);
         final VariablesLogin variablesLogin= new VariablesLogin();
 
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.filtrousuarioXid,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
                             try {
-
                                 JSONArray jsonarray = new JSONArray(response);
                                 for (int i = 0; i < jsonarray.length(); i++) {
 
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
-
                                     final String token= jsonobject.getString("token");
                                     final String username=  jsonobject.getString("nombre");
-
                                     if(token!=variablesLogin.getToken().toString())
                                     notificationPublication(token, titulo, username);
-
                                     //Toast.makeText(c, token , Toast.LENGTH_SHORT).show();
-
-
                                 }
                             } catch (JSONException e) {
                                 Log.e("Notifications UserGpo", "Error +->" + e);
@@ -206,14 +192,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             }
         };
         queue.add(stringRequest);
-
     }
 
-    public void notificationPublication(final String token, final String titulo, String username){
+        public void notificationPublication(final String token, final String titulo, String username){
 
-        new PostJSON(username, titulo, token );
+            new PostJSON(username, titulo, token );
 
-    }
+        }
 
 }
 
