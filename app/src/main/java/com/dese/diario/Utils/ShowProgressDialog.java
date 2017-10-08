@@ -120,6 +120,7 @@ public class ShowProgressDialog {
             dialogBuilder.content("Cargando..")
                     //.cancelable(false)
                     //.autoDismiss(true)
+                    .canceledOnTouchOutside(false)
                     .progress(true, 0);
             dialogBuilder.show();
           //  Toast.makeText(c, "tRUE", Toast.LENGTH_LONG).show();

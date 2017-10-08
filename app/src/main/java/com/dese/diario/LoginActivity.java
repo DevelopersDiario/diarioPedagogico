@@ -392,11 +392,13 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     dialog.dismiss();
-                                  //  spd.DialogProgress (LoginActivity.this, false);
+                                     spd.DialogProgress (LoginActivity.this, false);
+                                    spd.DialogProgress (LoginActivity.this, false);
 
                                 }
                             })
                             .show();
+                    spd.DialogProgress (LoginActivity.this, false);
                     //Toast.makeText(LoginActivity.this,R.string.Failded,Toast.LENGTH_LONG).show();
 
                 }

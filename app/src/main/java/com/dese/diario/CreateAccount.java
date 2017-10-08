@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.dese.diario.Utils.ShowProgressDialog;
 import com.dese.diario.Utils.Urls;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -156,13 +157,16 @@ public class CreateAccount extends AppCompatActivity {
 
     private void RegisterUser() throws JSONException{
         if(etPassword_CreateAcc.getText().toString().trim().matches(etPasswordConfirme_CreateAcc.getText().toString().trim())) {
+            new ShowProgressDialog().DialogProgress (CreateAccount.this, true);
         } else{
+            new ShowProgressDialog().DialogProgress (CreateAccount.this, false);
             Toast.makeText(CreateAccount.this, "La contraseña no coincide", Toast.LENGTH_LONG).show();
             etPassword_CreateAcc.setText("");
             etPassword_CreateAcc.requestFocus();
             etPasswordConfirme_CreateAcc.setText("");
         }//fin else valid_passw
         if (chkbTerms_CreateAcc.isChecked()) {
+
             name = etName_CreateAcc.getText().toString().trim();
             lastname = etLastName_CreateAcc.getText().toString().trim();
             email = etEmail_CreateAcc.getText().toString().trim();
@@ -171,7 +175,7 @@ public class CreateAccount extends AppCompatActivity {
             account= temp[0];
             // final String cue ta=account.toString();
             password=etPassword_CreateAcc.getText().toString().trim();
-
+            new ShowProgressDialog().DialogProgress (CreateAccount.this, true);
        final String token =  FirebaseInstanceId.getInstance().getToken();
 
 
@@ -234,6 +238,7 @@ public class CreateAccount extends AppCompatActivity {
 
         }//Fin isChecked
         else{
+            new ShowProgressDialog().DialogProgress (CreateAccount.this, false);
             String Mensaje="\"Debe aceptar el acuerdo para proceder con el registro\"";
             failed_createAccount.setText(Mensaje);
             Toast.makeText(CreateAccount.this,Mensaje , Toast.LENGTH_LONG).show();

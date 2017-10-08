@@ -563,9 +563,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                break;
            case R.id.imDoc:
-                   FilePickerBuilder fpb= new FilePickerBuilder();
-                 //  fpb.setActivityTheme(Apptheme);
-                   browserDocuments2(fpb);
+
+                   browserDocuments2();
                break;
 
 
@@ -579,7 +578,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
    }//enOnClick
 
 
-    private  void browserDocuments2(FilePickerBuilder fpb){
+    private  void browserDocuments2(){
+        FilePickerBuilder fpb= new FilePickerBuilder();
+        fpb.setActivityTheme(Apptheme);
         fpb.getInstance().setMaxCount(4)
                 .setSelectedFiles(paths)
                 .pickFile(this);
@@ -917,9 +918,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-
                 break;
 
             case android.R.id.home:
