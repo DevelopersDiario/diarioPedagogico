@@ -7,7 +7,7 @@ package com.dese.diario.Utils;
 public class Urls {
 
 /** Server Online **/
- /****/
+ /***
  public static final String login =  "http://201.144.197.51:8080/diariopws/api/1.0/user/autenticar";                        //en uso
  public static final String createaccount =  "http://201.144.197.51:8080/diariopws/api/1.0/usuario/insert";                //en uso
 
@@ -56,11 +56,11 @@ public class Urls {
  //URLs Grupodetalle
  public static final String listgpodetalle ="http://201.144.197.51:8080/diariopws/api/1.0/grupodetalle/list";   //Funcional en server
  public static final String addparticipante ="http://201.144.197.51:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
-
+*/
 
 
  /**   LOCAL       **/
-/***
+/*** */
 
  //URL usuario login
  public static final String login =  "http://192.168.0.105:8080/diariopws/api/1.0/user/autenticar";                        //en uso
@@ -112,6 +112,6 @@ public class Urls {
  //URLs Grupodetalle
  public static final String listgpodetalle ="http://192.168.0.105:8080/diariopws/api/1.0/grupodetalle/list";   //Funcional en server
  public static final String addparticipante ="http://192.168.0.105:8080/diariopws/api/1.0/grupodetalle/addparticipante";   //Funcional en server
- */
+
 
 }

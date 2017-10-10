@@ -117,7 +117,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 failedLoginMessage.setText("");
-                attemptLogin();
+
+                        attemptLogin();
+
+
             }
         });
         mLoginFormView = findViewById(R.id.login_form);
@@ -159,8 +162,6 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             if(isNetworkConnected()){
-                //spd.MaterialDialog (LoginActivity.this, true);
-                    //spd.MaterialDialogSeek(LoginActivity.this, true);
                 spd.DialogProgress (LoginActivity.this, true);
             userLogin();
             }else{
@@ -329,13 +330,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(String resultado){
-            final MaterialDialog.Builder dialogBuilder;
-
-
-            dialogBuilder = new MaterialDialog.Builder(LoginActivity.this);
 
             try {
-
 
                 VariablesLogin var_Login;
                 String datoslogin;
@@ -349,7 +345,6 @@ public class LoginActivity extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(jsonObject.getString(Success));
                     for (int x=0; x<jsonArray.length(); x++) {
                         JSONObject json = new JSONObject(jsonArray.get(x).toString());
-
 
                         var_Login.setIdusuario(json.getString(idusuario));
                         var_Login.setCuenta(json.getString(cuenta));
@@ -367,8 +362,6 @@ public class LoginActivity extends AppCompatActivity {
                         fc.setDatabaseUser(var_Login);
                         //spd.dismiss();
                     }
-                    //openProfile();
-
                     finishLogin();
 
                 }

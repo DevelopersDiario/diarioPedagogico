@@ -29,5 +29,12 @@ public class FirebaseInstanceIdService extends com.google.firebase.iid.FirebaseI
 
     }
 
+    public String getToken(){
+        if(token!=null)
+            return  token;
+        else
+        return du.getToken();
+    }
+
 
 }

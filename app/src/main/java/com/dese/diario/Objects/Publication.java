@@ -4,7 +4,6 @@ package com.dese.diario.Objects;
  * Created by Eduardo on 04/04/2017.
  */
 public class Publication {
-    // idpublicacion='12', idusuario='benjamin', nombre='holaa', foto='hola como estan', fecha='', titulo='1', observaciones='1', padre='2017-03-17 00:00:00.0'
     private String idpublicacion;
     private String idusuario;
     private String nombre;

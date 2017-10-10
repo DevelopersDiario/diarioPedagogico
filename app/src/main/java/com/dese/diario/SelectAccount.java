@@ -337,7 +337,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             //Calling signin}
          signIn();
 
-          spd.progressDilog(SelectAccount.this, true);
 
         }
 
@@ -417,17 +416,21 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             final String nameonly[]= name.split(" ", 2);
             final String na= nameonly[0];
             final String mail= acct.getEmail();
-            final String lastname= acct.getFamilyName();
+            String lastname= acct.getFamilyName();
+
+            final String finalLastname = "Apellidoss";
             final String token = acct.getId();
             final String account=acct.getDisplayName();
+            final String tokenfirebase="tokenpriv";//new FirebaseInstanceIdService().getToken();
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+
+          StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
                             Toast.makeText(SelectAccount.this,R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
-                            //finishLogin();
+                            finishLogin();
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -452,9 +455,10 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put(KEY_NOMBRE, na);
-                    params.put(KEY_APELLIDOS, lastname);
+                    params.put(KEY_APELLIDOS, finalLastname);
                     params.put(KEY_EMAIL, mail);
                     params.put(KEY_PASSWORD, token);
+                    params.put("token", tokenfirebase);
                     params.put(KEY_CUENTA, account);
                     params.put(KEY_VIGENCIA, KEY_9999);
                     params.put(CONTENT_TYPE, APPLICATION);
@@ -464,7 +468,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             };
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
-
 
         }//End if
         else {
@@ -502,7 +505,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin(String mail, String token) {
-        // System.out.println("prueba");
         try {
             if (isOnline()) {
 
@@ -513,7 +515,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                         {KEY_EMAIL, KEY_PASSWORD},
                         {mail, token}};
                 task.execute(parametros);
-//                Toast.makeText(LoginActivity.this,mEmailView.getText().toString()+mPasswordView.getText().toString(),Toast.LENGTH_LONG).show();
 
             }
         }catch (Exception ex){
@@ -537,31 +538,39 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 JSONObject jsonObject = new JSONObject(resultado.toString());
                 //   txtToken.setText(jsonObject.getString("success"));
                 var_Login = new VariablesLogin();
-                datoslogin = jsonObject.getString(getResources().getString(R.string.Success));
+                datoslogin = jsonObject.getString("Success");
+                if(datoslogin.equals("[]")){
+                    Toast.makeText(SelectAccount.this,"Hubo un problema. Intente mas tarde",Toast.LENGTH_LONG).show();
 
-                if (datoslogin.length()>=10){
-                    JSONArray jsonArray = new JSONArray(jsonObject.getString(getResources().getString(R.string.Success)));
-                    for (int x=0; x<jsonArray.length(); x++) {
-                        JSONObject json = new JSONObject(jsonArray.get(x).toString());
-                        var_Login.setIdusuario(json.getString(KEY_IDUSUARIO));
-                        var_Login.setCuenta(json.getString(KEY_CUENTA));
-                        var_Login.setCorreo(json.getString(KEY_EMAIL));
-                        var_Login.setTelefono(json.getString(KEY_TELEFONO));
-                        var_Login.setTelefono(json.getString(KEY_FOTO));
+                }else{
+              
+                    if (datoslogin.length()>=10){
+                        JSONArray jsonArray = new JSONArray(jsonObject.getString(getResources().getString(R.string.Success)));
+                        for (int x=0; x<jsonArray.length(); x++) {
+                            JSONObject json = new JSONObject(jsonArray.get(x).toString());
+                            var_Login.setIdusuario(json.getString(KEY_IDUSUARIO));
+                            var_Login.setCuenta(json.getString(KEY_CUENTA));
+                            var_Login.setCorreo(json.getString(KEY_EMAIL));
+                            var_Login.setTelefono(json.getString(KEY_TELEFONO));
+                            var_Login.setTelefono(json.getString(KEY_FOTO));
+                            var_Login.setFportada(json.getString("fportada"));
+                            var_Login.setToken(json.getString("token"));
 
+
+                        }
+
+                        finishLogin();
 
                     }
-                    //openProfile();
-                  finishLogin();
+                    else {
 
-                }
-                else {
+                        Toast.makeText(SelectAccount.this,"Hubo un problema. Porfavor Verifique su Correo y Contraseña",Toast.LENGTH_LONG).show();
+                    }
 
-                    Toast.makeText(SelectAccount.this,"Hubo un problema. Porfavor Verifique su Correo y Contraseña",Toast.LENGTH_LONG).show();
                 }
 
             } catch (Exception e) {
-
+                    Log.e("SelectAccount--->", e.getMessage());
             }
 
         }

@@ -157,7 +157,7 @@ public class CreateAccount extends AppCompatActivity {
 
     private void RegisterUser() throws JSONException{
         if(etPassword_CreateAcc.getText().toString().trim().matches(etPasswordConfirme_CreateAcc.getText().toString().trim())) {
-            new ShowProgressDialog().DialogProgress (CreateAccount.this, true);
+
         } else{
             new ShowProgressDialog().DialogProgress (CreateAccount.this, false);
             Toast.makeText(CreateAccount.this, "La contraseña no coincide", Toast.LENGTH_LONG).show();
@@ -166,7 +166,7 @@ public class CreateAccount extends AppCompatActivity {
             etPasswordConfirme_CreateAcc.setText("");
         }//fin else valid_passw
         if (chkbTerms_CreateAcc.isChecked()) {
-
+            new ShowProgressDialog().DialogProgress (CreateAccount.this, true);
             name = etName_CreateAcc.getText().toString().trim();
             lastname = etLastName_CreateAcc.getText().toString().trim();
             email = etEmail_CreateAcc.getText().toString().trim();
@@ -175,7 +175,7 @@ public class CreateAccount extends AppCompatActivity {
             account= temp[0];
             // final String cue ta=account.toString();
             password=etPassword_CreateAcc.getText().toString().trim();
-            new ShowProgressDialog().DialogProgress (CreateAccount.this, true);
+
        final String token =  FirebaseInstanceId.getInstance().getToken();
 
 
@@ -239,6 +239,8 @@ public class CreateAccount extends AppCompatActivity {
         }//Fin isChecked
         else{
             new ShowProgressDialog().DialogProgress (CreateAccount.this, false);
+            new ShowProgressDialog().DialogProgress (CreateAccount.this, false);
+
             String Mensaje="\"Debe aceptar el acuerdo para proceder con el registro\"";
             failed_createAccount.setText(Mensaje);
             Toast.makeText(CreateAccount.this,Mensaje , Toast.LENGTH_LONG).show();

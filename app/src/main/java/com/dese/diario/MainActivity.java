@@ -494,7 +494,7 @@ public class MainActivity extends AppCompatActivity
         RequestQueue queue = Volley.newRequestQueue(this);
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,// Urls.listxiduser,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

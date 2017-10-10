@@ -87,37 +87,39 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                     }
                                 })
                                 .show();
-                      /* if(type=="jpg" || type=="png"|| type=="gif"|| type=="mp3"|| type=="avi"|| type=="wav"){
-                           final CharSequence[] optione = { "View", "Descargar"};
-                           new MaterialDialog.Builder(context)
-                                   .items(optione)
-                                   .itemsCallback(new MaterialDialog.ListCallback() {
-                                       @Override
-                                       public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
 
-                                           switch (which){
-                                               case 0:
-                                                   previewFile(type, holder, fname);
-                                                   break;
+                      /*   final CharSequence[] optione = { "View", "Descargar"};
+                        new MaterialDialog.Builder(context)
+                                .items(optione)
+                                .itemsCallback(new MaterialDialog.ListCallback() {
+                                    @Override
+                                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+  Toast.makeText(context, "Tipo:"+ type, Toast.LENGTH_SHORT).show();
+                                        switch (which){
+                                            case 0:
+                                                previewFile(type, holder, fname);
+                                                break;
 
-                                               case 1:
-                                                   String urlDescarga= download+nombrefile.get(pos);
-                                                   new DownloadTask(context, null, urlDescarga);
+                                            case 1:
+                                                String urlDescarga= download+nombrefile.get(pos);
+                                                new DownloadTask(context, null, urlDescarga);
 
-                                                   break;
-                                               default:
-                                                   dialog.dismiss();
-                                                   break;
-                                           }
-                                       }
-                                   })
-                                   .show();
-                       }else{
+                                                break;
+                                            default:
+                                                dialog.dismiss();
+                                                break;
+                                        }
+                                    }
+                                })
+                                .show();*/
+                   /*   if(type=="jpg" || type=="png"|| type=="gif"|| type=="mp3"|| type=="avi"|| type=="wav"){
+
+                       }else if(type=="doc" || type=="pdf" || type=="xls"|| type=="ppt"){
                            String urlDescarga= download+nombrefile.get(pos);
                            new DownloadTask(context, null, urlDescarga);
 
-                       }
-*/
+                       }*/
+
                     }
                 });
 
