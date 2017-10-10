@@ -580,7 +580,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
     private  void browserDocuments2(){
         FilePickerBuilder fpb= new FilePickerBuilder();
-        fpb.setActivityTheme(Apptheme);
+        //fpb.setActivityTheme(Apptheme);
         fpb.getInstance().setMaxCount(4)
                 .setSelectedFiles(paths)
                 .pickFile(this);

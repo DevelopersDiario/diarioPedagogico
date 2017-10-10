@@ -15,38 +15,39 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.dese.diario.Adapter.Adapter_Pubication;
+import com.dese.diario.Adapter.Adapter_Experence;
+import com.dese.diario.POJOS.DatosUsr;
+import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Constants;
 import com.dese.diario.Utils.FirebaseService.FirebaseConection;
 import com.dese.diario.Utils.Urls;
-import com.dese.diario.POJOS.DatosUsr;
-import com.dese.diario.POJOS.VariablesLogin;
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
@@ -57,7 +58,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -99,8 +101,8 @@ public class MainActivity extends AppCompatActivity
     RecyclerView recyclerView;
 
     ArrayList listpublicaciones;
-    Adapter_Pubication adapter;
-
+  //  Adapter_Pubication adapter;
+     Adapter_Experence adapter;
     LinearLayoutManager linearLayoutManager;
     VideoView vidView;
 
@@ -120,6 +122,9 @@ public class MainActivity extends AppCompatActivity
     private static long back_pressed;
     private final int MY_PERMISSIONS = 100;
 
+
+    //Dates Friends
+    String dataFoto, dataNombre, dataToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -490,16 +495,12 @@ public class MainActivity extends AppCompatActivity
     } //Fin onStart
 
     public void conectionPublication(){
-
         RequestQueue queue = Volley.newRequestQueue(this);
 
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,// Urls.listxiduser,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listxgrupo,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        //JSONArray jsonArray = null;
 
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 
@@ -508,10 +509,8 @@ public class MainActivity extends AppCompatActivity
                                 JSONArray jsonarray = new JSONArray(response);
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
-                                    //  System.out.println(jsonobject);
-                                    VariablesLogin varllogin=new VariablesLogin();
-
-                                    listpublicaciones.add(new com.dese.diario.Objects.Publication(
+                                    //System.out.println(jsonobject);
+                                    listpublicaciones.add(new com.dese.diario.Objects.Experence(
                                             jsonobject.getString(idpublicacion),
                                             jsonobject.getString(idusuario),
                                             jsonobject.getString(nombre),
@@ -524,12 +523,14 @@ public class MainActivity extends AppCompatActivity
                                             jsonobject.getString("analisis"),
                                             jsonobject.getString("conclusion"),
                                             jsonobject.getString("planaccion"),
-                                            jsonobject.getString(padre)));
-                                    adapter=new Adapter_Pubication(listpublicaciones, MainActivity.this);
+                                            jsonobject.getString(padre),
+                                            jsonobject.getString("token"),
+                                            jsonobject.getString("nombregrupo"),
+                                            jsonobject.getString("parabuscaruser"),
+                                            jsonobject.getString("cuenta"),
+                                            jsonobject.getString("idgrupo")));
+                                    adapter=new Adapter_Experence(listpublicaciones, MainActivity.this);
                                     recyclerView.setAdapter(adapter);
-                                   /// System.out.println(listpublicaciones);
-                                    drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
 
 
                                 }
@@ -546,13 +547,25 @@ public class MainActivity extends AppCompatActivity
             public void onErrorResponse(VolleyError error) {
                 Log.e(getString(R.string.carita),getString(R.string.message_ocurrio_error));
             }
-        });
+        }){
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put(idusuario, varlogin.getIdusuario());
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
 
 
         queue.add(stringRequest);
-// Signify that we are done refreshing
         swipeContainer.setRefreshing(false);
     }// Fin conectionPublication
+
+
 
     private boolean mayRequestStoragePermission() {
 

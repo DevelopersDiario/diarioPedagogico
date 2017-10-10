@@ -28,7 +28,7 @@ public class Urls {
 
  //URLs listar  publicaciones
  //  public static final String listarpublicacionxiduser= "http://201.144.197.51:8080/diariopws/api/1.0/publicacion/listxiduser";
-
+  public static final String listxgrupo=" http://201.144.197.51:8080/diariopws/api/1.0/publicacion/listpublicxgpo";
  public static final String listpublicacion =  "http://201.144.197.51:8080/diariopws/api/1.0/publicacion/list";                //en uso
  public static final String listxiduser =  "http://201.144.197.51:8080/diariopws/api/1.0/publicacion/listxiduser";  //funcional server "Requiere idusuario" como header
 
@@ -82,8 +82,8 @@ public class Urls {
 
 
  //URLs listar  publicaciones
- //  public static final String listarpublicacionxiduser= "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/listxiduser";
-
+ //
+ public static final String listxgrupo=" http://192.168.0.105:8080/diariopws/api/1.0/publicacion/listpublicxgpo";
  public static final String listpublicacion =  "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/list";                //en uso
  public static final String listxiduser =  "http://192.168.0.105:8080/diariopws/api/1.0/publicacion/listxiduser";  //funcional server "Requiere idusuario" como header
 
