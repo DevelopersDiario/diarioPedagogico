@@ -17,6 +17,7 @@ public class Publication {
     private String conclusion;
     private String planaccion;
     private String padre;
+    private String token;
 
     public Publication(){
 
@@ -25,7 +26,7 @@ public class Publication {
     public Publication(String idpublicacion, String idusuario, String nombre,
                        String foto, String fecha, String titulo, String observaciones, String sentimiento, String evaluacion,
                        String analisis, String conclusion, String planaccion,
-                       String padre) {
+                       String padre, String token) {
         this.idpublicacion = idpublicacion;
         this.idusuario = idusuario;
         this.nombre = nombre;
@@ -39,6 +40,7 @@ public class Publication {
         this.conclusion=conclusion;
         this.planaccion=planaccion;
         this.padre = padre;
+        this.token=token;
     }
     public String getIdpublicacion() {
         return idpublicacion;
@@ -132,6 +134,14 @@ public class Publication {
         this.planaccion = planaccion;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "Publication{" +
@@ -148,6 +158,7 @@ public class Publication {
                 ", conclusion='" + conclusion+ '\'' +
                 ", planaccion='" + planaccion + '\'' +
                 ", padre='" + padre + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }

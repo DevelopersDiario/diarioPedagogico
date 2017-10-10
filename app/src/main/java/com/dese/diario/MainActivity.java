@@ -42,7 +42,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.dese.diario.Adapter.Adapter_Experence;
+import com.dese.diario.Adapter.Adapter_Pubication;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Constants;
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity
     RecyclerView recyclerView;
 
     ArrayList listpublicaciones;
-  //  Adapter_Pubication adapter;
-     Adapter_Experence adapter;
+  Adapter_Pubication adapter;
+     //Adapter_Experence adapter;
     LinearLayoutManager linearLayoutManager;
     VideoView vidView;
 
@@ -510,9 +510,9 @@ public class MainActivity extends AppCompatActivity
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
                                     //System.out.println(jsonobject);
-                                    listpublicaciones.add(new com.dese.diario.Objects.Experence(
+                                    listpublicaciones.add(new com.dese.diario.Objects.Publication(
                                             jsonobject.getString(idpublicacion),
-                                            jsonobject.getString(idusuario),
+                                            jsonobject.getString("parabuscaruser"),
                                             jsonobject.getString(nombre),
                                             jsonobject.getString(foto),
                                             jsonobject.getString(fecha),
@@ -524,12 +524,8 @@ public class MainActivity extends AppCompatActivity
                                             jsonobject.getString("conclusion"),
                                             jsonobject.getString("planaccion"),
                                             jsonobject.getString(padre),
-                                            jsonobject.getString("token"),
-                                            jsonobject.getString("nombregrupo"),
-                                            jsonobject.getString("parabuscaruser"),
-                                            jsonobject.getString("cuenta"),
-                                            jsonobject.getString("idgrupo")));
-                                    adapter=new Adapter_Experence(listpublicaciones, MainActivity.this);
+                                            jsonobject.getString("token")));
+                                    adapter=new Adapter_Pubication(listpublicaciones, MainActivity.this);
                                     recyclerView.setAdapter(adapter);
 
 
