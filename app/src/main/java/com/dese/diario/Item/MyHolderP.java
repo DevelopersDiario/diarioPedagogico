@@ -21,7 +21,6 @@ public class MyHolderP extends RecyclerView.ViewHolder implements /*View.OnLongC
     public TextView titlePublication;
     public TextView tvFechaRec;
     public TextView tvPublicationRec;
-    //public TextView tvSentimientosRec;
     public TableLayout tlMainSelect;
     public ImageView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 

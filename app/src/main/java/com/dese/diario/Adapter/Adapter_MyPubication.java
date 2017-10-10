@@ -72,89 +72,111 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
         holder.tvUserRec.setText(nombre);
         holder.titlePublicationMP.setText(titulo);
        // holder.tvSentimientosRec.setText(sen);
-
-        holder.cvFeelsMP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialDialog.Builder(context)
-                        .title("¿Que esta pensando y sintiendo?")
-                        .content(sen)
-                        .positiveText("Listo")
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+        if(!sen.isEmpty()){
+            holder.tlMainSelect.setVisibility(View.VISIBLE);
+            holder.cvFeelsMP.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new MaterialDialog.Builder(context)
+                            .title("¿Que esta pensando y sintiendo?")
+                            .content(sen)
+                            .positiveText("Listo")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                     dialog.dismiss();
-                            }
-                        })
-                        .show();
+                                }
+                            })
+                            .show();
 
-            }
-        });
-        holder.cvTestMP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialDialog.Builder(context)
-                        .title("¿Que es lo bueno y malo de esta experiencia?")
-                        .content(eva)
-                        .positiveText("Listo")
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
-        holder.cvAnalyzeMP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialDialog.Builder(context)
-                        .title("¿Que sentido puede tener esta experiencia?")
-                        .content(ana)
-                        .positiveText("Listo")
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
-       holder.cvConclusionMP.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               new MaterialDialog.Builder(context)
-                       .title("¿Qué mas podria haber hecho?")
-                       .content(con)
-                       .positiveText("Listo")
-                       .onPositive(new MaterialDialog.SingleButtonCallback() {
-                           @Override
-                           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                               dialog.dismiss();
-                           }
-                       })
-                       .show();
-           }
-       });
+                }
+            });
+        }else{
+            holder.cvFeelsMP.setVisibility(View.GONE);
+            holder.tlMainSelect.setVisibility(View.GONE);
+        }if(!eva.isEmpty()){
+            holder.cvTestMP.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new MaterialDialog.Builder(context)
+                            .title("¿Que es lo bueno y malo de esta experiencia?")
+                            .content(eva)
+                            .positiveText("Listo")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            });
+        }else{
+            holder.cvTestMP.setVisibility(View.GONE);
 
-        holder.cvPlanMP.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialDialog.Builder(context)
-                        .title("¿Qué haría en una experiencia similar?")
-                        .content(plan)
-                        .positiveText("Listo")
-                        .onPositive(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
+        }
+        if(!ana.isEmpty()){
+
+            holder.cvAnalyzeMP.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new MaterialDialog.Builder(context)
+                            .title("¿Que sentido puede tener esta experiencia?")
+                            .content(ana)
+                            .positiveText("Listo")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            });
+        }else{
+            holder.cvAnalyzeMP.setVisibility(View.GONE);
+        }
+        if(!con.isEmpty()){
+            holder.cvConclusionMP.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new MaterialDialog.Builder(context)
+                            .title("¿Qué mas podria haber hecho?")
+                            .content(con)
+                            .positiveText("Listo")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            });
+        }else{
+            holder.cvConclusionMP.setVisibility(View.GONE);
+        }
+        if(!plan.isEmpty()){
+            holder.cvPlanMP.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new MaterialDialog.Builder(context)
+                            .title("¿Qué haría en una experiencia similar?")
+                            .content(plan)
+                            .positiveText("Listo")
+                            .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
+            });
+        }else {
+            holder.cvPlanMP.setVisibility(View.GONE);
+        }
+
         Picasso.with(context)
                 .load(Urls.download + foto)
                 .resize(250, 250)
