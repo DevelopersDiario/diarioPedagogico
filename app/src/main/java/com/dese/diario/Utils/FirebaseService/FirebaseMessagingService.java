@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -113,7 +114,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
                                     final String _idUser = jsonobject.getString("idusuario");
 
-                                        //Toast.makeText(register, _idUser, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(register, _idUser, Toast.LENGTH_SHORT).show();
                                         getToken(register, _idUser, titulo);
 
                                 }
@@ -163,9 +164,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
                                     final String token= jsonobject.getString("token");
                                     final String username=  jsonobject.getString("nombre");
-                                    if(token!=variablesLogin.getToken().toString())
+                                   // if(token!=variablesLogin.getToken().toString())
                                     notificationPublication(token, titulo, username);
-                                    //Toast.makeText(c, token , Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(c, token , Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 Log.e("Notifications UserGpo", "Error +->" + e);

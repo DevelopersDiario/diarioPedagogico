@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity
                                 break;
                             case R.id.item_navigation_drawer_publication:
 
-                                Intent intentPubli = new Intent(MainActivity.this, Publication.class);
+                                Intent intentPubli = new Intent(MainActivity.this, Register.class);
                                 startActivity(intentPubli);
                                 break;
                             case R.id.item_navigation_drawer_profile:

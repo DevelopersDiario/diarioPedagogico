@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             if(isNetworkConnected()){
-                spd.DialogProgress (LoginActivity.this, true);
+                //spd.DialogProgress (LoginActivity.this, true);
             userLogin();
             }else{
                 spd.DialogProgress (LoginActivity.this, false);

@@ -132,7 +132,13 @@ public class MyPublication extends AppCompatActivity implements  SwipeRefreshLay
        imProfileMyPub= (CircleImageView)findViewById(R.id.imProfileMyPub);
 
         //tvUserMyPub.setText(listpublicaciones.get(2).toString());
+VariablesLogin variablesLogin= new VariablesLogin();
 
+        Picasso.with(MyPublication.this)
+                .load(Urls.download+variablesLogin.getFoto())
+                .resize(200, 200)
+                .centerCrop()
+                .into( imProfileMyPub);
 
     }
     private void initRecyclerView() {

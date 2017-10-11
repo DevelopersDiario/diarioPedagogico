@@ -185,7 +185,7 @@ public class Upload {
                                         @Override
                                         public void onCompleted(UploadInfo uploadInfo, ServerResponse serverResponse) {
 
-
+                                            Toast.makeText(context, "Se ha subido", Toast.LENGTH_LONG).show();
                                         }
 
                                         @Override

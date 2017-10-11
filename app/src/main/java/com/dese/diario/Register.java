@@ -787,7 +787,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         plan=etPlan.getText().toString().trim();
         padre="0";
 
-        if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty()) {
+        if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty() && !ide.isEmpty()) {
 
             new ShowProgressDialog().MaterialDialogMsj(Register.this, true, "Publicando");
 
@@ -812,7 +812,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                         try {
                             if(error!=null && error.getMessage() !=null){
-                                Toast.makeText(getApplicationContext(),"error VOLLEY "+error.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Intente maás tarde "+error.getMessage(),Toast.LENGTH_LONG).show();
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();

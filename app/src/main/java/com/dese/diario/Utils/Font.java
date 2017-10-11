@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.dese.diario.Publication;
 import com.dese.diario.R;
 
 /**
@@ -83,7 +82,7 @@ public class Font extends AppCompatActivity {
         TF13 = Typeface.createFromAsset(getAssets(), Precursive_1_FREE);
         TF14 = Typeface.createFromAsset(getAssets(), PWSchoolScript);
         TF15 = Typeface.createFromAsset(getAssets(), PWScolarpaper);
-        Publication p= new Publication();
+
 
        title = new String[]{
                "Seleccione fuente",
@@ -284,7 +283,7 @@ public class Font extends AppCompatActivity {
         return  tfSelected;
     }
 
-    public void selectFont(Publication context, final EditText editText){
+    public void selectFont(Context context, final EditText editText){
         bindActivity();
         final Typeface tfSelected=Typeface.DEFAULT;
         AlertDialog.Builder b = new AlertDialog.Builder(context);

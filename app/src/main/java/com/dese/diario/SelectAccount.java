@@ -126,7 +126,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
 
     ShowProgressDialog spd;
-
+        String tokens;
 
     //FirebaseLogin
     private FirebaseAuth firebaseAuth;
@@ -141,7 +141,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_select_account);
 
         spd= new ShowProgressDialog();
-
+        getToken();
         eventsButtons();
 
         inicializarResourceGmail();
@@ -215,13 +215,16 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         private void registerFacebook(){
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             final String name, mail, uid, lastname, token, account;
+            getToken();
             if (user != null) {
+
                 name = user.getDisplayName();
                 mail = user.getEmail();
                 Uri photoUrl = user.getPhotoUrl();
                 token = user.getUid();
-                lastname= " ";
+                lastname= "Apellidos";
                 account=user.getDisplayName();
+                final String tokenfirebase=tokens;
 
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -255,10 +258,11 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put(KEY_NOMBRE, name);
-                      //  params.put(KEY_APELLIDOS, lastname);
+                         params.put(KEY_APELLIDOS, lastname);
                         params.put(KEY_EMAIL, mail);
                         params.put(KEY_PASSWORD, token);
                         params.put(KEY_CUENTA, account);
+                        params.put("token", tokenfirebase);
                         params.put(KEY_VIGENCIA, KEY_9999);
                         params.put(CONTENT_TYPE, APPLICATION);
                         return params;
@@ -286,6 +290,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         getOnBoarding();
         tv1 = (TextView) findViewById(R.id.tvMessageWelcome);
 
+
+
     }
 
     private void getOnBoarding() {
@@ -307,6 +313,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     /*---onClicks------*/
     private void eventsButtons() {
         //Buttons
+
         //Button LoginActivity
         btnLoginEmail = (Button) findViewById(R.id.btn_login_email);
         btnLoginEmail.setOnClickListener(new View.OnClickListener() {
@@ -402,6 +409,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 }
 
                 else*/
+            getToken();
             handleSignInResult(result);
         }//end if
         callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -421,10 +429,10 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             final String finalLastname = "Apellidoss";
             final String token = acct.getId();
             final String account=acct.getDisplayName();
-            final String tokenfirebase="tokenpriv";//new FirebaseInstanceIdService().getToken();
+            final String tokenfirebase=tokens;//new FirebaseInstanceIdService().getToken();
 
 
-          StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -482,6 +490,16 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         }//end else
 
     }//end handleSignInResult
+    public void getToken(){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
+
+        tokens= prefs.getString( "tokenNew", "tokentmps" ); // (key, default)
+        Log.e("SELECTaccount", tokens);
+        // final String tempEmail = pref.getString( "storedEmail", "Email Address" );
+
+    }
+
+
     /**---LOGIN---**/
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private static String readStream(InputStream in) {
