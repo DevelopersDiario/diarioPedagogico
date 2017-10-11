@@ -92,6 +92,7 @@ public class ShowProgressDialog {
         if(status==true){
             new MaterialDialog.Builder(context)
                     .content(msj)
+                    .canceledOnTouchOutside(false)
                     .theme(Theme.DARK)
                     .progress(true, 0)
                     .show();
@@ -99,6 +100,7 @@ public class ShowProgressDialog {
         new MaterialDialog.Builder(context)
                 .content(msj)
                 .theme(Theme.DARK)
+                .canceledOnTouchOutside(false)
                 .progress(true, 0)
                 .dismissListener(new DialogInterface.OnDismissListener() {
                     @Override

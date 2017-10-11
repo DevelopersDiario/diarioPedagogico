@@ -32,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Grupo;
 import com.dese.diario.Item.Search_friends;
+import com.dese.diario.Utils.ShowProgressDialog;
 import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 
@@ -238,7 +239,7 @@ public class Colaboration extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton(R.string.btnAgree, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogBox, int id) {
-
+                        new ShowProgressDialog().MaterialDialogMsj(Colaboration.this, true, "Creando Colaboracion");
                         String nombreg = Gpoo.getText().toString();
                         String usuario = varlogin.getIdusuario();
                         String nombreusuario= varlogin.getCuenta();
@@ -274,7 +275,7 @@ public class Colaboration extends AppCompatActivity {
                     public void onResponse(String response) {
                         Toast.makeText(Colaboration.this, R.string.message_succes_group, Toast.LENGTH_LONG).show();
                         Intent i= new Intent(Colaboration.this, Colaboration.class);
-                        startActivity(i);
+                        startActivity(i);  new ShowProgressDialog().MaterialDialogMsj(Colaboration.this, false, "Creando Colaboracion");
 
                     }
                 }, new Response.ErrorListener() {

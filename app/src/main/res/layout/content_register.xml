@@ -44,18 +44,19 @@
                         android:layout_height="1dp"
                         android:background="?colorPrimary"
                         android:paddingBottom="5dp" />
-                 <!--   <TextView
+                   <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="19dp"
-                        android:text="@string/prompt_title" />-->
+                       android:layout_marginBottom="10dp"
+                        android:text="Titulo*" />
 
                     <EditText
                         android:id="@+id/etTitle"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginTop="20dp"
-                        android:hint="Titulo*" />
+                        android:layout_marginTop="30dp"
+                        android:hint="Escriba un titulo" />
 
                     </android.support.v7.widget.CardView>
 

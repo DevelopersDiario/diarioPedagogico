@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginTop="80dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     tools:context="com.dese.diario.DetailMyPublication"
     tools:showIn="@layout/activity_detail_my_publication">
 
@@ -51,6 +53,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:visibility="gone"
                                     android:orientation="vertical">
 
                                         <TextView
@@ -95,7 +98,6 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:background="@drawable/edit_text_design"
-                                            android:enabled="false"
                                             android:gravity="start"
                                             android:inputType="textMultiLine"
                                             android:lines="10"
@@ -152,7 +154,7 @@
                                             android:gravity="start"
                                             android:maxLines="10"
                                             android:background="@drawable/edit_text_design"
-                                            android:enabled="false"/>
+                                            />
 
 
                                 </LinearLayout>
@@ -185,7 +187,7 @@
                                             android:gravity="start"
                                             android:maxLines="10"
                                             android:background="@drawable/edit_text_design"
-                                            android:enabled="false"/>
+                                            />
 
 
                                 </LinearLayout>
@@ -218,8 +220,7 @@
                                             android:lines="10"
                                             android:gravity="start"
                                             android:maxLines="10"
-                                            android:background="@drawable/edit_text_design"
-                                            android:enabled="false"/>
+                                            android:background="@drawable/edit_text_design" />
 
 
                                 </LinearLayout>
@@ -251,7 +252,7 @@
                                             android:gravity="start"
                                             android:maxLines="10"
                                             android:background="@drawable/edit_text_design"
-                                            android:enabled="false"/>
+                                           />
 
                                 </LinearLayout>
                         </android.support.v7.widget.CardView>
@@ -281,8 +282,7 @@
                                             android:lines="10"
                                             android:gravity="start"
                                             android:maxLines="10"
-                                            android:background="@drawable/edit_text_design"
-                                            android:enabled="false"/>
+                                            android:background="@drawable/edit_text_design" />
 
                                 </LinearLayout>
                         </android.support.v7.widget.CardView>

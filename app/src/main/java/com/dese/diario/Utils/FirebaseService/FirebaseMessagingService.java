@@ -112,10 +112,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
                                     final String _idUser = jsonobject.getString("idusuario");
-                                    if(variablesLogin.getIdusuario()!=_idUser){
+
                                         //Toast.makeText(register, _idUser, Toast.LENGTH_SHORT).show();
                                         getToken(register, _idUser, titulo);
-                                    }
+
                                 }
                             } catch (JSONException e) {
                                 Log.e("Notifications UserGpo", "Error +->" + e);

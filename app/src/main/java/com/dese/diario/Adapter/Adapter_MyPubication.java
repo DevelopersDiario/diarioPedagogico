@@ -67,6 +67,7 @@ public class Adapter_MyPubication extends RecyclerView.Adapter<MyHolderMP> {
         final String plan=listapublicaciones.get(position).getPlanaccion();
 
 
+
         holder.tvFechaRecMP.setText(fecha);
         holder.tvPublicationRecMP.setText(observaciones);
         holder.tvUserRec.setText(nombre);
