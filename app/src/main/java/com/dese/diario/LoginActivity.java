@@ -1,7 +1,5 @@
 package com.dese.diario;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
@@ -80,6 +78,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
          spd= new ShowProgressDialog();
+
+        getToken();
 
         inicializarButton();
 
@@ -256,36 +256,6 @@ public class LoginActivity extends AppCompatActivity {
         return password.length() > 4;
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
 
 
     public boolean isOnline() {
@@ -305,10 +275,10 @@ public class LoginActivity extends AppCompatActivity {
                 AsyncTask task = new ObtenerDatos();
                 String[][] parametros = {
                         {url.toString()},
-                        {correo, password1},
-                        {mEmailView.getText().toString(), mPasswordView.getText().toString()}};
+                        {correo, password1, "token"},
+                        {mEmailView.getText().toString(), mPasswordView.getText().toString(), tokennew}};
                 task.execute(parametros);
-//                Toast.makeText(LoginActivity.this,mEmailView.getText().toString()+mPasswordView.getText().toString(),Toast.LENGTH_LONG).show();
+              //Toast.makeText(LoginActivity.this,mEmailView.getText().toString()+mPasswordView.getText().toString()+ tokennew, Toast.LENGTH_LONG).show();
 
             }else{
                // showProgress(false);
@@ -317,7 +287,8 @@ public class LoginActivity extends AppCompatActivity {
                 // spd.MaterialDialog (LoginActivity.this, false);
             }
         }catch (Exception ex){
-            System.out.println(ex);
+                Log.e("Exception->", ex.getMessage().toString());
+            //System.out.println(ex);
         }
     }//Fin UserLogin
 
@@ -327,6 +298,7 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 return ConexionServer(parametros[0][0], parametros[1], parametros[2]);
             } catch (IOException e) {
+                Log.e("Obtener datos---->", e.getMessage().toString());
                 return e.getMessage();
             }
         }
@@ -349,13 +321,13 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject json = new JSONObject(jsonArray.get(x).toString());
 
                         var_Login.setIdusuario(json.getString(idusuario));
-                        getToken(json.getString(idusuario));
+                        getToken();
                         var_Login.setCuenta(json.getString(cuenta));
                         var_Login.setCorreo(json.getString(correo));
                         var_Login.setTelefono(json.getString(telefono));
                         var_Login.setFoto(json.getString(foto));
                         var_Login.setFportada(json.getString("fportada"));
-                        var_Login.setToken(json.getString("token"));
+                        var_Login.setToken(tokennew);
 
                         du.setFoto(json.getString(foto));
                         du.setFportada(json.getString("fportada"));
@@ -380,7 +352,9 @@ public class LoginActivity extends AppCompatActivity {
                             .onPositive(new MaterialDialog.SingleButtonCallback() {
                                 @Override
                                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                    getToken();
                                     userLogin();
+                                    spd.DialogProgress (LoginActivity.this, false);
 
                                 }
                             })
@@ -406,7 +380,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
-    public void getToken(final String ide_){
+    public void getToken(){
         SharedPreferences prefs = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
 
         tokennew= prefs.getString( "tokenNew", "tokentmps" ); // (key, default)
@@ -415,7 +389,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    private String ConexionServer(String dir_url,String[] variables, String[] valores) throws IOException {
+    private String ConexionServer(String dir_url, String[] variables, String[] valores) throws IOException {
         URL url = new URL(dir_url);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(60000);
@@ -429,7 +403,7 @@ public class LoginActivity extends AppCompatActivity {
         conn.connect();
         datos = readStream(conn.getInputStream());
         conn.disconnect();
-       // System.out.println("datosserver: "+datos);
+        System.out.println("datosserver: "+datos);
         return datos;
 
     }

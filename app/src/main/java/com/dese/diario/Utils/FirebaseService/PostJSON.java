@@ -62,7 +62,7 @@ public class PostJSON  {
         return "{\n" +
                 "  \"to\": \""+token+"\",\n" +
                 "  \"notification\": {\n" +
-                "     \"title\": \"Nueva notificación de "+username+"\",\n" +
+                "     \"title\": \"Nueva publicacion de "+username+"\",\n" +
                 "     \"body\": \""+titulo+"\"\n" +
                 "  },\n" +
                 "}";
