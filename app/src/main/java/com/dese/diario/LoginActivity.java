@@ -70,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
     DatosUsr du;
     ShowProgressDialog spd;
 
+    String tokennew;
+
 
 
     @Override
@@ -347,6 +349,7 @@ public class LoginActivity extends AppCompatActivity {
                         JSONObject json = new JSONObject(jsonArray.get(x).toString());
 
                         var_Login.setIdusuario(json.getString(idusuario));
+                        getToken(json.getString(idusuario));
                         var_Login.setCuenta(json.getString(cuenta));
                         var_Login.setCorreo(json.getString(correo));
                         var_Login.setTelefono(json.getString(telefono));
@@ -356,7 +359,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         du.setFoto(json.getString(foto));
                         du.setFportada(json.getString("fportada"));
-                        du.setToken(json.getString("token"));
+                        du.setToken(tokennew);
 
                         FirebaseConection fc= new FirebaseConection();
                         fc.setDatabaseUser(var_Login);
@@ -402,6 +405,15 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         }
+    }
+    public void getToken(final String ide_){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
+
+        tokennew= prefs.getString( "tokenNew", "tokentmps" ); // (key, default)
+        Log.e("Cuenta", tokennew);
+
+
+
     }
     private String ConexionServer(String dir_url,String[] variables, String[] valores) throws IOException {
         URL url = new URL(dir_url);

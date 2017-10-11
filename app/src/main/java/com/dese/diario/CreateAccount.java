@@ -7,12 +7,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -30,7 +32,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Utils.ShowProgressDialog;
 import com.dese.diario.Utils.Urls;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 
@@ -55,6 +56,7 @@ public class CreateAccount extends AppCompatActivity {
     String account;
     String password;
     String email;
+    String token;
     private View createAccount_progress;
     private View CreateAccount_form;
     View focusView = null;
@@ -120,6 +122,8 @@ public class CreateAccount extends AppCompatActivity {
 
             }});
         createAccount_progress = findViewById(R.id.createAccount_progress);
+
+        getToken();
     }
     // Check if the device is connected to the Internet
     private boolean isNetworkConnected() {
@@ -176,7 +180,7 @@ public class CreateAccount extends AppCompatActivity {
             // final String cue ta=account.toString();
             password=etPassword_CreateAcc.getText().toString().trim();
 
-       final String token =  FirebaseInstanceId.getInstance().getToken();
+            //  final String token =  FirebaseInstanceId.getInstance().getToken();
 
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -226,7 +230,7 @@ public class CreateAccount extends AppCompatActivity {
                     params.put(KEY_EMAIL, email);
                     params.put(KEY_PASSWORD, password);
                     params.put(KEY_CUENTA, account);
-                    params.put(KEY_TOKEN, token);
+                  params.put(KEY_TOKEN, token);
                     params.put("vigencia", "9999-12-31");
                     params.put("Content-Type", "application/x-www-form-urlencoded");
                     return params;
@@ -251,7 +255,14 @@ public class CreateAccount extends AppCompatActivity {
 
 
     }//Fin RegisterUser
+    public void getToken(){
+        SharedPreferences prefs = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
 
+        token= prefs.getString( "tokenNew", "tokentmps" ); // (key, default)
+        Log.e("Cuenta", token);
+       // final String tempEmail = pref.getString( "storedEmail", "Email Address" );
+
+    }
     private void openLogin(String mail) {
         // showProgress(true);
         Intent intent= new Intent(CreateAccount.this,LoginActivity.class);
