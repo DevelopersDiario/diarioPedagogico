@@ -70,7 +70,7 @@
                 android:paddingRight="16dp">
 
 
-                    <com.rockerhieu.emojicon.EmojiconEditText
+                    <EditText
                         android:id="@+id/etPublication"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
