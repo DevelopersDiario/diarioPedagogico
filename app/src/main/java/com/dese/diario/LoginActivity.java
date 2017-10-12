@@ -11,7 +11,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -25,8 +24,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.FirebaseService.FirebaseConection;
@@ -314,66 +311,69 @@ public class LoginActivity extends AppCompatActivity {
                 //   txtToken.setText(jsonObject.getString("success"));
                 var_Login = new VariablesLogin();
                 datoslogin = jsonObject.getString(Success);
+                if(datoslogin.equals("[]")){
+                    Toast.makeText(LoginActivity.this,"Hubo un problema. Intente más tarde",Toast.LENGTH_LONG).show();
 
-                if (datoslogin.length()>=10){
-                    spd.DialogProgress (LoginActivity.this, true);
-                    JSONArray jsonArray = new JSONArray(jsonObject.getString(Success));
-                    for (int x=0; x<jsonArray.length(); x++) {
-                        JSONObject json = new JSONObject(jsonArray.get(x).toString());
+                }else{
+                    if (datoslogin.length()>=10){
+                        spd.DialogProgress (LoginActivity.this, true);
+                        JSONArray jsonArray = new JSONArray(jsonObject.getString(Success));
+                        for (int x=0; x<jsonArray.length(); x++) {
+                            JSONObject json = new JSONObject(jsonArray.get(x).toString());
 
-                        var_Login.setIdusuario(json.getString(idusuario));
-                        getToken();
-                        var_Login.setCuenta(json.getString(cuenta));
-                        var_Login.setCorreo(json.getString(correo));
-                        var_Login.setTelefono(json.getString(telefono));
-                        var_Login.setFoto(json.getString(foto));
-                        var_Login.setFportada(json.getString("fportada"));
-                        var_Login.setToken(tokennew);
+                            var_Login.setIdusuario(json.getString(idusuario));
+                            getToken();
+                            var_Login.setCuenta(json.getString(cuenta));
+                            var_Login.setCorreo(json.getString(correo));
+                            var_Login.setTelefono(json.getString(telefono));
+                            var_Login.setFoto(json.getString(foto));
+                            var_Login.setFportada(json.getString("fportada"));
+                            var_Login.setToken(tokennew);
 
-                        du.setFoto(json.getString(foto));
-                        du.setFportada(json.getString("fportada"));
-                        du.setToken(tokennew);
+                            du.setFoto(json.getString(foto));
+                            du.setFportada(json.getString("fportada"));
+                            du.setToken(tokennew);
 
-                        FirebaseConection fc= new FirebaseConection();
-                        fc.setDatabaseUser(var_Login);
-                        //spd.dismiss();
+                            FirebaseConection fc= new FirebaseConection();
+                            fc.setDatabaseUser(var_Login);
+                            //spd.dismiss();
+                        }
+                        finishLogin();
+
                     }
-                    finishLogin();
+                    else {
+                        Toast.makeText(LoginActivity.this,"Hubo un problema. Porfavor Verifique su Correo y Contraseña",Toast.LENGTH_LONG).show();
+                       spd.DialogProgress (LoginActivity.this, false);
 
+                        /*new MaterialDialog.Builder(LoginActivity.this)
+                              //  .title("Error al Logearse")
+                                .content(R.string.Failded)
+                                .positiveText(R.string.reset)
+                                .negativeText(R.string.disagree)
+                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        getToken();
+                                        userLogin();
+                                        spd.DialogProgress (LoginActivity.this, false);
+
+                                    }
+                                })
+                                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                                    @Override
+                                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                        dialog.dismiss();
+                                         spd.DialogProgress (LoginActivity.this, false);
+                                        spd.DialogProgress (LoginActivity.this, false);
+
+                                    }
+                                })
+                                .show();
+                        spd.DialogProgress (LoginActivity.this, false);
+                        //Toast.makeText(LoginActivity.this,R.string.Failded,Toast.LENGTH_LONG).show();
+*/
+                    }
                 }
-                else {
-
-                   spd.DialogProgress (LoginActivity.this, false);
-
-                    new MaterialDialog.Builder(LoginActivity.this)
-                          //  .title("Error al Logearse")
-                            .content(R.string.Failded)
-                            .positiveText(R.string.reset)
-                            .negativeText(R.string.disagree)
-                            .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    getToken();
-                                    userLogin();
-                                    spd.DialogProgress (LoginActivity.this, false);
-
-                                }
-                            })
-                            .onNegative(new MaterialDialog.SingleButtonCallback() {
-                                @Override
-                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                    dialog.dismiss();
-                                     spd.DialogProgress (LoginActivity.this, false);
-                                    spd.DialogProgress (LoginActivity.this, false);
-
-                                }
-                            })
-                            .show();
-                    spd.DialogProgress (LoginActivity.this, false);
-                    //Toast.makeText(LoginActivity.this,R.string.Failded,Toast.LENGTH_LONG).show();
-
-                }
-
             } catch (Exception e) {
                 Toast.makeText(LoginActivity.this, "Verfique su correo y/o contraseña", Toast.LENGTH_LONG).show();
                 Log.e("Login.ObtenerDatos", e.getMessage()+ ">--<"+e.getLocalizedMessage());

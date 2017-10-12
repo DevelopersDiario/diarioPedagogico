@@ -4,6 +4,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -28,6 +30,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +44,7 @@ import java.util.Map;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
     public static final String TAG = "PUBLICACIONES";
+    String fotuka;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -49,7 +56,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Notificacion: " + remoteMessage.getNotification().getBody());
 
-            showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+            showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody(), fotuka);
         }
 
         if (remoteMessage.getData().size() > 0) {
@@ -70,18 +77,19 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         super.onSendError(s, e);
     }
 
-    private void showNotification( String title, String body) {
+    private void showNotification( String title, String body, String foto) {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pedingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
+        Bitmap pictureProfile= getBitmapFromURL(Urls.download+fotuka);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(body)
+                .setLargeIcon(pictureProfile)
                 .setAutoCancel(true)
                 .setSound(soundUri)
                 .setVibrate(new long[100])
@@ -92,7 +100,20 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     }
 
-
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
+    }
     public void setUserGrup(final Register register, final String idgrupo, final String titulo) {
         RequestQueue queue = Volley.newRequestQueue(register);
         final VariablesLogin variablesLogin= new VariablesLogin();
@@ -163,8 +184,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
                                     final String token= jsonobject.getString("token");
                                     final String username=  jsonobject.getString("nombre");
+                                    final String foto=jsonobject.getString("foto");
                                    // if(token!=variablesLogin.getToken().toString())
-                                    notificationPublication(token, titulo, username);
+                                    notificationPublication(token, titulo, username, foto);
                                    // Toast.makeText(c, token , Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
@@ -194,9 +216,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         queue.add(stringRequest);
     }
 
-        public void notificationPublication(final String token, final String titulo, String username){
+        public void notificationPublication(final String token, final String titulo, String username, final  String foto){
 
-            new PostJSON(username, titulo, token );
+            new PostJSON(username, titulo, token, foto );
 
         }
 

@@ -57,7 +57,7 @@ public class Upload {
                 final String file_path = paths.get(i);
                // file= new File(file_path);
               //  final String fname= file.getName();
-                Toast.makeText(context, "Paths to:" + paths.get(i).toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Null:" + paths.get(i).toString(), Toast.LENGTH_SHORT).show();
                upload(context, file_path, grupo);
             }
         }else {
@@ -65,7 +65,7 @@ public class Upload {
             final String file_path = file.getAbsolutePath();
             final String fname= file.getName();
 
-            Toast.makeText(context, "Paths to2:" + file_path, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "NO NULL:" + file_path, Toast.LENGTH_SHORT).show();
 
             upload(context, file_path, grupo);
 

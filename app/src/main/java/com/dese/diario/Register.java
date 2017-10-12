@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
@@ -36,6 +37,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -786,79 +788,101 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         conclusion=etConclusion.getText().toString().trim();
         plan=etPlan.getText().toString().trim();
         padre="0";
+            if(ide==null|| ide==""){
+                new MaterialDialog.Builder(this)
+                        .title("Necesita crear al menos una colaboración ")
+                        .content("Desea crearla en este momento?")
+                        .positiveText("Crear colaboración")
+                        .negativeText("Cancelar")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                Intent colaboracion =new Intent(Register.this, Colaboration.class);
+                                startActivity(colaboracion);
+                            }
+                        })
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+                            }
+                        });
 
-        if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty() && !ide.isEmpty()) {
+            }else{
+                if (!etTitle.getText().toString().isEmpty() && !etDescripcion.getText().toString().isEmpty() ) {
 
-            new ShowProgressDialog().MaterialDialogMsj(Register.this, true, "Publicando");
+                    new ShowProgressDialog().MaterialDialogMsj(Register.this, true, "Publicando");
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.insertpublicacion,
-                    new Response.Listener<String>() {
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, Urls.insertpublicacion,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+                                    upload.recorrerListPaths(paths, Register.this, actReq, ed);
+                                    //  failed_regpublication.setText(R.string.message_succes_publication);
+                                    com.dese.diario.Utils.FirebaseService.FirebaseMessagingService fms= new com.dese.diario.Utils.FirebaseService.FirebaseMessagingService();
+                                    fms.setUserGrup(Register.this, ide, titulo);
+                                    openMainactivity();
+                                }
+                            }, new Response.ErrorListener() {
                         @Override
-                        public void onResponse(String response) {
+                        public void onErrorResponse(VolleyError error) {
+                            String body;
+                            String statusCode = String.valueOf(error.networkResponse.statusCode);
+                            //get response body and parse with appropriate encoding
+                            if (error.networkResponse.data != null) {
 
-                            upload.recorrerListPaths(paths, Register.this, actReq, ed);
-                          //  failed_regpublication.setText(R.string.message_succes_publication);
-                            com.dese.diario.Utils.FirebaseService.FirebaseMessagingService fms= new com.dese.diario.Utils.FirebaseService.FirebaseMessagingService();
-                            fms.setUserGrup(Register.this, ide, titulo);
-                            openMainactivity();
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    String body;
-                    String statusCode = String.valueOf(error.networkResponse.statusCode);
-                    //get response body and parse with appropriate encoding
-                    if (error.networkResponse.data != null) {
+                                try {
+                                    if(error!=null && error.getMessage() !=null){
+                                        Toast.makeText(getApplicationContext(),"Intente maás tarde "+error.getMessage(),Toast.LENGTH_LONG).show();
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
 
-                        try {
-                            if(error!=null && error.getMessage() !=null){
-                                Toast.makeText(getApplicationContext(),"Intente maás tarde "+error.getMessage(),Toast.LENGTH_LONG).show();
+                                    }
+                                    body = new String(error.networkResponse.data, "UTF-8");
+
+                                    // failed_regpublication.setText(body);
+
+
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
                             }
-                            else{
-                                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
-
-                            }
-                            body = new String(error.networkResponse.data, "UTF-8");
-
-                           // failed_regpublication.setText(body);
-
-
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
+                            Log.e("",error.getMessage());
                         }
-                    }
-                    Log.e("",error.getMessage());
-                }
-            }) {
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put(KEY_IDUSUARIO,idusuario );
-                    params.put(KEY_TITULO, titulo);
-                    params.put(KEY_IDGROUP, ide);
-                    params.put(KEY_OBSERVACIONES, observaciones);
-                    params.put("sentimiento", sentimientos);
-                    params.put("evaluacion", evaluacion);
-                    params.put("analisis", analisis);
-                    params.put("conclusion", conclusion);
-                    params.put("planaccion", plan);
-                    params.put(CONTENT_TYPE, APPLICATION);
-                    return params;
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put(KEY_IDUSUARIO,idusuario );
+                            params.put(KEY_TITULO, titulo);
+                            params.put(KEY_IDGROUP, ide);
+                            params.put(KEY_OBSERVACIONES, observaciones);
+                            params.put("sentimiento", sentimientos);
+                            params.put("evaluacion", evaluacion);
+                            params.put("analisis", analisis);
+                            params.put("conclusion", conclusion);
+                            params.put("planaccion", plan);
+                            params.put(CONTENT_TYPE, APPLICATION);
+                            return params;
 
-                }
+                        }
 
-            };
-            RequestQueue requestQueue = Volley.newRequestQueue(this);
-            requestQueue.add(stringRequest);
+                    };
+                    RequestQueue requestQueue = Volley.newRequestQueue(this);
+                    requestQueue.add(stringRequest);
 
-        }//Fin isChecked
-        else{
-            new ShowProgressDialog().MaterialDialogMsj(Register.this, false, "Publicando");
-            String Mensaje=("Debe rellenar todos los campos");
-            //failed_regpublication.setText(Mensaje);
-            Toast.makeText(Register.this,Mensaje , Toast.LENGTH_LONG).show();
+                }//Fin isChecked
+                else{
+                    new ShowProgressDialog().MaterialDialogMsj(Register.this, false, "Publicando");
+                    String Mensaje=("Debe rellenar todos los campos");
+                    //failed_regpublication.setText(Mensaje);
+                    Toast.makeText(Register.this,Mensaje , Toast.LENGTH_LONG).show();
 
-        }//fin else cheked
+                }//fin else cheked
+
+            }
 
 
 

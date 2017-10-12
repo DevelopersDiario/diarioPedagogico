@@ -18,13 +18,14 @@ import okhttp3.Response;
 public class PostJSON  {
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     OkHttpClient client = new OkHttpClient();
-    String token, username, titulo;
+    String token, username, titulo, foto;
 
 
-    public PostJSON(String username, String titulo, String token){
+    public PostJSON(String username, String titulo, String token, String foto){
         this.titulo=titulo;
         this.username=username;
         this.token=token;
+        this.foto=foto;
 
         new PostingJSON().execute();
 
