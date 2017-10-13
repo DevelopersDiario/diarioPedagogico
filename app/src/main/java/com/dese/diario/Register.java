@@ -72,10 +72,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
@@ -571,7 +569,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
               // FilePickerBuilder fpb= new FilePickerBuilder();
                //fpb.setActivityTheme(Apptheme);
-               new FilePickerBuilder().getInstance().setMaxCount(4)
+               new FilePickerBuilder().getInstance().setMaxCount(8)
                        .setSelectedFiles(paths)
                        .pickFile(this);
                break;
@@ -586,34 +584,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
    }//enOnClick
 
-    private void browseDocuments(){
-
-        String[] mimeTypes =
-                {"application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
-                        "application/vnd.ms-powerpoint","application/vnd.openxmlformats-officedocument.presentationml.presentation", // .ppt & .pptx
-                        "application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xls & .xlsx
-                        "text/plain",
-                        "application/pdf",
-                        "application/zip"};
-
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
-            if (mimeTypes.length > 0) {
-                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-            }
-        } else {
-            String mimeTypesStr = "";
-            for (String mimeType : mimeTypes) {
-                mimeTypesStr += mimeType + "|";
-            }
-            intent.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
-        }
-        startActivityForResult(Intent.createChooser(intent,"ChooseFile"), PICK_DOC_REQUEST);
-
-    }
 
 
     private void OpenCamera() {
@@ -729,8 +699,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         Toast.makeText(this, "Audio Grabado Correctamente!", Toast.LENGTH_SHORT).show();
                         if(!AUDIO_FILE_PATH_FULL.isEmpty())
                             paths.add(AUDIO_FILE_PATH_FULL);
-                      /*  ia = new Adapter_Item(paths, Register.this);
-                        rcItems.setAdapter(ia);*/
+                     ia = new Adapter_Item(paths, Register.this);
+                        rcItems.setAdapter(ia);
 
                     } else if (resultCode == RESULT_CANCELED) {
                         Toast.makeText(this, "El audio no se grabo correctamente", Toast.LENGTH_SHORT).show();
@@ -763,38 +733,26 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     break;
                 case PICK_IMG_REQUEST:
                     paths.add(mCurrentPhotoPath);
-                  /*  ia = new Adapter_Item(paths, Register.this);
+                  ia = new Adapter_Item(paths, Register.this);
                     rcItems.setAdapter(ia);
-*/
+
                     break;
                 case FilePickerConst.REQUEST_CODE_DOC:
                     if(resultCode== Activity.RESULT_OK && data!=null) {
                        paths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
-                 //       paths.add(data.getStringExtra(FilePickerConst.KEY_SELECTED_DOCS));
 
-                       /* ia = new Adapter_Item(paths, Register.this);
-                        rcItems.setAdapter(ia);*/
+                       ia = new Adapter_Item(paths, Register.this);
+                        rcItems.setAdapter(ia);
                     }
                     break;
 
             }
-            ia = new Adapter_Item(paths, Register.this);
-            rcItems.clearOnChildAttachStateChangeListeners();
-            rcItems.setAdapter(ia);
+
 
         }//Fin resultCode
 
     }// Fin onActivityResult
-    boolean duplicates(final ArrayList<String> zipcodelist)
-    {
-        Set<String> lump = new HashSet<>();
-        for (String i : zipcodelist)
-        {
-            if (lump.contains(i)) return true;
-            lump.add(i);
-        }
-        return false;
-    }
+
 
     private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();

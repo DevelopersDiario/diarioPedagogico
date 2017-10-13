@@ -42,6 +42,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -126,7 +127,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
 
     ShowProgressDialog spd;
-        String tokens;
+    String tokens;
     //facebook Reource
     private LoginButton loginButton;
     private CallbackManager callbackManager;
@@ -170,10 +171,12 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
+
             }
 
             @Override
             public void onCancel() {
+                finishLogin();
                 Toast.makeText(getApplicationContext(), R.string.cancel_login, Toast.LENGTH_SHORT).show();
             }
 
@@ -213,20 +216,21 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
-
+                    finishLogin();
                     Toast.makeText(getApplicationContext(), R.string.message_ocurrio_error, Toast.LENGTH_SHORT).show();
                 }
+
 
 
             }
         });
     }
-        private void registerFacebook(){
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            final String name, mail, uid, lastname, token, account;
-            getToken();
+    private void registerFacebook(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String name, mail, uid, lastname, token, account;
+        getToken();
 
-            try {
+        try {
             if (user != null) {
 
                 name = user.getDisplayName();
@@ -243,7 +247,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(SelectAccount.this, R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
-                              //  finishLogin();
+                                //  finishLogin();
                                 goMainScreen();
 
                             }
@@ -289,31 +293,31 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             } else {
                 goLoginScreen();
             }
-            } catch (Exception e) {
-                Drawable drawable = getResources().getDrawable(R.drawable.image_cloud_sad);
-                new MaterialDialog.Builder(SelectAccount.this)
-                        .title("Uja! Hubo un error")
-                        .icon(drawable)
-                        .content("Lo lamentamos, intente más tarde. Plis!")
-                        .negativeText(R.string.disagree)
-                        .onNegative(new MaterialDialog.SingleButtonCallback() {
-                            @Override
-                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                                dialog.dismiss();
+        } catch (Exception e) {
+            Drawable drawable = getResources().getDrawable(R.drawable.image_cloud_sad);
+            new MaterialDialog.Builder(SelectAccount.this)
+                    .title("Uja! Hubo un error")
+                    .icon(drawable)
+                    .content("Lo lamentamos, intente más tarde. Plis!")
+                    .negativeText(R.string.disagree)
+                    .onNegative(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dialog.dismiss();
 
-                            }
-                        })
-                        .show();
-               // Toast.makeText(SelectAccount.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
-                Log.e("Facebook Register", e.getMessage()+ ">--<"+e.getLocalizedMessage());
-
-            }
-
-
-
-
+                        }
+                    })
+                    .show();
+            // Toast.makeText(SelectAccount.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
+            Log.e("Facebook Register", e.getMessage()+ ">--<"+e.getLocalizedMessage());
 
         }
+
+
+
+
+
+    }
     private void goLoginScreen() {
         Intent intent = new Intent(this, SelectAccount.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -376,7 +380,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             //Intent iCA= new Intent (SelectAccount.this, CreateAccount.class);
             // startActivity(iCA);
             //Calling signin}
-         signIn();
+            signIn();
 
 
         }
@@ -395,7 +399,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         //Initializing signinbutton
         signInButton = (SignInButton) findViewById(R.id.login_google);
         signInButton.setSize(SignInButton.SIZE_WIDE);
-      //   signInButton.setScopes(gso.getScopeArray());
+        //   signInButton.setScopes(gso.getScopeArray());
 
         //Initializing google api client
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -423,7 +427,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         {
             mGoogleApiClient.disconnect();
         }
-
+        LoginManager.getInstance().logOut();
         firebaseAuth.removeAuthStateListener(firebaseAuthListener);
     }
     @Override
@@ -622,7 +626,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 }
 
             } catch (Exception e) {
-                    Log.e("SelectAccount--->", e.getMessage());
+                Log.e("SelectAccount--->", e.getMessage());
             }
 
         }
@@ -684,7 +688,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         super.onStart();
         state1();
         mGoogleApiClient.connect();
-       // firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        // firebaseAuth.addAuthStateListener(firebaseAuthListener);
         //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
     }
 
