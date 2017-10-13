@@ -40,6 +40,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -212,7 +213,7 @@ public class Search_friends extends AppCompatActivity  {
 
                 else if(s.length()<0) {
                     listFriends.clear();
-                    adpt.notifyDataSetChanged();
+                   // adpt.notifyDataSetChanged();
                 }
 
             }
@@ -251,6 +252,10 @@ public class Search_friends extends AppCompatActivity  {
                                                 jsonobject.getString("cuenta"),
                                                 jsonobject.getString("idrol"),
                                                 jsonobject.getString("foto")));
+                                        HashSet hs = new HashSet();
+                                        hs.addAll(listFriends);
+                                        listFriends.clear();
+                                        listFriends.addAll(hs);
                                         adpt = new Adapter_Friends(listFriends, Search_friends.this);
                                         recyclerFriends.setAdapter(adpt);
 
