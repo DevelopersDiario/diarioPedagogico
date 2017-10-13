@@ -60,8 +60,8 @@ public class Urls {
 
   */
  /**   LOCAL       **/
-/***  */
-
+/***
+*/
 
  //URL usuario login
  public static final String login =  "http://192.168.0.105:8080/diariopws/api/1.0/user/autenticar";                        //en uso

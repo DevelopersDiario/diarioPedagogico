@@ -167,6 +167,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
@@ -186,9 +187,13 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
+
                 if (user != null) {
+                    Toast.makeText(SelectAccount.this, "firebaseAuthListener", Toast.LENGTH_SHORT).show();
                     registerFacebook();
                     goMainScreen();
+                }else{
+                    Toast.makeText(SelectAccount.this, "User++++"+user.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -200,14 +205,16 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void handleFacebookAccessToken(AccessToken accessToken) {
+    private void handleFacebookAccessToken(final AccessToken accessToken) {
         AuthCredential credential= FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
+
                     Toast.makeText(getApplicationContext(), R.string.message_ocurrio_error, Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(SelectAccount.this, "firebaseAuth"+ accessToken.getUserId().toString(), Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -225,14 +232,21 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 lastname= "Apellidos";
                 account=user.getDisplayName();
                 final String tokenfirebase=tokens;
-
-
+                new MaterialDialog.Builder(SelectAccount.this)
+                        .title("Facebook datos")
+                        .content("name: "+name+
+                                " mail: "+mail+
+                                "  account: "+account+
+                                     "token :" +tokenfirebase)
+                        .canceledOnTouchOutside(false)
+                        .show();
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(SelectAccount.this, R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
                                 finishLogin();
+
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -426,7 +440,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             final String mail= acct.getEmail();
             String lastname= acct.getFamilyName();
 
-            final String finalLastname = "Apellidoss";
+            final String finalLastname = "Apellidos";
             final String token = acct.getId();
             final String account=acct.getDisplayName();
             final String tokenfirebase=tokens;//new FirebaseInstanceIdService().getToken();

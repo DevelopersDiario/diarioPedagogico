@@ -72,8 +72,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import cafe.adriel.androidaudiorecorder.AndroidAudioRecorder;
 import cafe.adriel.androidaudiorecorder.model.AudioChannel;
@@ -511,6 +513,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                break;
            case R.id.imCamera:
                OpenCamera();
+               Toast.makeText(this, "camera", Toast.LENGTH_LONG).show();
                break;
            case R.id.imGallery:
                FishBun.with(Register.this)
@@ -566,7 +569,11 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                break;
            case R.id.imDoc:
 
-                   browserDocuments2();
+              // FilePickerBuilder fpb= new FilePickerBuilder();
+               //fpb.setActivityTheme(Apptheme);
+               new FilePickerBuilder().getInstance().setMaxCount(4)
+                       .setSelectedFiles(paths)
+                       .pickFile(this);
                break;
 
 
@@ -579,14 +586,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
    }//enOnClick
 
-
-    private  void browserDocuments2(){
-        FilePickerBuilder fpb= new FilePickerBuilder();
-        //fpb.setActivityTheme(Apptheme);
-        fpb.getInstance().setMaxCount(4)
-                .setSelectedFiles(paths)
-                .pickFile(this);
-    }
     private void browseDocuments(){
 
         String[] mimeTypes =
@@ -688,6 +687,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Adapter_Item ia;
+
         if (resultCode == RESULT_OK) {
             switch (requestCode){
 
@@ -704,9 +704,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                             imageEncoded = upload.getFilePath(Register.this, mImageUri);
                             paths.add(imageEncoded);
 
-                            ia = new Adapter_Item(paths, Register.this);
-                            rcItems.setAdapter(ia);
-                            Toast.makeText(this, "Saved to:" + imageEncoded, Toast.LENGTH_SHORT).show();
+                           /* ia = new Adapter_Item(paths, Register.this);
+                            rcItems.setAdapter(ia);*/
+                            //Toast.makeText(this, "Saved to:" + imageEncoded, Toast.LENGTH_SHORT).show();
 
                         } catch (URISyntaxException e) {
                             e.printStackTrace();
@@ -724,8 +724,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         Toast.makeText(this, "Audio Grabado Correctamente!", Toast.LENGTH_SHORT).show();
                         if(!AUDIO_FILE_PATH_FULL.isEmpty())
                             paths.add(AUDIO_FILE_PATH_FULL);
-                        ia = new Adapter_Item(paths, Register.this);
-                        rcItems.setAdapter(ia);
+                      /*  ia = new Adapter_Item(paths, Register.this);
+                        rcItems.setAdapter(ia);*/
 
                     } else if (resultCode == RESULT_CANCELED) {
                         Toast.makeText(this, "El audio no se grabo correctamente", Toast.LENGTH_SHORT).show();
@@ -735,9 +735,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 case com.veer.multiselect.Util.Constants.REQUEST_CODE_MULTISELECT:
 
                     paths = data.getStringArrayListExtra(com.veer.multiselect.Util.Constants.GET_PATHS);
-                    ia = new Adapter_Item(paths, Register.this);
+                   /* ia = new Adapter_Item(paths, Register.this);
                     rcItems.setAdapter(ia);
-
+*/
                     break;
                 case Define.ALBUM_REQUEST_CODE:
 
@@ -758,24 +758,38 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     break;
                 case PICK_IMG_REQUEST:
                     paths.add(mCurrentPhotoPath);
-                    ia = new Adapter_Item(paths, Register.this);
+                  /*  ia = new Adapter_Item(paths, Register.this);
                     rcItems.setAdapter(ia);
-
+*/
                     break;
                 case FilePickerConst.REQUEST_CODE_DOC:
                     if(resultCode== Activity.RESULT_OK && data!=null) {
-                        paths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
-                        ia = new Adapter_Item(paths, Register.this);
-                        rcItems.setAdapter(ia);
+                       paths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
+                 //       paths.add(data.getStringExtra(FilePickerConst.KEY_SELECTED_DOCS));
+
+                       /* ia = new Adapter_Item(paths, Register.this);
+                        rcItems.setAdapter(ia);*/
                     }
                     break;
 
             }
-
+            ia = new Adapter_Item(paths, Register.this);
+            rcItems.clearOnChildAttachStateChangeListeners();
+            rcItems.setAdapter(ia);
 
         }//Fin resultCode
 
     }// Fin onActivityResult
+    boolean duplicates(final ArrayList<String> zipcodelist)
+    {
+        Set<String> lump = new HashSet<>();
+        for (String i : zipcodelist)
+        {
+            if (lump.contains(i)) return true;
+            lump.add(i);
+        }
+        return false;
+    }
 
     private void RegisterPost(final String  ide) throws JSONException {
         final VariablesLogin  varlogin =new VariablesLogin();
@@ -1178,9 +1192,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
             try {
                 imageEncoded= upload.getFilePath(Register.this, mImageUri);
                 paths.add(imageEncoded);
-
-                ia = new Adapter_Item(paths, Register.this);
-                rcItems.setAdapter(ia);
+             //   ia = new Adapter_Item(paths, Register.this);
+             //   rcItems.setAdapter(ia);
 
 //                Toast.makeText(Publication.this, "Data->"+ imageEncoded, Toast.LENGTH_SHORT).show();
 
@@ -1204,8 +1217,6 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
 
                         paths.add(realpath);
-                        ia = new Adapter_Item(paths, Register.this);
-                        rcItems.setAdapter(ia);
                        // Toast.makeText(Register.this, "Clipdata"+realpath, Toast.LENGTH_SHORT).show();
                     } catch (URISyntaxException e) {
                         e.printStackTrace();
@@ -1214,6 +1225,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
             }
         }
+
+        ia = new Adapter_Item(paths, Register.this);
+        rcItems.setAdapter(ia);
     }
 
 
