@@ -625,7 +625,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 photoFile = createImageFile();
             } catch (IOException ex) {
                 // Error occurred while creating the File
-                Log.i("Descripting", "IOException");
+                Log.i("Descripting", "IOException"+ ex.getLocalizedMessage());
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
@@ -635,10 +635,15 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         }
     }
     private File createImageFile() throws IOException {
+
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = new File( Environment.getExternalStorageDirectory()+Constants.mImageDirectory);
+        if (!storageDir.exists()) {
+            storageDir.mkdir();
+
+        }
         File image = File.createTempFile(
                 imageFileName,  // prefix
                 ".jpg",         // suffix
