@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -94,9 +96,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     private GoogleApiClient mGoogleApiClient;
     //Signin constant to check the activity result
     private int RC_SIGN_IN = 100;
-    //facebook Reource
-    private LoginButton loginButton;
-    CallbackManager callbackManager;
+
 
 
     //Parametres
@@ -127,8 +127,10 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
     ShowProgressDialog spd;
         String tokens;
+    //facebook Reource
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
 
-    //FirebaseLogin
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
 
@@ -167,7 +169,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
@@ -187,13 +188,13 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
                 if (user != null) {
-                    Toast.makeText(SelectAccount.this, "firebaseAuthListener", Toast.LENGTH_SHORT).show();
-                    registerFacebook();
-                    goMainScreen();
-                }else{
-                    Toast.makeText(SelectAccount.this, "User++++"+user.toString(), Toast.LENGTH_SHORT).show();
+                    try {
+                        goMainScreen();
+                    }catch (Exception e){
+                        Toast.makeText(SelectAccount.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
+                    }
+
                 }
             }
         };
@@ -206,6 +207,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
 
     private void handleFacebookAccessToken(final AccessToken accessToken) {
+        registerFacebook();
         AuthCredential credential= FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -214,7 +216,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
                     Toast.makeText(getApplicationContext(), R.string.message_ocurrio_error, Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(SelectAccount.this, "firebaseAuth"+ accessToken.getUserId().toString(), Toast.LENGTH_SHORT).show();
+
 
             }
         });
@@ -223,29 +225,26 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             final String name, mail, uid, lastname, token, account;
             getToken();
+
+            try {
             if (user != null) {
 
                 name = user.getDisplayName();
                 mail = user.getEmail();
+                final String todonombre[]= name.split(" ", 2);
                 Uri photoUrl = user.getPhotoUrl();
                 token = user.getUid();
-                lastname= "Apellidos";
+                lastname=todonombre[1];
                 account=user.getDisplayName();
                 final String tokenfirebase=tokens;
-                new MaterialDialog.Builder(SelectAccount.this)
-                        .title("Facebook datos")
-                        .content("name: "+name+
-                                " mail: "+mail+
-                                "  account: "+account+
-                                     "token :" +tokenfirebase)
-                        .canceledOnTouchOutside(false)
-                        .show();
+
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 Toast.makeText(SelectAccount.this, R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
-                                finishLogin();
+                              //  finishLogin();
+                                goMainScreen();
 
                             }
                         }, new Response.ErrorListener() {
@@ -259,7 +258,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                                 body = new String(error.networkResponse.data, "UTF-8");
                                 userLogin(mail, token);
 
-                                Toast.makeText(SelectAccount.this, "onErrorResponse", Toast.LENGTH_LONG).show();
+
                             } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
                             }
@@ -272,11 +271,11 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put(KEY_NOMBRE, name);
-                         params.put(KEY_APELLIDOS, lastname);
+                        params.put(KEY_APELLIDOS, lastname);
                         params.put(KEY_EMAIL, mail);
                         params.put(KEY_PASSWORD, token);
-                        params.put(KEY_CUENTA, account);
                         params.put("token", tokenfirebase);
+                        params.put(KEY_CUENTA, account);
                         params.put(KEY_VIGENCIA, KEY_9999);
                         params.put(CONTENT_TYPE, APPLICATION);
                         return params;
@@ -290,11 +289,31 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             } else {
                 goLoginScreen();
             }
+            } catch (Exception e) {
+                Drawable drawable = getResources().getDrawable(R.drawable.image_cloud_sad);
+                new MaterialDialog.Builder(SelectAccount.this)
+                        .title("Uja! Hubo un error")
+                        .icon(drawable)
+                        .content("Lo lamentamos, intente más tarde. Plis!")
+                        .negativeText(R.string.disagree)
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+
+                            }
+                        })
+                        .show();
+               // Toast.makeText(SelectAccount.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
+                Log.e("Facebook Register", e.getMessage()+ ">--<"+e.getLocalizedMessage());
+
+            }
 
 
 
 
-}
+
+        }
     private void goLoginScreen() {
         Intent intent = new Intent(this, SelectAccount.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -307,6 +326,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
 
     }
+
 
     private void getOnBoarding() {
         SharedPreferences preferences =
@@ -664,8 +684,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         super.onStart();
         state1();
         mGoogleApiClient.connect();
-        //firebaseAuth.addAuthStateListener(firebaseAuthListener);
-
+       // firebaseAuth.addAuthStateListener(firebaseAuthListener);
+        //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
     }
 
     public void state1(){

@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -24,6 +26,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.FirebaseService.FirebaseConection;
@@ -103,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                     if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                        spd.DialogProgress (LoginActivity.this, false);
                         attemptLogin();
                         return true;
                     }
@@ -316,7 +321,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }else{
                     if (datoslogin.length()>=10){
-                        spd.DialogProgress (LoginActivity.this, true);
+                      //  spd.DialogProgress (LoginActivity.this, true);
                         JSONArray jsonArray = new JSONArray(jsonObject.getString(Success));
                         for (int x=0; x<jsonArray.length(); x++) {
                             JSONObject json = new JSONObject(jsonArray.get(x).toString());
@@ -342,7 +347,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                     else {
-                        Toast.makeText(LoginActivity.this,"Hubo un problema. Porfavor Verifique su Correo y Contraseña",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this,"Verifique su Correo y Contraseña",Toast.LENGTH_LONG).show();
                        spd.DialogProgress (LoginActivity.this, false);
 
                         /*new MaterialDialog.Builder(LoginActivity.this)
@@ -375,7 +380,21 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             } catch (Exception e) {
-                Toast.makeText(LoginActivity.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
+                Drawable drawable = getResources().getDrawable(R.drawable.image_cloud_sad);
+                new MaterialDialog.Builder(LoginActivity.this)
+                         .title("Uja! Hubo un error")
+                        .icon(drawable)
+                        .content("Lo lamentamos, intente más tarde. Plis!")
+                        .negativeText(R.string.disagree)
+                        .onNegative(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                dialog.dismiss();
+
+                            }
+                        })
+                        .show();
+              //  Toast.makeText(LoginActivity.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
                 Log.e("Login.ObtenerDatos", e.getMessage()+ ">--<"+e.getLocalizedMessage());
 
             }
