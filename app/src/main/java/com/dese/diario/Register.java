@@ -72,6 +72,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -511,7 +512,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                break;
            case R.id.imCamera:
                OpenCamera();
-               Toast.makeText(this, "camera", Toast.LENGTH_LONG).show();
+
                break;
            case R.id.imGallery:
                FishBun.with(Register.this)
@@ -567,9 +568,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                break;
            case R.id.imDoc:
 
-              // FilePickerBuilder fpb= new FilePickerBuilder();
+               FilePickerBuilder fpb= new FilePickerBuilder();
                //fpb.setActivityTheme(Apptheme);
-               new FilePickerBuilder().getInstance().setMaxCount(8)
+               fpb.getInstance().setMaxCount(8)
                        .setSelectedFiles(paths)
                        .pickFile(this);
                break;
@@ -699,9 +700,9 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         Toast.makeText(this, "Audio Grabado Correctamente!", Toast.LENGTH_SHORT).show();
                         if(!AUDIO_FILE_PATH_FULL.isEmpty())
                             paths.add(AUDIO_FILE_PATH_FULL);
-                     ia = new Adapter_Item(paths, Register.this);
+                   /*  ia = new Adapter_Item(paths, Register.this);
                         rcItems.setAdapter(ia);
-
+*/
                     } else if (resultCode == RESULT_CANCELED) {
                         Toast.makeText(this, "El audio no se grabo correctamente", Toast.LENGTH_SHORT).show();
                     }
@@ -727,26 +728,35 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                         }
                         paths.add(realpath);
                     }
-                    ia = new Adapter_Item(paths, Register.this);
-                    rcItems.setAdapter(ia);
+                    /*ia = new Adapter_Item(paths, Register.this);
+                    rcItems.setAdapter(ia);*/
                     //You can get image path(ArrayList<Uri>) Version 0.6.2 or later
                     break;
                 case PICK_IMG_REQUEST:
                     paths.add(mCurrentPhotoPath);
-                  ia = new Adapter_Item(paths, Register.this);
-                    rcItems.setAdapter(ia);
+                /*  ia = new Adapter_Item(paths, Register.this);
+                    rcItems.setAdapter(ia);*/
 
                     break;
                 case FilePickerConst.REQUEST_CODE_DOC:
                     if(resultCode== Activity.RESULT_OK && data!=null) {
                        paths.addAll(data.getStringArrayListExtra(FilePickerConst.KEY_SELECTED_DOCS));
 
-                       ia = new Adapter_Item(paths, Register.this);
-                        rcItems.setAdapter(ia);
+                      /* ia = new Adapter_Item(paths, Register.this);
+
+                        rcItems.setAdapter(ia);*/
                     }
                     break;
 
             }
+            HashSet hs = new HashSet();
+            hs.addAll(paths);
+            paths.clear();
+             paths.addAll(hs);
+            ia = new Adapter_Item(paths, Register.this);
+
+            rcItems.setAdapter(ia);
+
 
 
         }//Fin resultCode
