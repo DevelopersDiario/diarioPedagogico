@@ -6,11 +6,8 @@ import android.view.ContextMenu;
 import android.view.View;
 import android.widget.TextView;
 
-import com.dese.diario.Objects.DataFriends;
 import com.dese.diario.R;
 import com.doodle.android.chips.ChipsView;
-
-import java.util.LinkedList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,10 +20,14 @@ public class MyHolderF extends RecyclerView.ViewHolder implements View.OnLongCli
         public TextView cuen;
         public TextView name;
         public  TextView tvIdRol;
-    public CircleImageView imProfileRec;
 
-       MyLongClickListener longClickListener;
+        public CircleImageView imProfileRec;
+
+        ChipsView mChipsView;
+
+
       ItemClickListener itemClickListener;
+     MyLongClickListener longClickListener;
 
     //Multiple
     private int resource;
@@ -41,14 +42,17 @@ public class MyHolderF extends RecyclerView.ViewHolder implements View.OnLongCli
             name = (TextView) itemView.findViewById(R.id.tvNameF);
             imProfileRec = (CircleImageView) itemView.findViewById(R.id.imgAmigo);
 
+            mChipsView   = (ChipsView) itemView.findViewById(R.id.cv_contacts);
             this.tvIdRol = (TextView) itemView.findViewById(R.id.tvidRolF);
+
 
             itemView.setOnLongClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
             itemView.setOnClickListener(this);
-
             seleccionados = new SparseBooleanArray();
         }
+
+
 
     public void setLongClickListener(MyLongClickListener longClickListener)
     {
@@ -62,7 +66,6 @@ public class MyHolderF extends RecyclerView.ViewHolder implements View.OnLongCli
     }
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
             //OUR CONTEXT MENU
               menu.setHeaderTitle("Seleccione: ");
               menu.add(0,0,0,"Agregar a Grupo");

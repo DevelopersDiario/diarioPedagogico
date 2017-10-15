@@ -29,7 +29,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvIdGF"
                     style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-                    android:hint="###"
                     android:visibility="gone"
                     android:gravity="center_horizontal"
                     android:layout_gravity="center_horizontal"/>
@@ -48,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/md_white_1000"
+                    android:layout_marginTop="10dp"
                     android:textColorHint="@color/md_white_1000"
                     android:layout_gravity="center_horizontal">
 
@@ -55,6 +55,7 @@
                         android:id="@+id/etBuscar"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+
                         android:drawableLeft="@drawable/ic_search_black_24dp"
                         android:drawableTint="@color/md_white_1000"
                         android:hint="@string/prompt_name"

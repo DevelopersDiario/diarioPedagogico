@@ -11,6 +11,7 @@ public class DataFriends {
     public static String cuenta;
     public  static String idrol;
     public static String foto;
+    public static String grupotmp;
 
     public DataFriends() {
 
@@ -64,13 +65,22 @@ public class DataFriends {
         DataFriends.idrol = idrol;
     }
 
-    public DataFriends(String idusuario, String nombre, String apellidos, String cuenta, String idrol, String foto){//}, String foto) {
+    public static String getGrupotmp() {
+        return grupotmp;
+    }
+
+    public static void setGrupotmp(String grupotmp) {
+        DataFriends.grupotmp = grupotmp;
+    }
+
+    public DataFriends(String idusuario, String nombre, String apellidos, String cuenta, String idrol, String foto, String grupotmp){//}, String foto) {
         this.idusuario=idusuario;
         this.nombre=nombre;
         this.cuenta=cuenta;
         this.idrol=idrol;
         this.apellidos=apellidos;
         this.foto=foto;
+        this.grupotmp=grupotmp;
     }
 
   }

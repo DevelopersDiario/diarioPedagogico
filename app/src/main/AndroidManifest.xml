@@ -7,7 +7,8 @@
     <uses-sdk android:minSdkVersion="8" />
     <!-- To auto-complete the email text field in the login form with the user'Theme emails -->
 
-    <!--<uses-permission android:name="android.permission.READ_PROFILE" />-->
+
+    <!-- <uses-permission android:name="android.permission.READ_PROFILE" /> -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -24,6 +25,8 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -33,12 +36,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="icon,android:theme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
 
         <provider
@@ -50,8 +54,7 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"
-                tools:replace="android:resource"
-           />
+                tools:replace="android:resource" />
         </provider>
 
         <activity
@@ -167,7 +170,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
             android:name="com.veer.multiselect.MultiSelectActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -269,18 +271,23 @@
         </activity>
         <activity android:name="com.desmond.squarecamera.CameraActivity" />
 
-    <service android:name=".Utils.FirebaseService.FirebaseMessagingService">
-        <intent-filter>
-            <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-        </intent-filter>
-    </service>
+        <service android:name=".Utils.FirebaseService.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <service
             android:name=".Utils.FirebaseService.FirebaseInstanceIdService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".FindFriends"
+            android:label="@string/title_activity_find_friends"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

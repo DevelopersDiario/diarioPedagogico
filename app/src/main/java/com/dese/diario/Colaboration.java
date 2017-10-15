@@ -5,11 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -31,10 +31,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.Adapter.Adapter_Grupo;
-import com.dese.diario.Item.Search_friends;
+import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.ShowProgressDialog;
 import com.dese.diario.Utils.Urls;
-import com.dese.diario.POJOS.VariablesLogin;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -269,13 +268,18 @@ public class Colaboration extends AppCompatActivity {
         builder.show();
     }
     private void registerGroup(final String n, final String i,final String nu) throws JSONException{
+        new ShowProgressDialog().MaterialDialogMsj(Colaboration.this, true, "Creando Colaboracion");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, urlgpo,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         Toast.makeText(Colaboration.this, R.string.message_succes_group, Toast.LENGTH_LONG).show();
+                        new ShowProgressDialog().MaterialDialogMsj(Colaboration.this, false, "Creando Colaboracion");
                         Intent i= new Intent(Colaboration.this, Colaboration.class);
-                        startActivity(i);  new ShowProgressDialog().MaterialDialogMsj(Colaboration.this, false, "Creando Colaboracion");
+
+                        startActivity(i);
+                        new ShowProgressDialog().MaterialDialogMsj(Colaboration.this, false, "Creando Colaboracion");
 
                     }
                 }, new Response.ErrorListener() {
@@ -287,7 +291,7 @@ public class Colaboration extends AppCompatActivity {
                     try {
                         body = new String(error.networkResponse.data, "UTF-8");
 
-                        Toast.makeText(Colaboration.this, body, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(Colaboration.this, body, Toast.LENGTH_LONG).show();
                     } catch (UnsupportedEncodingException e) {
                         Log.e("Response:",e.toString());
                     }
@@ -381,8 +385,7 @@ public class Colaboration extends AppCompatActivity {
 
     }
 
-
-    @Override
+   /* @Override
     public boolean onContextItemSelected(MenuItem item) {
         TextView tv1=(TextView) findViewById(R.id.tvIdG);
         TextView tv2=(TextView) findViewById(R.id.NombreG);
@@ -405,7 +408,7 @@ public class Colaboration extends AppCompatActivity {
         }
 
         return super.onContextItemSelected(item);
-    }
+    }*/
 
 }
 

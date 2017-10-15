@@ -271,7 +271,7 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println(R.string.user_Login_entra);
              // spd.MaterialDialog (LoginActivity.this, true);
               //  spd.DialogProgress (LoginActivity.this, true);
-
+                spd.DialogProgress (LoginActivity.this, true);
                 AsyncTask task = new ObtenerDatos();
                 String[][] parametros = {
                         {url.toString()},
@@ -329,7 +329,7 @@ public class LoginActivity extends AppCompatActivity {
                             var_Login.setCorreo(json.getString(correo));
                             var_Login.setTelefono(json.getString(telefono));
                             var_Login.setFoto(json.getString(foto));
-                            var_Login.setFportada(json.getString("fportada"));
+                           var_Login.setFportada(json.getString("fportada"));
                             var_Login.setToken(tokennew);
 
                             du.setFoto(json.getString(foto));
@@ -365,7 +365,9 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         })
                         .show();*/
-               Toast.makeText(LoginActivity.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
+                spd.DialogProgress (LoginActivity.this, false);
+
+                Toast.makeText(LoginActivity.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
                 Log.e("Login.ObtenerDatos", e.getMessage()+ ">--<"+e.getLocalizedMessage());
 
             }

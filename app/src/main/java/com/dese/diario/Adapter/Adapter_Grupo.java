@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dese.diario.Colaboration;
 import com.dese.diario.Item.ItemClickListener;
@@ -76,7 +75,7 @@ public class  Adapter_Grupo extends RecyclerView.Adapter<MyHolder> {
         sf.putExtra("namegpo", n);
         sf.putExtra("gpo", i);
         context.startActivity(sf);
-      //  Toast.makeText(context, "POSA-->"+ n+i, Toast.LENGTH_LONG).show();
+        //  Toast.makeText(context, "POSA-->"+ n+i, Toast.LENGTH_LONG).show();
 
     }
 

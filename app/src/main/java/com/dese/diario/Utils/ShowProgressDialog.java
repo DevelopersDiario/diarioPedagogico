@@ -2,7 +2,6 @@ package com.dese.diario.Utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.View;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.Theme;
 
 /**
  * Created by Eduardo on 19/05/2017.
@@ -68,7 +66,7 @@ public class ShowProgressDialog {
         progressDoalog.dismiss();
     }
 
-    public void MaterialDialog(Context context, Boolean status){
+  /*  public void MaterialDialog(Context context, Boolean status){
 
         if(status==true){
              new MaterialDialog.Builder(context)
@@ -86,9 +84,9 @@ public class ShowProgressDialog {
                         }
                     });
 
-    }
+    }*/
 
-    public void MaterialDialogMsj(Context context, Boolean status, String msj){
+   /* public void MaterialDialogMsj(Context context, Boolean status, String msj){
         if(status==true){
             new MaterialDialog.Builder(context)
                     .content(msj)
@@ -109,6 +107,29 @@ public class ShowProgressDialog {
                     }
                 });
     }
+*/
+   public void  MaterialDialogMsj(Context c, Boolean status, String msj){
+       final MaterialDialog.Builder dialogBuilder;
+
+
+       dialogBuilder = new MaterialDialog.Builder(c);
+
+
+       if(status){
+           dialogBuilder.content(msj)
+                   //.cancelable(false)
+                   //.autoDismiss(true)
+                   .canceledOnTouchOutside(false)
+                   .progress(true, 0);
+           dialogBuilder.show();
+           //  Toast.makeText(c, "tRUE", Toast.LENGTH_LONG).show();
+       }else if (!status){
+           // Toast.makeText(c, "False", Toast.LENGTH_LONG).show();
+           dialogBuilder.build().dismiss();
+           dialogBuilder.build().cancel();
+       }
+
+   }
 
 
     public void DialogProgress(Context c, Boolean status){

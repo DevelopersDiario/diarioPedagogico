@@ -15,7 +15,7 @@
     </style>
 
     <style name="OverflowStyle" parent="Widget.AppCompat.ActionButton.Overflow">
-Li
+        Li
         <item name="android:src">@drawable/ic_action_navigation_more_vert</item>
     </style>
 

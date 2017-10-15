@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-public class Search_friends extends AppCompatActivity  {
+public class Search_friends extends AppCompatActivity implements View.OnClickListener  {
     //Usuario
 
     final static String urlLisUser= Urls.ufilXnombre;
@@ -109,7 +110,7 @@ public class Search_friends extends AppCompatActivity  {
 
     private void chipData() {
 
-        mChipsView = (ChipsView) findViewById(R.id.cv_contacts);
+        mChipsView   = (ChipsView) findViewById(R.id.cv_contacts);
 
         // change EditText config
         mChipsView.getEditText().setCursorVisible(true);
@@ -152,6 +153,7 @@ public class Search_friends extends AppCompatActivity  {
             }
         });
     }
+
 
     private void bindData() {
 
@@ -198,8 +200,6 @@ public class Search_friends extends AppCompatActivity  {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-
-
             }
 
             @Override
@@ -207,13 +207,16 @@ public class Search_friends extends AppCompatActivity  {
 
                 String textValue = String.valueOf(s);
 
-                if(s.length()>=0){
+                if (s.length() >= 0) {
                     searchFriends(textValue);
-                }
+                } else if (s.length() < 0) {
+                    // listFriends.clear();
+                    // adpt.notifyDataSetChanged();
 
-                else if(s.length()<0) {
-                    listFriends.clear();
-                   // adpt.notifyDataSetChanged();
+
+                    HashSet hs = new HashSet();
+                    hs.addAll(listMembers);
+                    listMembers.clear();
                 }
 
             }
@@ -251,11 +254,14 @@ public class Search_friends extends AppCompatActivity  {
                                                 jsonobject.getString("apellidos"),
                                                 jsonobject.getString("cuenta"),
                                                 jsonobject.getString("idrol"),
-                                                jsonobject.getString("foto")));
+                                                jsonobject.getString("foto"),
+                                                tvIdGF.getText().toString()));
+
                                         HashSet hs = new HashSet();
                                         hs.addAll(listFriends);
                                         listFriends.clear();
                                         listFriends.addAll(hs);
+
                                         adpt = new Adapter_Friends(listFriends, Search_friends.this);
                                         recyclerFriends.setAdapter(adpt);
 
@@ -296,7 +302,7 @@ public class Search_friends extends AppCompatActivity  {
             Toast.makeText(Search_friends.this  ,"Escriba para buscar", Toast.LENGTH_SHORT).show();
 
         }
-// Signify that we are done refreshing
+
 
     }// Fin getPersonalInformation
 
@@ -333,10 +339,14 @@ public class Search_friends extends AppCompatActivity  {
                                   ch = lstChips.get(x);
                                   c= ch.getContact();
                             if(c.getEmailAddress()!=email){
-
+                                HashSet hs = new HashSet();
+                                hs.addAll(listFriends);
+                                listFriends.clear();
+                                listFriends.addAll(hs);
                                 mChipsView.addChip(email, "", contact);
 
                                 try {
+
                                     registerGroup(g, u, "1");
                                     listFriends.clear();
                                     etBuscar.requestFocus();
@@ -356,7 +366,7 @@ public class Search_friends extends AppCompatActivity  {
                             }
 
 
-                             }//end for*//*
+                             }//end for*//**//*
 
                 break;
 
@@ -393,11 +403,15 @@ public class Search_friends extends AppCompatActivity  {
                                     //listContact(jsonobject.getString("idusuario"));
 
                                    // Uri urifoto= Uri.parse(Urls.download+foto);
-
+                                    listMembers.add(jsonobject.getString("cuenta"));
+                                    HashSet hs = new HashSet();
+                                    hs.addAll(listMembers);
+                                    listMembers.clear();
+                                    listMembers.addAll(hs);
                                     contact  = new Contact(null, null, null, email, null );
                                     mChipsView.addChip(email, "", contact);
 
-                                    listMembers.add(jsonobject.getString("cuenta"));
+
                                     //Toast.makeText(Search_friends.this, listMembers.get(i).toString(), Toast.LENGTH_SHORT).show();
 
 
@@ -589,6 +603,25 @@ public class Search_friends extends AppCompatActivity  {
     }
 
 
+    @Override
+    public void onClick(View view) {
+        new MyHolderF(view).setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(int pos) {
+                TextView tv1=(TextView) findViewById(R.id.tvIdGF);
+                TextView tv2 = (TextView)findViewById(R.id.tvidRolF);
+                TextView tv3= (TextView) findViewById(R.id.tvIdF);
+                TextView tv4= (TextView) findViewById(R.id.tvAccountF);
 
-
+                String g=tvIdGF.getText().toString();
+                String u=tvIdF.getText().toString();
+                try {
+                    registerGroup(g,u,"1" );
+                } catch (JSONException e) {
+                    Log.e("Mira este error", e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 }
