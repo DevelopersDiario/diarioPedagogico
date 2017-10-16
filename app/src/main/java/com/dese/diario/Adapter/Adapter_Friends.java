@@ -1,6 +1,7 @@
 package com.dese.diario.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,6 +21,7 @@ import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolder;
 import com.dese.diario.Item.MyHolderF;
 import com.dese.diario.Item.MyLongClickListener;
+import com.dese.diario.Item.Search_friends;
 import com.dese.diario.Objects.DataFriends;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
@@ -118,13 +120,13 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
                             if(c.getEmailAddress()!=email) {
 */
                       //  mChipsView.addChip(email, "", contact);
-                        try {
+                      /*  try {
 
                             registerGroup(grupi, email, "1");
 
                         } catch (JSONException e) {
                             Log.e("Adapter_Friends", e.getMessage());
-                        }
+                        }*/
 
 
 
@@ -147,9 +149,11 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        Toast.makeText(context, "RES: "+response, Toast.LENGTH_LONG).show();
                         if(response.equals("succes")){
-                            //  Toast.makeText(MainActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
+                            //
+                            Intent i= new Intent(context, Search_friends.class);
+                            context.startActivity(i);
                             Toast.makeText(context, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
                         }
                         else{

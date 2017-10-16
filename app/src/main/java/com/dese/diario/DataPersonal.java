@@ -149,7 +149,7 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
 
     private void  updatedatos()  throws JSONException{
         if(!etPhone.getText().toString().isEmpty()){
-
+            new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, true, "Actualizando");
             final VariablesLogin varlogin =new VariablesLogin();
             final StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                     new Response.Listener<String>() {
@@ -203,8 +203,8 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
         }else{
-            new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, false, "Actualizando");
-            // Toast.makeText(DataPersonal.this, "Necesita agregar un telefono ", Toast.LENGTH_LONG).show();
+          new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, false, "Actualizando");
+           Toast.makeText(DataPersonal.this, "Necesita agregar un telefono ", Toast.LENGTH_LONG).show();
 
         }
 
@@ -403,7 +403,7 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
                 enableDates();
                 try {
                     getRadioButtonesDate();
-                    new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, true, "Actualizando");
+
                    // Toast.makeText(this, R.string.action_saved, Toast.LENGTH_SHORT).show();
                     updatedatos();
                 } catch (JSONException e) {

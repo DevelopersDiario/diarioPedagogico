@@ -26,7 +26,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -162,7 +161,6 @@ public class MainActivity extends AppCompatActivity
         super.onRestoreInstanceState(savedInstanceState);
 
         String varlogin = savedInstanceState.getString("starttime");
-        //Toast.makeText(this, "ON RESTORE IMSTAM", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -192,7 +190,7 @@ public class MainActivity extends AppCompatActivity
                 .centerCrop()
                 .into( fotouser);
 
-            Picasso.with(MainActivity.this)
+        Picasso.with(MainActivity.this)
                 .load(Urls.download+du.getFportada())
                 .resize(2000, 1200)
                 .centerCrop()
@@ -213,6 +211,9 @@ public class MainActivity extends AppCompatActivity
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        conectionPublication();
+
     }
 
     @Override
@@ -321,9 +322,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         File f = new File(Environment.getExternalStorageDirectory() + Constants.mMainDirectory);
-// Comprobamos si la carpeta está ya creada
 
-// Si la carpeta no está creada, la creamos.
 
         if(!f.isDirectory()) {
             String newFolder =Constants.mMainDirectory; //cualquierCarpeta es el nombre de la Carpeta que vamos a crear
@@ -368,23 +367,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     private void setupNavigationDrawerContent(final NavigationView navigationView) {

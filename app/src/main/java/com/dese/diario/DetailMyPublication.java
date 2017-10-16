@@ -34,7 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.dese.diario.Adapter.Adapter_File;
+import com.dese.diario.Adapter.Adapter_File_MP;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.Urls;
 
@@ -70,7 +70,7 @@ public class DetailMyPublication extends AppCompatActivity {
     //Files
     private ArrayList<String> filename = new ArrayList<>();
     private RecyclerView rcItems;
-    private Adapter_File ia;
+    private Adapter_File_MP ia;
     private LinearLayout lyContentImagenDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +150,7 @@ public class DetailMyPublication extends AppCompatActivity {
         con = i.getExtras().getString("CON_KEY");
         plan = i.getExtras().getString("PLAN_KEY");
 
-        //listarFile(idepublicacion);
+        listarFile(idepublicacion);
 
         etTitleMyPubE.setText(t);
         etDescriptingMyPubE.setText(p);
@@ -265,7 +265,7 @@ public class DetailMyPublication extends AppCompatActivity {
                                     filename.add(file);
                                     if(file!=" "){
 
-                                        ia = new Adapter_File(filename, DetailMyPublication.this);
+                                        ia = new Adapter_File_MP(filename, DetailMyPublication.this);
                                         rcItems.setAdapter(ia);
 
                                         //rcItems.setItemAnimator(new DefaultItemAnimator());

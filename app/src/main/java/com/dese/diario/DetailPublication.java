@@ -436,7 +436,6 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
-
                                     listRepublicaciones.add(new com.dese.diario.Objects.RePublication(
                                             jsonobject.getString("padre"),
                                             jsonobject.getString("idpublicacion"),

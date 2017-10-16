@@ -42,7 +42,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 public class Search_friends extends AppCompatActivity implements View.OnClickListener  {
@@ -326,11 +325,12 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
         final String email= tv4.getText().toString();
 
        contact  = new Contact(null, null, null, email, null);
+
         switch (item.getTitle().toString()){
 
             case  "Agregar a Grupo":
 
-                //Lista
+             /*   //Lista
                 List<ChipsView.Chip> lstChips= mChipsView.getChips();
                 int tamaño =lstChips.size();
                         ChipsView.Chip ch;
@@ -340,15 +340,20 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
                                   c= ch.getContact();
                             if(c.getEmailAddress()!=email){
                                 HashSet hs = new HashSet();
-                                hs.addAll(listFriends);
-                                listFriends.clear();
-                                listFriends.addAll(hs);
+                                hs.addAll(listMembers);
+                                listMembers.clear();
+                                listMembers.addAll(hs);
                                 mChipsView.addChip(email, "", contact);
+*/
 
                                 try {
 
                                     registerGroup(g, u, "1");
+                                    HashSet hs2 = new HashSet();
+                                    hs2.addAll(listFriends);
                                     listFriends.clear();
+                                    listFriends.addAll(hs2);
+                                    mChipsView.addChip(email, "", contact);
                                     etBuscar.requestFocus();
                                     etBuscar.setFocusable(true);
 
@@ -357,16 +362,16 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
                                 }
 
 
-                                //mChipsView.removeChipBy(contact);
+                            /*    //mChipsView.removeChipBy(contact);
                             }else if(c.getEmailAddress()==email){
                                 Toast.makeText(Search_friends.this  ,"Ya esta agregado", Toast.LENGTH_SHORT).show();
                                 //mChipsView.addChip(email, "", contact);
                                 mChipsView.removeChipBy(contact);
 
-                            }
+                            }*/
 
 
-                             }//end for*//**//*
+                             //}//end for*//**//*
 
                 break;
 
@@ -401,8 +406,9 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
                                     final String email= jsonobject.getString("cuenta");
                                     //listContact(jsonobject.getString("idusuario"));
+                                 //   final String fts=jsonobject.getString("foto");
 
-                                   // Uri urifoto= Uri.parse(Urls.download+foto);
+                                 //  Uri urifoto= Uri.parse(Urls.download+fts);
                                     listMembers.add(jsonobject.getString("cuenta"));
                                     HashSet hs = new HashSet();
                                     hs.addAll(listMembers);
@@ -510,11 +516,12 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        Toast.makeText(Search_friends.this, "RES: "+response, Toast.LENGTH_LONG).show();
                         if(response.equals("succes")){
                             //  Toast.makeText(MainActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
+
                             Toast.makeText(Search_friends.this, "Se ha agregado correctame a @"+dataFriends.getCuenta().toString(), Toast.LENGTH_LONG).show();
-                        }
+                     }
                         else{
                             Toast.makeText(Search_friends.this, "@"+dataFriends.getCuenta().toString()+"Ya forma parte de este Grupo", Toast.LENGTH_LONG).show();
                         }
