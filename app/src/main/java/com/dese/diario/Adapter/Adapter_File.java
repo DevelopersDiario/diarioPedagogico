@@ -139,17 +139,23 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
 
                 imagePopup.setWindowHeight(1000); // Optional
                 imagePopup.setWindowWidth(1000); // Optional
+                imagePopup.isImageOnClickClose();
                 imagePopup.initiatePopup(holder.ivItem.getDrawable());
                 imagePopup.viewPopup();
 
                 break;
             case "png":
 
+                imagePopup.setWindowHeight(1000); // Optional
+                imagePopup.setWindowWidth(1000); // Optional
                 imagePopup.initiatePopup(holder.ivItem.getDrawable());
                 imagePopup.viewPopup();
                 //  Toast.makeText(context, "Audio PNG", Toast.LENGTH_SHORT).show();
                 break;
             case "gif":
+
+                imagePopup.setWindowHeight(1000); // Optional
+                imagePopup.setWindowWidth(1000); // Optional
                 imagePopup.initiatePopup(holder.ivItem.getDrawable());
                 imagePopup.viewPopup();
                 break;

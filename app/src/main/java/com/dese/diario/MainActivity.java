@@ -332,9 +332,8 @@ public class MainActivity extends AppCompatActivity
         }else{
             Log.d("MAIN","La carpeta ya estaba creada");
         }
-
-
     }
+
 
 
     @Override
@@ -549,10 +548,16 @@ public class MainActivity extends AppCompatActivity
 
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return true;
-
         if((checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) &&
+                (checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED))
+            return true;
+        if((checkSelfPermission(RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) &&
                 (checkSelfPermission(RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED))
             return true;
+        if((checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED) &&
+                (checkSelfPermission(CAMERA) == PackageManager.PERMISSION_GRANTED))
+            return true;
+
 
         if((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) || (shouldShowRequestPermissionRationale(CAMERA))){
             Snackbar.make(swipeContainer, R.string.Los_permisos_son_necesarios,
@@ -565,6 +570,18 @@ public class MainActivity extends AppCompatActivity
             });
         }else{
             requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, MY_PERMISSIONS);
+        }
+        if((shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) || (shouldShowRequestPermissionRationale(CAMERA))){
+            Snackbar.make(swipeContainer, R.string.Los_permisos_son_necesarios,
+                    Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok, new View.OnClickListener() {
+                @TargetApi(Build.VERSION_CODES.M)
+                @Override
+                public void onClick(View v) {
+                    requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS);
+                }
+            });
+        }else{
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE, CAMERA}, MY_PERMISSIONS);
         }
         return false;
     }

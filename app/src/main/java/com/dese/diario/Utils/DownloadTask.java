@@ -58,6 +58,17 @@ public class DownloadTask {
                 //  buttonText.setEnabled(true);
                 // buttonText.setText(R.string.downloadCompleted);//If Download completed then change button text
                 Toast.makeText(context, "Se descargo correctamente", Toast.LENGTH_SHORT).show();
+              /* new MaterialDialog.Builder(context)
+                       .content("¿Desea abrir la ruta?")
+                       .positiveText("Abrir")
+                       .onPositive(new MaterialDialog.SingleButtonCallback() {
+                           @Override
+                           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                           }
+                       })
+                       .show();*/
+
             } else {
                 //buttonText.setText(R.string.downloadFailed);//If download failed change button text
                 new Handler().postDelayed(new Runnable() {

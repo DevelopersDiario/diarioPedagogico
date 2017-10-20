@@ -1,8 +1,26 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
+    compileSdkVersion 26
+    buildToolsVersion '25.0.3'
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        applicationId "com.dese.diario"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 22
+        versionName "1.2.2"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
 
+    }
+    signingConfigs {
+        release {
+            keyAlias 'AMDI'
+            keyPassword 'safa2017'
+            storeFile file('C:/Users/Eduardo/Documents/Developer/KeyDiario/KeyDiario.jks')
+            storePassword 'safa2017'
+        }
         config {
 
             keyAlias 'AMDI'
@@ -12,37 +30,43 @@ android {
         }
         debug {
 
-           /* storeFile file('keystore/debug.keystore')
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storePassword 'android'*/
+            /* storeFile file('keystore/debug.keystore')
+             keyAlias 'androiddebugkey'
+             keyPassword 'android'
+             storePassword 'android'*/
             keyAlias 'AMDI'
             keyPassword 'safa2017'
             storeFile file('C:/Users/Eduardo/Documents/Developer/KeyDiario/KeyDiario.jks')
             storePassword 'safa2017'
         }
     }
-    compileSdkVersion 26
-    buildToolsVersion '25.0.3'
-    useLibrary 'org.apache.http.legacy'
-    defaultConfig {
-        applicationId "com.dese.diario"
-        minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 19
-        versionName "1.1.9"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-
-    }
-
     buildTypes {
         release {
+
+
+
             shrinkResources true // This must be first
-            minifyEnabled false   // This must be after shrinkResources
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig getSigningConfig()
             signingConfig signingConfigs.config
             buildConfigField "String", "BASE_URL", "\"http://release.com/\""
+
+
+                applicationVariants.all { variant ->
+                    variant.outputs.each { output ->
+                        def date = new Date();
+
+                        def formattedDate = date.format('yyyyMMddHHmmss')
+                        output.outputFile = new File(output.outputFile.parent,
+                                output.outputFile.name.replace("-release", "-"+ formattedDate)
+                                //for Debug use output.outputFile = new File(output.outputFile.parent,
+                                //                             output.outputFile.name.replace("-debug", "-" + formattedDate)
+                        )
+                    }
+                }
+
+
         }
         debug {
             testCoverageEnabled false
@@ -55,10 +79,11 @@ android {
     aaptOptions {
         cruncherEnabled = false
     }
-
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+    productFlavors {
     }
 }
 

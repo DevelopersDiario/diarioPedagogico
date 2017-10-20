@@ -1,23 +1,43 @@
 package com.dese.diario.Adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolder;
 import com.dese.diario.Item.MyHolderF;
 import com.dese.diario.Item.MyLongClickListener;
 import com.dese.diario.Objects.DataFriends;
+import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
 import com.dese.diario.Utils.Urls;
 import com.doodle.android.chips.ChipsView;
-import com.doodle.android.chips.model.Contact;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Eduardo on 12/05/2017.
@@ -77,21 +97,50 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
             }
         });
 
-       // listarMember(lista.get(position).getGrupotmp());
+
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                Contact contact;
+                //Toast.makeText(context, "Tipo:"+ pos, Toast.LENGTH_SHORT).show();
 
                 String email =lista.get(pos).getCuenta();
                 String grupi=lista.get(pos).getGrupotmp();
-
+               // listProfile(lista.get(pos).getIdusuario());
 
             }
         });
     }
 
+    private void prevProfileFriends(String nombre, String correo, String foto){
+        TextView tvNombre, tvMail;
+        CircleImageView imProfilePreview;
+        boolean wrapInScrollView = true;
+        final MaterialDialog dialog = new MaterialDialog.Builder(context)
+                .customView(R.layout.dialog_audio, wrapInScrollView)
+                .show();
+        View view = dialog.getCustomView();
+        final Button start= (Button) view.findViewById(R.id.btnStart);
+        Button stop = (Button) view.findViewById(R.id.btnStop);
+        Button pause= (Button)view.findViewById(R.id.btnReplay);
+        ImageView exit = (ImageView) view.findViewById(R.id.btnExit);
+        dialog.show();
+/*
+
+        imProfilePreview= (CircleImageView) dialog.findViewById(R.id.imProfilePreview);
+        tvNombre= (TextView) dialog.findViewById(R.id.tvNamePreview);
+        tvMail= (TextView) dialog.findViewById(R.id.tvMailPreview);
+*/
+
+      /*  imProfilePreview.setImageURI(Uri.parse(Urls.download+foto));
+        Picasso.with(context)
+                .load(Urls.download+foto)
+                .resize(2000, 1200)
+                .centerInside()
+                .into(  imProfilePreview);
+        tvNombre.setText(nombre);
+        tvMail.setText(correo);*/
+    }
 
 
     @Override
@@ -100,5 +149,63 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
         //return listapublicaciones.size();
     }
 
+    private void listProfile(final String iduser) {
 
+        VariablesLogin variablesLogin = new VariablesLogin();
+
+        com.android.volley.RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listxiduser,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                                //listMembers = new ArrayList<>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (int i = 0; i < jsonarray.length(); i++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+
+                                    String    foto = jsonobject.getString("foto");
+                                    String nombre =jsonobject.getString("nombre");
+                                    String correo =jsonobject.getString("correo");
+
+                                    prevProfileFriends(nombre, correo, foto);
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Search Friends", "Error +->" + e);
+                            }
+
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Search Friends", "Response--->"+error);
+            }
+
+        }
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idusuario", iduser);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
+
+    }
 }

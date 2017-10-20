@@ -126,6 +126,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:visibility="gone"
         android:background="?attr/selectableItemBackground">
 
         <ImageView
@@ -144,6 +145,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="64dp"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="vertical">
 
 

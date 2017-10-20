@@ -149,6 +149,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
     private final int PICK_AUD_REC_REQUEST = 2;
     private final int PICK_AUD_REQUEST = 3;
     private final int PICK_IMG_REQUEST = 4;
+    private final int PICK_VID_REQUEST = 5;
     private String mCurrentPhotoPath;
 
     private static  String AUDIO_FILE_PATH =
@@ -498,20 +499,12 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                break;
            case R.id.imGIF:
 
-                /*if(!emojicons.isShown()){
-
-                    emojicons.setVisibility(View.VISIBLE);
-                    setEmojiconFragment(Boolean.FALSE);
-                    //Hide softKeyboard
-                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                }else{
-                    emojicons.setVisibility(View.GONE);
-                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-                }*/
 
                break;
            case R.id.imCamera:
-               OpenCamera();
+              // OpenCamera();
+               
+               selectedTypeCamere();
 
                break;
            case R.id.imGallery:
@@ -557,7 +550,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                                        intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                                        startActivityForResult(intentA, PICK_AUD_REQUEST);
 
-                                       Toast.makeText(Register.this, text.toString(), Toast.LENGTH_LONG).show();
+                                       //Toast.makeText(Register.this, text.toString(), Toast.LENGTH_LONG).show();
                                        break;
                                }
                            }
@@ -585,6 +578,33 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
    }//enOnClick
 
+    private void selectedTypeCamere() {
+        final CharSequence[] optione = { "Camara", "Video"};
+        new MaterialDialog.Builder(this)
+                .title("Seleccione")
+                .items(optione)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        switch (which){
+                            case 0:
+                             OpenCamera();
+                                break;
+
+                            case 1:
+                                Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                                intentA.addCategory(Intent.CATEGORY_OPENABLE);
+                                intentA.setType("video/*");
+                                intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                                startActivityForResult(intentA, PICK_VID_REQUEST);
+
+                                //Toast.makeText(Register.this, text.toString(), Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                    }
+                })
+                .show();
+    }
 
 
     private void OpenCamera() {

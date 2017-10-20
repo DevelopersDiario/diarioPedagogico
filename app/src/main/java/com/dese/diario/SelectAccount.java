@@ -518,12 +518,11 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         }//End if
         else {
             //If login fails
-            //Toast.makeText(this, R.string.Login_Failed, Toast.LENGTH_LONG).show();
-            new MaterialDialog.Builder(SelectAccount.this)
+            Toast.makeText(this, R.string.Login_Failed, Toast.LENGTH_LONG).show();
+            /*new MaterialDialog.Builder(SelectAccount.this)
                     .title(R.string.Login_Failed)
                     .content(result.getStatus().toString())
-                    .canceledOnTouchOutside(false)
-                    .show();
+                    .show();*/
             spd.progressDilog(SelectAccount.this, false);
         }//end else
 

@@ -149,13 +149,14 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
 
     private void  updatedatos()  throws JSONException{
         if(!etPhone.getText().toString().isEmpty()){
-            new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, true, "Actualizando");
+
             final VariablesLogin varlogin =new VariablesLogin();
             final StringRequest stringRequest = new StringRequest(Request.Method.PUT, url,
                     new Response.Listener<String>() {
 
                         @Override
                         public void onResponse(String response) {
+                            new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, true, "Actualizando");
                             Toast.makeText(DataPersonal.this, R.string.message_succes_information, Toast.LENGTH_LONG).show();
                             openactivity();
 
@@ -175,9 +176,9 @@ public class DataPersonal extends AppCompatActivity implements View.OnClickListe
                                     .show();
 
 */
-                            Toast.makeText(DataPersonal.this, "Necesita actualizar un campo", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DataPersonal.this, "Necesita actualizar todos los  campos", Toast.LENGTH_LONG).show();
 
-
+                            new ShowProgressDialog().MaterialDialogMsj(DataPersonal.this, false, "Actualizando");
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
