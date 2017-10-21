@@ -502,30 +502,11 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
                break;
            case R.id.imCamera:
-              // OpenCamera();
-               
-               selectedTypeCamere();
+               OpenCamera();
 
                break;
            case R.id.imGallery:
-               FishBun.with(Register.this)
-                       .MultiPageMode()
-                       .setMaxCount(4)
-                       .setMinCount(1)
-                       .setPickerSpanCount(5)
-                       .setActionBarColor(Color.DKGRAY, Color.DKGRAY)
-                       .setActionBarTitleColor(Color.parseColor("#ffffff"))
-                       .setAlbumSpanCount(2, 3)
-                       .setButtonInAlbumActivity(true)
-                       .setCamera(true)
-                       .exceptGif(true)
-                       .setReachLimitAutomaticClose(true)
-                       .setHomeAsUpIndicatorDrawable(ContextCompat.getDrawable(Register.this, R.drawable.ic_arrow_back_white_24dp))
-                       .setOkButtonDrawable(ContextCompat.getDrawable(Register.this, R.drawable.ic_add_a_photo_white_24dp))
-                       .setAllViewTitle("Todos")
-                       .setActionBarTitle("Seleccione ")
-                       .textOnNothingSelected("Seleccione como maximo cuatro")
-                       .startAlbum();
+              selectedTypeGallery();
                break;
 
            case R.id.imMic:
@@ -578,8 +559,8 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
 
    }//enOnClick
 
-    private void selectedTypeCamere() {
-        final CharSequence[] optione = { "Camara", "Video"};
+        private void selectedTypeGallery() {
+        final CharSequence[] optione = { "Imagenes", "Videos"};
         new MaterialDialog.Builder(this)
                 .title("Seleccione")
                 .items(optione)
@@ -588,17 +569,31 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                         switch (which){
                             case 0:
-                             OpenCamera();
+                                FishBun.with(Register.this)
+                                        .MultiPageMode()
+                                        .setMaxCount(4)
+                                        .setMinCount(1)
+                                        .setPickerSpanCount(5)
+                                        .setActionBarColor(Color.DKGRAY, Color.DKGRAY)
+                                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                                        .setAlbumSpanCount(2, 3)
+                                        .setButtonInAlbumActivity(true)
+                                        .setCamera(true)
+                                        .exceptGif(true)
+                                        .setReachLimitAutomaticClose(true)
+                                        .setHomeAsUpIndicatorDrawable(ContextCompat.getDrawable(Register.this, R.drawable.ic_arrow_back_white_24dp))
+                                        .setOkButtonDrawable(ContextCompat.getDrawable(Register.this, R.drawable.ic_add_a_photo_white_24dp))
+                                        .setAllViewTitle("Todos")
+                                        .setActionBarTitle("Seleccione ")
+                                        .textOnNothingSelected("Seleccione como maximo cuatro")
+                                        .startAlbum();
                                 break;
 
                             case 1:
-                                Intent intentA = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                                intentA.addCategory(Intent.CATEGORY_OPENABLE);
-                                intentA.setType("video/*");
-                                intentA.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                                startActivityForResult(intentA, PICK_VID_REQUEST);
+                                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                                galleryIntent.setType("video/*");
+                                startActivityForResult(galleryIntent, PICK_VID_REQUEST);
 
-                                //Toast.makeText(Register.this, text.toString(), Toast.LENGTH_LONG).show();
                                 break;
                         }
                     }
@@ -713,6 +708,26 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
                 case PICK_AUD_REQUEST:
                     actReq=data;
                     clipdataSelect(data);
+                    break;
+                case PICK_VID_REQUEST:
+                    actReq=data;
+                    String imageEncoded2;
+                    Uri mImageUri2;
+                    if (data.getData() != null) {
+                        mImageUri2 = Uri.parse(data.getDataString());
+                        // Get the cursor
+                        try {
+                            imageEncoded2 = upload.getFilePath(Register.this, mImageUri2);
+                            paths.add(imageEncoded2);
+
+                           /* ia = new Adapter_Item(paths, Register.this);
+                            rcItems.setAdapter(ia);*/
+                            //Toast.makeText(this, "Saved to:" + imageEncoded, Toast.LENGTH_SHORT).show();
+
+                        } catch (URISyntaxException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     break;
                 case PICK_AUD_REC_REQUEST:
                     if (resultCode == RESULT_OK) {

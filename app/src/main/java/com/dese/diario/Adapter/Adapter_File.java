@@ -364,6 +364,27 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                         .centerCrop()
                         .into(holder.ivSound);
                 break;
+            case "mp4":
+                Picasso.with(context)
+                        .load(R.drawable.filemov)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
+            case "3gp":
+                Picasso.with(context)
+                        .load(R.drawable.filemov)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
+            case "mov":
+                Picasso.with(context)
+                        .load(R.drawable.filemov)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
 
         }
 

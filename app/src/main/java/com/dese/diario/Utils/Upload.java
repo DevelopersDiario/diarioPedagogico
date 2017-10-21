@@ -284,6 +284,8 @@ public class Upload {
                         return "Documento";
                     case ".mov":
                         return "Audio";
+                        case ".mp4":
+                        return "video";
                     case ".mp3":
                         return "Audio";
                     case ".ogg":

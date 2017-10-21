@@ -1,14 +1,11 @@
 package com.dese.diario.Adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dese.diario.Item.Item;
 import com.dese.diario.Item.MyHolderView;
 import com.dese.diario.R;
 import com.squareup.picasso.Picasso;
@@ -156,6 +153,27 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
             case "wav":
                 Picasso.with(context)
                         .load(R.drawable.filewav)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.imType);
+                break;
+            case "mp4":
+                Picasso.with(context)
+                        .load(R.drawable.filemov)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.imType);
+                break;
+            case "3gp":
+                Picasso.with(context)
+                        .load(R.drawable.filemov)
+                        .resize(1120, 1120)
+                        .centerCrop()
+                        .into(holder.imType);
+                break;
+            case "mov":
+                Picasso.with(context)
+                        .load(R.drawable.filemov)
                         .resize(1120, 1120)
                         .centerCrop()
                         .into(holder.imType);
