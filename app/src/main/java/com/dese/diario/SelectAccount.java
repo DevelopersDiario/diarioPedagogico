@@ -59,6 +59,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -97,7 +98,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     private GoogleApiClient mGoogleApiClient;
     //Signin constant to check the activity result
     private int RC_SIGN_IN = 100;
-
 
 
     //Parametres
@@ -143,7 +143,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
         setContentView(R.layout.activity_select_account);
 
-        spd= new ShowProgressDialog();
+        spd = new ShowProgressDialog();
         getToken();
         eventsButtons();
 
@@ -194,7 +194,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 if (user != null) {
                     try {
                         goMainScreen();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         Toast.makeText(SelectAccount.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
                     }
 
@@ -202,6 +202,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
         };
     }
+
     private void goMainScreen() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -211,21 +212,21 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
     private void handleFacebookAccessToken(final AccessToken accessToken) {
         registerFacebook();
-        AuthCredential credential= FacebookAuthProvider.getCredential(accessToken.getToken());
+        AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
+                if (!task.isSuccessful()) {
                     finishLogin();
                     Toast.makeText(getApplicationContext(), R.string.message_ocurrio_error, Toast.LENGTH_SHORT).show();
                 }
 
 
-
             }
         });
     }
-    private void registerFacebook(){
+
+    private void registerFacebook() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String name, mail, uid, lastname, token, account;
         getToken();
@@ -235,12 +236,12 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
                 name = user.getDisplayName();
                 mail = user.getEmail();
-                final String todonombre[]= name.split(" ", 2);
+                final String todonombre[] = name.split(" ", 2);
                 Uri photoUrl = user.getPhotoUrl();
                 token = user.getUid();
-                lastname=todonombre[1];
-                account=user.getDisplayName();
-                final String tokenfirebase=tokens;
+                lastname = todonombre[1];
+                account = user.getDisplayName();
+                final String tokenfirebase = tokens;
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
@@ -309,24 +310,22 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                     })
                     .show();
             // Toast.makeText(SelectAccount.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
-            Log.e("Facebook Register", e.getMessage()+ ">--<"+e.getLocalizedMessage());
+            Log.e("Facebook Register", e.getMessage() + ">--<" + e.getLocalizedMessage());
 
         }
 
 
-
-
-
     }
+
     private void goLoginScreen() {
         Intent intent = new Intent(this, SelectAccount.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
     private void inicializarResources() {
         getOnBoarding();
         tv1 = (TextView) findViewById(R.id.tvMessageWelcome);
-
 
 
     }
@@ -336,7 +335,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         SharedPreferences preferences =
                 getSharedPreferences(KEY_PREFERENCE, MODE_PRIVATE);
 
-        if(!preferences.getBoolean(KEY_ONBOARDING,false)){
+        if (!preferences.getBoolean(KEY_ONBOARDING, false)) {
 
             Intent onboarding = new Intent(this, OnboardingActivity.class);
             startActivity(onboarding);
@@ -345,7 +344,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             return;
         }
     }
-
 
 
     /*---onClicks------*/
@@ -392,6 +390,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
         //Initializing google signin option
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .requestProfile()
                 .build();
@@ -409,6 +408,22 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
         //Setting onclick listener to signing button
         signInButton.setOnClickListener(this);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    try {
+                        goMainScreen();
+                    } catch (Exception e) {
+                        Toast.makeText(SelectAccount.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+            }
+        };
     }
 
     private void signIn() {
@@ -423,13 +438,13 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     protected void onStop() {
         super.onStop();
         //Stop the Google Client when activity is stopped
-        if(mGoogleApiClient.isConnected())
-        {
+        if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
         LoginManager.getInstance().logOut();
         firebaseAuth.removeAuthStateListener(firebaseAuthListener);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -437,46 +452,79 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         if (requestCode == RC_SIGN_IN) {
 
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-                /*if(!result.getStatus().isSuccess()){
-                    new MaterialDialog.Builder(SelectAccount.this)
-                            .title("Error  Gmail")
-                            .content(result.getStatus().toString())
-                            .canceledOnTouchOutside(false)
-                            .show();
-                    spd.progressDilog(SelectAccount.this, false);
-                }
 
-                else*/
             getToken();
             handleSignInResult(result);
         }//end if
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void handleSignInResult(GoogleSignInResult result)  {
+    private void handleSignInResult(GoogleSignInResult result) {
         if (result.isSuccess()) {
             //Getting google account
-            GoogleSignInAccount acct = result.getSignInAccount();
+            firebaseAuthWithGoogle(result.getSignInAccount());
 
-            final String name=  acct.getDisplayName();
-            final String nameonly[]= name.split(" ", 2);
-            final String na= nameonly[0];
-            final String mail= acct.getEmail();
-            String lastname= acct.getFamilyName();
+        }//End if
+        else {
+            //If login fails
+            //Toast.makeText(this, R.string.Login_Failed, Toast.LENGTH_LONG).show();
+            new MaterialDialog.Builder(SelectAccount.this)
+                    .title(R.string.Login_Failed)
+                    .content(result.getStatus().toString())
+                    .canceledOnTouchOutside(false)
+                    .show();
+            spd.progressDilog(SelectAccount.this, false);
+        }//end else
+
+    }//end handleSignInResult
+    private void firebaseAuthWithGoogle(GoogleSignInAccount signInAccount) {
+        registerGoogle();
+        AuthCredential credential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if(!task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), R.string.not_firebase_auth, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void registerGoogle() {
+        FirebaseUser user= firebaseAuth.getCurrentUser();
+        if(user!=null) {
+            final String name = user.getDisplayName();
+            final String nameonly[] = name.split(" ", 2);
+            final String na = nameonly[0];
+            final String mail = user.getEmail();
+            String lastname = user.getDisplayName();
 
             final String finalLastname = "Apellidos";
-            final String token = acct.getId();
-            final String account=acct.getDisplayName();
-            final String tokenfirebase=tokens;//new FirebaseInstanceIdService().getToken();
+            final String token = user.getUid();
+            final String account1 = user.getEmail();
+            final String cuentaonly[] = account1.split("@", 2);
+            final String a = cuentaonly[0];
+            final String account = a;
+            final String tokenfirebase = tokens;//new FirebaseInstanceIdService().getToken();
 
-
+         /*  new MaterialDialog.Builder(this)
+                    .title("Google trae esto")
+                    .content("Nombre: " + name + "\n" + " " +
+                            "Apellidos: " + lastname + "\n" + " " +
+                            "Email: " + mail + "\n" + " " +
+                            "Pass: " + "--" + "\n" + " " +
+                            "Cuenta: " + a + "\n"
+                    )
+                    .theme(Theme.DARK)
+                    .show();*/
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
 
                             Toast.makeText(SelectAccount.this,R.string.Su_registro_realizo_con_Exito, Toast.LENGTH_LONG).show();
-                            finishLogin();
+                            goMainScreen();
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -491,6 +539,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                             e.printStackTrace();
                         }
                     }else{
+
                         Log.e("SelectAccount", "Network Response is Null");
                     }
                 }//Fin onErrorResponse
@@ -514,30 +563,22 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             };
             RequestQueue requestQueue = Volley.newRequestQueue(this);
             requestQueue.add(stringRequest);
+         }
+        }
 
-        }//End if
-        else {
-            //If login fails
-            Toast.makeText(this, R.string.Login_Failed, Toast.LENGTH_LONG).show();
-            /*new MaterialDialog.Builder(SelectAccount.this)
-                    .title(R.string.Login_Failed)
-                    .content(result.getStatus().toString())
-                    .show();*/
-            spd.progressDilog(SelectAccount.this, false);
-        }//end else
-
-    }//end handleSignInResult
-    public void getToken(){
+    public void getToken() {
         SharedPreferences prefs = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
 
-        tokens= prefs.getString( "tokenNew", "tokentmps" ); // (key, default)
+        tokens = prefs.getString("tokenNew", "tokentmps"); // (key, default)
         Log.e("SELECTaccount", tokens);
         // final String tempEmail = pref.getString( "storedEmail", "Email Address" );
 
     }
 
 
-    /**---LOGIN---**/
+    /**
+     * ---LOGIN---
+     **/
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private static String readStream(InputStream in) {
         StringBuilder sb = new StringBuilder();
@@ -552,6 +593,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         }
         return sb.toString();
     }
+
     public boolean isOnline() {
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -572,10 +614,11 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 task.execute(parametros);
 
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
         }
     }//Fin UserLogin
+
     private class ObtenerDatos extends AsyncTask<String[], Void, String> {
         @Override
         protected String doInBackground(String[]... parametros) {
@@ -585,8 +628,9 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 return e.getMessage();
             }
         }
+
         @Override
-        protected void onPostExecute(String resultado){
+        protected void onPostExecute(String resultado) {
             try {
 
                 String datoslogin;
@@ -594,14 +638,14 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
                 //   txtToken.setText(jsonObject.getString("success"));
                 var_Login = new VariablesLogin();
                 datoslogin = jsonObject.getString("Success");
-                if(datoslogin.equals("[]")){
-                    Toast.makeText(SelectAccount.this,"Hubo un problema. Intente mas tarde",Toast.LENGTH_LONG).show();
+                if (datoslogin.equals("[]")) {
+                    Toast.makeText(SelectAccount.this, "Hubo un problema. Intente mas tarde", Toast.LENGTH_LONG).show();
 
-                }else{
+                } else {
 
-                    if (datoslogin.length()>=10){
+                    if (datoslogin.length() >= 10) {
                         JSONArray jsonArray = new JSONArray(jsonObject.getString(getResources().getString(R.string.Success)));
-                        for (int x=0; x<jsonArray.length(); x++) {
+                        for (int x = 0; x < jsonArray.length(); x++) {
                             JSONObject json = new JSONObject(jsonArray.get(x).toString());
                             var_Login.setIdusuario(json.getString(KEY_IDUSUARIO));
                             var_Login.setCuenta(json.getString(KEY_CUENTA));
@@ -616,10 +660,9 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
                         finishLogin();
 
-                    }
-                    else {
+                    } else {
 
-                        Toast.makeText(SelectAccount.this,"Hubo un problema. Porfavor Verifique su Correo y Contraseña",Toast.LENGTH_LONG).show();
+                        Toast.makeText(SelectAccount.this, "Hubo un problema. Porfavor Verifique su Correo y Contraseña", Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -631,7 +674,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private String ConexionServer(String dir_url,String[] variables, String[] valores) throws IOException {
+    private String ConexionServer(String dir_url, String[] variables, String[] valores) throws IOException {
         URL url = new URL(dir_url);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setReadTimeout(60000);
@@ -645,7 +688,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         conn.connect();
         datos = readStream(conn.getInputStream());
         conn.disconnect();
-        System.out.println("datosserver: "+datos);
+        System.out.println("datosserver: " + datos);
         return datos;
 
     }
@@ -655,9 +698,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     public void onBackPressed() {
        /* DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-
             drawer.closeDrawer(GravityCompat.START);
-
         } else {
             super.onBackPressed();
         }*/
@@ -675,13 +716,6 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     }
 
 
-
-
-
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -691,7 +725,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         //firebaseAuth.removeAuthStateListener(firebaseAuthListener);
     }
 
-    public void state1(){
+    public void state1() {
         //  Toast.makeText(Shared.this, "State1", Toast.LENGTH_SHORT).show();
         android.view.animation.Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.state);
         tv1.setText(R.string.tag_message_selected);
@@ -706,7 +740,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -719,7 +754,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void  movedSalida1(){
+    private void movedSalida1() {
         //  Toast.makeText(Shared.this, "Mover Salida1", Toast.LENGTH_SHORT).show();
         //tv1.setVisibility(View.INVISIBLE);
         android.view.animation.Animation animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movevoutput);
@@ -735,7 +770,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -782,7 +818,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    private void  movedSalida2(){
+    private void movedSalida2() {
         //   Toast.makeText(Shared.this, "Mover Salida2", Toast.LENGTH_SHORT).show();
         //tv1.setVisibility(View.INVISIBLE);
         android.view.animation.Animation animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.movevoutput);
@@ -798,7 +834,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -828,7 +865,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -863,7 +901,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -874,6 +913,7 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
         });
 
     }//End
+
     private void moveEntrada4() {
 
 
@@ -892,7 +932,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -927,7 +968,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -957,7 +999,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -992,7 +1035,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -1022,7 +1066,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -1057,7 +1102,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -1087,7 +1133,8 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onAnimationRepeat(android.view.animation.Animation animation) {}
+            public void onAnimationRepeat(android.view.animation.Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(android.view.animation.Animation animation) {
@@ -1106,15 +1153,15 @@ public class SelectAccount extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void finishLogin( ) {
+    private void finishLogin() {
         Intent main = new Intent(this, MainActivity.class);
         startActivity(main);
         finish();
     }
+
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
 
 }

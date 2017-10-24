@@ -48,6 +48,7 @@
     <string name="Terminos">Aceptar términos y condiciones</string>
     <string name="no_text"> </string>
     <string name="action_register">Registrar</string>
+    <string name="not_firebase_auth">Ocirrio un problema. Intente más tarde</string>
 
     <!-- Terms & Conditions-->
     <string name="title_terms">Términos de servicio en "Mi Diario"</string>
