@@ -103,6 +103,9 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                             case "mov":
                                 dowloandFile(type, holder, fname, pos);
                                 break;
+                            case "mp4":
+                                dowloandFile(type, holder, fname, pos);
+                                break;
 
                         }
 
