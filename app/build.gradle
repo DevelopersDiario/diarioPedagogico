@@ -8,8 +8,8 @@ android {
         applicationId "com.dese.diario"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 22
-        versionName "1.2.2"
+        versionCode 24
+        versionName "1.2.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
@@ -30,10 +30,7 @@ android {
         }
         debug {
 
-            /* storeFile file('keystore/debug.keystore')
-             keyAlias 'androiddebugkey'
-             keyPassword 'android'
-             storePassword 'android'*/
+
             keyAlias 'AMDI'
             keyPassword 'safa2017'
             storeFile file('C:/Users/Eduardo/Documents/Developer/KeyDiario/KeyDiario.jks')
@@ -42,36 +39,32 @@ android {
     }
     buildTypes {
         release {
-
             shrinkResources true // This must be first
-            minifyEnabled false
+            minifyEnabled false //true for release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig getSigningConfig()
-            signingConfig signingConfigs.config
+           signingConfig signingConfigs.config
             buildConfigField "String", "BASE_URL", "\"http://release.com/\""
-
-             /*  applicationVariants.all { variant ->
-                    variant.outputs.each { output ->
-                        def date = new Date();
-                        def version = variant.versionName
-                        def formattedDate = date.format('yyyyMMddHHmmss')
-                        output.outputFile = new File(output.outputFile.parent,
-                                output.outputFile.name.replace("-release", "-"+ formattedDate+"-"+version)
-                                //for Debug use output.outputFile = new File(output.outputFile.parent,
-                                //                             output.outputFile.name.replace("-debug", "-" + formattedDate)
-                        )
-                    }
-                }*/
-
-
+              applicationVariants.all { variant ->
+                   variant.outputs.each { output ->
+                       def date = new Date();
+                       def version = variant.versionName
+                       def formattedDate = date.format('yyyyMMddHHmmss')
+                       output.outputFile = new File(output.outputFile.parent,
+                               output.outputFile.name.replace("-release", "-"+ version)
+                               //for Debug use output.outputFile = new File(output.outputFile.parent,
+                               //                             output.outputFile.name.replace("-debug", "-" + formattedDate)
+                       )
+                   }
+               }
         }
         debug {
             testCoverageEnabled false
             minifyEnabled false
             shrinkResources false
             debuggable true
+            signingConfig signingConfigs.config
         }
-
     }
     aaptOptions {
         cruncherEnabled = false
@@ -188,7 +181,7 @@ dependencies {
     compile 'com.github.boxme:squarecamera:1.1.0'
     compile 'com.droidninja:filepicker:2.0.8'
     compile 'uk.co.samuelwall:material-tap-target-prompt:2.1.0'
-   // compile 'com.zhihu.android:matisse:0.4.3'
+    // compile 'com.zhihu.android:matisse:0.4.3'
     compile 'com.google.firebase:firebase-database:11.0.1'
     compile 'com.google.firebase:firebase-core:11.0.1'
     compile 'com.google.firebase:firebase-messaging:11.0.1'
