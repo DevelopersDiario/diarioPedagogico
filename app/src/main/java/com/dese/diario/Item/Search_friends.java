@@ -146,6 +146,8 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
                 }
 
                 else if(text.length()<0) {
+                    HashSet hs = new HashSet();
+                    hs.addAll(listFriends);
                     listFriends.clear();
                     adpt.notifyDataSetChanged();
                 }
@@ -516,7 +518,7 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(Search_friends.this, "RES: "+response, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(Search_friends.this, "RES: "+response, Toast.LENGTH_LONG).show();
                         if(response.equals("succes")){
                             //  Toast.makeText(MainActivity.this, "Uploaded Successful", Toast.LENGTH_LONG).show();
 

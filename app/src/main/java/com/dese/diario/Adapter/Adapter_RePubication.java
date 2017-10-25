@@ -52,12 +52,12 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
        // final String r=listaRepublicaciones.get(position).getRuta();
         final String o = listaRepublicaciones.get(position).getObservaciones();
 
-       /* final String sen=listaRepublicaciones.get(position).getSentimiento();
+      final String sen=listaRepublicaciones.get(position).getSentimiento();
         final String eva=listaRepublicaciones.get(position).getEvaluacion();
         final String ana=listaRepublicaciones.get(position).getAnalisis();
         final String con= listaRepublicaciones.get(position).getConclusion();
         final String plan=listaRepublicaciones.get(position).getPlanaccion();
-*/
+
         holder.titlePublicationR.setText(t);
         holder.tvUserRecR.setText(u);
         holder.tvPublicationRecR.setText(o);

@@ -102,7 +102,7 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                //Toast.makeText(context, "Tipo:"+ pos, Toast.LENGTH_SHORT).show();
+
 
                 String email =lista.get(pos).getCuenta();
                 String grupi=lista.get(pos).getGrupotmp();

@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,9 +25,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dese.diario.DetailPublication;
-import com.dese.diario.Utils.Urls;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.R;
+import com.dese.diario.Utils.Urls;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -283,7 +282,7 @@ public class ListRepublication extends AppCompatActivity {
         queue.add(stringRequest);
     }*/
 
-    public  void listarRe(final Context context, final String pa){
+  /*  public  void listarRe(final Context context, final String pa){
 
 
 
@@ -341,9 +340,9 @@ public class ListRepublication extends AppCompatActivity {
             }
 
             ) {
-                /**
+                *//**
                  * Passing some request headers
-                 */
+                 *//*
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     HashMap<String, String> headers = new HashMap<String, String>();
@@ -356,7 +355,7 @@ public class ListRepublication extends AppCompatActivity {
 
             queue.add(stringRequest);
         }
-
+*/
 
 
 

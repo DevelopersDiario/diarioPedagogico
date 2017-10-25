@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
@@ -63,7 +64,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(final int pos) {
-                        final CharSequence[] optione = { "View", "Descargar"};
+                       /* final CharSequence[] optione = { "View", "Descargar"};
                         new MaterialDialog.Builder(context)
                                 .items(optione)
                                 .itemsCallback(new MaterialDialog.ListCallback() {
@@ -86,9 +87,9 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                         }
                                     }
                                 })
-                                .show();
+                                .show();*/
 
-                      /*   final CharSequence[] optione = { "View", "Descargar"};
+                         final CharSequence[] optione = { "View", "Descargar"};
                         new MaterialDialog.Builder(context)
                                 .items(optione)
                                 .itemsCallback(new MaterialDialog.ListCallback() {
@@ -111,14 +112,14 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                         }
                                     }
                                 })
-                                .show();*/
-                   /*   if(type=="jpg" || type=="png"|| type=="gif"|| type=="mp3"|| type=="avi"|| type=="wav"){
+                                .show();
+                      if(type=="jpg" || type=="png"|| type=="gif"|| type=="mp3"|| type=="avi"|| type=="wav"){
 
                        }else if(type=="doc" || type=="pdf" || type=="xls"|| type=="ppt"){
                            String urlDescarga= download+nombrefile.get(pos);
                            new DownloadTask(context, null, urlDescarga);
 
-                       }*/
+                       }
 
                     }
                 });

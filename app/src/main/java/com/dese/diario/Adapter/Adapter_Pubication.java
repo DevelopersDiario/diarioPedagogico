@@ -57,6 +57,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         final String u = listapublicaciones.get(position).getNombre();
         final String t = listapublicaciones.get(position).getTitulo();
         final String f = listapublicaciones.get(position).getFoto();
+
         final String pa = listapublicaciones.get(position).getIdpublicacion();
         final String sen= listapublicaciones.get(position).getSentimiento();
         final String eva= listapublicaciones.get(position).getEvaluacion();

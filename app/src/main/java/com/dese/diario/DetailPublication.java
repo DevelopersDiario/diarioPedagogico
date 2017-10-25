@@ -194,7 +194,8 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         }
 
 
-        listarRe( idepublicacion);
+        listarRe( pa);
+      //  Toast.makeText(this, "Papa  "+pa + " IDE"+ idepublicacion, Toast.LENGTH_LONG ).show();
         listarFile(idepublicacion);
 
 
@@ -443,7 +444,16 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                             jsonobject.getString("observaciones"),
                                             jsonobject.getString("titulo"),
                                             jsonobject.getString("nombre"),
-                                            jsonobject.getString("idusuario")));
+                                            jsonobject.getString("idusuario"),
+                                            jsonobject.getString("analisis"),
+                                            jsonobject.getString("evaluacion"),
+                                            jsonobject.getString("conclusion"),
+                                            jsonobject.getString("token"),
+                                            jsonobject.getString("planaccion"),
+                                            jsonobject.getString("sentimiento")));
+                                   /* HashSet hs = new HashSet();
+                                    hs.addAll(listRepublicaciones);
+                                    listRepublicaciones.clear();*/
                                     adapter = new Adapter_RePubication(listRepublicaciones,DetailPublication.this);
                                     recyclerView.setAdapter(adapter);
 
