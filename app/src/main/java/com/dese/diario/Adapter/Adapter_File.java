@@ -13,7 +13,6 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
@@ -64,38 +63,64 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 holder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onItemClick(final int pos) {
-                       /* final CharSequence[] optione = { "View", "Descargar"};
+                        switch (type){
+                            case "jpg":
+
+                               selectFile(type, holder, fname, pos);
+
+                                break;
+                            case "png":
+
+                                selectFile(type, holder, fname, pos);
+                                break;
+                            case "gif":
+
+                                selectFile(type, holder, fname, pos);
+                                break;
+                            case "mp3":
+                                selectFile(type, holder, fname, pos);
+                                break;
+                            case "avi":
+                                selectFile(type, holder, fname, pos);
+                                break;
+                            case "wav":
+                                selectFile(type, holder, fname, pos);
+                                break;
+                            case "doc":
+                                dowloandFile(type, holder, fname, pos);
+                                break;
+                            case "pdf":
+
+                                dowloandFile(type, holder, fname, pos);
+
+                                break;
+                            case "xls":
+                                dowloandFile(type, holder, fname, pos);
+                                break;
+                            case "ppt":
+                                dowloandFile(type, holder, fname, pos);
+                                break;
+                            case "mov":
+                                dowloandFile(type, holder, fname, pos);
+                                break;
+
+                        }
+
+
+
+
+                    }
+                });
+
+            }
+    private void selectFile(final String type, final MyHolderItem holder, final String fname, final int pos){
+        final CharSequence[] optione = { "Preview", "Descargar"};
                         new MaterialDialog.Builder(context)
                                 .items(optione)
                                 .itemsCallback(new MaterialDialog.ListCallback() {
                                     @Override
                                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
 
-                                        switch (which){
-                                            case 0:
-                                                previewFile(type, holder, fname);
-                                                break;
-
-                                            case 1:
-                                                String urlDescarga= download+nombrefile.get(pos);
-                                                new DownloadTask(context, null, urlDescarga);
-
-                                                break;
-                                            default:
-                                                dialog.dismiss();
-                                                break;
-                                        }
-                                    }
-                                })
-                                .show();*/
-
-                         final CharSequence[] optione = { "View", "Descargar"};
-                        new MaterialDialog.Builder(context)
-                                .items(optione)
-                                .itemsCallback(new MaterialDialog.ListCallback() {
-                                    @Override
-                                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-  Toast.makeText(context, "Tipo:"+ type, Toast.LENGTH_SHORT).show();
                                         switch (which){
                                             case 0:
                                                 previewFile(type, holder, fname);
@@ -113,22 +138,28 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                                     }
                                 })
                                 .show();
-                      if(type=="jpg" || type=="png"|| type=="gif"|| type=="mp3"|| type=="avi"|| type=="wav"){
+    } private void dowloandFile(final String type, final MyHolderItem holder, final String fname, final int pos){
+        final CharSequence[] optione = {"Descargar"};
+                        new MaterialDialog.Builder(context)
+                                .items(optione)
+                                .itemsCallback(new MaterialDialog.ListCallback() {
+                                    @Override
+                                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
 
-                       }else if(type=="doc" || type=="pdf" || type=="xls"|| type=="ppt"){
-                           String urlDescarga= download+nombrefile.get(pos);
-                           new DownloadTask(context, null, urlDescarga);
+                                        switch (which){
 
-                       }
+                                            case 0:
+                                                String urlDescarga= download+nombrefile.get(pos);
+                                                new DownloadTask(context, null, urlDescarga);
 
-                    }
-                });
-
-            }
-    @Override
-    public int getItemCount() {
-
-        return nombrefile.size();
+                                                break;
+                                            default:
+                                                dialog.dismiss();
+                                                break;
+                                        }
+                                    }
+                                })
+                                .show();
     }
     private void previewFile(String type, MyHolderItem holder, final String fname) {
 
@@ -174,7 +205,7 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 dialogPlayer(mp, fname);
                 break;
             case "doc":
-                dialogDocument(fname);
+               // dialogDocument(fname);
                 break;
             case "pdf":
               //  dialogDocument(fname);
@@ -390,6 +421,10 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
         }
 
     }
+    @Override
+    public int getItemCount() {
 
+        return nombrefile.size();
+    }
 
 }
