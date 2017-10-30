@@ -195,7 +195,17 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
 
         listarRe( pa);
-      //  Toast.makeText(this, "Papa  "+pa + " IDE"+ idepublicacion, Toast.LENGTH_LONG ).show();
+   //   Toast.makeText(this, "Papa  "+pa + " IDE"+ idepublicacion, Toast.LENGTH_LONG ).show();
+
+        /*new MaterialDialog.Builder(this)
+                .title("Contenido de "+u)
+                .content("Titutlo "+ t + "\n "+
+                        " idpublicacion "+ idepublicacion + "\n "+
+                        "data "+ d + "\n "+
+                        "foto "+ f + "\n "+
+                        "papa "+ pa + "\n "
+                )
+                .show();*/
         listarFile(idepublicacion);
 
 
@@ -457,7 +467,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                     adapter = new Adapter_RePubication(listRepublicaciones,DetailPublication.this);
                                     recyclerView.setAdapter(adapter);
 
-                                    // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
 
 
                                   //&  System.out.println(listRepublicaciones);

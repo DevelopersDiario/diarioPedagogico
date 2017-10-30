@@ -494,4 +494,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="versionName">1.2.0</string>
+    <string name="tag_version_name">Versión</string>
 </resources>

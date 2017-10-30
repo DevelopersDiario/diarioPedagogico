@@ -5,12 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.ContextMenu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.dese.diario.R;
-
-import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -74,7 +71,7 @@ public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongCli
 
         //OUR CONTEXT MENU
         // menu.setHeaderTitle("Seleccione: ");
-           menu.add(0,0,0,"Abrir");
+           //menu.add(0,0,0,"Abrir");
 
 
     }

@@ -27,9 +27,7 @@
         android:textSize="15sp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:visibility="gone"
-        />
+        android:layout_marginRight="16dp" />
 
     <Button
         android:id="@+id/btn_login_email"

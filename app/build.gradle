@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '25.0.3'
+    buildToolsVersion '26.0.2'
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.dese.diario"
@@ -12,7 +12,7 @@ android {
         versionName "1.2.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-
+        vectorDrawables.useSupportLibrary = true
     }
     signingConfigs {
         release {
@@ -39,24 +39,24 @@ android {
     }
     buildTypes {
         release {
-            shrinkResources true // This must be first
-            minifyEnabled false //true for release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources true
+            minifyEnabled true //true para relase
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
             signingConfig getSigningConfig()
            signingConfig signingConfigs.config
             buildConfigField "String", "BASE_URL", "\"http://release.com/\""
-              applicationVariants.all { variant ->
+             /* applicationVariants.all { variant ->
                    variant.outputs.each { output ->
                        def date = new Date();
                        def version = variant.versionName
                        def formattedDate = date.format('yyyyMMddHHmmss')
                        output.outputFile = new File(output.outputFile.parent,
                                output.outputFile.name.replace("-release", "-"+ version)
-                               //for Debug use output.outputFile = new File(output.outputFile.parent,
-                               //                             output.outputFile.name.replace("-debug", "-" + formattedDate)
+
                        )
                    }
-               }
+               }*/
         }
         debug {
             testCoverageEnabled false
