@@ -143,6 +143,7 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
 
                 if(text.length()>0){
                     searchFriends(textValue);
+
                 }
 
                 else if(text.length()<0) {
@@ -211,8 +212,8 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
                 if (s.length() >= 0) {
                     searchFriends(textValue);
                 } else if (s.length() < 0) {
-                    // listFriends.clear();
-                    // adpt.notifyDataSetChanged();
+                    listFriends.clear();
+                     adpt.notifyDataSetChanged();
 
 
                     HashSet hs = new HashSet();
@@ -232,6 +233,8 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
             RequestQueue queue = Volley.newRequestQueue(this);
 
         if(name!=null) {
+
+            listFriends.clear();
             StringRequest stringRequest = new StringRequest(Request.Method.GET, urlLisUser,
                     new Response.Listener<String>() {
                         @Override
@@ -300,6 +303,9 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
             queue.add(stringRequest);
         }
         else{
+            HashSet hs = new HashSet();
+            hs.addAll(listFriends);
+            listFriends.clear();
             Toast.makeText(Search_friends.this  ,"Escriba para buscar", Toast.LENGTH_SHORT).show();
 
         }

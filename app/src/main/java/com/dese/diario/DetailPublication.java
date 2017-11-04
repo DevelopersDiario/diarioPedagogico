@@ -582,19 +582,16 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
                                     String file=jsonobject.getString("descripcion");
                                     filename.add(file);
-                                    if(file!=" "){
+                                  //  if(file!=" "){
 
                                         ia = new Adapter_File(filename, DetailPublication.this);
                                         rcItems.setAdapter(ia);
-
-                                        //rcItems.setItemAnimator(new DefaultItemAnimator());
-                                        //rcItems.setLayoutManager(new LinearLayoutManager(DetailPublication.this));
 
                                         lyContentImagenDetail.setVisibility(View.VISIBLE);
                                         rcItems.setItemAnimator(new DefaultItemAnimator());
                                         rcItems.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                                        // System.out.println(paths);
-                                    }
+                                  //  }
 
                                 }
                             } catch (JSONException e) {

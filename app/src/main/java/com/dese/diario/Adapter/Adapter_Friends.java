@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
  * Created by Eduardo on 12/05/2017.
@@ -106,40 +105,62 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
 
                 String email =lista.get(pos).getCuenta();
                 String grupi=lista.get(pos).getGrupotmp();
-               // listProfile(lista.get(pos).getIdusuario());
+                listProfile(lista.get(pos).getIdusuario());
+
 
             }
         });
     }
 
-    private void prevProfileFriends(String nombre, String correo, String foto){
-        TextView tvNombre, tvMail;
-        CircleImageView imProfilePreview;
-        boolean wrapInScrollView = true;
-        final MaterialDialog dialog = new MaterialDialog.Builder(context)
-                .customView(R.layout.dialog_audio, wrapInScrollView)
-                .show();
-        View view = dialog.getCustomView();
-        final Button start= (Button) view.findViewById(R.id.btnStart);
-        Button stop = (Button) view.findViewById(R.id.btnStop);
-        Button pause= (Button)view.findViewById(R.id.btnReplay);
-        ImageView exit = (ImageView) view.findViewById(R.id.btnExit);
-        dialog.show();
-/*
+    private void prevProfileFriends(JSONObject jsonobject){
 
-        imProfilePreview= (CircleImageView) dialog.findViewById(R.id.imProfilePreview);
-        tvNombre= (TextView) dialog.findViewById(R.id.tvNamePreview);
-        tvMail= (TextView) dialog.findViewById(R.id.tvMailPreview);
-*/
+        try {
 
-      /*  imProfilePreview.setImageURI(Uri.parse(Urls.download+foto));
-        Picasso.with(context)
-                .load(Urls.download+foto)
-                .resize(2000, 1200)
-                .centerInside()
-                .into(  imProfilePreview);
-        tvNombre.setText(nombre);
-        tvMail.setText(correo);*/
+            String foto = jsonobject.getString("foto");
+            String nombre =jsonobject.getString("nombre");
+            String correo  = jsonobject.getString("correo");
+            String portada =jsonobject.getString("fportada");
+
+            TextView tvNombre, tvMail;
+            ImageView imProfilePreview;
+            ImageView imHolder;
+            MaterialProgressBar pbLoad;
+            boolean wrapInScrollView = false;
+            final MaterialDialog dialog = new MaterialDialog.Builder(context)
+                    .customView(R.layout.dialog_profile_preview, wrapInScrollView)
+                    .show();
+            View view = dialog.getCustomView();
+            dialog.show();
+
+
+
+            imProfilePreview= (ImageView) view.findViewById(R.id.imProfilePreview);
+            tvNombre= (TextView) view.findViewById(R.id.tvNamePreview);
+            tvMail= (TextView) view.findViewById(R.id.tvMailPreview);
+            pbLoad= (MaterialProgressBar) view.findViewById(R.id.pbLoad);
+           // imHolder= (ImageView) view.findViewById(R.id.imHolderPreview) ;
+
+            pbLoad.setVisibility(View.VISIBLE);
+            pbLoad.setIndeterminate(true);
+            Picasso.with(context)
+                    .load(Urls.download+foto)
+                    .resize(2000, 1200)
+                   .centerCrop()
+                    .into(  imProfilePreview);
+            pbLoad.setVisibility(View.GONE);
+           /* Picasso.with(context)
+                    .load(Urls.download+portada)
+                    .resize(2000, 12000)
+                    .centerCrop()
+                    .into(  imHolder);*/
+            tvNombre.setText(nombre);
+            tvMail.setText(correo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
 
@@ -155,7 +176,7 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
 
         com.android.volley.RequestQueue queue = Volley.newRequestQueue(context);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listxiduser,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.filtrousuarioXid,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -170,11 +191,11 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
-                                    String    foto = jsonobject.getString("foto");
-                                    String nombre =jsonobject.getString("nombre");
-                                    String correo =jsonobject.getString("correo");
 
-                                    prevProfileFriends(nombre, correo, foto);
+
+                                    prevProfileFriends(jsonobject);
+                                    //Toast.makeText(context, "Idusu"+nombre+correo+ foto,Toast.LENGTH_SHORT).show();
+
 
                                 }
                             } catch (JSONException e) {
@@ -208,4 +229,6 @@ public class Adapter_Friends extends RecyclerView.Adapter<MyHolderF > {
         queue.add(stringRequest);
 
     }
+
+
 }

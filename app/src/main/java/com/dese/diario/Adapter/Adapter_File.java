@@ -307,13 +307,23 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
     private void getExtensionFile(String type, MyHolderItem holder, String name) {
         switch (type){
             case  "jpg":
-                Picasso.with(context)
+                //LoadBitmap.loadBitmap(download+name, holder.ivItem);
+               Picasso.with(context)
+                        .load(download+name)
+                        .resize(1200, 1200)
+                        .centerCrop()
+                        .into(holder.ivItem);
+                break;
+                case  "jpeg":
+                //LoadBitmap.loadBitmap(download+name, holder.ivItem);
+               Picasso.with(context)
                         .load(download+name)
                         .resize(1200, 1200)
                         .centerCrop()
                         .into(holder.ivItem);
                 break;
             case "png":
+                //LoadBitmap.loadBitmap(download+name, holder.ivItem);
                 Picasso.with(context)
                         .load(download+name)
                         .resize(1200, 1200)
