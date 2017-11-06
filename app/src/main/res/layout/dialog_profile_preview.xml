@@ -26,26 +26,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvNamePreview"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:textSize="20dp"
-            style="@style/AlertDialog.AppCompat.Light"
-            android:text="Nombre Usuario"
-            />
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:id="@+id/tvMailPreview"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_account"/>
+
+            <TextView
+                android:id="@+id/tvNamePreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="20dp"
+                style="@style/AlertDialog.AppCompat.Light"
+                android:text="Nombre Usuario"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:text="Mail"
-            style="@style/AlertDialog.AppCompat"
-            />
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_mail_outline_black_24dp"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:id="@+id/tvMailPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:text="Mail"
+                style="@style/AlertDialog.AppCompat"
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
 
 

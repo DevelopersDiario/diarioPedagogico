@@ -233,8 +233,6 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
             RequestQueue queue = Volley.newRequestQueue(this);
 
         if(name!=null) {
-
-            listFriends.clear();
             StringRequest stringRequest = new StringRequest(Request.Method.GET, urlLisUser,
                     new Response.Listener<String>() {
                         @Override
