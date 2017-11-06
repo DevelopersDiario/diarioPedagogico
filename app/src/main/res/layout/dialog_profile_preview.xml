@@ -42,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
                 android:textSize="20dp"
                 style="@style/AlertDialog.AppCompat.Light"
                 android:text="Nombre Usuario"
@@ -61,7 +60,6 @@
 
             <TextView
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
                 android:id="@+id/tvMailPreview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -212,9 +212,9 @@ public class Search_friends extends AppCompatActivity implements View.OnClickLis
                 if (s.length() >= 0) {
                     searchFriends(textValue);
                 } else if (s.length() < 0) {
-                    listFriends.clear();
+                   /* listFriends.clear();
                      adpt.notifyDataSetChanged();
-
+*/
 
                     HashSet hs = new HashSet();
                     hs.addAll(listMembers);

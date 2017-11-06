@@ -55,7 +55,6 @@
                         android:id="@+id/etBuscar"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-
                         android:drawableLeft="@drawable/ic_search_black_24dp"
                         android:drawableTint="@color/md_white_1000"
                         android:hint="@string/prompt_name"
@@ -78,6 +77,14 @@
                     app:cv_color="?colorPrimary"
                     />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/tag_help_search"/>
+
+
+
             </LinearLayout>
 
 
@@ -99,6 +106,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerFriends"
             android:layout_width="match_parent"

@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dese.diario"
     android:windowSoftInputMode="stateHidden|adjustResize"
-    android:versionCode="24"
-    android:versionName="1.2.4"
+    android:versionCode="25"
+    android:versionName="1.2.5"
     >
 
     <uses-sdk android:minSdkVersion="8" />
