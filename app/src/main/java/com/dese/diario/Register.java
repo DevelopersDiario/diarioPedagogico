@@ -298,7 +298,7 @@ public class Register extends AppCompatActivity implements DatePickerListener,  
         btnMoreConclusion.setOnClickListener(this);
         btnMorePlan.setOnClickListener(this);
 
-        getData();
+      //  getData();
 
     }
 

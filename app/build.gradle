@@ -8,8 +8,8 @@ android {
         applicationId "com.dese.diario"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 25
-        versionName "1.2.5"
+        versionCode 26
+        versionName "1.2.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

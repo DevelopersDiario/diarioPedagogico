@@ -178,6 +178,19 @@ public class Adapter_File extends RecyclerView.Adapter<MyHolderItem> {
                 imagePopup.initiatePopup(holder.ivItem.getDrawable());
                 imagePopup.viewPopup();
 
+            /* ImageView imShow;
+             boolean wrapInScrollView = true;
+                MaterialDialog dialog = new MaterialDialog.Builder(context)
+                        .customView(R.layout.dialog_image_full, wrapInScrollView)
+                        .show();
+
+
+                View view = dialog.getCustomView();
+                imShow= (ImageView) view.findViewById(R.id.imgShow);
+
+               imShow.setImageDrawable(holder.ivItem.getDrawable());*/
+
+
                 break;
             case "png":
 

@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity
     RecyclerView recyclerView;
 
     ArrayList listpublicaciones;
-  Adapter_Pubication adapter;
+    Adapter_Pubication adapter;
      //Adapter_Experence adapter;
     LinearLayoutManager linearLayoutManager;
     VideoView vidView;
@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity
     //Dates Friends
     String dataFoto, dataNombre, dataToken;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

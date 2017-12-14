@@ -6,8 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dese.diario.R;
-import com.example.jean.jcplayer.JcPlayerView;
-import com.mostafaaryan.transitionalimageview.TransitionalImageView;
 
 /**
  * Created by Eduardo on 14/07/2017.

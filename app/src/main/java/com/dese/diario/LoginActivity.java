@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -25,6 +26,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.FirebaseService.FirebaseConection;
@@ -352,7 +355,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             } catch (Exception e) {
                 Drawable drawable = getResources().getDrawable(R.drawable.image_cloud_sad);
-               /* new MaterialDialog.Builder(LoginActivity.this)
+               new MaterialDialog.Builder(LoginActivity.this)
                          .title("Uja! Hubo un error")
                         .icon(drawable)
                         .content("Lo lamentamos, intente más tarde. Plis!")
@@ -364,10 +367,10 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                         })
-                        .show();*/
+                        .show();
                 spd.DialogProgress (LoginActivity.this, false);
 
-                Toast.makeText(LoginActivity.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
+               // Toast.makeText(LoginActivity.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
                 Log.e("Login.ObtenerDatos", e.getMessage()+ ">--<"+e.getLocalizedMessage());
 
             }

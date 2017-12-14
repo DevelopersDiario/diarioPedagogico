@@ -40,7 +40,8 @@ public class Adapter_Item extends RecyclerView.Adapter<MyHolderView> {
     }
 
 
-    @Override public void onBindViewHolder(MyHolderView holder, int position) {
+    @Override
+    public void onBindViewHolder(MyHolderView holder, int position) {
 
         File f= new File(paths.get(position));
         String fname=f.getName().toString();
