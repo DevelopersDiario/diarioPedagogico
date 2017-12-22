@@ -93,86 +93,71 @@
                     android:text="@string/tag_lorem" />
 
 
-
-                 <TableLayout
-
-                      xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:layout_width="match_parent"
-                      android:layout_height="220dp"
-                      android:layout_marginTop="20dp"
-                      android:shrinkColumns="*"
-                      android:id="@+id/tlMainSelect"
-                      android:stretchColumns="*"
-                     android:visibility="gone"
-                      android:background="#ffffff">
+                <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/tlMainSelect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="#ffffff"
+                    android:shrinkColumns="*"
+                    android:stretchColumns="*"
+                    android:visibility="gone">
 
 
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
 
-                      <TableRow
-                          android:layout_height="wrap_content"
-                          android:layout_width="fill_parent"
-                          android:gravity="center_horizontal">
+                        <ImageView
+                            android:id="@+id/imvFeels"
+                            android:layout_weight="1"
+                            android:background="?colorAccent"
+                            android:gravity="center"
+                            android:padding="20dip"
+                            android:src="@drawable/idea"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:textColor="#000000" />
 
+                        <ImageView
+                            android:id="@+id/imvTest"
+                            android:background="?colorControlHighlight"
+                            android:gravity="center"
+                            android:padding="20dip"
+                            android:src="@drawable/test"
+                            android:textColor="#000000" />
 
-                          <ImageView
-                              android:id="@+id/imvFeels"
-                              android:layout_weight="1"
-                              android:background="?colorAccent"
-                              android:gravity="center"
-                              android:padding="20dip"
-                              android:src="@drawable/idea"
-                              android:textColor="#000000" />
-
-                          <ImageView
-                              android:id="@+id/imvTest"
-                              android:gravity="center"
-                              android:padding="20dip"
-                              android:background="?colorControlHighlight"
-                             android:src="@drawable/test"
-                              android:textColor="#000000" />
-
-                          <ImageView
-                              android:id="@+id/imvAnalyze"
-                              android:src="@drawable/analytics"
-                              android:layout_weight="1"
-                              android:background="?colorAccent"
-                              android:textColor="#000000"
-                              android:padding="20dip"
-                              android:gravity="center"/>
-
-                      </TableRow>
+                        <ImageView
+                            android:id="@+id/imvAnalyze"
+                            android:layout_weight="1"
+                            android:background="?colorAccent"
+                            android:gravity="center"
+                            android:padding="20dip"
+                            android:src="@drawable/analytics"
+                            android:textColor="#000000" />
 
 
+                        <ImageView
+                            android:id="@+id/imvConclusion"
+                            android:layout_weight="1"
+                            android:background="?colorControlHighlight"
+                            android:gravity="center"
+                            android:padding="20dip"
+                            android:src="@drawable/goal"
+                            android:textColor="#000000" />
 
-                      <TableRow
-                          android:id="@+id/tableRow1"
-                          android:layout_height="wrap_content"
-                          android:layout_width="match_parent">
+                        <ImageView
+                            android:id="@+id/imvPlan"
+                            android:layout_weight="1"
+                            android:background="?colorAccent"
+                            android:gravity="center"
+                            android:padding="20dip"
+                            android:src="@drawable/plan"
+                            android:textColor="#000000" />
 
-                          <ImageView
-                              android:id="@+id/imvConclusion"
-                              android:src="@drawable/goal"
-                              android:layout_weight="1"
-                              android:background="?colorControlHighlight"
-                              android:textColor="#000000"
-                              android:padding="20dip"
-                              android:gravity="center"/>
-
-                          <ImageView
-                              android:id="@+id/imvPlan"
-                              android:layout_weight="1"
-                              android:background="?colorAccent"
-                              android:gravity="center"
-                              android:padding="20dip"
-                              android:src="@drawable/plan"
-                              android:textColor="#000000" />
-
-                      </TableRow>
-                  </TableLayout>
-
-
-
-
+                    </TableRow>
+                </TableLayout>
 
             </LinearLayout>
 

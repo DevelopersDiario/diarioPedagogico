@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group  android:checkableBehavior="single"
-        >
+    <group android:checkableBehavior="single">
         <item
-            android:checked="true"
             android:id="@+id/item_navigation_drawer_home"
+            android:checked="true"
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/action_home" />
         <item
-            android:checked="true"
             android:id="@+id/item_navigation_drawer_mypublication"
+            android:checked="true"
             android:icon="@drawable/ic_directions_run_black_24dp"
             android:title="@string/action_my_publication" />
         <tem
@@ -25,27 +24,27 @@
         <item
             android:id="@+id/item_navigation_drawer_friends"
             android:icon="@drawable/ic_group_black_24dp"
-            android:title="@string/action_team"/>
-        <!--item
-            android:id="@+id/item_navigation_drawer_sent_mail"
-            android:icon="@drawable/ic_action_content_send"
-            android:title="Sent mail" /-->
+            android:title="@string/action_team" />
+
         <item
             android:id="@+id/item_navigation_drawer_settings"
             android:icon="@drawable/settingblack"
-            android:title="@string/action_settings"  />
+            android:title="@string/action_settings" />
 
-        
 
-            <item
-                android:id="@+id/item_navigation_drawer_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/action_share"/>
-            <item
-                android:id="@+id/item_navigation_drawer_about"
-                android:icon="@drawable/ic_info_black_24dp"
-                android:title="@string/action_about"/>
-            <item
+        <item
+            android:id="@+id/item_navigation_drawer_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/action_share" />
+        <item
+            android:id="@+id/item_navigation_drawer_about"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/action_about" />
+        <item
+            android:id="@+id/item_navigation_drawer_help"
+            android:icon="@drawable/ic_help_white_24dp"
+            android:title="@string/action_help" />
+        <item
             android:id="@+id/item_navigation_drawer_exit"
             android:icon="@android:drawable/ic_lock_power_off"
             android:title="@string/action_exit" />

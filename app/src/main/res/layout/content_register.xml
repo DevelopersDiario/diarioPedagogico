@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:background="@color/bg_gray"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Register">
 
 
-     <ScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,11 +19,29 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <com.github.jhonnyx2012.horizontalpicker.HorizontalPicker
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="18dp"/>
+                android:layout_marginBottom="18dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="*Obligatorio"
+                    android:textSize="15dp" />
+                <!--   <android.support.v7.widget.RecyclerView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rvItems"
+                    android:layout_centerVertical="true"/>-->
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -36,20 +54,22 @@
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="15dp"
+                    android:layout_marginBottom="18dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="18dp">
+                    app:cardElevation="15dp">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?colorPrimary"
                         android:paddingBottom="5dp" />
-                   <TextView
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="19dp"
-                       android:layout_marginBottom="10dp"
-                        android:text="Titulo*" />
+                        android:layout_marginBottom="10dp"
+                        android:text="Titulo*"
+                        android:textSize="19dp" />
 
                     <EditText
                         android:id="@+id/etTitle"
@@ -58,7 +78,7 @@
                         android:layout_marginTop="30dp"
                         android:hint="Escriba un titulo" />
 
-                    </android.support.v7.widget.CardView>
+                </android.support.v7.widget.CardView>
 
 
                 <!--android:background="@drawable/edit_text_design"-->
@@ -67,39 +87,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
                 android:layout_marginBottom="16dp"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/padding_5dp"
                 android:paddingTop="@dimen/padding_5dp">
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="5dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="5dp">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="?colorPrimary"
                         android:paddingBottom="10dp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="19dp"
-                            android:layout_marginBottom="10dp"
-                            android:text="Grupo*" />
 
-                        <Spinner
-                            android:id="@+id/spGpoP"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="20dp"
-                            android:hint="Grupo"
-                            android:textAlignment="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Grupo*"
+                        android:textSize="19dp" />
 
-             </android.support.v7.widget.CardView>
+                    <Spinner
+                        android:id="@+id/spGpoP"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:hint="Grupo"
+                        android:textAlignment="center" />
+
+                </android.support.v7.widget.CardView>
             </LinearLayout>
 
             <ScrollView
@@ -112,12 +135,13 @@
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="5dp"
                     android:orientation="vertical">
+
                     <android.support.v7.widget.CardView
                         android:id="@+id/card_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardElevation="5dp"
-                        android:layout_marginBottom="8dp">
+                        android:layout_marginBottom="8dp"
+                        app:cardElevation="5dp">
 
                         <FrameLayout
                             android:layout_width="match_parent"
@@ -125,22 +149,23 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginTop="5dp"
                             android:background="?colorPrimary" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="19dp"
                             android:layout_marginBottom="10dp"
                             android:layout_marginTop="5dp"
-                            android:text="¿Que esta pasando?*" />
+                            android:text="¿Que esta pasando?*"
+                            android:textSize="19dp" />
 
                         <EditText
                             android:id="@+id/etDescripcion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginTop="25dp"
                             android:background="@drawable/edit_text_unbording"
                             android:gravity="start"
-                            android:layout_marginTop="25dp"
                             android:inputType="textMultiLine"
                             android:isScrollContainer="true"
                             android:lines="10"
@@ -160,18 +185,20 @@
 
                 </LinearLayout>
             </ScrollView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="10dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="10dp">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvItems"
@@ -189,25 +216,28 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="10dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="10dp">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
                         android:background="?colorPrimary" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="19dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="5dp"
-                        android:text="@string/input_sent" />
+                        android:text="@string/input_sent"
+                        android:textSize="19dp" />
 
                     <EditText
                         android:id="@+id/etSenimientos"
@@ -248,21 +278,23 @@
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="10dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="10dp">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
                         android:background="?colorPrimary" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="19dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="5dp"
-                        android:text="¿Que es lo bueno y malo de esta experiencia?" />
+                        android:text="¿Que es lo bueno y malo de esta experiencia?"
+                        android:textSize="19dp" />
 
                     <EditText
                         android:id="@+id/etEvaluacion"
@@ -299,25 +331,28 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="10dp"
-                    android:layout_marginBottom="8dp">
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="10dp">
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
                         android:background="?colorPrimary" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="19dp"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="5dp"
-                        android:text="¿Qué sentido puede tener esta experiencia?" />
+                        android:text="¿Qué sentido puede tener esta experiencia?"
+                        android:textSize="19dp" />
 
 
                     <EditText
@@ -357,52 +392,55 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="10dp"
-                    android:layout_marginBottom="8dp">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="?colorPrimary" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="¿Qué más podria haber hecho?" />
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="10dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="?colorPrimary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="¿Qué más podria haber hecho?"
+                        android:textSize="19dp" />
 
 
-                <EditText
-                    android:id="@+id/etConclusion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="25dp"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:inputType="textMultiLine"
-                    android:isScrollContainer="true"
-                    android:lines="10"
-                    android:maxLines="10"
-                    android:minLines="10"
-                    android:overScrollMode="always"
-                    android:scrollbars="vertical"
-                    android:textAlignment="center" />
+                    <EditText
+                        android:id="@+id/etConclusion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="25dp"
+                        android:ems="10"
+                        android:gravity="start"
+                        android:inputType="textMultiLine"
+                        android:isScrollContainer="true"
+                        android:lines="10"
+                        android:maxLines="10"
+                        android:minLines="10"
+                        android:overScrollMode="always"
+                        android:scrollbars="vertical"
+                        android:textAlignment="center" />
 
-                <Button
-                    android:id="@+id/btnMoreConclusion"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right"
-                    android:visibility="gone" />
+                    <Button
+                        android:id="@+id/btnMoreConclusion"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_menu_right"
+                        android:visibility="gone" />
                 </android.support.v7.widget.CardView>
 
             </LinearLayout>
@@ -414,70 +452,58 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
+
                 <android.support.v7.widget.CardView
                     android:id="@+id/card_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="10dp"
-                    android:layout_marginBottom="8dp">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
-                    android:background="?colorPrimary" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="19dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="5dp"
-                    android:text="¿Qué haria en una experiencia similar?" />
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="10dp">
 
-                <EditText
-                    android:id="@+id/etPlan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="25dp"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:inputType="textMultiLine"
-                    android:isScrollContainer="true"
-                    android:lines="10"
-                    android:maxLines="10"
-                    android:minLines="10"
-                    android:overScrollMode="always"
-                    android:scrollbars="vertical"
-                    android:textAlignment="center" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="?colorPrimary" />
 
-                <Button
-                    android:id="@+id/btnMorePlan"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/ic_menu_right"
-                    android:visibility="gone" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="¿Qué haria en una experiencia similar?"
+                        android:textSize="19dp" />
+
+                    <EditText
+                        android:id="@+id/etPlan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="25dp"
+                        android:ems="10"
+                        android:gravity="start"
+                        android:inputType="textMultiLine"
+                        android:isScrollContainer="true"
+                        android:lines="10"
+                        android:maxLines="10"
+                        android:minLines="10"
+                        android:overScrollMode="always"
+                        android:scrollbars="vertical"
+                        android:textAlignment="center" />
+
+                    <Button
+                        android:id="@+id/btnMorePlan"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/ic_menu_right"
+                        android:visibility="gone" />
                 </android.support.v7.widget.CardView>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:layout_gravity="center"
-                    android:text="*Obligatorio" />
-                <!--   <android.support.v7.widget.RecyclerView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rvItems"
-                    android:layout_centerVertical="true"/>-->
-            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

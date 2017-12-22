@@ -108,7 +108,7 @@
                         android:id="@+id/tlMainSelectDetail"
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="wrap_content"
                         android:shrinkColumns="*"
                         android:visibility="gone"
                         android:stretchColumns="*" android:background="#ffffff">
@@ -148,16 +148,6 @@
                                 android:gravity="center"/>
 
 
-                        </TableRow>
-
-                        <!-- Row 2 with 3 columns -->
-
-
-                        <TableRow
-                            android:id="@+id/tableRow1"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent">
-
                             <ImageView
                                 android:id="@+id/imvConclusionD"
                                android:src="@drawable/goal"
@@ -178,14 +168,7 @@
 
 
                         </TableRow>
-                        <!--<TableRow
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:background="@drawable/edit_text_border">-->
 
-
-
-                        <!--</TableRow>-->
 
                     </TableLayout>
                     <LinearLayout
