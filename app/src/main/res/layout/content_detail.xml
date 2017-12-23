@@ -107,11 +107,12 @@
                     <TableLayout
                         android:id="@+id/tlMainSelectDetail"
                         xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:shrinkColumns="*"
                         android:visibility="gone"
-                        android:stretchColumns="*" android:background="#ffffff">
+                        android:stretchColumns="*"
+                        android:background="#ffffff">
 
 
                         <!-- Row 1 with single column -->
@@ -126,14 +127,16 @@
                                 android:layout_weight="1"
                                 android:background="?colorAccent"
                                 android:gravity="center"
-                                android:padding="20dip"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:src="@drawable/idea"
                                 android:textColor="#000000" />
 
                             <ImageView
                                 android:id="@+id/imvTestD"
                                 android:gravity="center"
-                                android:padding="20dip"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:background="?colorControlHighlight"
                                 android:src="@drawable/test"
                                 android:textColor="#000000" />
@@ -144,7 +147,8 @@
                                 android:layout_weight="1"
                                 android:background="?colorAccent"
                                 android:textColor="#000000"
-                                android:padding="20dip"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:gravity="center"/>
 
 
@@ -154,7 +158,8 @@
                                 android:layout_weight="1"
                                 android:background="?colorControlHighlight"
                                 android:textColor="#000000"
-                                android:padding="20dip"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
                                 android:gravity="center"/>
 
                             <ImageView
@@ -162,8 +167,9 @@
                                 android:layout_weight="1"
                                 android:background="?colorAccent"
                                 android:gravity="center"
-                                android:padding="20dip"
-                                 android:src="@drawable/plan"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/plan"
                                 android:textColor="#000000" />
 
 

@@ -1,0 +1,160 @@
+/* Curso CSS estilos aprenderaprogramar.com*/
+html {
+
+   height: 100%
+
+}
+*{
+font-family: arial; 
+
+}
+
+#pagewrap {
+ 
+width: 94%:
+}
+ 
+#content {
+ 
+width: 65%;
+}
+ 
+#sidebar {
+ 
+width: 30%;
+}
+/* para 700px o menos. Con auto width se hace un reset al container. */
+#content {
+ 
+width: auto;
+float: none;
+}
+ 
+#sidebar {
+ 
+width: auto;
+float: none;
+}
+/* para 480px o menos */
+#header {
+ 
+height: auto;
+}
+ 
+h1 {
+ 
+font-size: 24px;
+}
+ 
+#sidebar {
+ 
+display: none;
+}
+
+
+
+
+
+
+body {
+		width: 410px;
+		/*border-style: dotted;*/
+		font-family:Helvetica,Futura,Arial,Verdana,sans-serif;
+		color:  #02558b;
+
+	}
+	.image{
+		width: 350px;
+		height: 500px;
+		padding: 10px;
+		margin: 5px;
+		margin-right: : 10px;
+		text-align: center;
+		border-radius: 30px;
+
+	}
+	
+	.imageicono{
+		width: 50px;
+		height: 50px;
+		padding: 10px;
+		margin: -17px;
+		margin-right: : 10px;
+		text-align: right;
+		border-radius: 30px;
+
+	}
+	.imageicon{
+		width: 50px;
+		height: 40px;
+		padding: 10px;
+		margin: -17px;
+
+		text-align: right;
+		border-radius: 50px;
+
+	}
+div {
+	/*border-style: dashed;*/
+	margin: 20px;
+	padding: 2px;
+	text-align: justify;
+
+}
+
+h1 {
+  font-family: fantasy;
+  font-size: 20px
+  color: #4762B0 ;
+}
+p {
+	text-align: justify; 
+	margin:10px;
+	font: 100% sans-serif;
+	
+}
+.texttitulo{
+	text-align: justify; 
+	margin:10px;
+	font: 100% sans-serif;
+	color: #00557F ;
+}
+
+.intro{
+	text-align: justify; 
+	margin:10px;
+	font: 100% sans-serif;
+	color: #033744 ;
+}
+
+
+  .boton-nav{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #00557F;
+    border-radius: 6px;
+   /* border: 2px solid #0016b0;*/
+  }
+  .boton2{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #f8941c;
+    border-radius: 100px;
+    margin-left: 100px;
+   /* border: 2px solid #0016b0;*/
+  }
+footer{
+	margin: 20px;
+	padding: 5px; 
+	}
+
+
+ img {margin:10px; float:right;}
+
+

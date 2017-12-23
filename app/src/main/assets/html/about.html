@@ -1,12 +1,133 @@
-<html>
-	<head>
-		<title>Acerca de Mi  Diario Virtual</title> <meta charset="utf-8" >
-		<link rel="stylesheet" type="text/css" href="div.css">
-	</head>
-			<body marginheight="2dp" marginwidth="2dp">
-				<div>
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<!-- viewport meta to reset iPhone inital scale -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Acerca de Mi  Diario Virtual</title> <meta charset="utf-8" >
+
+<!-- css3-mediaqueries.js for IE8 or older -->
+<!--[if lt IE 9]>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+
+<style type="text/css">
+
+body {
+	font: 1em/150% Arial, Helvetica, sans-serif;
+}
+a {
+	color: #669;
+	texto-decoration: none;
+}
+a:hover {
+	texto-decoration: underline;
+}
+h1 {
+	font: bold 36px/100% Arial, Helvetica, sans-serif;
+}
+
+/************************************************************************************
+ESTRUCTURA
+*************************************************************************************/
+#pagewrap {
+	padding: 5px;
+	width: 960px;
+	margin: 20px auto;
+}
+#header {
+	height: 180px;
+}
+#content {
+	width: 600px;
+	float: left;
+}
+#sidebar {
+	width: 300px;
+	float: right;
+}
+#footer {
+	clear: both;
+}
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* para 980px o menos */
+@media screen and (max-width: 980px) {
+	
+	#pagewrap {
+		width: 94%;
+	}
+	#content {
+		width: 65%;
+	}
+	#sidebar {
+		width: 30%;
+	}
+
+}
+
+/* para 700px o menos */
+@media screen and (max-width: 700px) {
+
+	#content {
+		width: auto;
+		float: none;
+	}
+	#sidebar {
+		width: auto;
+		float: none;
+	}
+
+}
+
+/* para 480px o menos */
+@media screen and (max-width: 480px) {
+
+	#header {
+		height: auto;
+	}
+	h1 {
+		font-size: 24px;
+	}
+	#sidebar {
+		display: none;
+	}
+
+}
+
+/* borde & guideline (puedes ignorarlo) */
+#content {
+	background: #f8f8f8;
+}
+#sidebar {
+	background: #f0efef;
+}
+#header, #content, #sidebar {
+	margin-bottom: 5px;
+}
+#pagewrap, #header, #content, #sidebar, #footer {
+	border: solid 1px #ccc;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="pagewrap">
+
+	
+
+	<div id="content">
+		<h2>Contenido</h2>
+		<div>
 					<H1>Objetivo</H1>
-					<img src="https://i1.wp.com/desetecnologia.files.wordpress.com/2017/08/playstore-icon.png?ssl=1&w=450" width="150dp" alt="imgObject" title="Objectivo">
+					<img style= "margin:10px; float:right;" src="https://i1.wp.com/desetecnologia.files.wordpress.com/2017/08/playstore-icon.png?ssl=1&w=450" width="150dp" alt="imgObject" title="Objectivo">
 					<p>Comprender los procesos inherentes al pensamiento reflexivo que se generan a través del diario interactivo en línea,
 						realizado por un grupo estudiantes  en sus escenarios reales de práctica.
 					</p>
@@ -29,10 +150,24 @@
 
 					<p>	DidacTIC impulsa el uso de las TIC con el afán de ser partícipe del desarrollo educativo y tecnológico en Oaxaca.</p>
 				</div>
+	</div>
 
-			</body>
-			<footer>
-				<iframe align="center" height="250dp" width="350dp" src="https://www.youtube.com/watch?v=sccaJG9tdzA&t=10s" frameborder="0" autoplay=1 allowfullscreen></iframe>
-				
-			</footer>
+	<div id="sidebar">
+		<h3>Sidebar</h3>
+		<p>texto</p>
+		<p>texto</p>
+	</div>
+	
+	<div id="viewport">
+    <!-- Copy & Pasted from YouTube -->
+    
+	
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sccaJG9tdzA" frameborder="0" gesture="media" allow="encrypted-media" ></iframe>
+
+
+	</div>
+
+</div>
+
+</body>
 </html>

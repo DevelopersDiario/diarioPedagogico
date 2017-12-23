@@ -70,6 +70,7 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
         holder.tvPublicationRec.setText(p);
         holder.tvUserRec.setText(u);
         holder.titlePublication.setText(t);
+
        // holder.tvSentimientosRec.setText(sen);
         if(!sen.isEmpty()){
             holder.tlMainSelect.setVisibility(View.VISIBLE);
@@ -92,7 +93,11 @@ public class Adapter_Pubication extends RecyclerView.Adapter<MyHolderP> {
             });
         }else{
             holder.cvFeels.setVisibility(View.GONE);
-            holder.tlMainSelect.setVisibility(View.GONE);
+            holder.cvTest.setVisibility(View.GONE);
+            holder.cvAnalyze.setVisibility(View.GONE);
+            holder.cvConclusion.setVisibility(View.GONE);
+            holder.cvPlan.setVisibility(View.GONE);
+           // holder.tlMainSelect.setVisibility(View.GONE);
         }
         if(!eva.isEmpty()){
             holder.cvTest.setOnClickListener(new View.OnClickListener() {

@@ -28,6 +28,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -443,6 +445,32 @@ public class MainActivity extends AppCompatActivity
 
                                 Intent ip= new Intent(MainActivity.this, MyPublication.class);
                                 startActivity(ip);
+                                break;
+
+                            case R.id.item_navigation_drawer_help:
+                                menuItem.setChecked(true);
+                                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                                alert.setTitle("¿Necesitas ayuda?");
+
+                                WebView wv = new WebView(MainActivity.this);
+                                wv.loadUrl("file:///android_asset/html/index.html");
+                                wv.setWebViewClient(new WebViewClient() {
+                                    @Override
+                                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                                        view.loadUrl(url);
+
+                                        return true;
+                                    }
+                                });
+
+                                alert.setView(wv);
+                                alert.setNegativeButton("Cerrar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                                alert.show();
                                 break;
 
                         }
