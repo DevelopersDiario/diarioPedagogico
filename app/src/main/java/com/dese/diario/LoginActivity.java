@@ -271,9 +271,7 @@ public class LoginActivity extends AppCompatActivity {
 
         try {
             if (isOnline()) {
-                System.out.println(R.string.user_Login_entra);
-             // spd.MaterialDialog (LoginActivity.this, true);
-              //  spd.DialogProgress (LoginActivity.this, true);
+               // System.out.println(R.string.user_Login_entra);
                 spd.DialogProgress (LoginActivity.this, true);
                 AsyncTask task = new ObtenerDatos();
                 String[][] parametros = {
@@ -284,11 +282,8 @@ public class LoginActivity extends AppCompatActivity {
               //Toast.makeText(LoginActivity.this,mEmailView.getText().toString()+mPasswordView.getText().toString()+ tokennew, Toast.LENGTH_LONG).show();
 
             }else{
-               // showProgress(false);
                 spd.DialogProgress (LoginActivity.this, false);
-
-                // spd.MaterialDialog (LoginActivity.this, false);
-            }
+         }
         }catch (Exception ex){
                 Log.e("Exception->", ex.getMessage().toString());
             //System.out.println(ex);
