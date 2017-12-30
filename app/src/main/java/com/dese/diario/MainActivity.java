@@ -453,7 +453,7 @@ public class MainActivity extends AppCompatActivity
                                 alert.setTitle("¿Necesitas ayuda?");
 
                                 WebView wv = new WebView(MainActivity.this);
-                                wv.loadUrl("file:///android_asset/html/index.html");
+                                wv.loadUrl("file:///android_asset/html/Ayudita.html");
                                 wv.setWebViewClient(new WebViewClient() {
                                     @Override
                                     public boolean shouldOverrideUrlLoading(WebView view, String url) {

@@ -332,7 +332,7 @@ public class LoginActivity extends AppCompatActivity {
                             var_Login.setCorreo(json.getString(correo));
                             var_Login.setTelefono(json.getString(telefono));
                             var_Login.setFoto(json.getString(foto));
-                           var_Login.setFportada(json.getString("fportada"));
+                            var_Login.setFportada(json.getString("fportada"));
                             var_Login.setToken(tokennew);
 
                             du.setFoto(json.getString(foto));
@@ -357,25 +357,24 @@ public class LoginActivity extends AppCompatActivity {
                 Drawable drawable = getResources().getDrawable(R.drawable.image_cloud_sad);
                new MaterialDialog.Builder(LoginActivity.this)
                          .title("Uja! Hubo un error")
-                        .icon(drawable)
+
                         .content("Lo lamentamos, intente más tarde. Plis!")
                         .negativeText(R.string.disagree)
                         .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 dialog.dismiss();
-
+                                spd.DialogProgress (LoginActivity.this, false);
                             }
                         })
                         .show();
                 spd.DialogProgress (LoginActivity.this, false);
-
-               // Toast.makeText(LoginActivity.this, "Intente más tarde ", Toast.LENGTH_LONG).show();
                 Log.e("Login.ObtenerDatos", e.getMessage()+ ">--<"+e.getLocalizedMessage());
 
             }
-
+            spd.DialogProgress (LoginActivity.this, false);
         }
+
     }
     public void getToken(){
         SharedPreferences prefs = getSharedPreferences("MyPrefsFile", MODE_PRIVATE);
