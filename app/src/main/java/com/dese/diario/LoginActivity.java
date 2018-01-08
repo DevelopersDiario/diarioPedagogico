@@ -2,6 +2,7 @@ package com.dese.diario;
 
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     final String Success="Success";
     final String GET="GET";
     final static String url= Urls.login;
+
     //Resource
     String datos = "";
     // private EditText mEmailView;
@@ -72,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String tokennew;
 
-
+    private ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,13 @@ public class LoginActivity extends AppCompatActivity {
     }//Fin oNCreate
 
     private void inicializarButton() {
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Procesando...");
+        mProgress.setMessage("Porfavor espere...");
+        mProgress.setCancelable(true);
+        mProgress.setCanceledOnTouchOutside(false);
+        mProgress.setIndeterminate(true);
+
         du= new DatosUsr();
         mEmailView= (EditText) findViewById(R.id.tvEmail_Login);
         //       populateAutoComplete();
@@ -107,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                     if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                        spd.DialogProgress (LoginActivity.this, false);
+                        //*****spd.DialogProgress (LoginActivity.this, false);
                         attemptLogin();
                         return true;
                     }
@@ -170,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                 //spd.DialogProgress (LoginActivity.this, true);
             userLogin();
             }else{
-                spd.DialogProgress (LoginActivity.this, false);
+               //***** spd.DialogProgress (LoginActivity.this, false);
                 showAlertDialog(getResources().getString(R.string.title_conection_fail),
                         getResources().getString(R.string.message_need_conection));
             }
@@ -272,7 +281,8 @@ public class LoginActivity extends AppCompatActivity {
         try {
             if (isOnline()) {
                // System.out.println(R.string.user_Login_entra);
-                spd.DialogProgress (LoginActivity.this, true);
+               //********** spd.DialogProgress (LoginActivity.this, true);
+                mProgress.show();
                 AsyncTask task = new ObtenerDatos();
                 String[][] parametros = {
                         {url.toString()},
@@ -282,7 +292,8 @@ public class LoginActivity extends AppCompatActivity {
               //Toast.makeText(LoginActivity.this,mEmailView.getText().toString()+mPasswordView.getText().toString()+ tokennew, Toast.LENGTH_LONG).show();
 
             }else{
-                spd.DialogProgress (LoginActivity.this, false);
+                mProgress.dismiss();
+               //***** spd.DialogProgress (LoginActivity.this, false);
          }
         }catch (Exception ex){
                 Log.e("Exception->", ex.getMessage().toString());
@@ -343,31 +354,33 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else {
                         Toast.makeText(LoginActivity.this,"Verifique su Correo y Contraseña",Toast.LENGTH_LONG).show();
-                       spd.DialogProgress (LoginActivity.this, false);
+                       //*****spd.DialogProgress (LoginActivity.this, false);
 
 
                     }
                 }
             } catch (Exception e) {
+                mProgress.dismiss();
+
                 Drawable drawable = getResources().getDrawable(R.drawable.image_cloud_sad);
                new MaterialDialog.Builder(LoginActivity.this)
                          .title("Uja! Hubo un error")
 
-                        .content("Lo lamentamos, intente más tarde. Plis!")
+                        .content("Lo lamentamos, intente más tarde. Plis!"+ "\n"+e.getMessage().toString())
                         .negativeText(R.string.disagree)
                         .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 dialog.dismiss();
-                                spd.DialogProgress (LoginActivity.this, false);
+                                mProgress.dismiss();
                             }
                         })
                         .show();
-                spd.DialogProgress (LoginActivity.this, false);
+              //****  spd.DialogProgress (LoginActivity.this, false);
                 Log.e("Login.ObtenerDatos", e.getMessage()+ ">--<"+e.getLocalizedMessage());
 
             }
-            spd.DialogProgress (LoginActivity.this, false);
+           //*** spd.DialogProgress (LoginActivity.this, false);
         }
 
     }

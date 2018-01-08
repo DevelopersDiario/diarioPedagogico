@@ -449,7 +449,7 @@ public class MainActivity extends AppCompatActivity
 
                             case R.id.item_navigation_drawer_help:
                                 menuItem.setChecked(true);
-                                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+                                AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);
                                 alert.setTitle("¿Necesitas ayuda?");
 
                                 WebView wv = new WebView(MainActivity.this);
