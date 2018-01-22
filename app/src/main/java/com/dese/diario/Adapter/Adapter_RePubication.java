@@ -10,8 +10,8 @@ import com.dese.diario.Item.ItemClickListener;
 import com.dese.diario.Item.MyHolderR;
 import com.dese.diario.Item.MyLongClickListener;
 import com.dese.diario.Objects.RePublication;
-import com.dese.diario.Utils.Urls;
 import com.dese.diario.R;
+import com.dese.diario.Utils.Urls;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,21 +22,27 @@ import java.util.ArrayList;
 
 public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
     ArrayList<RePublication> listaRepublicaciones;
+
     Context context;
     View.OnLongClickListener longClickListener;
     int selectedPos;
+
+    ArrayList<String> filename = new ArrayList<>();
+    Adapter_File ia;
+    RecyclerView rvItemFeed;
     public Adapter_RePubication(ArrayList<RePublication> listaRepublicaciones, Context context) {
 
 
         this.listaRepublicaciones = listaRepublicaciones;
         this.context = context;
 
+
     }
 
     @Override
     public MyHolderR onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_layout_repost, parent, false);
+                .inflate(R.layout.item_repost, parent, false);
 
 
         return new MyHolderR(view);
@@ -61,7 +67,7 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
         holder.titlePublicationR.setText(t);
         holder.tvUserRecR.setText(u);
         holder.tvPublicationRecR.setText(o);
-     Picasso.with(context)
+        Picasso.with(context)
                 .load(Urls.download + f)
                 .resize(250, 250)
                 .centerCrop()
@@ -95,22 +101,71 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
         //return listapublicaciones.size();
     }
 
+/*
 
-   /* private void openDetailActivity(String t, String u, String d, String p, String f , final String pa ) {
-        Intent i = new Intent(context, DetailPublication.class);
+    public  void listarFile2( final String ide){
 
-        //PACK DATA TO SEND
-        i.putExtra("TITLE_KEY", t);
-        i.putExtra("USER_KEY", u);
-        i.putExtra("DATA_KEY", d);
-        i.putExtra("PUBLI_KEY", p);
-        i.putExtra("FOTO_KEY", f);
-        listarRepublicaciones(pa);
+        RequestQueue queue = Volley.newRequestQueue(context);
 
-        //open activity
-        context.startActivity(i);
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,Urls.obtenerdetallepublicacion ,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-    }*/
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+                                // paths = new ArrayList<>();
+                                JSONArray jsonarray = new JSONArray(response);
+                                for (int i = 0; i < jsonarray.length(); i++) {
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    String file=jsonobject.getString("descripcion");
+                                    filename.add(file);
+                                    //  if(file!=" "){
+
+                                    ia = new Adapter_File(filename, context);
+                                    rvItemFeed.setAdapter(ia);
+
+                                    lyContentImagenDetail.setVisibility(View.VISIBLE);
+                                    rvItemFeed.setItemAnimator(new DefaultItemAnimator());
+                                    rvItemFeed.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                                    // System.out.println(paths);
+                                    //  }
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Detail Publicacion", "Problema con" + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Horror", "Response--->"+error);
+            }
+
+        }
+
+        ) {
+            */
+/**
+             * Passing some request headers
+             *//*
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idpublicacion", ide);
+                //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+        queue.add(stringRequest);
+    }
+*/
 
 
 

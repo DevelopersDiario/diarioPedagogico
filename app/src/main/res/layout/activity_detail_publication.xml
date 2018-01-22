@@ -21,29 +21,50 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_detail" />
+    <include layout="@layout/content_detail"/>
 
 
-          <android.support.design.widget.FloatingActionButton
-              android:id="@+id/btnRep"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="bottom|end"
-              android:layout_margin="@dimen/fab_margin"
-              android:tint="@color/white"
-              app:srcCompat="@drawable/ic_create_black_24dp"/>
-    <SearchView
-        android:id="@+id/searchViewB"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnRep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:tint="@color/white"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_create_black_24dp" />
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/color_error"
-        android:padding="2dp"
-        android:queryHint="Search">
-        </SearchView>
+        android:layout_gravity="bottom|end">
+
+
+        <EditText
+            android:id="@+id/etRetroalimentacion"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_design"
+            android:gravity="center"
+            android:hint="Retroalimente.." />
+        <ImageView
+            android:id="@+id/ivZoomRetro"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:src="@drawable/ic_zoom_out_map_black_24dp"
+            android:tint="?colorPrimary" />
+
+        <ImageView
+            android:id="@+id/ivSendRetro"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+            android:src="@drawable/ic_send_black_24dp"
+            android:tint="?colorPrimary" />
+    </FrameLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -44,9 +44,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     'proguard-rules.pro'
             signingConfig getSigningConfig()
-           signingConfig signingConfigs.config
+            signingConfig signingConfigs.config
             buildConfigField "String", "BASE_URL", "\"http://release.com/\""
-             /* applicationVariants.all { variant ->
+            /* applicationVariants.all { variant ->
                    variant.outputs.each { output ->
                        def date = new Date();
                        def version = variant.versionName
@@ -90,12 +90,12 @@ repositories {
     }
 }
 repositories {
-            jcenter()
-            maven
-                    {
-                        url "https://jitpack.io"
-                    }
-        }
+    jcenter()
+    maven
+            {
+                url "https://jitpack.io"
+            }
+}
 configurations.all {
     resolutionStrategy.eachDependency {
         DependencyResolveDetails details ->

@@ -64,7 +64,7 @@ public class Settings extends AppCompatActivity implements  View.OnClickListener
 
     public void inicializarToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TypedValue typedValueColorPrimaryDark = new TypedValue();
@@ -132,7 +132,7 @@ public class Settings extends AppCompatActivity implements  View.OnClickListener
                 break;
             case R.id.relativeLayoutChooseAccount:
 
-             //  finishSession();
+                //  finishSession();
                 startActivity(new Intent(getBaseContext(), SelectAccount.class)
                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
                 finish();

@@ -1,18 +1,18 @@
 <resources>
     <!-- Resource Xtras -->
-  <!--  <style name="DialogTheme" parent="android:Theme.Holo.Light.Dialog">
+    <!--  <style name="DialogTheme" parent="android:Theme.Holo.Light.Dialog">
 
         <item name="android:windowMinWidthMajor">96%</item>
         <item name="android:windowMinWidthMinor">96%</item>
     </style>-->
-   <style name="DialogTheme" parent="android:Theme.Holo.Light.Dialog">
+    <style name="DialogTheme" parent="android:Theme.Holo.Light.Dialog">
         <item name="android:alertDialogStyle">@style/MyCustomDialog</item>
     </style>
 
-    <style name="MyCustomDialog" parent="@android:style/Theme.Dialog" >
+    <style name="MyCustomDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowMinWidthMajor">96%</item>
         <item name="android:windowMinWidthMinor">96%</item>
-       <item name="android:bottomBright">@color/white</item>
+        <item name="android:bottomBright">@color/white</item>
         <item name="android:bottomDark">@color/white</item>
         <item name="android:bottomMedium">@color/white</item>
         <item name="android:centerBright">@color/white</item>

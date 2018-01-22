@@ -497,4 +497,7 @@
     <string name="tag_version_name">Versión</string>
     <string name="tag_help_search">Mantenga presionado para agregar un miembro</string>
     <string name="action_main">Inicio</string>
+    <string name="title_activity_feedback">Retroalimentación</string>
+    <string name="tag_feedback">Retroalimentar...</string>
+    <string name="tag_comment">Comentario...</string>
 </resources>

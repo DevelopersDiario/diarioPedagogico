@@ -66,7 +66,8 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     TextView tvTitlePubDetail, tvUserPubDetail, tvDatePubDetail, tvPubDetail;
     ImageView foto;
     String t,u,d,p,f,sen, eva, ana, con, plan,  pa, idepublicacion;
-    ImageView imvDowloandPDF;
+    ImageView imvDowloandPDF, ivSendRetro, ivZoomRetro;
+    EditText etRetroalimentacion;
 
     public ImageView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 
@@ -75,7 +76,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
     ArrayList listRepublicaciones;
     Adapter_RePubication adapter;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView, rvItemFeed;
     LinearLayoutManager linearLayoutManager;
     LinearLayout lyContentImagenDetail;
     String ed;
@@ -102,7 +103,7 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     ArrayList<String> filename = new ArrayList<>();
     ArrayList<String> paths = new ArrayList<>();
     private RecyclerView rcItems;
-    Adapter_File ia;
+    Adapter_File ia, ia2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         theme();
@@ -124,8 +125,13 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
         rcItems = (RecyclerView) findViewById(R.id.rvItemDetailPublicacion);
        StaggeredGridLayoutManager staggeredGridLayout = new StaggeredGridLayoutManager(4,1);
+
+        rvItemFeed = (RecyclerView) findViewById(R.id.rvItemFeed);
       // rcItems.setLayoutManager(staggeredGridLayout);
 
+       /* final LinearLayoutManager layoutManager = new LinearLayoutManager(DetailPublication.this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rvItemFeed.setLayoutManager(layoutManager);*/
 
         lyContentImagenDetail= (LinearLayout) findViewById(R.id.lyContentImagenDetail);
         tvTitlePubDetail = (TextView) findViewById(R.id.tvTitlePubDetail);
@@ -150,6 +156,13 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         imvDowloandPDF.setOnClickListener(this);
         tlMainSelectDetail= (TableLayout)findViewById(R.id.tlMainSelectDetail   );
 
+        ivSendRetro= (ImageView)findViewById(R.id.ivSendRetro);
+        ivSendRetro.setOnClickListener(this);
+
+        ivZoomRetro= (ImageView)findViewById(R.id.ivZoomRetro);
+        ivZoomRetro.setOnClickListener(this);
+
+        etRetroalimentacion=(EditText) findViewById(R.id.etRetroalimentacion);
 
         Intent  i=this.getIntent();
         idepublicacion=i.getExtras().getString("_IDE_KEY");
@@ -159,6 +172,8 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
          p=i.getExtras().getString("PUBLI_KEY");
         f=i.getExtras().getString("FOTO_KEY");
         pa=i.getExtras().getString("PAPA");
+
+        GroupId(pa);
 
         sen=i.getExtras().getString("SEN_KEY");
         eva=i.getExtras().getString("TES_KEY");
@@ -216,6 +231,8 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
 
             }
         });
+
+
         tvTitlePubDetail.setText(t);
         tvUserPubDetail.setText(u);
         tvDatePubDetail.setText(d);
@@ -232,6 +249,28 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.ivSendRetro:
+                String cont=etRetroalimentacion.getText().toString();
+
+
+                String papa = pa;
+
+                String idgrupe = ed;
+                Toast.makeText(this, "Ide"+ed+ "Papa:"+pa+"content: "+cont, Toast.LENGTH_SHORT).show();
+
+               registerRePost(ed, cont, papa, idgrupe);
+
+                break;
+            case R.id.ivZoomRetro:
+                cont = etRetroalimentacion.getText().toString();
+
+                Intent feedback= new Intent(this, Feedback.class);
+                feedback.putExtra("Gpo", ed);
+                feedback.putExtra("Papa", pa);
+                feedback.putExtra("Cont", cont);
+               startActivity(feedback);
+
+                break;
             case R.id.imvFeelsD:
                 new MaterialDialog.Builder(this)
                         .title(R.string.input_sent)
@@ -461,13 +500,16 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                                             jsonobject.getString("token"),
                                             jsonobject.getString("planaccion"),
                                             jsonobject.getString("sentimiento")));
+
                                    /* HashSet hs = new HashSet();
+
                                     hs.addAll(listRepublicaciones);
                                     listRepublicaciones.clear();*/
                                     adapter = new Adapter_RePubication(listRepublicaciones,DetailPublication.this);
                                     recyclerView.setAdapter(adapter);
 
-                                   // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
+                                  listarFile2(jsonobject.getString("idpublicacion").toString());
+                                  //  Toast.makeText(DetailPublication.this, "idepi"+jsonobject.getString("idpublicacion").toString(), Toast.LENGTH_LONG).show();
 
 
                                   //&  System.out.println(listRepublicaciones);
@@ -541,6 +583,61 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.e("DetallePub", "Respons-->"+error);
+            }
+        }
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idpublicacion", pa);
+                headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+
+
+        queue.add(stringRequest);
+
+    }
+    private void GroupId(final String pa) {
+        VariablesLogin variablesLogin = new VariablesLogin();
+        final String id= variablesLogin.getIdusuario().toString();
+
+        RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Urls.listargpoxpublicacion,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            try {
+                                //leadsNames  = new ArrayList<String>();
+                                ///leadsIdes= new ArrayList<String>();
+                                JSONObject jsonObject = new JSONObject(response);
+                                for (int i = 0; i < jsonObject.length(); i++) {
+                                    String getGruop=jsonObject.getString("nombregrupo").toString();
+
+                                    ed=jsonObject.getString("idgrupo").toString();
+
+                                    // Toast.makeText(DetailPublication.this, "Lista"+ getGruop, Toast.LENGTH_LONG).show();
+                                    //recyclerView.setAdapter(adaptergpo);
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Detalle", "Error +->" + e);
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
                 Log.e("DetallePub", "Response--->"+error);
             }
         }
@@ -561,7 +658,6 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
         queue.add(stringRequest);
 
     }
-
     public  void listarFile( final String ide){
 
         RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
@@ -752,6 +848,76 @@ public class DetailPublication extends AppCompatActivity implements  View.OnClic
             }
         }
 
+    public  void listarFile2( final String ide){
+
+        RequestQueue queue = Volley.newRequestQueue(DetailPublication.this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,getFilesList ,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Toast.makeText(DetailPublication.this,"IDE"+ide, Toast.LENGTH_LONG).show();    // paths = new ArrayList<>();
+
+
+                        //JSONArray jsonArray = null;
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                            try {
+
+                                JSONArray jsonarray = new JSONArray(response);
+                                Toast.makeText(DetailPublication.this,"Lolo"+jsonarray.length(), Toast.LENGTH_LONG).show();    // paths = new ArrayList<>();
+
+                                for (int i = 0; i < jsonarray.length(); i++) {
+
+                                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                                    String file=jsonobject.getString("descripcion");
+                                    filename.add(file);
+                                    //  if(file!=" "){
+                                    Toast.makeText(DetailPublication.this,file, Toast.LENGTH_LONG).show();    // paths = new ArrayList<>();
+
+                                    ia2 = new Adapter_File(filename, DetailPublication.this);
+
+                                    rvItemFeed.setAdapter(ia2);
+
+                                  //  rvItemFeed.setItemAnimator(new DefaultItemAnimator());
+
+                                   // rvItemFeed.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+                                   //System.out.println(paths);
+                                    //  }
+
+                                }
+                            } catch (JSONException e) {
+                                Log.e("Detail Publicacion", "Problema con" + e);
+                                Toast.makeText(DetailPublication.this, e.toString(), Toast.LENGTH_LONG).show();    // paths = new ArrayList<>();
+
+                            }
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Horror", "Response--->"+error);
+            }
+
+        }
+
+        ) {
+            /**
+             * Passing some request headers
+             */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("idpublicacion", ide);
+                //headers.put("Content-Type", "application/x-www-form-urlencoded");
+                return headers;
+            }
+        };
+        queue.add(stringRequest);
+    }
 
 
 }
