@@ -1,12 +1,22 @@
 package com.dese.diario.Adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dese.diario.Item.ItemClickListener;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.dese.diario.Item.MyHolderR;
 import com.dese.diario.Item.MyLongClickListener;
 import com.dese.diario.Objects.RePublication;
@@ -14,7 +24,14 @@ import com.dese.diario.R;
 import com.dese.diario.Utils.Urls;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Created by Eduardo on 04/04/2017.
@@ -27,9 +44,9 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
     View.OnLongClickListener longClickListener;
     int selectedPos;
 
-    ArrayList<String> filename = new ArrayList<>();
+
     Adapter_File ia;
-    RecyclerView rvItemFeed;
+    //RecyclerView rvItemFeed;
     public Adapter_RePubication(ArrayList<RePublication> listaRepublicaciones, Context context) {
 
 
@@ -49,7 +66,9 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
     }
 
     @Override
-    public void onBindViewHolder(MyHolderR holder, int position) {
+    public void onBindViewHolder(MyHolderR holder, final int position) {
+
+
 
 
         final String t = listaRepublicaciones.get(position).getTitulo();
@@ -73,14 +92,8 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
                 .centerCrop()
                 .into(holder.imProfileRecR);
 
-        holder.setItemClickListener(new ItemClickListener() {
-            @Override
-            public void onItemClick(int pos) {
-              //  openDetailActivity(t, u, d, p, f, pa);
 
-                //Toast.makeText(context,"Select+"+ pa,Toast.LENGTH_SHORT).show();
-            }
-        });
+        listarFile2(listaRepublicaciones.get(position).getIdpublicacion(), holder);
 
         holder.setLongClickListener(new MyLongClickListener() {
             @Override
@@ -90,6 +103,16 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
             }
         });
 
+     /*   holder.btnFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MaterialDialog.Builder(context)
+                        .title("ooooo")
+                        .content(position)
+                        .show();
+            }
+        });
+*/
 
 
     }
@@ -101,10 +124,10 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
         //return listapublicaciones.size();
     }
 
-/*
 
-    public  void listarFile2( final String ide){
 
+    public  void listarFile2(final String ide, final MyHolderR holder){
+        final ArrayList<String> filename = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,Urls.obtenerdetallepublicacion ,
@@ -126,14 +149,17 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
                                     //  if(file!=" "){
 
                                     ia = new Adapter_File(filename, context);
-                                    rvItemFeed.setAdapter(ia);
+                                    holder.rvItemFeed.setAdapter(ia);
 
-                                    lyContentImagenDetail.setVisibility(View.VISIBLE);
-                                    rvItemFeed.setItemAnimator(new DefaultItemAnimator());
-                                    rvItemFeed.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-                                    // System.out.println(paths);
-                                    //  }
 
+                                  //  holder.lyContentImagenDetail.setVisibility(View.VISIBLE);
+                                    holder.rvItemFeed.setItemAnimator(new DefaultItemAnimator());
+                                    holder.rvItemFeed.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+
+                                    HashSet hs2 = new HashSet();
+                                    hs2.addAll(filename);
+                                    filename.clear();
+                                    filename.addAll(hs2);
                                 }
                             } catch (JSONException e) {
                                 Log.e("Detail Publicacion", "Problema con" + e);
@@ -150,10 +176,7 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
         }
 
         ) {
-            */
-/**
-             * Passing some request headers
-             *//*
+
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -165,10 +188,6 @@ public class Adapter_RePubication extends RecyclerView.Adapter<MyHolderR> {
         };
         queue.add(stringRequest);
     }
-*/
-
-
-
 
 
 

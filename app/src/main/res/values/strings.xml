@@ -500,4 +500,5 @@
     <string name="title_activity_feedback">Retroalimentación</string>
     <string name="tag_feedback">Retroalimentar...</string>
     <string name="tag_comment">Comentario...</string>
+    <string name="title_activity_example">Example</string>
 </resources>

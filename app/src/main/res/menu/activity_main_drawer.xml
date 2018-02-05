@@ -44,6 +44,7 @@
             android:id="@+id/item_navigation_drawer_help"
             android:icon="@drawable/ic_help_white_24dp"
             android:title="@string/action_help" />
+
         <item
             android:id="@+id/item_navigation_drawer_exit"
             android:icon="@android:drawable/ic_lock_power_off"

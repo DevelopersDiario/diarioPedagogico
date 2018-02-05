@@ -95,7 +95,7 @@ public class Urls {
 
  public static final String insertpublicacion =  "http://192.168.0.104:8080/diariopws/api/1.0/publicacion/createpublicacionpadre";   //En reconstruccion
  public static final String repuplication ="http://192.168.0.104:8080/diariopws/api/1.0/publicacion/republication";
- public static final String listarrepublication="http:///192.168.0.104:8080/diariopws/api/1.0/publicacion/listrepublication";
+ public static final String listarrepublication="http://192.168.0.104:8080/diariopws/api/1.0/publicacion/listrepublication";
  public static final String publicararchivo= "http://192.168.0.104:8080/diariopws/api/1.0/publicacion/publicarArchivo";
  public static final String obtenerdetallepublicacion="http://192.168.0.104:8080/diariopws/api/1.0/publicacion/listdetpublication";
 

@@ -447,6 +447,7 @@ public class MainActivity extends AppCompatActivity
                                 startActivity(ip);
                                 break;
 
+
                             case R.id.item_navigation_drawer_help:
                                 menuItem.setChecked(true);
                                 AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this, R.style.DialogTheme);

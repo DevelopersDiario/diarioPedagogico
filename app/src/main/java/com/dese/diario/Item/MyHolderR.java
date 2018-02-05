@@ -3,8 +3,9 @@ package com.dese.diario.Item;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
-import android.view.ContextMenu;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dese.diario.R;
@@ -15,7 +16,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Eduardo on 15/05/2017.
  */
 
-public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnCreateContextMenuListener, View.OnClickListener {
+public class MyHolderR extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     MyLongClickListener longClickListener;
     ItemClickListener itemClickListener ;
@@ -23,6 +24,11 @@ public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongCli
     public TextView titlePublicationR;
     public TextView tvPublicationRecR;
     public CircleImageView imProfileRecR;
+  public   LinearLayout lyContentImagenDetail;
+
+    public RecyclerView rvItemFeed;
+
+    public Button btnFile;
 
     public CardView cvFeels, cvTest, cvAnalyze, cvConclusion, cvPlan;
 
@@ -46,8 +52,13 @@ public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongCli
         cvConclusion= (CardView)itemView.findViewById(R.id.imvConclusionD);
         cvPlan= (CardView)itemView.findViewById(R.id.imvPlanD);
 
-        itemView.setOnLongClickListener(this);
-        itemView.setOnCreateContextMenuListener(this);
+        //btnFile= (Button)itemView.findViewById(R.id.btnFile);
+        //itemView.setOnLongClickListener(this);
+        //itemView.setOnCreateContextMenuListener(this);
+
+        rvItemFeed= (RecyclerView) itemView.findViewById(R.id.rvItemFeed) ;
+        lyContentImagenDetail= (LinearLayout) itemView.findViewById(R.id.lyContentImagenDetail);
+
         itemView.setOnClickListener(this);
 
         seleccionados = new SparseBooleanArray();
@@ -60,22 +71,21 @@ public class MyHolderR extends RecyclerView.ViewHolder implements View.OnLongCli
         this.longClickListener=longClickListener;
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        this.longClickListener.onLongClick(getLayoutPosition());
-        return false;
-    }
+    /*   @Override
+      public boolean onLongClick(View v) {
+          this.longClickListener.onLongClick(getLayoutPosition());
+          return false;
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+     /*    @Override
+      public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 
-        //OUR CONTEXT MENU
-        // menu.setHeaderTitle("Seleccione: ");
-           //menu.add(0,0,0,"Abrir");
+          //OUR CONTEXT MENU
+          menu.setHeaderTitle("Seleccione: ");
+            menu.add(0,0,0,"Abrir");
 
 
-    }
-
+      }
+  */
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }

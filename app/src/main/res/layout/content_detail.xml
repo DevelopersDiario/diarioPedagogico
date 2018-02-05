@@ -104,7 +104,8 @@
                         android:paddingBottom="10dp" />
                 </LinearLayout>
 
-                <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <TableLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/tlMainSelectDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -202,7 +203,7 @@
 
 
                 <LinearLayout
-
+                    android:id="@+id/lyContentImagenDetail2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -234,13 +235,20 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginTop="10dp"
                         android:background="?colorAccent" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recyclerRepost"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true"
+                        android:overScrollMode="never"
                         tools:listitem="@layout/item_repost" />
+                    </LinearLayout>
 
                 </LinearLayout>
 

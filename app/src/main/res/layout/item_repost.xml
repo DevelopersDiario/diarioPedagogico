@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -100,30 +100,40 @@
                     android:hint="@string/tag_lorem" />
 
 
+                <!--<Button
+                    android:id="@+id/btnFile"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_rectangule"
+                    android:hint="FILE"
+                    android:theme="@style/buttonRaised"
+                    />-->
 
-                <ScrollView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content">
-                    <LinearLayout
+                <LinearLayout
+                    android:id="@+id/lyContentImagenDetailF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvItemFeed"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/rvItemFeed"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_span="3"
-                            tools:listitem="@layout/item_file" />
-                    </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_span="3"
+                        tools:listitem="@layout/item_file" />
 
-
-
-             </ScrollView>
-                <!--Fin 2do scrollview -->
-            </LinearLayout>
+                </LinearLayout>
+                </LinearLayout>
 
             </ScrollView>
+
         </LinearLayout>
+
+
     </android.support.v7.widget.CardView>
 
 
-</RelativeLayout>
+</LinearLayout>
