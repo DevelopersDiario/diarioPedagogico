@@ -32,6 +32,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.dese.diario.POJOS.DatosUsr;
 import com.dese.diario.POJOS.VariablesLogin;
 import com.dese.diario.Utils.FirebaseService.FirebaseConection;
+import com.dese.diario.Utils.Session;
 import com.dese.diario.Utils.ShowProgressDialog;
 import com.dese.diario.Utils.Urls;
 
@@ -75,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
     String tokennew;
 
     private ProgressDialog mProgress;
+    private Session conf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,11 @@ public class LoginActivity extends AppCompatActivity {
     }//Fin oNCreate
 
     private void inicializarButton() {
+        conf = new Session(this);
+        /*if(conf.getUserEmail() != null)
+            userLogin2();*/
+
+
         mProgress = new ProgressDialog(this);
         mProgress.setTitle("Procesando...");
         mProgress.setMessage("Porfavor espere...");
@@ -177,7 +184,12 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             if(isNetworkConnected()){
                 //spd.DialogProgress (LoginActivity.this, true);
-            userLogin();
+              /*  if(conf.getUserEmail() != null)
+                    userLogin2();
+                else*/
+                    userLogin();
+
+
             }else{
                //***** spd.DialogProgress (LoginActivity.this, false);
                 showAlertDialog(getResources().getString(R.string.title_conection_fail),
@@ -229,7 +241,8 @@ public class LoginActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
         email = mEmailView.getText().toString();
         password = mPasswordView.getText().toString();
-
+       conf.setUserEmail(email);
+       conf.setUserPass(password);
         boolean cancel = false;
 
         // Check for a valid password, if the user entered one.
@@ -297,6 +310,30 @@ public class LoginActivity extends AppCompatActivity {
          }
         }catch (Exception ex){
                 Log.e("Exception->", ex.getMessage().toString());
+            //System.out.println(ex);
+        }
+    }//Fin UserLogin
+    private void userLogin2() {
+
+        try {
+            if (isOnline()) {
+                // System.out.println(R.string.user_Login_entra);
+                //********** spd.DialogProgress (LoginActivity.this, true);
+                mProgress.show();
+                AsyncTask task = new ObtenerDatos();
+                String[][] parametros = {
+                        {url.toString()},
+                        {conf.getUserEmail(), conf.getUserPass(), "token"},
+                        {mEmailView.getText().toString(), mPasswordView.getText().toString(), tokennew}};
+                task.execute(parametros);
+                //Toast.makeText(LoginActivity.this,mEmailView.getText().toString()+mPasswordView.getText().toString()+ tokennew, Toast.LENGTH_LONG).show();
+
+            }else{
+                mProgress.dismiss();
+                //***** spd.DialogProgress (LoginActivity.this, false);
+            }
+        }catch (Exception ex){
+            Log.e("Exception->", ex.getMessage().toString());
             //System.out.println(ex);
         }
     }//Fin UserLogin

@@ -28,6 +28,9 @@ public class Session {
     public String getUserEmail(){
         return getSettings().getString(KEY_EMAIL, null);
     }
+    public String getUserPass(){
+        return getSettings().getString(KEY_PASS, null);
+    }
 
     public void setUserEmail(String email){
         SharedPreferences.Editor editor = getSettings().edit();
