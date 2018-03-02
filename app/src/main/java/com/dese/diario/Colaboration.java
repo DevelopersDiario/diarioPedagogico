@@ -339,19 +339,19 @@ public class Colaboration extends AppCompatActivity {
                                 for (int i = 0; i < jsonarray.length(); i++) {
                                     JSONObject jsonobject = jsonarray.getJSONObject(i);
 
+                                        listGpo.add(new com.dese.diario.Objects.Group(
+                                                jsonobject.getString(KEY_NAMEG),
+                                                jsonobject.getString(KEY_NAMEU),
+                                                jsonobject.getString(KEY_IDG),
+                                                jsonobject.getString(KEY_IDROL),
+                                                jsonobject.getString(KEY_IDU),
+                                                jsonobject.getString("usuarioalumno")));
+                                        adaptergpo = new Adapter_Grupo(listGpo,Colaboration.this);
+                                           recyclerView.setAdapter(adaptergpo);
 
-                                    listGpo.add(new com.dese.diario.Objects.Group(
-                                            jsonobject.getString(KEY_NAMEG),
-                                            jsonobject.getString(KEY_NAMEU),
-                                            jsonobject.getString(KEY_IDG),
-                                            jsonobject.getString(KEY_IDROL),
-                                            jsonobject.getString(KEY_IDU),
-                                            jsonobject.getString("usuarioalumno")));
-                                    adaptergpo = new Adapter_Grupo(listGpo,Colaboration.this);
-                                    // Toast.makeText(DetailPublication.this, "Lista"+ listRepublicaciones, Toast.LENGTH_LONG).show();
-                                    recyclerView.setAdapter(adaptergpo);
 
-                                    System.out.println(listGpo);
+
+                                   // System.out.println(jsonobject.getString("estatus").toString());
 
                                 }
                             } catch (JSONException e) {
